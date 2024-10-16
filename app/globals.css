@@ -1,27 +1,268 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(19, 16, 16);
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+
+}
+.Home{
+    text-align: left;
+
+    max-width: 1200px;
+
+}
+.Color{
+    height: 150px;
+    background-color: antiquewhite;
+}
+.basic {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+    text-align: left;
+}
+.basic h1 {
+    color: blueviolet;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.basic p {
+    max-width: 80%;
+    color: rgb(228, 228, 228);
+}
+
+.basic p a {
+    color: #A35AED;
+    text-decoration: none;
+}
+
+.Info {
+    display: flex;
+    text-align: left;
+    padding-top: 20px;
+}
+.Links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 150px;
+    border-radius: 8px;
+    border-color: white;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.Links img {
+    width: auto;
+    height: 50px;
+    margin: 5px;
+    filter: brightness(80%);
+    transition: 0.3s;
+}
+
+.Links img:hover {
+    filter: grayscale(0%);
+    filter: brightness(100%);
+    scale: 1.1;
+}
+
+.Working {
+    color: rgb(228, 228, 228);
+    display: block;
+    padding-left: 10px;
+    text-align: left;
+    background-color: blueviolet;
+    max-width: 500px;
+    border-radius: 8px;
+    padding-right: 50px;
+}
+
+.College {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(37, 37, 37);
+    border-radius: 8px;
+}
+
+.College img {
+    max-height: 140px;
+}
+
+.Working,
+.College,
+.Links {
+    margin-right: 7px;
+}
+
+.Working:last-child,
+.College:last-child,
+.Links:last-child {
+    margin-right: 0;
+}
+.Working h2{
+    color: rgb(214, 214, 214);
+
+}
+#WorkingOn {
+    color: rgb(97, 97, 97);
+    text-align: left;
+}
+
+.Projects {
+    padding-top: 20px;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 80%;
+    margin: 0 0;
+}
+
+.Project {
+    width: 400px;
+    height: 130px;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-width: 5px;
+    margin-bottom: 10px;
+}
+.Home .SeeAllText{
+    color:rgb(172, 216, 255)
+}
+.Bar1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 40%;
+}
+h1{
+    color: blueviolet;
+}
+
+
+.Project p {
+    color: rgb(233, 233, 233);
+}
+@media (max-width: 1353px) {
+    .Home{
+        padding-left: 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .Home{
+        padding-left: 0px;
+    }
+    .Container {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+    }
+    .Color{
+        height: 150px;
+        max-width: 100%;
+        background-color: antiquewhite;
+    }
+    
+    body{
+        text-align: center;
+    }
+    .basic {
+        text-align: center;
+        align-items: center;
+        max-width: 100%;
+    }
+    .basic h1{
+        padding-top: 50px;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .basic h2{
+        max-width: 70%;
+        text-align: center;
+        margin: 0 auto;
+        text-wrap: wrap;
+    }
+    .basic p{
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    .basic a{
+        text-align: center;
+    }
+    
+    .Info {
+        display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    padding-top: 20px;
+    max-width: 50%;
+
+    }
+    .Working {
+        color: rgb(228, 228, 228);
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center; /* Center items vertically */
+        align-items: center; /* Center items horizontally */
+        text-align: left;
+        background-color: blueviolet;
+        max-width: 500px;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 0 auto; /* Center the .Working div horizontally */
+    }
+        .Working h2{
+        text-align: center;
+    }
+    .Working p{
+        text-align: center;
+    }
+    .Links {
+        justify-content: center;
+        max-width: 90%;
+    }
+    
+
+    
+    .Projects {
+        padding-top: 20px;
+        text-align: center; /* Center the text */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        max-width: 100%; /* Adjust the maximum width */
+    }
+    
+    .Project {
+        width: 90%; /* Adjust the width of each project card */
+        max-width: 400px; /* Set a maximum width */
+        height: 130px;
+        padding-left: 0px;
+        border-radius: 8px;
+        border-width: 5px;
+        margin-bottom: 10px;
+    }
+        #WorkingOn{
+        text-align: center;
+    }
+    h3{
+        text-align: center;
+    }
+    iframe{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        width: 70%;
+        max-width: 600px;
+        height: 500px;
+    }
 }
