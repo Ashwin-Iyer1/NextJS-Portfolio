@@ -3,6 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 async function saveSongsToFile() {
+    const date = new Date();
+    if (date.getDay() !== 6) {
+        console.log('Songs data will be saved only on Saturdays');
+        return;
+    }
     try {
         const results = await pool.query('SELECT * FROM songs');
         const songs = results.rows;
