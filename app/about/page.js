@@ -2,7 +2,7 @@ import styles from './About.module.css';
 import React from 'react';
 import Links from '../components/Links';
 import Bar from '../components/Bar';
-
+import SongList from '../components/SongList';
 export default function About(){
     return (
         <div className={styles.About}>
@@ -17,12 +17,15 @@ export default function About(){
                     I currently have a few side <a href='../Projects' id="AHHH">projects</a> which range from web scraping to basic machine learning.
                 </p>
                 <p>I also enjoy working out and listening to music 🎵!</p>
+
                 <div className={styles.Links2}>
                     <Links />
+                    
                 </div>
-                
+                <h1>My top songs this week</h1>
+                <SongList />
             </div>
-            <iframe style={{ borderRadius: '12px' }} title="Spotify" src="https://open.spotify.com/embed/playlist/2ItvzS59h6sRnebp4LdTgY?utm_source=generator" width="100%" height="352" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            
         </div>
     );
 }
