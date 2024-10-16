@@ -5,7 +5,7 @@ import path from 'path';
 export async function GET(req) {
     try {
         // Define the path to the JSON file
-        const filePath = path.join(process.cwd(), 'data', 'songs.json');
+        const filePath = path.join(process.cwd(), 'app', 'data', 'songs.json');
         
         // Read the JSON file
         const data = fs.readFileSync(filePath, 'utf8');
