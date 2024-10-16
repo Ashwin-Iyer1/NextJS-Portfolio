@@ -1,8 +1,8 @@
 import psycopg2
 from psycopg2 import sql
 import os
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 # Database connection parameters
 db_params = {
