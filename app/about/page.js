@@ -3,6 +3,7 @@ import React from 'react';
 import Links from '../components/Links';
 import Bar from '../components/Bar';
 import SongList from '../components/SongList';
+import Coc from '../components/COC';
 export default function About(){
     return (
         <div className={styles.About}>
@@ -20,10 +21,10 @@ export default function About(){
 
                 <div className={styles.Links2}>
                     <Links />
-                    
                 </div>
                 <h1>My top songs this week</h1>
                 <SongList />
+                <Coc />
             </div>
             
         </div>

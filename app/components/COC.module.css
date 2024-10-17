@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Change to 'row' if you want everything in a single row */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within each item */
+    padding: 20px; /* Add some padding */
+}
+
+.container h2 {
+    margin-bottom: 10px; /* Space between heading and first paragraph */
+}
+
+.container p {
+    margin: 5px 0; /* Space between paragraphs */
+    max-width: 100%;
+}
+
+.container img {
+    margin-top: 10px; /* Space above the image */
+    width: 50px; /* Set a fixed width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
