@@ -1,7 +1,7 @@
 import React from 'react';
 import NEU from './Images/NEU.webp';
 import Links from './components/Links.js';
-import projects from './components/projects.json';
+import projects from './data/repos.json';
 import Image from 'next/image'
 import Link from 'next/link';
 
@@ -33,13 +33,17 @@ export default function Home() {
                     <div>
                         <h2 id="WorkingOn">Projects</h2>
                         <div className="Projects">
-                            {projects.slice(0, 4).map((project) => {
-                                return (
-                                    <div className="Project" style={{ backgroundColor: project.color, border: "2px solid " + removeAlpha(project.color) }}>
-                                        <h2><a href={project.link} target='_blank' rel="noreferrer" style={{ color: removeAlpha(project.color) }}>{project.name}</a></h2>
-                                        <p>{project.description}</p>
-                                    </div>
-                                )
+                            {projects.slice(0, 4).map((project, index) => {
+                      const hue = (index * (360 / projects.length)) % 360;  // Dynamically calculate hue
+                      const textColor = `hsl(${hue}, 70%, 50%)`;  // Saturation and Lightness are set for vivid colors
+                      const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`;  // Add transparency to the background                    
+                    return (
+                        <div className="Project" style={{border: `2px solid ${textColor}`, backgroundColor: backgroundColor}}>
+                            <h2><a href={project.html_url} target='_blank' rel="noreferrer" style={{color: textColor}}>{project.name}</a></h2>
+                            <p>{project.description}</p>
+                            
+                        </div>
+                    )
                             })}
                         </div>
                         <h3><Link className="SeeAllText" href="/projects">See All</Link></h3>
