@@ -13,6 +13,10 @@
     flex-direction: column; /* Stack image and info vertically */
     align-items: center; /* Center align content */
     width: 150px; /* Set a fixed width for each item */
+    opacity: 0; /* Start hidden */
+    animation: slideInFromLeft 0.3s ease forwards;
+
+    
 }
 
 .song-cover {
@@ -37,4 +41,36 @@
     color: gray; /* Change text color */
     white-space: nowrap; /* Prevent wrapping */
     width: 100%; /* Ensure it takes the full width of the container */
+}
+.song-item:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 767px) {
+    .song-item {
+        opacity: 1; /* Keep items visible */
+        animation: none; /* Disable the desktop animation */
+    }
+
+    .song-item img {
+        opacity: 0;
+        transform: translateY(20px); /* Images are slightly translated down initially */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .song-item img.show {
+        opacity: 1;
+        transform: translateY(0); /* Images fade in and move up */
+    }
 }
