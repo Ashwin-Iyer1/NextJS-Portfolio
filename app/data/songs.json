@@ -1,33 +1,8 @@
 [
   {
-    "song_name": "Sailor Song",
-    "artist": "Gigi Perez",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2730f588c6bdb28000656d084bf"
-  },
-  {
     "song_name": "Sparks",
     "artist": "Coldplay",
     "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2739164bafe9aaa168d93f4816a"
-  },
-  {
-    "song_name": "Yale",
-    "artist": "Ken Carson",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273ca7232129beaa19da34b919e"
-  },
-  {
-    "song_name": "Language",
-    "artist": "Paperboy Fabe",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273514cf65903e09649d7672c53"
-  },
-  {
-    "song_name": "SKELETONS",
-    "artist": "Travis Scott",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d00001e0224938858a3971f09da45d3f2"
-  },
-  {
-    "song_name": "BEST INTEREST",
-    "artist": "Tyler, the Creator",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273ab8995f18dc3dd9f34a6acd4"
   },
   {
     "song_name": "No. 1 Party Anthem",
@@ -35,18 +10,43 @@
     "songcoverlink": "https://i.scdn.co/image/ab67616d0000b27350f7adb38940826cadaa044d"
   },
   {
-    "song_name": "Been Away",
-    "artist": "Brent Faiyaz",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2736a463f436bbf07f3c9e8c62a"
+    "song_name": "Sailor Song",
+    "artist": "Gigi Perez",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2730f588c6bdb28000656d084bf"
   },
   {
-    "song_name": "Silly Watch",
-    "artist": "Lil Uzi Vert",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273d5f1bbe527fa685633339add"
+    "song_name": "Sunsetz",
+    "artist": "Cigarettes After Sex",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d00001e02fd275af89cec73d6287f9cbf"
   },
   {
-    "song_name": "Apple Pie",
-    "artist": "Travis Scott",
-    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2736cfd9a7353f98f5165ea6160"
+    "song_name": "My Sweet Lord (2014 Remaster)",
+    "artist": "George Harrison",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2736c6610322fc60bfb41481273"
+  },
+  {
+    "song_name": "Yale",
+    "artist": "Ken Carson",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273ca7232129beaa19da34b919e"
+  },
+  {
+    "song_name": "exile (feat. Bon Iver)",
+    "artist": "Taylor Swift",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273c288028c2592f400dd0b9233"
+  },
+  {
+    "song_name": "Good Life",
+    "artist": "Kanye West",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b273675561f3defd1d5a551936a8"
+  },
+  {
+    "song_name": "loml",
+    "artist": "Taylor Swift",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2738ecc33f195df6aa257c39eaa"
+  },
+  {
+    "song_name": "You Get Me So High",
+    "artist": "The Neighbourhood",
+    "songcoverlink": "https://i.scdn.co/image/ab67616d0000b2739b6ac98a52f62d5cb473da40"
   }
 ]

@@ -1,7 +1,7 @@
 import requests
 import os
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 last_fm = os.getenv('last_fm_key')
 
 secret = os.getenv('last_fm_secret')

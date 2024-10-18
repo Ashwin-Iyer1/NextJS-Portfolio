@@ -1,6 +1,6 @@
 from last_fm import get_top
 from coverArt import get_image
-
+from databaseMod import addtoDatabase, clear_entries
 import datetime
 
 #only run if friday
@@ -16,6 +16,9 @@ def main():
         get_image(song)
         song.append(get_image(song))
         print("\n")
+    clear_entries()
+    addtoDatabase(songs)
+
     print(songs)
 
 main()
