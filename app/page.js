@@ -5,12 +5,8 @@ import projects from './data/repos.json';
 import Image from 'next/image'
 import Link from 'next/link';
 
-const removeAlpha = (color) => {
-    // Remove the last two characters (alpha value) from the color string
-    return color.slice(0, -2);
-};
-
 export default function Home() {
+    
         return (
             <div className="Home">
                 <div className="Container">

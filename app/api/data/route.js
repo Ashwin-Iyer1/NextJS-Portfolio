@@ -3,7 +3,7 @@ const pool = require('../../about/db'); // Use require instead of import
 
 export async function GET(request) {
   try {
-    const results = await pool.query('SELECT * FROM songs');
+    const results = await pool.query('SELECT * FROM repos');
     return new Response(JSON.stringify(results.rows), {
       status: 200,
       headers: {

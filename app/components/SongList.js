@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import songsData from '../data/songs.json'; // Adjust the path as necessary
+import songsData1 from '../data/songs.json'; // Adjust the path as necessary
 import styles from './SongList.module.css'; // Import your CSS module
 
 const SongList = () => {
     const songRefs = useRef([]);
     const [isClient, setIsClient] = useState(false); // To track if we are on the client
     const [windowWidth, setWindowWidth] = useState(0); // Track window width for conditional behavior
+    const [songsData, setSongsData] = useState([]); // Store the song data
+    const [loading, setLoading] = useState(true); // Track loading state
 
     useEffect(() => {
         setIsClient(true); // Set to true after the component mounts
@@ -30,6 +32,29 @@ const SongList = () => {
     }, []);
 
     useEffect(() => {
+        const fetchSongs = async () => {
+            try {
+                // Attempt to fetch the data from the external API
+                const res = await fetch(`${process.env.HerokuURL}/api/songs`);
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await res.json(); // Await the JSON response to get the projects array
+                setSongsData(data);
+            } catch (error) {
+                console.error('Failed to fetch from API, falling back to local data:', error);
+                
+                // If the fetch fails, use the local JSON file
+                setSongsData(songsData1); // Use the local songs data
+            } finally {
+                setLoading(false); // Set loading to false when done
+            }
+        };
+
+        fetchSongs(); // Call the fetch function
+    }, []); // Empty dependency array to run once on mount
+
+    useEffect(() => {
         // Only apply the observer if the window width is less than 767px (mobile)
         if (windowWidth < 767) {
             const observer = new IntersectionObserver(
@@ -41,7 +66,7 @@ const SongList = () => {
                     });
                 },
                 {
-                    threshold: .99, // 10% of the image is in view
+                    threshold: 0.99, // 10% of the image is in view
                 }
             );
 
@@ -61,6 +86,10 @@ const SongList = () => {
             };
         }
     }, [windowWidth]);
+
+    if (loading) {
+        return <p>Loading songs...</p>; // Display a loading message
+    }
 
     return (
         <div className={styles['song-list']}>
