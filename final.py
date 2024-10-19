@@ -2,6 +2,7 @@ from last_fm import get_top
 from coverArt import get_image
 from databaseMod import addtoDatabase, clear_entries
 import datetime
+from fetchGithub import get_repos
 
 #only run if friday
 def is_friday():
@@ -9,6 +10,7 @@ def is_friday():
 
 
 def main():
+    get_repos()
     if(not is_friday()):
         return
     songs = get_top(10)
@@ -16,7 +18,7 @@ def main():
         get_image(song)
         song.append(get_image(song))
         print("\n")
-    clear_entries()
+    clear_entries("Songs")
     addtoDatabase(songs)
 
     print(songs)

@@ -1,8 +1,8 @@
 import psycopg2
 from psycopg2 import sql
 import os
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 # Database connection parameters
 db_params = {
@@ -13,7 +13,7 @@ db_params = {
     'port': '5432'
 }
 
-def clear_entries():
+def clear_entries(table_name: str):
     try:
         connection = psycopg2.connect(**db_params)
         cursor = connection.cursor()
@@ -22,7 +22,7 @@ def clear_entries():
         create_table(cursor)
 
         # Clear all entries from the Songs table
-        truncate_query = sql.SQL("TRUNCATE TABLE Songs;")
+        truncate_query = sql.SQL(f'TRUNCATE TABLE {table_name}')
         cursor.execute(truncate_query)
         connection.commit()
 
@@ -72,6 +72,37 @@ def addtoDatabase(songs: list):
         connection.commit()
 
         print("Song added successfully.")
+
+    except Exception as error:
+        print(f"Error occurred: {error}")
+
+    finally:
+        # Close the cursor and connection
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+
+def insert_repo(cursor, repo_data):
+    # Define the insert query
+    insert_query = sql.SQL("""
+        INSERT INTO repos (reponame, description, html_url)
+        VALUES (%s, %s, %s)
+    """)
+    cursor.execute(insert_query, repo_data)
+
+
+def addtoGithub(data: list):
+    try:
+        connection = psycopg2.connect(**db_params)
+        cursor = connection.cursor()
+
+        for repo in data:
+            insert_repo(cursor, repo)
+        connection.commit()
+
+        print("repos added successfully.")
 
     except Exception as error:
         print(f"Error occurred: {error}")
