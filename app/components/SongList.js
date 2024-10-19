@@ -11,25 +11,6 @@ const SongList = () => {
     const [songsData, setSongsData] = useState([]); // Store the song data
     const [loading, setLoading] = useState(true); // Track loading state
 
-    useEffect(() => {
-        setIsClient(true); // Set to true after the component mounts
-
-        // Update window width
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        // Set initial window width
-        handleResize();
-
-        // Add resize listener
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            // Cleanup the resize listener
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     useEffect(() => {
         const fetchSongs = async () => {
@@ -55,8 +36,23 @@ const SongList = () => {
     }, []); // Empty dependency array to run once on mount
 
     useEffect(() => {
+        setIsClient(true); // Set to true after the component mounts
+        // Update window width
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        // Set initial window width
+        handleResize();
+        // Add resize listener
+        window.addEventListener('resize', handleResize);
+        return () => {
+            // Cleanup the resize listener
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+        useEffect(() => {
         // Only apply the observer if the window width is less than 767px (mobile)
-        if (windowWidth < 767) {
+        if  (windowWidth < 767 && songRefs.current.length > 0) {
             const observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
@@ -66,17 +62,15 @@ const SongList = () => {
                     });
                 },
                 {
-                    threshold: 0.99, // 10% of the image is in view
+                    threshold: 0.7, // 10% of the image is in view
                 }
             );
-
             // Observe each image
             songRefs.current.forEach((img) => {
                 if (img) {
                     observer.observe(img);
                 }
             });
-
             return () => {
                 songRefs.current.forEach((img) => {
                     if (img) {
@@ -85,7 +79,7 @@ const SongList = () => {
                 });
             };
         }
-    }, [windowWidth]);
+    }, [windowWidth, songsData]);
 
     if (loading) {
         return <p>Loading songs...</p>; // Display a loading message
