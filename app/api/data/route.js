@@ -1,5 +1,6 @@
 // pages/api/data.js
 const pool = require('../../about/db'); // Use require instead of import
+export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
   try {
