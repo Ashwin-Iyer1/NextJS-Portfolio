@@ -1,5 +1,4 @@
 const {Pool} = require('pg');
-export const dynamic = 'force-dynamic';
 
 require('dotenv').config();
 
