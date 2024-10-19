@@ -35,7 +35,7 @@ export default function Home() {
                       const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`;  // Add transparency to the background                    
                     return (
                         <div className="Project" style={{border: `2px solid ${textColor}`, backgroundColor: backgroundColor}}>
-                            <h2><a href={project.html_url} target='_blank' rel="noreferrer" style={{color: textColor}}>{project.name}</a></h2>
+                            <h2><a href={project.html_url} target='_blank' rel="noreferrer" style={{color: textColor}}>{project.reponame}</a></h2>
                             <p>{project.description}</p>
                             
                         </div>

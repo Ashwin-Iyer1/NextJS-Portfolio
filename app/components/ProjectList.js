@@ -12,7 +12,7 @@ export default function ProjectList() {
         const fetchProjects = async () => {
             try {
                 // Attempt to fetch the data from the external API
-                const res = await fetch(`${process.env.HerokuURL}/api/data`);
+                const res = await fetch(`/api/data`);
                 
                 if (!res.ok) {
                     throw new Error('Network response was not ok');

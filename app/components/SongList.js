@@ -35,7 +35,7 @@ const SongList = () => {
         const fetchSongs = async () => {
             try {
                 // Attempt to fetch the data from the external API
-                const res = await fetch(`${process.env.HerokuURL}/api/songs`);
+                const res = await fetch(`/api/songs`);
                 if (!res.ok) {
                     throw new Error('Network response was not ok');
                 }
