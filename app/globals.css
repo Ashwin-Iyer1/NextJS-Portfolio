@@ -7,6 +7,15 @@ body {
     font-family: 'Roboto', sans-serif;
 
 }
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer{
+    color: rgba(255, 255, 255, 0.42);
+}
 .Home{
     text-align: left;
 
@@ -184,10 +193,71 @@ h1{
     color: blueviolet;
 }
 
+h2{
+    color: rgb(164, 102, 223);
+}
+
 
 .Project p {
     color: rgb(233, 233, 233);
 }
+
+svg{
+    height: 80px;
+}
+
+.Skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+}
+.Skill{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    color: rgb(228, 228, 228);
+    align-items: center;
+    text-align: center;
+}
+
+.ContactLinks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+}
+.ContactText svg {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    filter: brightness(80%) grayscale(90%);
+    transition: filter 0.3s; /* Use transition for filter */
+}
+
+
+.ContactText svg:hover {
+    filter: brightness(100%) grayscale(0%);
+    transition-duration: .5s;
+}
+.Contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding-top: 20px;
+}
+.Contact p{
+    color: rgb(233, 233, 233)
+}
+
+.Contact a{
+    text-decoration: none;
+    color: rgb(69, 69, 255);
+}
+
 @media (max-width: 1353px) {
     .Home{
         padding-left: 50px;

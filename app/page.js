@@ -4,13 +4,14 @@ import Links from './components/Links.js';
 import projects from './data/repos.json';
 import Image from 'next/image'
 import Link from 'next/link';
-
+import Skills from './components/Skills.js';
+import Contact from './components/Contact.js';
 export default function Home() {
-    
         return (
             <div className="Home">
                 <div className="Container">
                     <div className="basic">
+
                         <h1>Ashwin Iyer</h1>
                         <h2>Freshman at Northeastern University</h2>
                         <p>I am currently a freshman at Northeastern University in Boston, Massachusetts, and I am interested in computer science.
@@ -44,6 +45,13 @@ export default function Home() {
                         </div>
                         <h3><Link className="SeeAllText" href="/projects">See All</Link></h3>
                     </div>
+                    <h2 style={{textAlign:"center", fontSize:"2em"} }>Skills</h2>
+                    <Skills />
+                </div>
+                <div className="Contact">
+                    <h2 style={{textAlign:"center", fontSize:"2em"} }>Contact Me</h2>
+                    <Contact />
+                    <p>Email: <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a></p>
                 </div>
 
             </div>

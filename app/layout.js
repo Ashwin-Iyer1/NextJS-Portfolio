@@ -5,7 +5,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         {/* Layout UI */}
-        <main>{children}</main>
+        <main>{children}
+        <footer>
+        <span className="text-xs text-slate-400 text-center">&copy; {new Date().getFullYear()} Ashwin Iyer. All rights reserved.</span>
+        </footer>
+        </main>
       </body>
     </html>
   )
