@@ -20,12 +20,14 @@ export default function ProjectList() {
 
                 // Await the JSON response to get the projects array
                 const data = await res.json(); // Make sure to await this
-                setProjects(data); // Set the fetched projects
+                const sortedProjects = data.sort((a, b) => a.reponame.localeCompare(b.reponame));
+                setProjects(sortedProjects); // Set the fetched projects
             } catch (error) {
                 console.error('Failed to fetch from API, falling back to local data:', error);
                 
                 // If the fetch fails, use the local JSON file
-                setProjects(projects1); // Use the local projects data
+                const sortedLocalProjects = projects1.sort((a, b) => a.reponame.localeCompare(b.reponame));
+                setProjects(sortedLocalProjects); // Use the local projects data
             } finally {
                 setLoading(false); // Set loading to false when done
             }
