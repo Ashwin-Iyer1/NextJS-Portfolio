@@ -1,5 +1,9 @@
 import './globals.css'; // Your global CSS file
-
+export const metadata = {
+  title: 'Ashwin Iyer',
+  description: 'Personal website of Ashwin Iyer, a freshman at Northeastern University from Southlake, Texas.',
+}
+ 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
