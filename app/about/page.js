@@ -14,10 +14,10 @@ export default function About(){
                 <p>My name is Ashwin Iyer, a current freshman at <b>Northeastern University</b> for <b>Computer science x Business</b>.
                     I am looking forward to the co-op program as well as joining the <b>Mars Rover Team</b> and the <b>Electric Racing Team</b>.
                 </p>
-                <p>I have been hobby coding for around 10~ years and have competed in 2 hackathons being <b>HackUTD</b> and <b>AIFAHacks</b> and I have won both. 
+                <p className="ABTText">I have been hobby coding for around 10~ years and have competed in 2 hackathons being <b>HackUTD</b> and <b>AIFAHacks</b> and I have won both. 
                     I currently have a few side <a href='../projects' id="AHHH">projects</a> which range from web scraping to basic machine learning.
                 </p>
-                <p>I also enjoy working out and listening to music 🎵!</p>
+                <p className="ABTText">I also enjoy working out and listening to music 🎵!</p>
 
                 <div className={styles.Links2}>
                     <Links />
