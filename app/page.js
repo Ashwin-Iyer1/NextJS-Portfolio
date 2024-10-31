@@ -12,7 +12,20 @@ export default function Home() {
     const [shouldLoad, setShouldLoad] = useState(false);
     const [fadeOut, setFadeOut] = useState(false); // New state for fade out
 
-¡
+    useEffect(() => {
+        if (sessionStorage.getItem('loaded') === null) {
+          setShouldLoad(true);
+          setTimeout(() => {
+            setFadeOut(true); // Start fade-out
+            sessionStorage.setItem('loaded', 'true');
+            
+            // Wait for the fade-out duration before removing the loader
+            setTimeout(() => {
+              setShouldLoad(false);
+            }, 500); // Adjust this duration to match your CSS fade-out time
+          }, 2200);
+        }
+      }, []);
 
       
           if(shouldLoad){
