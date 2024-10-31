@@ -9,33 +9,17 @@ import Link from 'next/link';
 import Skills from './components/Skills.js';
 import Contact from './components/Contact.js';
 export default function Home() {
-    const [isFirstLoad, setIsFirstLoad] = useState(true);
-    const [showLoading, setShowLoading] = useState(true);
+    const [shouldLoad, setShouldLoad] = useState(false);
     const [fadeOut, setFadeOut] = useState(false); // New state for fade out
 
-    useEffect(() => {
-        const hasLoaded = sessionStorage.getItem('hasLoaded');
-        
-        if (!hasLoaded) {
-            setIsFirstLoad(true);
-            sessionStorage.setItem('hasLoaded', 'true');
-        }
-        
-        // Hide the loading screen after 2 seconds
-        const timer = setTimeout(() => {
-            setFadeOut(true); // Start fade out
-            setTimeout(() => setShowLoading(false), 500); // Wait for fade-out duration before hiding the component
-        }, 2000);
-        
-        return () => clearTimeout(timer);
-    }, []);
+¡
 
-    if (isFirstLoad && showLoading) {
+      
+          if(shouldLoad){
         return <div className={`fade-out ${fadeOut ? 'fade' : ''}`}><NameAnim /></div>;
     }
-    
 
-    
+
         return (
             <div className="Home">
                 <div className="Container">

@@ -2,13 +2,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
 .fade-out {
-    transition: opacity 0.5s ease-in-out; /* Adjust duration and easing as needed */
+    transition: opacity 0.5s ease-in-out; /* Adjust duration as needed */
+    opacity: 1; /* Starting opacity */
 }
 
-.fade-out.fade {
-    opacity: 0; /* Fade out effect */
+.fade {
+    opacity: 0; /* End opacity */
 }
 
+svg{
+    height: 80px;
+}
 
 body {
     background-color: rgb(19, 16, 16);
