@@ -1,5 +1,7 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react'; // Import useEffect and useState
 import NEU from './Images/NEU.webp';
+import NameAnim from './components/NameAnim.js';
 import Links from './components/Links.js';
 import projects from './data/repos.json';
 import Image from 'next/image'
@@ -7,6 +9,33 @@ import Link from 'next/link';
 import Skills from './components/Skills.js';
 import Contact from './components/Contact.js';
 export default function Home() {
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+    const [showLoading, setShowLoading] = useState(true);
+    const [fadeOut, setFadeOut] = useState(false); // New state for fade out
+
+    useEffect(() => {
+        const hasLoaded = sessionStorage.getItem('hasLoaded');
+        
+        if (!hasLoaded) {
+            setIsFirstLoad(true);
+            sessionStorage.setItem('hasLoaded', 'true');
+        }
+        
+        // Hide the loading screen after 2 seconds
+        const timer = setTimeout(() => {
+            setFadeOut(true); // Start fade out
+            setTimeout(() => setShowLoading(false), 500); // Wait for fade-out duration before hiding the component
+        }, 2000);
+        
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isFirstLoad && showLoading) {
+        return <div className={`fade-out ${fadeOut ? 'fade' : ''}`}><NameAnim /></div>;
+    }
+    
+
+    
         return (
             <div className="Home">
                 <div className="Container">

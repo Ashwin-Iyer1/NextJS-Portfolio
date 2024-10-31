@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
         {/* Layout UI */}
         <main>{children}
         <footer>
-        <span className="text-xs text-slate-400 text-center">&copy; {new Date().getFullYear()} Ashwin Iyer. All rights reserved.</span>
+        <span className="text-xs text-slate-400 text-center" style={{color: "#7c7c7c"}}>&copy; {new Date().getFullYear()} Ashwin Iyer. All rights reserved.</span>
         </footer>
         </main>
       </body>

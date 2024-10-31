@@ -64,6 +64,9 @@
 }
 
 @media (max-width: 767px) {
+    .song-list {
+        padding: 0; /* Remove padding */
+    }
     .song-item {
         opacity: 1; /* Keep items visible */
         animation: none; /* Disable the desktop animation */

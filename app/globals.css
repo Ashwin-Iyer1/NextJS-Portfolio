@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+.fade-out {
+    transition: opacity 0.5s ease-in-out; /* Adjust duration and easing as needed */
+}
+
+.fade-out.fade {
+    opacity: 0; /* Fade out effect */
+}
+
 
 body {
     background-color: rgb(19, 16, 16);
@@ -7,7 +17,29 @@ body {
     font-family: 'Roboto', sans-serif;
 
 }
+.NameAnim{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    background-color: rgb(19, 16, 16);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
+
+.NameAnim h1{
+    font: 700 20vw 'Caveat', cursive;
+    /* Make 80% of screen width*/
+    color: #8a2ce2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    display: block;
+}
 main{
     display: flex;
     flex-direction: column;
@@ -33,6 +65,7 @@ footer{
     text-align: left;
 }
 .basic h1 {
+    font: 700 2.5rem 'Caveat', cursive;
     color: blueviolet;
 }
 
@@ -202,9 +235,6 @@ h2{
     color: rgb(233, 233, 233);
 }
 
-svg{
-    height: 80px;
-}
 
 .Skills {
     display: flex;
@@ -255,7 +285,7 @@ svg{
 
 .Contact a{
     text-decoration: none;
-    color: rgb(69, 69, 255);
+    color: #6868fe;
 }
 
 @media (max-width: 1353px) {
@@ -264,7 +294,20 @@ svg{
     }
 }
 
+@media (max-width: 400px) {
+    .Project h2{
+        font-size: 1.4rem;
+    }
+    .Project p {
+        font-size: 1.1rem;
+    }
+    
+}
+
 @media (max-width: 767px) {
+    
+    
+    
     .Home{
         padding-left: 0px;
     }
