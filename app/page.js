@@ -43,7 +43,7 @@ export default function Home() {
                         <h1>Ashwin Iyer</h1>
                         <h2>Freshman at Northeastern University</h2>
                         <p>I am currently a freshman at Northeastern University in Boston, Massachusetts, and I am interested in computer science.
-                        I am currently learning Python, Java, and JavaScript. <Link href='/about'>Learn more about me!</Link></p>
+                        I am currently learning Python, Kotlin, and JavaScript. <Link href='/about'>Learn more about me!</Link></p>
                     </div>
                     <div className="Info">
                         <Links />
