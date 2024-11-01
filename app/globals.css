@@ -9,6 +9,11 @@
 .fade {
     opacity: 0; /* End opacity */
 }
+.fade-in {
+    opacity: 0; /* Starting opacity */
+    transition: opacity 0.3s ease-in-out; /* Adjust duration as needed */
+    opacity: 1; /* End opacity */
+}
 
 svg{
     height: 80px;

@@ -11,6 +11,7 @@ import Contact from './components/Contact.js';
 export default function Home() {
     const [shouldLoad, setShouldLoad] = useState(false);
     const [fadeOut, setFadeOut] = useState(false); // New state for fade out
+    const [fadeIn, setFadeIn] = useState(false); // New state for fade in
 
     useEffect(() => {
         if (sessionStorage.getItem('loaded') === null) {
@@ -22,7 +23,8 @@ export default function Home() {
             // Wait for the fade-out duration before removing the loader
             setTimeout(() => {
               setShouldLoad(false);
-            }, 500); // Adjust this duration to match your CSS fade-out time
+              setFadeIn(true); // Start fade-in
+            }, 400); // Adjust this duration to match your CSS fade-out time
           }, 2200);
         }
       }, []);
@@ -33,11 +35,11 @@ export default function Home() {
     }
 
 
+
         return (
-            <div className="Home">
+            <div className={`Home ${fadeIn ? 'fade-in' : ''}`}>
                 <div className="Container">
                     <div className="basic">
-
                         <h1>Ashwin Iyer</h1>
                         <h2>Freshman at Northeastern University</h2>
                         <p>I am currently a freshman at Northeastern University in Boston, Massachusetts, and I am interested in computer science.
