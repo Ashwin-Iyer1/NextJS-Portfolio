@@ -4,6 +4,8 @@ export const metadata = {
   description: 'Personal website of Ashwin Iyer, a freshman at Northeastern University from Southlake, Texas.',
   image: './Ashwin.jpeg'
 }
+import { GoogleAnalytics } from '@next/third-parties/google'
+
  
 export default function RootLayout({ children }) {
   return (
@@ -27,6 +29,7 @@ export default function RootLayout({ children }) {
         </footer>
         </main>
       </body>
+      <GoogleAnalytics gaId="G-T57ZFGY2HZ" />
     </html>
   )
 }

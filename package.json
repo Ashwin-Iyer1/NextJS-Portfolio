@@ -11,10 +11,11 @@
   "dependencies": {
     "@emotion/cache": "^11.13.1",
     "@mui/material-nextjs": "^6.1.5",
+    "@next/third-parties": "^15.0.3",
     "@octokit/auth-token": "^5.1.1",
     "dotenv": "^16.4.5",
     "gsap": "^3.12.5",
-    "next": "14.2.15",
+    "next": "^15.0.3",
     "node-fetch": "^3.3.2",
     "octokit": "^4.0.2",
     "pg": "^8.13.0",
