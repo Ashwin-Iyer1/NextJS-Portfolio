@@ -60,6 +60,35 @@ def insert_song(cursor, song_data):
     """)
     cursor.execute(insert_query, song_data)
 
+
+
+
+def insertData(total_seconds, daily_average):
+    try:
+        connection = psycopg2.connect(**db_params)
+        cursor = connection.cursor()
+
+        # Define the insert query
+        insert_query = """
+        INSERT INTO wakatime (total_seconds, daily_average)
+        VALUES (%s, %s);
+        """
+        
+        # Execute the query with the actual values
+        cursor.execute(insert_query, (total_seconds, daily_average))
+        connection.commit()
+
+        print("Data inserted successfully.")
+    except Exception as error:
+        print("Error inserting data:", error)
+
+    finally:
+        # Close the cursor and connection
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
 def addtoDatabase(songs: list):
     # Create a connection to the database
     try:

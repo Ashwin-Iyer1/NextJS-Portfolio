@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import Skills from './components/Skills.js';
 import Contact from './components/Contact.js';
+import GetTime from './components/getTime.js';
 export default function Home() {
     const [shouldLoad, setShouldLoad] = useState(false);
     const [fadeOut, setFadeOut] = useState(false); // New state for fade out
@@ -33,9 +34,6 @@ export default function Home() {
           if(shouldLoad){
         return <div className={`fade-out ${fadeOut ? 'fade' : ''}`}><NameAnim /></div>;
     }
-
-
-
         return (
             <div className={`Home ${fadeIn ? 'fade-in' : ''}`}>
                 <div className="Container">
@@ -48,8 +46,8 @@ export default function Home() {
                     <div className="Info">
                         <Links />
                         <div className="Working">
-                            <h2>Currently Working on</h2>
-                            <p>Personal Projects</p>
+                            <h2>Current coding time</h2>
+                            <GetTime />
                         </div>
                         <div className="College">
                             <Image src={NEU} id={'person'} alt="Northeastern" />
