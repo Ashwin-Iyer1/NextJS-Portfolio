@@ -12,9 +12,6 @@ def is_friday():
 
 def main():
     get_repos()
-    data = get_wakatime_data()
-    clear_entries("wakatime")
-    insertData(data['data']['total_seconds'], data['data']['daily_average'])
     if(not is_friday()):
         return
     songs = get_top(10)
