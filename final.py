@@ -1,6 +1,6 @@
 from last_fm import get_top
-from coverArt import get_image
-from databaseMod import addtoDatabase, clear_entries, insertData
+from coverArt import get_image, get_spotify_bearer
+from databaseMod import addtoDatabase, clear_entries
 import datetime
 from fetchGithub import get_repos
 
@@ -14,9 +14,9 @@ def main():
     if(not is_friday()):
         return
     songs = get_top(10)
+    bearer = get_spotify_bearer()
     for song in songs:
-        get_image(song)
-        song.append(get_image(song))
+        song.append(get_image(song, bearer))
         print("\n")
     clear_entries("Songs")
     addtoDatabase(songs)
