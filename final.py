@@ -3,7 +3,6 @@ from coverArt import get_image
 from databaseMod import addtoDatabase, clear_entries, insertData
 import datetime
 from fetchGithub import get_repos
-from wakatime import get_wakatime_data
 
 #only run if friday
 def is_friday():

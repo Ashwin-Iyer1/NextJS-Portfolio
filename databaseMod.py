@@ -142,3 +142,28 @@ def addtoGithub(data: list):
             cursor.close()
         if connection:
             connection.close()
+
+def wakatime_db_data():
+    try:
+        connection = psycopg2.connect(**db_params)
+        cursor = connection.cursor()
+
+        # Define the select query
+        select_query = """
+        SELECT total_seconds FROM wakatime;
+        """
+        
+        # Execute the query
+        cursor.execute(select_query)
+        data = cursor.fetchall()
+        return data
+
+    except Exception as error:
+        print("Error fetching data:", error)
+
+    finally:
+        # Close the cursor and connection
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
