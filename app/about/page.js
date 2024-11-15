@@ -4,6 +4,8 @@ import Links from '../components/Links';
 import Bar from '../components/Bar';
 import SongList from '../components/SongList';
 import Coc from '../components/COC';
+import Link from 'next/link';
+
 export default function About(){
     return (
         <div className={styles.About}>
@@ -22,9 +24,16 @@ export default function About(){
                 <div className={styles.Links2}>
                     <Links />
                 </div>
+                <Link href='/resume' >
+                <h2>My Resume</h2>
+                </Link>
+
                 <h1>My top songs this week</h1>
                 <SongList />
                 <Coc />
+                <div className="ContactText">
+            </div>                
+
             </div>
             
         </div>
