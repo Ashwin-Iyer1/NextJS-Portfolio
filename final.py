@@ -5,14 +5,10 @@ import datetime
 from fetchGithub import get_repos
 
 #only run if friday
-def is_friday():
-    return datetime.datetime.today().weekday() == 4
 
 
 def main():
     get_repos()
-    if(not is_friday()):
-        return
     songs = get_top(10)
     bearer = get_spotify_bearer()
     for song in songs:
