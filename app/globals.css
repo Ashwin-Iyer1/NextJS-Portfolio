@@ -127,6 +127,7 @@ footer{
     max-width: 500px;
     border-radius: 8px;
     padding-right: 50px;
+    box-shadow: 10px 10px rgb(38, 12, 62);
 }
 
 .College {
@@ -135,6 +136,7 @@ footer{
     align-items: center;
     background-color: rgb(37, 37, 37);
     border-radius: 8px;
+    box-shadow: 10px 10px rgb(12, 12, 12);
 }
 
 .College img {
@@ -367,7 +369,6 @@ h2{
     align-items: center; /* Center items horizontally */
     text-align: center; /* Center text */
     padding-top: 20px;
-    max-width: 50%;
 
     }
     .Working {
@@ -391,7 +392,8 @@ h2{
     }
     .Links {
         justify-content: center;
-        max-width: 90%;
+        max-width: 60%;
+        
     }
     
 

@@ -61,7 +61,7 @@ export default function Home() {
                       const textColor = `hsl(${hue}, 70%, 50%)`;  // Saturation and Lightness are set for vivid colors
                       const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`;  // Add transparency to the background                    
                     return (
-                        <div className="Project" style={{border: `2px solid ${textColor}`, backgroundColor: backgroundColor}}>
+                        <div className="Project" style={{border: `2px solid ${textColor}`, backgroundColor: backgroundColor, boxShadow: `2px 3px ${textColor}`}}>
                             <h2><a href={project.html_url} target='_blank' rel="noreferrer" style={{color: textColor}}>{project.reponame}</a></h2>
                             <p>{project.description}</p>
                             
