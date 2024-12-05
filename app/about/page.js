@@ -20,19 +20,22 @@ export default function About(){
                     I currently have a few side <a href='../projects' id="AHHH">projects</a> which range from web scraping to basic machine learning.
                 </p>
                 <p className="ABTText">I also enjoy working out and listening to music 🎵!</p>
-
+            
                 <div className={styles.Links2}>
                     <Links />
                 </div>
                 <Link href='/resume' >
                 <h2>My Resume</h2>
                 </Link>
-
+                
                 <h1>My top songs this week</h1>
+                </div>
+                <div className={styles.songs}>
                 <SongList />
+                </div>
                 <Coc />
                 <div className="ContactText">
-            </div>                
+                            
 
             </div>
             

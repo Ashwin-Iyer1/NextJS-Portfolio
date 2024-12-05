@@ -13,9 +13,14 @@
     
 }
 @media (min-width: 767px) {
-    .About p {
+    .About .text p {
         max-width: 60%;
         text-align: left;
+    }
+
+    .About .songs {
+        max-width: 100% !important;
+        text-align: center !important;
     }
     
 }
