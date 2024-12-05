@@ -362,6 +362,8 @@ h2{
     .basic a{
         text-align: center;
     }
+
+    
     
     .Info {
         display: flex;
@@ -393,6 +395,7 @@ h2{
     .Links {
         justify-content: center;
         max-width: 60%;
+        align-items: center;
         
     }
     
