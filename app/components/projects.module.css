@@ -1,69 +1,67 @@
-#WorkingOnP{
-    color: rgb(97, 97, 97);
-    text-align: left;
+#WorkingOnP {
+  color: rgb(97, 97, 97);
+  text-align: left;
 
-    padding-left: 20px;
+  padding-left: 20px;
 }
 @media (min-width: 767px) {
-    .Projects{
-        padding-left: 20px;
-    }
-    
+  .Projects {
+    padding-left: 20px;
+  }
 }
 .Projects {
-    padding-top: 20px;
-    text-align: left;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 100%;
-    margin: 0 0;
+  padding-top: 20px;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 0;
 }
 .Project1 .BG {
-    background-color: rgb(0, 71, 60);
-    height: 200px;
-    width: 100%;
-    padding: 0;
-    z-index: 1; /* Ensure it appears above other elements */
-
+  background-color: rgb(0, 71, 60);
+  height: 200px;
+  width: 100%;
+  padding: 0;
+  z-index: 1; /* Ensure it appears above other elements */
 }
 
 .Projects.skeleton {
-    padding-top: 20px;
-    text-align: left;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 100%;
-    margin: 0 0;
+  padding-top: 20px;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 0;
 }
 
 .Project.placeholder {
-    border: 2px solid #ccc; /* Light gray border */
-    background-color: #f0f0f0; /* Light gray background */
-    padding: 20px;
-    border-radius: 5px; /* Rounded corners */
-    min-height: 100px; /* Minimum height for placeholder */
+  border: 2px solid #ccc; /* Light gray border */
+  background-color: #f0f0f0; /* Light gray background */
+  padding: 20px;
+  border-radius: 5px; /* Rounded corners */
+  min-height: 100px; /* Minimum height for placeholder */
 }
 
 .skeleton-text {
-    height: 20px;
-    background-color: #e0e0e0; /* Slightly darker gray */
-    margin-bottom: 10px; /* Space below the text */
-    border-radius: 4px;
+  height: 20px;
+  background-color: #e0e0e0; /* Slightly darker gray */
+  margin-bottom: 10px; /* Space below the text */
+  border-radius: 4px;
 }
 
 .skeleton-description {
-    height: 15px;
-    background-color: #e0e0e0; /* Slightly darker gray */
-    border-radius: 4px;
+  height: 15px;
+  background-color: #e0e0e0; /* Slightly darker gray */
+  border-radius: 4px;
 }
 
 .Project {
-    width: 400px;
-    height: 130px;
-    padding-left: 10px;
-    border-radius: 8px;
-    border-width: 5px;
-    margin-bottom: 10px;
+  width: 400px;
+  height: 130px;
+  padding-left: 10px;
+  border-radius: 8px;
+  border-width: 5px;
+  margin-bottom: 10px;
 }

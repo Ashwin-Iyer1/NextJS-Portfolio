@@ -1,77 +1,77 @@
 [
-    {
-        "reponame": "7110A-Website",
-        "description": "the website for VEX team 7110A ",
-        "html_url": "https://github.com/Ashwin-Iyer1/7110A-Website"
-    },
-    {
-        "reponame": "7110A_Code",
-        "description": null,
-        "html_url": "https://github.com/Ashwin-Iyer1/7110A_Code"
-    },
-    {
-        "reponame": "Chess-Bot-using-OpenCV",
-        "description": "A chess bot that utilizes Stockfish and OpenCV to find the best move.",
-        "html_url": "https://github.com/Ashwin-Iyer1/Chess-Bot-using-OpenCV"
-    },
-    {
-        "reponame": "Email-Writer-with-web-search",
-        "description": "A useful tool which uses Selenium to scrape google searches for websites with possible emails.",
-        "html_url": "https://github.com/Ashwin-Iyer1/Email-Writer-with-web-search"
-    },
-    {
-        "reponame": "Game-Pigeon-Anagrams",
-        "description": "a Game Pigeon bot for the Anagrams game using iPhone mirroring on MacOS",
-        "html_url": "https://github.com/Ashwin-Iyer1/Game-Pigeon-Anagrams"
-    },
-    {
-        "reponame": "GPTvsGeminiTrader",
-        "description": "A bot that utilizes chatGPT and Gemini to trade stocks using Alpaca",
-        "html_url": "https://github.com/Ashwin-Iyer1/GPTvsGeminiTrader"
-    },
-    {
-        "reponame": "homereadypro",
-        "description": "submission for hackUTD",
-        "html_url": "https://github.com/Ashwin-Iyer1/homereadypro"
-    },
-    {
-        "reponame": "NextJS-Portfolio",
-        "description": "My Portfolio on NextJS hosted on Heroku",
-        "html_url": "https://github.com/Ashwin-Iyer1/NextJS-Portfolio"
-    },
-    {
-        "reponame": "Pothole-detector",
-        "description": "A machine learning model that utilizes photos and geotags to determine where road faults occur.",
-        "html_url": "https://github.com/Ashwin-Iyer1/Pothole-detector"
-    },
-    {
-        "reponame": "ReactPortfolio",
-        "description": "my portfolio in react",
-        "html_url": "https://github.com/Ashwin-Iyer1/ReactPortfolio"
-    },
-    {
-        "reponame": "SkyblockSniper",
-        "description": "A bot that utilizes the Hypixel Skyblock API and the Coflnet API to perform arbitrage",
-        "html_url": "https://github.com/Ashwin-Iyer1/SkyblockSniper"
-    },
-    {
-        "reponame": "studentsdrivesafe",
-        "description": "A machine learning model that utilizes the user's phone gyroscope and accelerometer to determine bad driving",
-        "html_url": "https://github.com/Ashwin-Iyer1/studentsdrivesafe"
-    },
-    {
-        "reponame": "tiktodv4",
-        "description": "A Selenium bot to automate the liking of a video",
-        "html_url": "https://github.com/Ashwin-Iyer1/tiktodv4"
-    },
-    {
-        "reponame": "TikTok-Video-Creator",
-        "description": "A video splicer in Python for easy creation and uploading of Tiktoks",
-        "html_url": "https://github.com/Ashwin-Iyer1/TikTok-Video-Creator"
-    },
-    {
-        "reponame": "Cookle",
-        "description": "Food guessing game similar to Wordle",
-        "html_url": "https://s-pat6.github.io/cookle/"
-    }
+  {
+    "reponame": "7110A-Website",
+    "description": "the website for VEX team 7110A ",
+    "html_url": "https://github.com/Ashwin-Iyer1/7110A-Website"
+  },
+  {
+    "reponame": "7110A_Code",
+    "description": null,
+    "html_url": "https://github.com/Ashwin-Iyer1/7110A_Code"
+  },
+  {
+    "reponame": "Chess-Bot-using-OpenCV",
+    "description": "A chess bot that utilizes Stockfish and OpenCV to find the best move.",
+    "html_url": "https://github.com/Ashwin-Iyer1/Chess-Bot-using-OpenCV"
+  },
+  {
+    "reponame": "Email-Writer-with-web-search",
+    "description": "A useful tool which uses Selenium to scrape google searches for websites with possible emails.",
+    "html_url": "https://github.com/Ashwin-Iyer1/Email-Writer-with-web-search"
+  },
+  {
+    "reponame": "Game-Pigeon-Anagrams",
+    "description": "a Game Pigeon bot for the Anagrams game using iPhone mirroring on MacOS",
+    "html_url": "https://github.com/Ashwin-Iyer1/Game-Pigeon-Anagrams"
+  },
+  {
+    "reponame": "GPTvsGeminiTrader",
+    "description": "A bot that utilizes chatGPT and Gemini to trade stocks using Alpaca",
+    "html_url": "https://github.com/Ashwin-Iyer1/GPTvsGeminiTrader"
+  },
+  {
+    "reponame": "homereadypro",
+    "description": "submission for hackUTD",
+    "html_url": "https://github.com/Ashwin-Iyer1/homereadypro"
+  },
+  {
+    "reponame": "NextJS-Portfolio",
+    "description": "My Portfolio on NextJS hosted on Heroku",
+    "html_url": "https://github.com/Ashwin-Iyer1/NextJS-Portfolio"
+  },
+  {
+    "reponame": "Pothole-detector",
+    "description": "A machine learning model that utilizes photos and geotags to determine where road faults occur.",
+    "html_url": "https://github.com/Ashwin-Iyer1/Pothole-detector"
+  },
+  {
+    "reponame": "ReactPortfolio",
+    "description": "my portfolio in react",
+    "html_url": "https://github.com/Ashwin-Iyer1/ReactPortfolio"
+  },
+  {
+    "reponame": "SkyblockSniper",
+    "description": "A bot that utilizes the Hypixel Skyblock API and the Coflnet API to perform arbitrage",
+    "html_url": "https://github.com/Ashwin-Iyer1/SkyblockSniper"
+  },
+  {
+    "reponame": "studentsdrivesafe",
+    "description": "A machine learning model that utilizes the user's phone gyroscope and accelerometer to determine bad driving",
+    "html_url": "https://github.com/Ashwin-Iyer1/studentsdrivesafe"
+  },
+  {
+    "reponame": "tiktodv4",
+    "description": "A Selenium bot to automate the liking of a video",
+    "html_url": "https://github.com/Ashwin-Iyer1/tiktodv4"
+  },
+  {
+    "reponame": "TikTok-Video-Creator",
+    "description": "A video splicer in Python for easy creation and uploading of Tiktoks",
+    "html_url": "https://github.com/Ashwin-Iyer1/TikTok-Video-Creator"
+  },
+  {
+    "reponame": "Cookle",
+    "description": "Food guessing game similar to Wordle",
+    "html_url": "https://s-pat6.github.io/cookle/"
+  }
 ]

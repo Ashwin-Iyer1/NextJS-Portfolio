@@ -1,35 +1,33 @@
-h2{
-    color: #C596EE;
-    font-size: 1.4em;
-    
-
+h2 {
+  color: #c596ee;
+  font-size: 1.4em;
 }
-h1{
-    color: blueviolet;
+h1 {
+  color: blueviolet;
 }
 .links-section a {
-    margin-right: 20px; /* Adjust this value to increase or decrease the space between links */
+  margin-right: 20px; /* Adjust this value to increase or decrease the space between links */
 }
 
 .links-section {
-    display: flex; /* Ensure links are displayed in a row */
-    justify-content: space-between; /* Ensure links are spaced evenly */
-    align-items: center; /* Ensure links are centered vertically */
-    flex-direction: row;
+  display: flex; /* Ensure links are displayed in a row */
+  justify-content: space-between; /* Ensure links are spaced evenly */
+  align-items: center; /* Ensure links are centered vertically */
+  flex-direction: row;
 }
 .Bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
 }
 @media (max-width: 767px) {
-    .Bar {
-        flex-direction: column;
-        justify-content: center; /* Center vertically */
-        max-width: 100%; /* Allow full width on smaller screens */
-        margin: auto;
-        padding-left: 0px;
-    }
+  .Bar {
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    max-width: 100%; /* Allow full width on smaller screens */
+    margin: auto;
+    padding-left: 0px;
+  }
 }

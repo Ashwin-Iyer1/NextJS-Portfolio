@@ -1,68 +1,59 @@
 .About .text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 
 .About h2 {
-    align-items: left;
-    text-align: left;
-    color: rgb(167, 94, 235);
-    
+  align-items: left;
+  text-align: left;
+  color: rgb(167, 94, 235);
 }
 @media (min-width: 767px) {
-    .About .text p {
-        max-width: 60%;
-        text-align: left;
-    }
+  .About .text p {
+    max-width: 60%;
+    text-align: left;
+  }
 
-    .About .songs {
-        max-width: 100% !important;
-        text-align: center !important;
-    }
-    
+  .About .songs {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
 }
 @media (max-width: 767px) {
-    .About p {
-        max-width: 90%;
-        text-align: center;
-
-    }
-    .About .Links2 {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-    
+  .About p {
+    max-width: 90%;
+    text-align: center;
+  }
+  .About .Links2 {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
 
-
 .About p {
-    align-items: left;
-    color: rgb(155, 155, 155);
+  align-items: left;
+  color: rgb(155, 155, 155);
 }
 
 #AHHH {
-    color: rgb(167, 94, 235);
+  color: rgb(167, 94, 235);
 }
 
 .About .BG {
-    background-color: rgb(0, 10, 66);
-    height: 200px;
-    width: 100%;
-    padding: 0;
+  background-color: rgb(0, 10, 66);
+  height: 200px;
+  width: 100%;
+  padding: 0;
 }
 
 .About .Links2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-    margin: 0 auto;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
 }
-
-

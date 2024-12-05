@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
 .container {
   min-height: 100vh;
@@ -31,8 +31,8 @@
   height: 500px;
 }
 @media (max-width: 767px) {
-  .logo{
-      max-width: 767px; 
-      height: auto;
+  .logo {
+    max-width: 767px;
+    height: auto;
   }
 }
