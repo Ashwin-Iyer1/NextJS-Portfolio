@@ -426,12 +426,4 @@ h2{
     h3{
         text-align: center;
     }
-    iframe{
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        width: 70%;
-        max-width: 600px;
-        height: 500px;
-    }
 }

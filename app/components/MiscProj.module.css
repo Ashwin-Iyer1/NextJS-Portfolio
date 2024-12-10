@@ -1,15 +1,22 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .container iframe {
+  padding-left: 20px;
   width:519px;
   height:292px;
 }
 
+@media (max-width: 1000px) {
+  .container{
+    flex-direction: column;
+  }
+}
 @media (max-width: 568px) {
   .container iframe {
     width: 43vh;
