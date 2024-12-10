@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container iframe {
+  width:519px;
+  height:292px;
+}
+
+@media (max-width: 568px) {
+  .container iframe {
+    width: 43vh;
+    height: 25vh;
+  }
+}

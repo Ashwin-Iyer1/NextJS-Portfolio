@@ -9,6 +9,7 @@ import Link from "next/link";
 import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
 import GetTime from "./components/getTime.js";
+import MiscProj from "./components/MiscProj";
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // New state for fade out
@@ -30,6 +31,7 @@ export default function Home() {
     }
   }, []);
 
+  
   if (shouldLoad) {
     return (
       <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
@@ -99,6 +101,10 @@ export default function Home() {
         </div>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Skills</h2>
         <Skills />
+      </div>
+      <div className="MiscProj">
+        <h2 style={{ textAlign: "center", fontSize: "2em" }}>Miscellaneous Projects</h2>
+        <MiscProj />
       </div>
       <div className="Contact">
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
