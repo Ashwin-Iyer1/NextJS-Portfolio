@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
-    "@mui/material-nextjs": "^6.1.5",
+    "@mui/material-nextjs": "^6.2.1",
     "@next/third-parties": "^15.1.2",
     "@octokit/auth-token": "^5.1.1",
     "dotenv": "^16.4.5",
