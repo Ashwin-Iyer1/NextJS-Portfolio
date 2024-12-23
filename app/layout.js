@@ -1,4 +1,6 @@
 import "./globals.css"; // Your global CSS file
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 export const metadata = {
   title: "Ashwin Iyer",
   description:
@@ -34,6 +36,7 @@ export default function RootLayout({ children }) {
           </footer>
         </main>
       </body>
+      <GoogleAnalytics gaId="G-T57ZFGY2HZ" />
     </html>
   );
 }
