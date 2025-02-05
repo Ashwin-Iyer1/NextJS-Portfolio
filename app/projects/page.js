@@ -1,4 +1,4 @@
-import "./projects.module.css";
+import "./projects.css";
 import React from "react"; // Import useEffect and useState
 import Bar from "../components/Bar";
 

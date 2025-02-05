@@ -57,6 +57,7 @@ main{
 footer{
     color: rgba(255, 255, 255, 0.42);
 }
+
 .Home{
     text-align: left;
 
@@ -174,6 +175,17 @@ footer{
     max-width: 100%;
     margin: 0 0;
 }
+.Project {
+    width: 90%; /* Adjust the width of each project card */
+    max-width: 400px; /* Set a maximum width */
+    height: 130px;
+    padding-left: 0px;
+    border-radius: 8px;
+    border-width: 5px;
+    margin-bottom: 10px;
+}
+
+
 .Project1 .BG {
     background-color: rgb(0, 71, 60);
     height: 200px;
@@ -215,14 +227,7 @@ footer{
     border-radius: 4px;
 }
 
-.Project {
-    width: 400px;
-    height: 130px;
-    padding-left: 10px;
-    border-radius: 8px;
-    border-width: 5px;
-    margin-bottom: 10px;
-}
+
 .Home .SeeAllText{
     color:rgb(172, 216, 255)
 }
@@ -244,6 +249,11 @@ h2{
 
 .Project p {
     color: rgb(233, 233, 233);
+    padding-left: 10px;
+}
+
+.Project h2 {
+    padding-left: 10px;
 }
 
 
@@ -316,9 +326,6 @@ h2{
 }
 
 @media (max-width: 767px) {
-    
-    
-    
     .Home{
         padding-left: 0px;
     }

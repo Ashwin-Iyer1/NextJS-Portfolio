@@ -10,6 +10,7 @@ import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
 import GetTime from "./components/getTime.js";
 import MiscProj from "./components/MiscProj";
+import Bar from "./components/Bar";
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // New state for fade out
@@ -41,9 +42,9 @@ export default function Home() {
   }
   return (
     <div className={`Home ${fadeIn ? "fade-in" : ""}`}>
+      <Bar />
       <div className="Container">
         <div className="basic">
-          <h1>Ashwin Iyer</h1>
           <h2>Freshman at Northeastern University</h2>
           <p>
             I am currently a freshman at Northeastern University in Boston,
