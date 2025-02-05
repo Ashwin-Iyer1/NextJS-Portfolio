@@ -309,7 +309,7 @@ h2{
     color: #6868fe;
 }
 
-@media (max-width: 1353px) {
+@media (min-width: 1080px) {
     .Home{
         padding-left: 50px;
     }

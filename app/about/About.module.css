@@ -1,5 +1,5 @@
 
-@media (min-width: 1353px) {
+@media (min-width: 1080px) {
     .About{
       padding-left: 50px;
       padding-right: 50px;
@@ -8,7 +8,7 @@
   
 }
 
-.About h1{
+.About .songsHeading{
   font-family: Roboto,sans-serif;
   display: block;
   font-size: 2em;

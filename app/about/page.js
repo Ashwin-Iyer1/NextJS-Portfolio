@@ -39,8 +39,8 @@ export default function About() {
           <h2>My Resume</h2>
         </Link>
 
-        <h1>My top songs this week</h1>
-      </div>
+        <h1 className={styles.songsHeading}>My top songs this week</h1>
+        </div>
       <div className={styles.songs}>
         <SongList />
       </div>
