@@ -252,9 +252,6 @@ h2{
     padding-left: 10px;
 }
 
-.Project h2 {
-    padding-left: 10px;
-}
 
 
 .Skills {
@@ -313,6 +310,10 @@ h2{
     .Home{
         padding-left: 50px;
     }
+    .Project h2 {
+        padding-left: 10px;
+    }
+    
 }
 
 @media (max-width: 400px) {

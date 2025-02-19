@@ -11,6 +11,7 @@ import Contact from "./components/Contact.js";
 import GetTime from "./components/getTime.js";
 import MiscProj from "./components/MiscProj";
 import Bar from "./components/Bar";
+import BlogList from "./components/BlogList";
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // New state for fade out
@@ -106,6 +107,8 @@ export default function Home() {
       <div className="MiscProj">
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Miscellaneous Projects</h2>
         <MiscProj />
+        <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
+        <BlogList />
       </div>
       <div className="Contact">
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>

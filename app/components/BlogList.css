@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  min-height: 100vh; /* Ensures the container takes full height of the viewport */
+  padding: 20px;
+}
+
+.Blogs {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates a responsive grid */
+  gap: 16px; /* Adds spacing between the items */
+  width: 100%; /* Ensures the grid takes the full width */
+  max-width: 70%; /* Optional: Limits the maximum width of the grid */
+  margin: 0 auto; /* Center the grid container horizontally */
+}
+
+
+.Blog {
+  
+  padding: 16px;
+  border-radius: 8px;
+  background-color: white;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.Blog:hover {
+  transform: translateY(-5px); /* Adds a small hover effect */
+}
