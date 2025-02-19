@@ -4,33 +4,33 @@ import style from "./BlogList.css";
 const blogs = [
   {
     slug: "books",
-    title: "My favorite books and what I am reading next",
-    description: "A breakdown of my workout schedule and tips.",
+    title: "Books",
+    description: "My favorite books and books I plan to read.",
   },
   {
     slug: "coding",
     title: "My coding journey",
-    description: "A breakdown of my workout schedule and tips.",
+    description: "How I started coding and my favorite resources.",
   },
   {
     slug: "school",
-    title: "High school to College",
-    description: "A breakdown of my workout schedule and tips.",
+    title: "School",
+    description: "My experience from high school to the beginning of college.",
   },
   {
     slug: "stocks",
-    title: "What got me into stocks",
-    description: "A breakdown of my workout schedule and tips.",
+    title: "Stocks and Investing",
+    description: "My investing strategy and what got me into investing.",
   },
   {
     slug: "working-out",
-    title: "My Working Out Journey",
-    description: "A breakdown of my workout schedule and tips.",
+    title: "Working Out",
+    description: "My gym routine and progress.",
   },
   {
     slug: "youtube",
-    title: "My Favorite Youtube Channels and Videos",
-    description: "A breakdown of my workout schedule and tips.",
+    title: "YouTube",
+    description: "My favorite Youtube channels and videos.",
   },
   // Add more blog objects here if needed
 ];

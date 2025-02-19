@@ -7,14 +7,17 @@ export default async function Page({ params }) {
   const { slug } = params;
 
   try {
+    
     // Dynamically import the Markdown file
     const { default: Post } = await import(`@/content/${slug}.mdx`);
 
     // Wrap the Post component with Bar
     return (
       <div className="full-width-wrapper">
+
         <Bar />
         <div className="half-width-wrapper">
+          
         <Post />
         </div>
         </div>
