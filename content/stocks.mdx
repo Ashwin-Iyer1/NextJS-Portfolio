@@ -1,2 +1,136 @@
+import Image from 'next/image';
+import crypto from './InvestingPhotos/Crypto.jpg';
+import meta from './InvestingPhotos/Meta.PNG';
+import orcl from './InvestingPhotos/ORCL.PNG';
+import qubt from './InvestingPhotos/QUBT.PNG';
+import alpaca from './InvestingPhotos/Alpaca.jpg';
+import flashBoys from './bookPhotos/FlashBoys.webp';
+import Fooled from './bookPhotos/Fooled.webp';
+import MoreMoney from './bookPhotos/MoreMoney.webp';
+import Benjamin from './YoutubeChannels/Benjamin.webp';
+import Fractal from './YoutubeChannels/Fractal.webp';
+import Minding from './YoutubeChannels/Minding.webp';
 
-# About
+
+import trillion from './YoutubeVideo/Trillion.avif';
+import uncorrelated from './YoutubeVideo/uncorrelated.jpg';
+import technical from './YoutubeVideo/technical.jpg';
+import deep from './YoutubeVideo/deep.jpg';
+import poor from './YoutubeVideo/poor.jpg';
+import barclay from './YoutubeVideo/barclay.jpg';
+import yolo from './YoutubeVideo/YOLO.avif';
+import random from './YoutubeVideo/random.jpg';
+
+# Stocks And Investing
+## How I got invested
+
+### Paper Trading
+I always wanted to go into computer science but at the same time I had an interest in the world of investing whether that be through Youtube videos or trying to "predict the market". In the 7th grade I had asked my dad for a Robinhood account to which I was too young so I started [paper trading](https://www.investopedia.com/terms/p/papertrade.asp) on [Alpaca Markets](https://alpaca.markets/). I do not remember how good my portfolio was but I just remember a lot of red...
+
+### Crypto Currency
+In the beginning of my freshman year of high school (2020) I got into crypto mining, specifically Ethereum. From this point I tried to understand the market to which I go back to Warren Buffet's quote on bitcoin, "probably rat poison squared". The market is not really a market and it follows the random walk hypothesis as the [volatility is not clustered](https://youtu.be/6I9T2dboLXI?si=bZLFvuY821Wovusc). I still hold on to crypto but I do not actively trade it. Crypto taught me about supply and demand as well as a basic understanding on volatility.
+
+<Image src={crypto} alt="Crypto" width={500} className="center-image"/>
+
+### Stocks
+I started trading stocks in my junior year with the help of chatGPT (very dumb) and had no clue about technical analysis or the fundamentals of a market. My thought process was that past precedents proceeded future movements which was very incorrect and it taught me that charts and other indicators are complete garbage when analyzing a market. At this time I had a very small holding of MSFT and FGD which I held for the long-term. 
+
+I picked up reading in my freshman year of college and got back into investing through the use of technical analysis and found my calling of poor man's covered calls as well as capitalizing off IV crush during earnings season. My best trades stem from META calls, ORCL calls, and MSFT puts. I chose this strategy as I am an optimist in the market and found that these blue chip stocks proved to have over valued volatility. If you want to know more about my strategy feel free to PM me on Discord or email me.
+
+<div className="flexbox">
+  <Image src={meta} alt="Meta stock movement" width={500} className="flex-image" />
+  <Image src={orcl} alt="Orcl stock movement" width={500} className="flex-image" />
+  <Image src={qubt} alt="QUBT regret" width={500} className="flex-image" />
+</div>
+
+My biggest regret was not selling QUBT when I was up over 300% in 1 day :').
+
+I currently hold on to QUBT and BWXT as my speculative stocks, MSFT as my growth stock, and FGD as my dividend stock. I have stopped trading options due to the volatility and uncertainty of today's market however my paper trading strategy is to sell calls on over valued stocks and hope for IV crush.
+
+
+<Image src={alpaca} alt="Alpaca" width={500} className="center-image"/>
+
+### Side projects and my own analysis of the market
+I remember learning the [fourier series](https://www.youtube.com/watch?v=r6sGWTCMz2k) and getting hooked onto the idea of creating any wave using the combination of multiple sin and cosine waves with differing amplitudes. In the shower of my freshman year London dorm, I thought I had uncovered a market opportunity by using the fourier series to track the movement of a stock and relating that to volatility to price options. In one Google search my ambitions were shut down as I saw a [well written article](https://engineering.nyu.edu/sites/default/files/2018-08/CarrMadan2_0.pdf) from an NYU professor and a 30 year consultant at Morgan Stanley, people who were more than qualified compared to me. This taught me that the market is almost already solved, it is hard to squeeze out alpha when the market is so efficient. 
+
+<center>"It doesn’t matter if I’m one second slower or one microsecond; either way I come in second place." -Flash Boys</center>
+<br />
+My theory for gaining alpha from the market involves trying to capture the delta between implied volatility and realized volatility and using that figure out the correct pricing of options. Though this is rudimentary, I only ever found that out after months of research that when trying to trade options, you aren't trying to bet on the market's movement but rather whether the option is overpriced or underpriced. If the market were perfectly efficient, you would only ever make money from pure chance and not from any technical analysis.
+
+
+## Recommendations
+I recommend the following books, youtube videos, and channels to learn more about investing:
+### Books
+<div className="flexboxVideos">
+<div className="video"> 
+Flash Boys
+  <Image src={flashBoys} alt="Meta stock movement" width={80} className="flex-image" />
+  </div>
+
+  <div className="video"> 
+
+  Fooled By Randomness
+  <Image src={Fooled} alt="Orcl stock movement" width={80} className="flex-image" />
+    </div>
+    <div className="video"> 
+
+  More Money Than God
+  <Image src={MoreMoney} alt="QUBT regret" width={80} className="flex-image" />
+  </div>
+</div>
+
+### channels
+<div className="flexboxVideos">
+<div className="video"> 
+[Fractal Manhattan](https://www.youtube.com/@fractalmanhattan)  
+<Image src={Fractal} alt="Meta stock movement" width={80} className="flex-image" />
+Channel that applies mathematical concepts to the stock market.
+  </div>
+  <div className="video">
+[Benjamin](https://www.youtube.com/@benjjjaamiinn) 
+  <Image src={Benjamin} alt="Orcl stock movement" width={80} className="flex-image" />
+    Very funny channel that teaches you the basics of technical analysis.
+    </div>
+    <div className="video"> 
+
+[Minding The Data](https://www.youtube.com/@mindingthedata4218)
+  <Image src={Minding} alt="QUBT regret" width={80} className="flex-image" />
+    Mainly statistics and data analysis but teaches you about alternative markets and how to analyze data.
+  </div>
+</div>
+
+### Videos
+<div className="flexboxVideos">
+<div className="video">
+[The Trillion Dollar Equation](https://www.youtube.com/watch?v=A5w-dEgIU1M)
+<Image src={trillion} alt="Trillion" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[Sources of Uncorrelated Returns](https://www.youtube.com/watch?v=AyJdUFeYHYs)
+<Image src={uncorrelated} alt="Uncorrelated" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[The Truth About Technical Analysis](https://www.youtube.com/watch?v=ZN6P9ErUcOg)
+<Image src={technical} alt="Technical" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[The Deep Value Investing Formula](https://www.youtube.com/watch?v=2Zus6SyQhW4)
+<Image src={deep} alt="Deep" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[Poor Man's Covered Calls Strategy in Robinhood](https://www.youtube.com/watch?v=xr2DfWmQ4_Y)
+<Image src={poor} alt="Poor" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[The Barclays Trading Strategy that Outperforms the Market](https://www.youtube.com/watch?v=8pYgz4YlQnE)
+<Image src={barclay} alt="Barclay" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[How To YOLO Your Life Savings (and make millions)](https://www.youtube.com/watch?v=FEMFVM1PskM)
+<Image src={yolo} alt="YOLO" width={500} className="flex-image"/>
+</div>
+<div className="video">
+[Why Random Walks and the Efficient Market Hypothesis Fail](https://www.youtube.com/watch?v=vo8q5AqIKlA)
+<Image src={random} alt="Random" width={500} className="flex-image"/>
+</div>
+</div>

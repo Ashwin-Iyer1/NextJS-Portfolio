@@ -26,6 +26,9 @@ h3{
   color:rgb(190, 156, 221);
 }
 
+center{
+  color: azure;
+}
 .flexbox {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
