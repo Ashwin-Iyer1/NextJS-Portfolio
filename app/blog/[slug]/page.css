@@ -1,6 +1,8 @@
 .full-width-wrapper {
-    width: 90vw;  /* Use the full viewport width */
     margin: 0;
+    width: 100%;
+    max-width: 90vw;  /* Ensures it doesn't go beyond 90% of the viewport width */
+
   }
   .half-width-wrapper {
     text-align: left;
@@ -88,7 +90,14 @@ a{
   margin-top: 10px;
 }
 
-
+.YoutubeVideo{
+  width: 100%;
+  max-width: 80vw; /* Scales with the window but prevents excessive stretching */
+  height: auto;
+  aspect-ratio: 16 / 9; /* Maintains the correct aspect ratio */
+  margin: 0 auto;
+  display: block;
+}
 
 .book .center-image{
   max-width: 100%;
