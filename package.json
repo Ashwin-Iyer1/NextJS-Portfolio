@@ -20,6 +20,7 @@
     "dotenv": "^16.4.5",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.5",
+    "markdown-table": "^3.0.4",
     "next": "^14.0.0",
     "next-mdx-remote": "^5.0.0",
     "node-fetch": "^3.3.2",
