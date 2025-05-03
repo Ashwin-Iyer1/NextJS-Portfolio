@@ -17,9 +17,15 @@
   margin: 0 auto; /* Center the grid container horizontally */
 }
 
+/* Special container for the last row to handle the centered last item */
+.last-row-container {
+  grid-column: 1 / -1; /* Span across all columns */
+  display: flex;
+  justify-content: center; /* Center the last item horizontally */
+  margin-top: 16px; /* Add some spacing from the items above */
+}
 
 .Blog {
-  
   padding: 16px;
   border-radius: 8px;
   background-color: white;
@@ -31,3 +37,4 @@
   transform: translateY(-5px); /* Adds a small hover effect */
 }
 
+/* Make the last item maintain its width */
