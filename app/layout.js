@@ -5,7 +5,8 @@ export const metadata = {
   title: "Ashwin Iyer",
   description:
     "Personal website of Ashwin Iyer, a rising sophomore at Northeastern University from Southlake, Texas.",
-  image: "https://photos.fife.usercontent.google.com/pw/AP1GczOdFssYTs9Pz2YtPa3Vrqv4YdpBEb5aIQV80EsI1owJ01Hqns6ibXs7MA=w1234-h1646-s-no-gm?authuser=0",
+  image:
+    "https://photos.fife.usercontent.google.com/pw/AP1GczOdFssYTs9Pz2YtPa3Vrqv4YdpBEb5aIQV80EsI1owJ01Hqns6ibXs7MA=w1234-h1646-s-no-gm?authuser=0",
 };
 
 export default function RootLayout({ children }) {

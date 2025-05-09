@@ -12,20 +12,20 @@
   z-index: 1; /* Ensure it appears above other elements */
 }
 
-  .Project {
-    width: 350px;
-    height: 130px;
-    border-radius: 8px;
-    border-width: 5px;
-    margin-bottom: 10px;
-  }
+.Project {
+  width: 350px;
+  height: 130px;
+  border-radius: 8px;
+  border-width: 5px;
+  margin-bottom: 10px;
+}
 
 @media (min-width: 1080px) {
-  .Project1{
+  .Project1 {
     padding-left: 50px;
     padding-right: 50px;
   }
-  
+
   .Projects {
     padding-left: 20px; /* Add padding on larger screens if necessary */
   }

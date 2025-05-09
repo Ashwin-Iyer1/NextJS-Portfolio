@@ -8,12 +8,12 @@
 
 .container iframe {
   padding-left: 20px;
-  width:519px;
-  height:292px;
+  width: 519px;
+  height: 292px;
 }
 
 @media (max-width: 1080px) {
-  .container{
+  .container {
     flex-direction: column;
   }
 }

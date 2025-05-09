@@ -10,7 +10,10 @@
 .Blogs {
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates a responsive grid */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Creates a responsive grid */
   gap: 16px; /* Adds spacing between the items */
   width: 100%; /* Ensures the grid takes the full width */
   max-width: 70%; /* Optional: Limits the maximum width of the grid */

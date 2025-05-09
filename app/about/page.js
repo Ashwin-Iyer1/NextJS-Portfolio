@@ -40,7 +40,7 @@ export default function About() {
         </Link>
 
         <h1 className={styles.songsHeading}>My top songs this week</h1>
-        </div>
+      </div>
       <div className={styles.songs}>
         <SongList />
       </div>

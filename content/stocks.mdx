@@ -1,28 +1,26 @@
-import Image from 'next/image';
-import crypto from './InvestingPhotos/Crypto.webp';
-import hash from './InvestingPhotos/Hash.webp';
+import Image from "next/image";
+import crypto from "./InvestingPhotos/Crypto.webp";
+import hash from "./InvestingPhotos/Hash.webp";
 
-import meta from './InvestingPhotos/Meta.webp';
-import orcl from './InvestingPhotos/ORCL.webp';
-import qubt from './InvestingPhotos/QUBT.webp';
-import alpaca from './InvestingPhotos/Alpaca.webp';
-import flashBoys from './bookPhotos/FlashBoys.webp';
-import Fooled from './bookPhotos/Fooled.webp';
-import MoreMoney from './bookPhotos/MoreMoney.webp';
-import Benjamin from './YoutubeChannels/Benjamin.webp';
-import Fractal from './YoutubeChannels/Fractal.webp';
-import Minding from './YoutubeChannels/Minding.webp';
+import meta from "./InvestingPhotos/Meta.webp";
+import orcl from "./InvestingPhotos/ORCL.webp";
+import qubt from "./InvestingPhotos/QUBT.webp";
+import alpaca from "./InvestingPhotos/Alpaca.webp";
+import flashBoys from "./bookPhotos/FlashBoys.webp";
+import Fooled from "./bookPhotos/Fooled.webp";
+import MoreMoney from "./bookPhotos/MoreMoney.webp";
+import Benjamin from "./YoutubeChannels/Benjamin.webp";
+import Fractal from "./YoutubeChannels/Fractal.webp";
+import Minding from "./YoutubeChannels/Minding.webp";
 
-
-import trillion from './YoutubeVideo/Trillion.avif';
-import uncorrelated from './YoutubeVideo/uncorrelated.webp';
-import technical from './YoutubeVideo/technical.webp';
-import deep from './YoutubeVideo/deep.webp';
-import poor from './YoutubeVideo/poor.webp';
-import barclay from './YoutubeVideo/barclay.webp';
-import yolo from './YoutubeVideo/YOLO.avif';
-import random from './YoutubeVideo/random.webp';
-
+import trillion from "./YoutubeVideo/Trillion.avif";
+import uncorrelated from "./YoutubeVideo/uncorrelated.webp";
+import technical from "./YoutubeVideo/technical.webp";
+import deep from "./YoutubeVideo/deep.webp";
+import poor from "./YoutubeVideo/poor.webp";
+import barclay from "./YoutubeVideo/barclay.webp";
+import yolo from "./YoutubeVideo/YOLO.avif";
+import random from "./YoutubeVideo/random.webp";
 
 # Stocks and Investing
 
@@ -39,7 +37,7 @@ At the beginning of my freshman year of high school (2020), I got into crypto mi
 <div className="flex flex-col items-center justify-center">
 
 <Image src={hash} alt="Hash" width={320} className="flex-image" />
-<Image src={crypto} alt="Crypto" width={500} className="flex-image"/>
+<Image src={crypto} alt="Crypto" width={500} className="flex-image" />
 
 </div>
 
@@ -51,11 +49,27 @@ I picked up reading in my freshman year of college and got back into investing t
 
 <div className="flexbox">
 
-  <Image src={meta} alt="Meta stock movement" width={500} className="flex-image" />
+{" "}
 
-  <Image src={orcl} alt="Orcl stock movement" width={500} className="flex-image" />
+<Image
+  src={meta}
+  alt="Meta stock movement"
+  width={500}
+  className="flex-image"
+/>
 
-  <Image src={qubt} alt="QUBT regret" width={500} className="flex-image" />
+{" "}
+
+<Image
+  src={orcl}
+  alt="Orcl stock movement"
+  width={500}
+  className="flex-image"
+/>
+
+{" "}
+
+<Image src={qubt} alt="QUBT regret" width={500} className="flex-image" />
 
 </div>
 
@@ -63,13 +77,16 @@ My biggest regret was not selling QUBT when I was up over 300% in 1 day :').
 
 I currently hold on to QUBT and BWXT as my speculative stocks, MSFT as my growth stock, and FGD as my dividend stock. I have stopped trading options due to the volatility and uncertainty of today's market; however, my paper trading strategy is to sell calls on overvalued stocks and hope for IV crush.
 
-<Image src={alpaca} alt="Alpaca" width={500} className="center-image"/>
+<Image src={alpaca} alt="Alpaca" width={500} className="center-image" />
 
 ### Side projects and my analysis of the market
 
 I remember learning the [Fourier series](https://www.youtube.com/watch?v=r6sGWTCMz2k) and getting hooked on the idea of creating any wave using the combination of multiple sine and cosine waves with differing amplitudes. In the shower of my freshman year London dorm, I thought I had uncovered a market opportunity by using the Fourier series to track the movement of a stock and relating that to volatility to price options. In one Google search, my ambitions were shut down as I saw a [well-written article](https://engineering.nyu.edu/sites/default/files/2018-08/CarrMadan2_0.pdf) from an NYU professor and a 30-year consultant at Morgan Stanley, people who were more than qualified compared to me. This taught me that the market is almost already solved; it is hard to squeeze out alpha when the market is so efficient.
 
-<center>"It doesn’t matter if I’m one second slower or one microsecond; either way, I come in second place." -Flash Boys</center>
+<center>
+  "It doesn’t matter if I’m one second slower or one microsecond; either way, I
+  come in second place." -Flash Boys
+</center>
 
 <br />
 
@@ -79,13 +96,11 @@ My theory for gaining alpha from the market involves capturing the delta between
 
 <center>"it's all basically arbitrage"</center>
 
-I update my blog to share a "finding", I have realized that everything is just arbitrage whether that be volatility, price spread, or fair price. At the end of the day, it is your intuition versus the market and how they value the underlying asset compared to your analysis. I also retract my statement on QUBT stock after a [tweet by Martin Shkreli](https://x.com/MartinShkreli/status/1876950624824177127?lang=en) where he shows the value of quantum stocks as a mere paperweight. I also found out that the "[NASA investment](https://x.com/danielnewmanUV/status/1869804629896376560)" into QUBT was a mere 26k while the market cap was 1.5 billion, which is a mere 0.000017% of the market cap. 
+I update my blog to share a "finding", I have realized that everything is just arbitrage whether that be volatility, price spread, or fair price. At the end of the day, it is your intuition versus the market and how they value the underlying asset compared to your analysis. I also retract my statement on QUBT stock after a [tweet by Martin Shkreli](https://x.com/MartinShkreli/status/1876950624824177127?lang=en) where he shows the value of quantum stocks as a mere paperweight. I also found out that the "[NASA investment](https://x.com/danielnewmanUV/status/1869804629896376560)" into QUBT was a mere 26k while the market cap was 1.5 billion, which is a mere 0.000017% of the market cap.
 
 The date is 3/11/25, and I have moved my strategy to cover puts on the S&P and CRSR. I hope to act as an "insurance agency" where I can sell overpriced puts during this fearful market.
 
 I hope to dabble in alternative markets such as the arbitrage between probability markets such as Kalshi and Polymarket and capitalizing spreads during increased volume during events such as using indicators like limit order volume. Essentially, I am following why someone is creating a large buy volume at a certain price and using that to determine the market's movement. I have no clue why it is moving, but I am trusting their intuition and pricing just above that.
-
-
 
 ## Recommendations
 
@@ -95,27 +110,43 @@ I recommend the following books, YouTube videos, and channels to learn more abou
 
 <div className="flexboxVideos">
 
-<div className="video"> 
+<div className="video">
 
 Flash Boys
 
-  <Image src={flashBoys} alt="Meta stock movement" width={80} className="flex-image" />
+{" "}
+
+<Image
+  src={flashBoys}
+  alt="Meta stock movement"
+  width={80}
+  className="flex-image"
+/>
 
   </div>
 
-  <div className="video"> 
+  <div className="video">
 
 Fooled By Randomness
 
-  <Image src={Fooled} alt="Orcl stock movement" width={80} className="flex-image" />
+{" "}
+
+<Image
+  src={Fooled}
+  alt="Orcl stock movement"
+  width={80}
+  className="flex-image"
+/>
 
     </div>
 
-    <div className="video"> 
+    <div className="video">
 
 More Money Than God
 
-  <Image src={MoreMoney} alt="QUBT regret" width={80} className="flex-image" />
+{" "}
+
+<Image src={MoreMoney} alt="QUBT regret" width={80} className="flex-image" />
 
   </div>
 
@@ -125,10 +156,16 @@ More Money Than God
 
 <div className="flexboxVideos">
 
-<div className="video"> 
+<div className="video">
 
 [Fractal Manhattan](https://www.youtube.com/@fractalmanhattan)
-<Image src={Fractal} alt="Meta stock movement" width={80} className="flex-image" />
+
+<Image
+  src={Fractal}
+  alt="Meta stock movement"
+  width={80}
+  className="flex-image"
+/>
 
 Channel that applies mathematical concepts to the stock market.
 
@@ -136,19 +173,28 @@ Channel that applies mathematical concepts to the stock market.
 
   <div className="video">
 
-[Benjamin](https://www.youtube.com/@benjjjaamiinn) 
+[Benjamin](https://www.youtube.com/@benjjjaamiinn)
 
-  <Image src={Benjamin} alt="Orcl stock movement" width={80} className="flex-image" />
+{" "}
+
+<Image
+  src={Benjamin}
+  alt="Orcl stock movement"
+  width={80}
+  className="flex-image"
+/>
 
     Very funny channel that teaches you the basics of technical analysis.
 
     </div>
 
-    <div className="video"> 
+    <div className="video">
 
 [Minding The Data](https://www.youtube.com/@mindingthedata4218)
 
-  <Image src={Minding} alt="QUBT regret" width={80} className="flex-image" />
+{" "}
+
+<Image src={Minding} alt="QUBT regret" width={80} className="flex-image" />
 
 Mainly statistics and data analysis, but it teaches you about alternative markets and how to analyze data.
 
@@ -164,7 +210,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [The Trillion Dollar Equation](https://www.youtube.com/watch?v=A5w-dEgIU1M)
 
-<Image src={trillion} alt="Trillion" width={500} className="flex-image"/>
+<Image src={trillion} alt="Trillion" width={500} className="flex-image" />
 
 </div>
 
@@ -172,7 +218,12 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [Sources of Uncorrelated Returns](https://www.youtube.com/watch?v=AyJdUFeYHYs)
 
-<Image src={uncorrelated} alt="Uncorrelated" width={500} className="flex-image"/>
+<Image
+  src={uncorrelated}
+  alt="Uncorrelated"
+  width={500}
+  className="flex-image"
+/>
 
 </div>
 
@@ -180,7 +231,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [The Truth About Technical Analysis](https://www.youtube.com/watch?v=ZN6P9ErUcOg)
 
-<Image src={technical} alt="Technical" width={500} className="flex-image"/>
+<Image src={technical} alt="Technical" width={500} className="flex-image" />
 
 </div>
 
@@ -188,7 +239,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [The Deep Value Investing Formula](https://www.youtube.com/watch?v=2Zus6SyQhW4)
 
-<Image src={deep} alt="Deep" width={500} className="flex-image"/>
+<Image src={deep} alt="Deep" width={500} className="flex-image" />
 
 </div>
 
@@ -196,7 +247,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [Poor Man's Covered Calls Strategy in Robinhood](https://www.youtube.com/watch?v=xr2DfWmQ4_Y)
 
-<Image src={poor} alt="Poor" width={500} className="flex-image"/>
+<Image src={poor} alt="Poor" width={500} className="flex-image" />
 
 </div>
 
@@ -204,7 +255,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [The Barclays Trading Strategy That Outperforms the Market](https://www.youtube.com/watch?v=8pYgz4YlQnE)
 
-<Image src={barclay} alt="Barclay" width={500} className="flex-image"/>
+<Image src={barclay} alt="Barclay" width={500} className="flex-image" />
 
 </div>
 
@@ -212,7 +263,7 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [How To YOLO Your Life Savings (and make millions)](https://www.youtube.com/watch?v=FEMFVM1PskM)
 
-<Image src={yolo} alt="YOLO" width={500} className="flex-image"/>
+<Image src={yolo} alt="YOLO" width={500} className="flex-image" />
 
 </div>
 
@@ -220,10 +271,8 @@ Mainly statistics and data analysis, but it teaches you about alternative market
 
 [Why Random Walks and the Efficient Market Hypothesis Fail](https://www.youtube.com/watch?v=vo8q5AqIKlA)
 
-<Image src={random} alt="Random" width={500} className="flex-image"/>
+<Image src={random} alt="Random" width={500} className="flex-image" />
 
 </div>
 
 </div>
-
-
