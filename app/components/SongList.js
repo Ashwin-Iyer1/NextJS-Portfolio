@@ -5,6 +5,8 @@ import songsData1 from "../data/songs.json"; // Adjust the path as necessary
 import styles from "./SongList.module.css"; // Import your CSS module
 import Stack from "@mui/material/Stack"; // Import Stack from Material-UI
 import Box from "@mui/material/Box"; // Import Box from Material-UI
+import Grid from "@mui/material/Grid"; // Import Grid from Material-UI
+
 const SongList = () => {
   const songRefs = useRef([]);
   const [isClient, setIsClient] = useState(false); // To track if we are on the client
@@ -53,6 +55,7 @@ const SongList = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   useEffect(() => {
     // Only apply the observer if the window width is less than 767px (mobile)
     if (windowWidth < 767 && songRefs.current.length > 0) {
@@ -65,7 +68,7 @@ const SongList = () => {
           });
         },
         {
-          threshold: 0.7, // 10% of the image is in view
+          threshold: 0.7, // 70% of the image is in view
         }
       );
       // Observe each image
@@ -90,37 +93,48 @@ const SongList = () => {
 
   return (
     <div className={styles["song-list"]}>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-        spacing={{ xs: 1, sm: 2 }}
-        justifyContent="center"
-        alignItems="center"
-        flexWrap={"wrap"}
-      >
+      {/* Replace Stack with Grid for better column control */}
+      <Grid container spacing={2} justifyContent="center">
         {songsData.length > 0 ? (
           songsData.map((song, index) => (
-            <Box
+            // Use Grid item with minimum width to ensure at least 2 columns
+            <Grid
+              item
+              xs={12} // Full width on extra small screens
+              sm={6} // 2 columns on small screens
+              md={4} // 3 columns on medium screens
+              lg={3} // 4 columns on large screens
               key={index}
-              className={`${styles["song-item"]} ${styles["fade-in"]}`}
-              sx={{}}
-              textOverflow={"ellipsis"}
             >
-              <img
-                ref={(el) => (songRefs.current[index] = el)}
-                src={song.songcoverlink}
-                alt={`${song.song_name} cover`}
-                className={styles["song-cover"]}
-              />
-              <div className={styles["song-info"]}>
-                <h3 className={styles["song-name"]}>{song.song_name}</h3>
-                <p className={styles["artist-name"]}>{song.artist}</p>
-              </div>
-            </Box>
+              <Box
+                className={`${styles["song-item"]} ${styles["fade-in"]}`}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <img
+                  ref={(el) => (songRefs.current[index] = el)}
+                  src={song.songcoverlink}
+                  alt={`${song.song_name} cover`}
+                  className={styles["song-cover"]}
+                />
+                <div className={styles["song-info"]}>
+                  <h3 className={styles["song-name"]}>{song.song_name}</h3>
+                  <p className={styles["artist-name"]}>{song.artist}</p>
+                </div>
+              </Box>
+            </Grid>
           ))
         ) : (
-          <p>No songs available</p>
+          <Grid item xs={12}>
+            <p>No songs available</p>
+          </Grid>
         )}
-      </Stack>
+      </Grid>
     </div>
   );
 };
