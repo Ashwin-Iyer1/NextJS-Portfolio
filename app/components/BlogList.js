@@ -1,6 +1,7 @@
 import React from "react";
 import "./BlogList.css"; // Assuming you have a CSS file for styling
-
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 const blogs = [
   {
     slug: "books",
@@ -41,75 +42,60 @@ const blogs = [
 
 export default function BlogList() {
   return (
-    <div className="Blogs">
-      {blogs.slice(0, blogs.length - 1).map((blog) => {
-        const isExternal = blog.slug.startsWith("http");
-        const textColor = "black";
-        const backgroundColor = "#818181";
+    <Box
+      margin="auto"
+      sx={{
+        alignContent: "center",
+        textAlign: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Stack
+        spacing={{ xs: 1, sm: 2 }}
+        direction="row"
+        useFlexGap
+        sx={{ flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {blogs.slice(0, blogs.length).map((blog) => {
+          const isExternal = blog.slug.startsWith("http");
+          const textColor = "black";
+          const backgroundColor = "#818181";
 
-        return (
-          <div
-            className="Blog"
-            style={{
-              border: `2px solid ${textColor}`,
-              backgroundColor: backgroundColor,
-              boxShadow: `2px 3px ${textColor}`,
-            }}
-            key={blog.slug}
-          >
-            <h2>
-              <a
-                href={isExternal ? blog.slug : `/blog/${blog.slug}`}
-                target={isExternal ? "_blank" : "_self"}
-                rel={isExternal ? "noopener noreferrer" : undefined}
-                style={{ color: textColor }}
-              >
-                {blog.title}
-              </a>
-            </h2>
-            <p>{blog.description}</p>
-          </div>
-        );
-      })}
-      
-      {/* Last item rendered separately to center it */}
-      <div className="last-row-container">
-        {blogs.length > 0 && (
-          <div
-            className="Blog"
-            style={{
-              border: `2px solid black`,
-              backgroundColor: "#818181",
-              boxShadow: `2px 3px black`,
-            }}
-            key={blogs[blogs.length - 1].slug}
-          >
-            <h2>
-              <a
-                href={
-                  blogs[blogs.length - 1].slug.startsWith("http")
-                    ? blogs[blogs.length - 1].slug
-                    : `/blog/${blogs[blogs.length - 1].slug}`
-                }
-                target={
-                  blogs[blogs.length - 1].slug.startsWith("http")
-                    ? "_blank"
-                    : "_self"
-                }
-                rel={
-                  blogs[blogs.length - 1].slug.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                style={{ color: "black" }}
-              >
-                {blogs[blogs.length - 1].title}
-              </a>
-            </h2>
-            <p>{blogs[blogs.length - 1].description}</p>
-          </div>
-        )}
-      </div>
-    </div>
+          return (
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: 300,
+                borderRadius: 1,
+                padding: 2,
+                "&:hover": {
+                  filter: "brightness(110%)",
+                  transform: "translateY(-5px)",
+                  transition:
+                    "transform 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                  boxShadow: `0 4px 12px ${textColor}`,
+                },
+                transition:
+                  "transform 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+              }}
+              key={blog.slug}
+              bgcolor={backgroundColor}
+            >
+              <h2>
+                <a
+                  href={isExternal ? blog.slug : `/blog/${blog.slug}`}
+                  target={isExternal ? "_blank" : "_self"}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  style={{ color: textColor, textDecoration: "underline" }}
+                >
+                  {blog.title}
+                </a>
+              </h2>
+              <p style={{ marginTop: 8, color: "#333" }}>{blog.description}</p>
+            </Box>
+          );
+        })}
+      </Stack>
+    </Box>
   );
 }

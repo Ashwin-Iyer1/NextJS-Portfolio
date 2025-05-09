@@ -1,5 +1,6 @@
-import React from "react"; 
+import React from "react";
 import styles from "./MiscProj.module.css";
+
 export default function MiscProj() {
   return (
     <div className={styles.container}>

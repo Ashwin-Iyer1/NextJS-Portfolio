@@ -1,40 +1,102 @@
+"use client";
 import Github from "../Images/github.webp";
 import Linkedin from "../Images/linkedin.webp";
 import Instagram from "../Images/instagram-color.webp";
 import Discord from "../Images/Discord.webp";
 import Image from "next/image";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Box from "@mui/material/Box";
+import React from "react";
+import { styled } from "@mui/material/styles";
 
 export default function Links() {
+  const SocialIcon = styled(Image)({
+    width: "auto",
+    height: "50px",
+    margin: "auto", // Fixed duplicated margin declaration
+    filter: "brightness(80%)",
+    transition: "all 0.3s ease",
+    display: "block",
+    "&:hover": {
+      filter: "brightness(100%)",
+      transform: "scale(1.1)",
+    },
+  });
+
   return (
-    <div className="Links">
-      <a
-        href="https://github.com/Ashwin-Iyer1"
-        target="_blank"
-        rel="noreferrer"
+    <div className="links">
+      <Box
+        component="section"
+        sx={{
+          p: 2,
+          border: "2px solid white",
+          padding: "0",
+          alignItems: "center",
+          textAlign: "center",
+          borderRadius: 1,
+          bgcolor: "#000000", // Fixed value (had one too few zeros)
+          maxHeight: "162.8px",
+          minHeight: "150px",
+          height: "100%",
+          minWidth: "150px",
+          maxWidth: "220px",
+          margin: "0 auto",
+          //
+          backgroundColor: "transparent",
+        }}
+        className="Socials"
       >
-        <Image src={Github} id={"person"} alt="Github Logo"></Image>
-      </a>
-      <a
-        href="https://www.linkedin.com/in/ashwin-iyer-949028263/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Image src={Linkedin} id={"person"} alt="Linkedin Logo"></Image>
-      </a>
-      <a
-        href="https://www.instagram.com/ashwin_i_/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Image src={Instagram} id={"person"} alt="Instagram Logo"></Image>
-      </a>
-      <a
-        href="https://discordapp.com/users/299516008920514560"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <Image src={Discord} id={"person"} alt="Discord Logo"></Image>
-      </a>
+        <ImageList
+          sx={{
+            width: "100%",
+            height: "100%",
+            minHeight: "150px",
+            maxHeight: "162.8px",
+            alignItems: "center",
+            margin: "0 auto",
+          }}
+          cols={2}
+          rowHeight={50}
+        >
+          {Object.values(imageData).map((item) => (
+            <ImageListItem key={item.src}>
+              <a href={item.href} target="_blank" rel="noopener noreferrer">
+                <SocialIcon
+                  src={item.src}
+                  alt={item.alt}
+                  width={item.width || 50}
+                  height={50}
+                />
+              </a>
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Box>
     </div>
   );
 }
+
+const imageData = {
+  github: {
+    src: Github,
+    alt: "Github Logo",
+    href: "https://github.com/Ashwin-Iyer1",
+  },
+  linkedin: {
+    src: Linkedin,
+    alt: "Linkedin Logo",
+    href: "https://www.linkedin.com/in/ashwin-iyer-949028263/",
+  },
+  instagram: {
+    src: Instagram,
+    alt: "Instagram Logo",
+    href: "https://www.instagram.com/ashwin_i_/",
+  },
+  discord: {
+    src: Discord,
+    alt: "Discord Logo",
+    href: "https://discordapp.com/users/299516008920514560",
+    width: 68,
+  },
+};

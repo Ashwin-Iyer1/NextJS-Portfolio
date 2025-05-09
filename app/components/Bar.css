@@ -1,21 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
 h2 {
   color: #c596ee;
   font-size: 1.4em;
 }
 h1 {
-  font: 700 2.5rem 'Caveat', cursive;
-
-}
-.links-section a {
-  margin-right: 20px; /* Adjust this value to increase or decrease the space between links */
+  font: 700 2.5rem "Caveat", cursive;
 }
 
 .links-section {
   display: flex; /* Ensure links are displayed in a row */
-  justify-content: space-between; /* Ensure links are spaced evenly */
   align-items: center; /* Ensure links are centered vertically */
   flex-direction: row;
 }

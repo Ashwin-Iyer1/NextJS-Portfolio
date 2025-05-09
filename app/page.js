@@ -1,21 +1,28 @@
 "use client";
-import React, { useEffect, useState } from "react"; // Import useEffect and useState
+import React, { lazy, Suspense, useRef, useEffect, useState } from "react";
 import NEU from "./Images/NEU.webp";
 import NameAnim from "./components/NameAnim.js";
 import Links from "./components/Links.js";
 import projects from "./data/repos.json";
+import Box from "@mui/material/Box";
 import Image from "next/image";
 import Link from "next/link";
 import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
 import GetTime from "./components/getTime.js";
-import MiscProj from "./components/MiscProj";
 import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
+import Stack from "@mui/material/Stack";
+import useIntersectionObserver from "./components/useIntersectionObserver";
+
+const LazyMiscProj = lazy(() => import("./components/MiscProj"));
+
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // New state for fade out
   const [fadeIn, setFadeIn] = useState(false); // New state for fade in
+  const miscProjSection = useRef(null);
+  const isMiscProjVisible = useIntersectionObserver(miscProjSection);
 
   useEffect(() => {
     if (sessionStorage.getItem("loaded") === null) {
@@ -33,7 +40,6 @@ export default function Home() {
     }
   }, []);
 
-  
   if (shouldLoad) {
     return (
       <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
@@ -48,52 +54,77 @@ export default function Home() {
         <div className="basic">
           <h2>Rising Sophomore at Northeastern University</h2>
           <p>
-            I am currently a rising sophomore at Northeastern University in Boston,
-            Massachusetts, and I am interested in computer science. I am
+            I am currently a rising sophomore at Northeastern University in
+            Boston, Massachusetts, and I am interested in computer science. I am
             currently learning Python, Kotlin, and JavaScript.{" "}
             <Link href="/about">Learn more about me!</Link>
           </p>
         </div>
         <div className="Info">
           <Links />
-          <div className="Working">
-            <h2>Current coding time</h2>
-            <GetTime />
-          </div>
+          <Box
+            sx={{
+              bgcolor: "blueviolet",
+              borderRadius: 1,
+              boxShadow: "10px 10px #260c3e",
+            }}
+            className="Time"
+          >
+            <div className="Working">
+              <h2>Current coding time</h2>
+              <GetTime />
+            </div>
+          </Box>
           <div className="College">
             <Image src={NEU} id={"person"} alt="Northeastern" />
           </div>
         </div>
         <div>
-          <h2 id="WorkingOn">Projects</h2>
           <div className="Projects">
-            {projects.slice(0, 4).map((project, index) => {
-              const hue = (index * (360 / projects.length)) % 360; // Dynamically calculate hue
-              const textColor = `hsl(${hue}, 70%, 50%)`; // Saturation and Lightness are set for vivid colors
-              const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`; // Add transparency to the background
-              return (
-                <div
-                  className="Project"
-                  style={{
-                    border: `2px solid ${textColor}`,
-                    backgroundColor: backgroundColor,
-                    boxShadow: `2px 3px ${textColor}`,
-                  }}
-                >
-                  <h2>
-                    <a
-                      href={project.html_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{ color: textColor }}
-                    >
-                      {project.reponame}
-                    </a>
-                  </h2>
-                  <p>{project.description}</p>
-                </div>
-              );
-            })}
+            <h2 id="WorkingOn">Projects</h2>
+            <Stack
+              spacing={{ xs: 1, sm: 1 }}
+              direction="row"
+              useFlexGap
+              sx={{
+                flexWrap: "wrap",
+                margin: "0 auto",
+              }}
+              className="ProjectStack"
+            >
+              {projects.slice(0, 4).map((project, index) => {
+                const hue = (index * (360 / projects.length)) % 360; // Dynamically calculate hue
+                const textColor = `hsl(${hue}, 70%, 50%)`; // Saturation and Lightness are set for vivid colors
+                const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`; // Add transparency to the background
+                return (
+                  <Box
+                    sx={{
+                      border: `2px solid ${textColor}`,
+                      bgcolor: backgroundColor,
+                      boxShadow: `2px 3px ${textColor}`,
+                      borderRadius: 1,
+                      height: "130px",
+                      maxWidth: "400px",
+                      width: "100%",
+                    }}
+                  >
+                    <h2 style={{ paddingLeft: "10px" }}>
+                      <a
+                        href={project.html_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ color: textColor }}
+                      >
+                        {project.reponame}
+                      </a>
+                    </h2>
+                    <p style={{ color: "white", paddingLeft: "10px" }}>
+                      {project.description}
+                    </p>
+                  </Box>
+                );
+              })}
+            </Stack>
           </div>
           <h3>
             <Link className="SeeAllText" href="/projects">
@@ -105,8 +136,16 @@ export default function Home() {
         <Skills />
       </div>
       <div className="MiscProj">
-        <h2 style={{ textAlign: "center", fontSize: "2em" }}>Miscellaneous Projects</h2>
-        <MiscProj />
+        <h2 style={{ textAlign: "center", fontSize: "2em" }}>
+          Miscellaneous Projects
+        </h2>
+        <div className="MiscProjContainer" ref={miscProjSection}>
+          {isMiscProjVisible && (
+            <Suspense fallback={<div className="loading">Loading...</div>}>
+              <LazyMiscProj />
+            </Suspense>
+          )}
+        </div>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
         <BlogList />
       </div>

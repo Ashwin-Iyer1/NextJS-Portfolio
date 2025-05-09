@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import songsData1 from "../data/songs.json"; // Adjust the path as necessary
 import styles from "./SongList.module.css"; // Import your CSS module
-
+import Stack from "@mui/material/Stack"; // Import Stack from Material-UI
+import Box from "@mui/material/Box"; // Import Box from Material-UI
 const SongList = () => {
   const songRefs = useRef([]);
   const [isClient, setIsClient] = useState(false); // To track if we are on the client
@@ -89,32 +90,37 @@ const SongList = () => {
 
   return (
     <div className={styles["song-list"]}>
-      {songsData.length > 0 ? (
-        songsData.map((song, index) => (
-          <div
-            key={index}
-            className={styles["song-item"]}
-            style={
-              isClient && windowWidth >= 767
-                ? { animationDelay: `${0.1 * (index + 1)}s` }
-                : {}
-            }
-          >
-            <img
-              ref={(el) => (songRefs.current[index] = el)}
-              src={song.songcoverlink}
-              alt={`${song.song_name} cover`}
-              className={styles["song-cover"]}
-            />
-            <div className={styles["song-info"]}>
-              <h3 className={styles["song-name"]}>{song.song_name}</h3>
-              <p className={styles["artist-name"]}>{song.artist}</p>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>No songs available</p>
-      )}
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 1, sm: 2 }}
+        justifyContent="center"
+        alignItems="center"
+        flexWrap={"wrap"}
+      >
+        {songsData.length > 0 ? (
+          songsData.map((song, index) => (
+            <Box
+              key={index}
+              className={`${styles["song-item"]} ${styles["fade-in"]}`}
+              sx={{}}
+              textOverflow={"ellipsis"}
+            >
+              <img
+                ref={(el) => (songRefs.current[index] = el)}
+                src={song.songcoverlink}
+                alt={`${song.song_name} cover`}
+                className={styles["song-cover"]}
+              />
+              <div className={styles["song-info"]}>
+                <h3 className={styles["song-name"]}>{song.song_name}</h3>
+                <p className={styles["artist-name"]}>{song.artist}</p>
+              </div>
+            </Box>
+          ))
+        ) : (
+          <p>No songs available</p>
+        )}
+      </Stack>
     </div>
   );
 };

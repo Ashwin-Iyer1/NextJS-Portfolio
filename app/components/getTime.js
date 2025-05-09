@@ -2,6 +2,7 @@
 
 import "./getTime.module.css";
 import React, { useEffect, useState } from "react"; // Import useEffect and useState
+import Box from "@mui/material/Box";
 
 export default function getTime() {
   const [wakatime, setWakatime] = useState([]); // State for Wakatime data
@@ -45,7 +46,7 @@ export default function getTime() {
     ); // Return loading skeleton
   }
   return (
-    <div className="wakatime">
+    <div className="wakatime" style={{ color: "white" }}>
       <p style={{ fontSize: "1em" }}>
         Total: {(wakatime[0]?.total_seconds / 60 / 60).toFixed(1)} Hours
       </p>

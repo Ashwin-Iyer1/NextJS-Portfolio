@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource/roboto": "^5.2.5",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/material": "^7.1.0",
     "@mui/material-nextjs": "^6.1.5",
     "@next/mdx": "^15.1.7",
     "@next/third-parties": "^14.0.5-canary.59",
