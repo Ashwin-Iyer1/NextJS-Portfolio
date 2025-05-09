@@ -19,10 +19,22 @@ const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false); // New state for fade out
-  const [fadeIn, setFadeIn] = useState(false); // New state for fade in
+  const [fadeOut, setFadeOut] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+  const [forceMiscProjLoad, setForceMiscProjLoad] = useState(false);
   const miscProjSection = useRef(null);
   const isMiscProjVisible = useIntersectionObserver(miscProjSection);
+
+  // Add this effect to force load MiscProj component after main content appears
+  useEffect(() => {
+    if (fadeIn) {
+      // Small delay to ensure intersection observer has initialized
+      const timer = setTimeout(() => {
+        setForceMiscProjLoad(true);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [fadeIn]);
 
   useEffect(() => {
     if (sessionStorage.getItem("loaded") === null) {
@@ -37,6 +49,9 @@ export default function Home() {
           setFadeIn(true); // Start fade-in
         }, 400); // Adjust this duration to match your CSS fade-out time
       }, 2200);
+    } else {
+      // If already loaded previously, set fadeIn true immediately
+      setFadeIn(true);
     }
   }, []);
 
@@ -107,6 +122,7 @@ export default function Home() {
                       maxWidth: "400px",
                       width: "100%",
                     }}
+                    key={project.reponame}
                   >
                     <h2 style={{ paddingLeft: "10px" }}>
                       <a
@@ -140,7 +156,7 @@ export default function Home() {
           Miscellaneous Projects
         </h2>
         <div className="MiscProjContainer" ref={miscProjSection}>
-          {isMiscProjVisible && (
+          {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
             <Suspense fallback={<div className="loading">Loading...</div>}>
               <LazyMiscProj />
             </Suspense>

@@ -13,6 +13,7 @@ const SongList = () => {
   const [windowWidth, setWindowWidth] = useState(0); // Track window width for conditional behavior
   const [songsData, setSongsData] = useState([]); // Store the song data
   const [loading, setLoading] = useState(true); // Track loading state
+  const [animationsReady, setAnimationsReady] = useState(false); // Track if animations should be active
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -50,42 +51,54 @@ const SongList = () => {
     handleResize();
     // Add resize listener
     window.addEventListener("resize", handleResize);
+
+    // Set animations ready after a short delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setAnimationsReady(true);
+    }, 100);
+
     return () => {
       // Cleanup the resize listener
       window.removeEventListener("resize", handleResize);
+      clearTimeout(timer);
     };
   }, []);
 
   useEffect(() => {
-    // Only apply the observer if the window width is less than 767px (mobile)
-    if (windowWidth < 767 && songRefs.current.length > 0) {
+    // Apply the observer regardless of screen size to ensure animations work properly
+    if (songRefs.current.length > 0 && animationsReady) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add(styles.show); // Add the show class when visible
+              entry.target.classList.add(styles.show);
+            } else {
+              entry.target.classList.remove(styles.show);
             }
           });
         },
         {
-          threshold: 0.7, // 70% of the image is in view
+          threshold: 0.1, // Trigger when 90% of the item is in view
+          rootMargin: "0px 0px -500px 0px", // Delay animation trigger until items are closer to the viewport
         }
       );
-      // Observe each image
-      songRefs.current.forEach((img) => {
-        if (img) {
-          observer.observe(img);
+
+      // Observe each song item Box
+      songRefs.current.forEach((item) => {
+        if (item) {
+          observer.observe(item);
         }
       });
+
       return () => {
-        songRefs.current.forEach((img) => {
-          if (img) {
-            observer.unobserve(img);
+        songRefs.current.forEach((item) => {
+          if (item) {
+            observer.unobserve(item);
           }
         });
       };
     }
-  }, [windowWidth, songsData]);
+  }, [windowWidth, songsData, animationsReady]);
 
   if (loading) {
     return <p>Loading songs...</p>; // Display a loading message
@@ -107,17 +120,24 @@ const SongList = () => {
               key={index}
             >
               <Box
-                className={`${styles["song-item"]} ${styles["fade-in"]}`}
+                ref={(el) => (songRefs.current[index] = el)}
+                className={`${styles["song-item"]}`}
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   width: "100%",
                   height: "100%",
+                  opacity: 0,
+                  transform: "translateY(20px)",
+                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                  "&.show": {
+                    opacity: 1,
+                    transform: "translateY(0)",
+                  },
                 }}
               >
                 <img
-                  ref={(el) => (songRefs.current[index] = el)}
                   src={song.songcoverlink}
                   alt={`${song.song_name} cover`}
                   className={styles["song-cover"]}
