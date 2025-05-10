@@ -1,8 +1,8 @@
 "use client";
-import Github from "../Images/github.webp";
-import Linkedin from "../Images/linkedin.webp";
-import Instagram from "../Images/instagram-color.webp";
-import Discord from "../Images/Discord.webp";
+const Github = "/Images/github.webp";
+const Linkedin = "/Images/linkedin.webp";
+const Instagram = "/Images/instagram-color.webp";
+const Discord = "/Images/Discord.webp";
 import Image from "next/image";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
