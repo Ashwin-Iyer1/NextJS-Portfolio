@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import songsData1 from "../data/songs.json"; // Adjust the path as necessary
 import styles from "./SongList.module.css"; // Import your CSS module
-import Stack from "@mui/material/Stack"; // Import Stack from Material-UI
 import Box from "@mui/material/Box"; // Import Box from Material-UI
 import Grid from "@mui/material/Grid"; // Import Grid from Material-UI
 
@@ -79,7 +78,7 @@ const SongList = () => {
         },
         {
           threshold: 0.1, // Trigger when 90% of the item is in view
-          rootMargin: "0px 0px -500px 0px", // Delay animation trigger until items are closer to the viewport
+          rootMargin: "0px 0px -10px 0px", // Delay animation trigger until items are closer to the viewport
         }
       );
 
@@ -107,16 +106,11 @@ const SongList = () => {
   return (
     <div className={styles["song-list"]}>
       {/* Replace Stack with Grid for better column control */}
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={{ xs: 2, md: 0 }} columns={{ xs: 4, sm: 16, md: 32 }} justifyContent={"center"} padding={"0"}>
         {songsData.length > 0 ? (
           songsData.map((song, index) => (
-            // Use Grid item with minimum width to ensure at least 2 columns
             <Grid
-              item
-              xs={12} // Full width on extra small screens
-              sm={6} // 2 columns on small screens
-              md={4} // 3 columns on medium screens
-              lg={3} // 4 columns on large screens
+              size={{ xs: 2, sm: 4, md: 4 }}
               key={index}
             >
               <Box
