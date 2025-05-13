@@ -7,7 +7,7 @@ export default function Resume() {
     <div className={styles.resume} style={{ height: "90vh", width: "100vw" }}>
       <Bar />
       <iframe
-        src="./Ashwin_Iyer_CV.pdf"
+        src="./resume.pdf"
         style={{ width: "100vw", height: "90vh" }}
         frameBorder="0"
       />
