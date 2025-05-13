@@ -16,6 +16,8 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
+        <meta property="og:image" content="https://ashwiniyer.info/opengraph-image.png" />
+        <meta name="twitter:image" content="https://ashwiniyer.info/opengraph-image.png" />
 
         <title>{metadata.title}</title>
         <link rel="icon" href="/favicon.ico" />
