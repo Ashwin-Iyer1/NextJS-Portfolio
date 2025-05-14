@@ -44,7 +44,7 @@ export default function ProjectList() {
   }, []); // Empty dependency array to run once on mount
 
   // Loading skeleton placeholder
-  if  (true) {
+  if  (loading) {
   return (
     <Grid
       container
