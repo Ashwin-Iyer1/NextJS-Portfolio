@@ -26,10 +26,10 @@ export default function RootLayout({ children }) {
         {/* Layout UI */}
         <main>
           {children}
-          <footer>
+          <footer style={{ paddingTop: "20px" }}>
             <span
               className="text-xs text-slate-400 text-center"
-              style={{ color: "#7c7c7c" }}
+              style={{ color: "#7c7c7c"}}
             >
               &copy; {new Date().getFullYear()} Ashwin Iyer. All rights
               reserved.

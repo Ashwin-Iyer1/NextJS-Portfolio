@@ -14,6 +14,7 @@ import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
 import Stack from "@mui/material/Stack";
 import useIntersectionObserver from "./components/useIntersectionObserver";
+import "./landing.css";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 
@@ -168,7 +169,7 @@ export default function Home() {
       <div className="Contact">
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
         <Contact />
-        <p>
+        <p style={{ margin: "0 auto", marginTop: "16px" }}>
           Email:{" "}
           <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
         </p>
