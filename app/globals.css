@@ -207,18 +207,15 @@ footer {
 
 .Projects.skeleton {
   padding-top: 20px;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  max-width: 100%;
-  margin: 0 0;
 }
 
 .Project.placeholder {
   border: 2px solid #ccc; /* Light gray border */
   background-color: #f0f0f0; /* Light gray background */
-  padding: 20px;
   border-radius: 5px; /* Rounded corners */
   min-height: 100px; /* Minimum height for placeholder */
 }

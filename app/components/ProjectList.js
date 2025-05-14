@@ -44,23 +44,43 @@ export default function ProjectList() {
   }, []); // Empty dependency array to run once on mount
 
   // Loading skeleton placeholder
-  if (loading) {
-    return (
-      <div className="Projects skeleton">
-        {[...Array(3)].map(
-          (
-            _,
-            index // Display 3 placeholders
-          ) => (
-            <div className="Project placeholder" key={index}>
-              <div className="skeleton-text" />
-              <div className="skeleton-description" />
-            </div>
-          )
-        )}
-      </div>
-    ); // Return loading skeleton
-  }
+  if  (true) {
+  return (
+    <Grid
+      container
+      rowSpacing={1}
+      spacing={{ xs: 2, md: 3 }}
+      columns={{ xs: 6, sm: 9, md: 12 }}
+      sx={{ alignContent: "center", textAlign: "center" }}
+      flexWrap={"wrap"}
+    >
+      {[...Array(16)].map((_, index) => (
+          <Grid
+            size={3}
+            sx={{
+              border: `2px solid gray`,
+              bgcolor: "white",
+              boxShadow: `2px 3px gray`,
+              borderRadius: 1,
+            }}
+            key={index}
+          >
+            <h2>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "white" }}
+              >
+                Lorem ipsum
+              </a>
+            </h2>
+            <p style={{ color: "white" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut </p>
+        </Grid>
+      ))}
+    </Grid>
+  );
+}
+
 
   return (
     <Grid
