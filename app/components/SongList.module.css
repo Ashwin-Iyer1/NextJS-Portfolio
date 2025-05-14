@@ -66,22 +66,21 @@
     padding: 0;
     gap: 0.5rem;
   }
-  
+
   .song-item {
-    max-width: 100%;  /* Allow full width on mobile */
+    max-width: 100%; /* Allow full width on mobile */
     padding: 0.25rem;
   }
-  
+
   .song-item.mobile {
     opacity: 1;
     transform: translateY(0);
   }
-  
-  
+
   .song-name {
     font-size: 0.9rem;
   }
-  
+
   .artist-name {
     font-size: 0.8rem;
   }

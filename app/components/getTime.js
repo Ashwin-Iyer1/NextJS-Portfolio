@@ -1,8 +1,5 @@
 "use client";
-
-import "./getTime.module.css";
 import React, { useEffect, useState } from "react"; // Import useEffect and useState
-import Box from "@mui/material/Box";
 
 export default function getTime() {
   const [wakatime, setWakatime] = useState([]); // State for Wakatime data

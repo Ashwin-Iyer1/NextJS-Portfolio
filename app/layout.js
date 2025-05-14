@@ -16,8 +16,14 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content="https://ashwiniyer.info/opengraph-image.png" />
-        <meta name="twitter:image" content="https://ashwiniyer.info/opengraph-image.png" />
+        <meta
+          property="og:image"
+          content="https://ashwiniyer.info/opengraph-image.png"
+        />
+        <meta
+          name="twitter:image"
+          content="https://ashwiniyer.info/opengraph-image.png"
+        />
 
         <title>{metadata.title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -29,7 +35,7 @@ export default function RootLayout({ children }) {
           <footer style={{ paddingTop: "20px" }}>
             <span
               className="text-xs text-slate-400 text-center"
-              style={{ color: "#7c7c7c"}}
+              style={{ color: "#7c7c7c" }}
             >
               &copy; {new Date().getFullYear()} Ashwin Iyer. All rights
               reserved.

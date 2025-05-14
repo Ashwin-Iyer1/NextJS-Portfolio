@@ -1,39 +1,37 @@
 .full-width-wrapper {
-    margin: 0;
-    width: 100%;
-    max-width: 90vw;  /* Ensures it doesn't go beyond 90% of the viewport width */
-
-  }
-  .half-width-wrapper {
-    text-align: left;
-    width: 70vw;
-    margin: 0 auto;
-  }
-  .center-image{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    }
-  
-    .half-width-wrapper h1{
-      font-family: 'Roboto', sans-serif;
-    }
-p{
-  color:azure;
+  margin: 0;
+  width: 100%;
+  max-width: 90vw; /* Ensures it doesn't go beyond 90% of the viewport width */
 }
-h2{
-  color:rgb(168, 118, 214);
+.half-width-wrapper {
+  text-align: left;
+  width: 70vw;
+  margin: 0 auto;
 }
-h3{
-  color:rgb(190, 156, 221);
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-h4{
-  color:rgb(190, 156, 221);
+.half-width-wrapper h1 {
+  font-family: "Roboto", sans-serif;
+}
+p {
+  color: azure;
+}
+h2 {
+  color: rgb(168, 118, 214);
+}
+h3 {
+  color: rgb(190, 156, 221);
 }
 
+h4 {
+  color: rgb(190, 156, 221);
+}
 
-center{
+center {
   color: azure;
 }
 
@@ -52,7 +50,8 @@ thead {
   color: white;
 }
 
-th, td {
+th,
+td {
   padding: 12px 15px;
   border-bottom: 1px solid #ddd;
 }
@@ -64,7 +63,6 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
   background-color: #2c3e50;
 }
-
 
 th {
   font-weight: bold;
@@ -82,11 +80,10 @@ td {
   width: auto; /* Change from 100% to auto */
   max-width: 1200px;
   margin: 0 auto;
-  
 }
 
-a{
-  color:rgb(168, 118, 214);
+a {
+  color: rgb(168, 118, 214);
 }
 .book {
   display: flex;
@@ -95,7 +92,7 @@ a{
   padding: 10px;
   margin-bottom: 15px; /* Padding between books */
   border-radius: 8px;
-  align-items: center;  
+  align-items: center;
   max-width: 100%;
 }
 
@@ -111,42 +108,42 @@ a{
 .image-container .flex-image {
   filter: blur(10px);
 }
-    .image-container {
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    }
-    .image-container img {
-    filter: blur(500px);
-    transform: scale(10);
-    image-rendering: pixelated;
-    transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out;
-    }
-    .image-container.revealed img {
-    filter: blur(0);
-    transform: scale(1);
-    }
-    .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    transition: opacity 0.3s;
-    }
-    .image-container.revealed .overlay {
-    opacity: 0;
-    pointer-events: none;
-    }
-    Image{
-    filter: blur(500px);
+.image-container {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.image-container img {
+  filter: blur(500px);
+  transform: scale(10);
+  image-rendering: pixelated;
+  transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.image-container.revealed img {
+  filter: blur(0);
+  transform: scale(1);
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+.image-container.revealed .overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+Image {
+  filter: blur(500px);
 }
 
 .video {
@@ -173,7 +170,7 @@ a{
   margin-top: 10px;
 }
 
-.YoutubeVideo{
+.YoutubeVideo {
   width: 100%;
   max-width: 80vw; /* Scales with the window but prevents excessive stretching */
   height: auto;
@@ -182,7 +179,7 @@ a{
   display: block;
 }
 
-.book .center-image{
+.book .center-image {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
@@ -190,33 +187,34 @@ a{
 }
 
 @media (max-width: 768px) {
-  ul{
+  ul {
     text-align: center;
     margin: 0 auto;
     padding-left: 0;
   }
-  .half-width-wrapper{
+  .half-width-wrapper {
     text-align: center;
   }
   .flexboxVideos {
     grid-template-columns: 1fr; /* 1 column on small screens */
   }
 
-  h1{
+  h1 {
     text-align: center;
   }
-  h2{
+  h2 {
     text-align: center;
   }
-  h3{
+  h3 {
     text-align: center;
   }
-  p{text-align: center;}
-  .center-image{
+  p {
+    text-align: center;
+  }
+  .center-image {
     max-width: 100%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    }
-
+  }
 }

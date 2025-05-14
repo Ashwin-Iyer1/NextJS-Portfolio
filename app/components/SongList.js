@@ -106,13 +106,16 @@ const SongList = () => {
   return (
     <div className={styles["song-list"]}>
       {/* Replace Stack with Grid for better column control */}
-      <Grid container spacing={{ xs: 2, md: 0 }} columns={{ xs: 4, sm: 16, md: 32 }} justifyContent={"center"} padding={"0"}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 0 }}
+        columns={{ xs: 4, sm: 16, md: 32 }}
+        justifyContent={"center"}
+        padding={"0"}
+      >
         {songsData.length > 0 ? (
           songsData.map((song, index) => (
-            <Grid
-              size={{ xs: 2, sm: 4, md: 4 }}
-              key={index}
-            >
+            <Grid size={{ xs: 2, sm: 4, md: 4 }} key={index}>
               <Box
                 ref={(el) => (songRefs.current[index] = el)}
                 className={`${styles["song-item"]}`}
