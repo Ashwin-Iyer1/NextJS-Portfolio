@@ -2,7 +2,7 @@ import "./globals.css"; // Your global CSS file
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
-  title: "Ashwin Iyer",
+  title: "Ashwin Iyer's Portfolio",
   description:
     "Personal website of Ashwin Iyer, a rising sophomore at Northeastern University from Southlake, Texas.",
 };
