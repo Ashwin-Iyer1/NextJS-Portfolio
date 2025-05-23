@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import Bar from "../../components/Bar";
+import "./page.css";
 
 export default async function Page({ params }) {
   const { slug } = params;

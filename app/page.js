@@ -1,6 +1,9 @@
 "use client";
 import React, { lazy, Suspense, useRef, useEffect, useState } from "react";
-import NEU from "./Images/NEU.webp";
+// Use the public directory for static images in Next.js
+// Place NEU.webp in the /public folder at the root of your project
+// Then import as a string path:
+const NEU = "/NEU.webp";
 import NameAnim from "./components/NameAnim.js";
 import Links from "./components/Links.js";
 import projects from "./data/repos.json";
@@ -92,7 +95,13 @@ export default function Home() {
             </div>
           </Box>
           <div className="College">
-            <Image src={NEU} id={"person"} alt="Northeastern" />
+            <Image
+              src={NEU}
+              id={"person"}
+              alt="Northeastern"
+              width={200}
+              height={200}
+            />
           </div>
         </div>
         <div>
