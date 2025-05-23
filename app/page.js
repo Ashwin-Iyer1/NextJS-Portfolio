@@ -1,9 +1,6 @@
 "use client";
 import React, { lazy, Suspense, useRef, useEffect, useState } from "react";
-// Use the public directory for static images in Next.js
-// Place NEU.webp in the /public folder at the root of your project
-// Then import as a string path:
-const NEU = "/NEU.webp";
+const NEU = "/Images/NEU.webp";
 import NameAnim from "./components/NameAnim.js";
 import Links from "./components/Links.js";
 import projects from "./data/repos.json";
