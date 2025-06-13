@@ -18,11 +18,11 @@ export default function RootLayout({ children }) {
         <meta property="og:description" content={metadata.description} />
         <meta
           property="og:image"
-          content="https://ashwiniyer.info/opengraph-image.png"
+          content="https://ashwiniyer.com/opengraph-image.png"
         />
         <meta
           name="twitter:image"
-          content="https://ashwiniyer.info/opengraph-image.png"
+          content="https://ashwiniyer.com/opengraph-image.png"
         />
 
         <title>{metadata.title}</title>
