@@ -14,9 +14,16 @@ import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
 import Stack from "@mui/material/Stack";
 import useIntersectionObserver from "./components/useIntersectionObserver";
+import List from "@mui/material/List";
 import "./landing.css";
+const zealImage = "/Images/zeal.png";
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
+
+const workDateFormat = (date) => {
+  return <span style={{ backgroundColor: "#6E6E6E90", padding: "2px 4px", borderRadius: "4px" }}>{date}</span>;
+};
 
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -102,6 +109,31 @@ export default function Home() {
           </div>
         </div>
         <div>
+          <div className="workExperience">
+            <h2 id="WorkingOn">Work Experience</h2>
+            <List sx={{ width: "100%", color: "white" }}>
+              <ListItem>
+                <ListItemAvatar>
+                  <Box>
+                    <img src={zealImage} alt="Zeal" height={50} />
+                  </Box>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <>
+                      <b>Zeal IT Consultants</b>{" "}
+                      {workDateFormat("May 2025 - August 2025")}
+                    </>
+                  }
+                  secondary="Frontend Developer Intern"
+                  sx={{
+                    color: "white",
+                    "& .MuiListItemText-secondary": { color: "white" },
+                  }}
+                />
+              </ListItem>
+            </List>
+          </div>
           <div className="Projects">
             <h2 id="WorkingOn">Projects</h2>
             <Stack
