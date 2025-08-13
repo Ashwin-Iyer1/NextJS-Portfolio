@@ -38,6 +38,11 @@ const blogs = [
     title: "My College Essays",
     description: "A few of my essays I submitted for my college applications.",
   },
+  {
+    slug: "zeal-it-consultants",
+    title: "Zeal IT Consultants",
+    description: "My experience interning at Zeal IT Consultants."
+  }
 ];
 
 export default function BlogList() {
