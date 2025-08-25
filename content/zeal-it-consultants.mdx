@@ -8,6 +8,7 @@ import firstDay from "./zealPhotos/firstDay.webp";
 import interns from "./zealPhotos/interns.webp";
 import lunch1 from "./zealPhotos/lunch1.webp";
 import golf from "./zealPhotos/golf.webp";
+import lastDay from "./zealPhotos/lastDay.webp";
 
 # Zeal IT Consultants
 
@@ -47,11 +48,14 @@ This was a huge moment for me and the team, as they felt as if they could count 
 
 I often worked overtime and put my best foot forward to ensure that I delivered quality work. I had remembered a message from my dad that his developers "put no pride in their work; they call the day at 5 pm even though the server is down." I did not want that to be me. Before sprint demos, I would get API endpoints and be ready to develop them throughout the night at the office, as I wanted to showcase the backend developers' efforts. I even worked a few weekends to make sure I could deliver extra each sprint. I learned that,
 
- <center>"The workday does not end at 5pm, it ends when the project is done."</center>
+{" "}
+<center style={{ paddingTop: "8px", paddingBottom: "20px" }}>
+  "The workday does not end at 5pm, it ends when the project is done."
+</center>
 <Image src={bonusly} alt="Bonusly" height={200} className="center-image" />
 <br />
 
-<div className="flex flex-col items-center justify-center" style={{display: "flex", gap: 15, alignItems: "center", justifyContent: "center"}}>
+<div className="zeal-image flex flex-col items-center justify-center" style={{display: "flex", gap: 15, alignItems: "center", justifyContent: "center"}}>
 
 <Image src={late1} alt="late night 1" height={320} className="flex-image" />
 <Image src={late2} alt="late night 2" height={320} className="flex-image" />
@@ -62,18 +66,35 @@ I loved my time at Zeal, and it put lots of pressure on me, but with pressure an
 
 ### More Photos
 
-<center> <Image src={firstDay} alt="first day" height={320} className="flex-image" />
+<div className="zeal-image flex flex-col items-center justify-center" style={{display: "flex", gap: 15, alignItems: "center", justifyContent: "center"}}>
+<div className="image-with-caption">
+<Image src={firstDay} alt="first day" height={320} className="flex-image" />
+<center>
 First day of work!
 </center>
+</div>
 
-  <div className="flex flex-col items-center justify-center" style={{display: "flex", gap: 15}}>
+<div className="image-with-caption">
 
-<Image src={interns} alt="interns" height={320} className="flex-image" />
+<Image src={lastDay} alt="first day" height={320} className="flex-image" />
+<center>
+Last day of work!
+</center>
+</div>
+</div>
+
+<center> 
+  <div className="zeal-image-big flex flex-col items-center justify-center" style={{display: "flex", gap: 15}}>
+
+<Image src={interns} alt="interns" height={320} className="flex-image" style={{alignItems: "center"}} />
 <Image src={lunch1} alt="lunch 1" height={320} className="flex-image" />
 <Image src={golf} alt="golf" height={320} className="flex-image" />
 </div>
+</center>
 
-
-<div className="flex items-center justify-center" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-Fellow Zealers 
+<div
+  className="flex items-center justify-center"
+  style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+>
+  Fellow Zealers
 </div>

@@ -186,7 +186,17 @@ Image {
   margin-right: 0; /* Optional: adds rounded corners to images */
 }
 
+@media (max-width: 1000px) {
+  .zeal-image-big {
+    display: block !important;
+  }
+}
+
 @media (max-width: 768px) {
+
+  .zeal-image {
+    display: block !important;
+  }
   ul {
     text-align: center;
     margin: 0 auto;
