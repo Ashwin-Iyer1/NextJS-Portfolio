@@ -42,7 +42,12 @@ const blogs = [
     slug: "zeal-it-consultants",
     title: "Zeal IT Consultants",
     description: "My experience interning at Zeal IT Consultants."
-  }
+  },
+  {
+    slug: "mission",
+    title: "My Mission Statement",
+    description: "My mission statement and guiding principles.",
+  },
 ];
 
 export default function BlogList() {
