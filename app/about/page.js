@@ -15,17 +15,17 @@ export default function About() {
         <h2>About me 😲</h2>
         <p>
           My name is Ashwin Iyer, a current rising sophomore at{" "}
-          <b>Northeastern University</b> for <b>Computer science x Business</b>.
+          <b>Northeastern University</b> studying <b>Computer science x Business Administration</b>.
           I am looking forward to the co-op program as well as joining the{" "}
-          <b>Mars Rover Team</b> and the <b>Electric Racing Team</b>.
+          <b>finance</b> and the <b>computer science</b> clubs on campus.
         </p>
         <p className="ABTText">
           I have been hobby coding for around 10~ years and have competed in 2
-          hackathons being <b>HackUTD</b> and <b>AIFAHacks</b> and I have won
+          hackathons, <b>HackUTD</b> and <b>AIFAHacks</b>, and I have won
           both. I currently have a few side{" "}
           <a href="../projects" id="AHHH">
             projects
-          </a>{" "}
+          </a>{", "}
           which range from web scraping to basic machine learning.
         </p>
         <p className="ABTText">

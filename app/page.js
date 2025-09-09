@@ -79,7 +79,7 @@ export default function Home() {
           <p>
             I am currently a rising sophomore at Northeastern University in
             Boston, Massachusetts, and I am interested in computer science. I am
-            currently learning Python, Kotlin, and JavaScript.{" "}
+            currently learning Python, Java, and TypeScript.{" "}
             <Link href="/about">Learn more about me!</Link>
           </p>
         </div>
