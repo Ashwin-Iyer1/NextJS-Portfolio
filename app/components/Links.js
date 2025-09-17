@@ -86,7 +86,7 @@ const imageData = {
   linkedin: {
     src: Linkedin,
     alt: "Linkedin Logo",
-    href: "https://www.linkedin.com/in/ashwin-iyer-949028263/",
+    href: "https://www.linkedin.com/in/ashwin-hao-iyer",
   },
   instagram: {
     src: Instagram,
