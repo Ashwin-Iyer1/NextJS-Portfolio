@@ -48,6 +48,11 @@ const blogs = [
     title: "My Mission Statement",
     description: "My mission statement and guiding principles.",
   },
+  // {
+  //   slug: "three-faces",
+  //   title: "🙈🙉🙊",
+  //   description: "My three faces.",
+  // },
 ];
 
 export default function BlogList() {
