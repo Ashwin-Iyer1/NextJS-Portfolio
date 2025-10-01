@@ -75,9 +75,9 @@ export default function Home() {
       <Bar />
       <div className="Container">
         <div className="basic">
-          <h2>Rising Sophomore at Northeastern University</h2>
+          <h2>Sophomore at Northeastern University</h2>
           <p>
-            I am currently a rising sophomore at Northeastern University in
+            I am currently a sophomore at Northeastern University in
             Boston, Massachusetts, and I am interested in computer science. I am
             currently learning Python, Java, and TypeScript.{" "}
             <Link href="/about">Learn more about me!</Link>

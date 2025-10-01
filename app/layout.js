@@ -4,7 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 export const metadata = {
   title: "Ashwin Iyer's Portfolio",
   description:
-    "Personal website of Ashwin Iyer, a rising sophomore at Northeastern University from Southlake, Texas.",
+    "Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas.",
 };
 
 export default function RootLayout({ children }) {
@@ -17,14 +17,14 @@ export default function RootLayout({ children }) {
         <meta property="og:url" content="https://ashwiniyer.com" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Ashwin Iyer's Portfolio" />
-        <meta property="og:description" content="Personal website of Ashwin Iyer, a rising sophomore at Northeastern University from Southlake, Texas." />
+        <meta property="og:description" content="Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas." />
         <meta property="og:image" content="https://ashwiniyer.com/opengraph-image.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="ashwiniyer.com" />
         <meta property="twitter:url" content="https://ashwiniyer.com" />
         <meta name="twitter:title" content="Ashwin Iyer's Portfolio" />
-        <meta name="twitter:description" content="Personal website of Ashwin Iyer, a rising sophomore at Northeastern University from Southlake, Texas." />
+        <meta name="twitter:description" content="Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas." />
         <meta name="twitter:image" content="https://ashwiniyer.com/opengraph-image.png" />
 
         <title>{metadata.title}</title>

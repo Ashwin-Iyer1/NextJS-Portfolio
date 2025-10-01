@@ -14,7 +14,7 @@ export default function About() {
       <div className={styles.text}>
         <h2>About me 😲</h2>
         <p>
-          My name is Ashwin Iyer, a current rising sophomore at{" "}
+          My name is Ashwin Iyer, a current sophomore at{" "}
           <b>Northeastern University</b> studying <b>Computer science x Business Administration</b>.
           I am looking forward to the co-op program as well as joining the{" "}
           <b>finance</b> and the <b>computer science</b> clubs on campus.
