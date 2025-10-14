@@ -24,6 +24,16 @@ export default function MiscProj() {
           allowFullScreen
         ></iframe>
       </div>
+      <div className={styles.videoWrapper}>
+        <iframe
+          src="https://www.youtube.com/embed/_XEaRUrlE2c"
+          title="The Wolf of Skyblock"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      </div>
     </div>
   );
 }
