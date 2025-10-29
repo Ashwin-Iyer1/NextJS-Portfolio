@@ -1,3 +1,11 @@
 footer {
   padding-left: 50px;
 }
+
+.MuiListItemAvatar-root {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding-right: 4px;
+}

@@ -17,12 +17,23 @@ import useIntersectionObserver from "./components/useIntersectionObserver";
 import List from "@mui/material/List";
 import "./landing.css";
 const zealImage = "/Images/zeal.png";
+const wellingtonImage = "/Images/wellington_management_logo.jpeg";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 
 const workDateFormat = (date) => {
-  return <span style={{ backgroundColor: "#6E6E6E90", padding: "2px 4px", borderRadius: "4px" }}>{date}</span>;
+  return (
+    <span
+      style={{
+        backgroundColor: "#6E6E6E90",
+        padding: "2px 4px",
+        borderRadius: "4px",
+      }}
+    >
+      {date}
+    </span>
+  );
 };
 
 export default function Home() {
@@ -77,8 +88,8 @@ export default function Home() {
         <div className="basic">
           <h2>Sophomore at Northeastern University</h2>
           <p>
-            I am currently a sophomore at Northeastern University in
-            Boston, Massachusetts, and I am interested in computer science. I am
+            I am currently a sophomore at Northeastern University in Boston,
+            Massachusetts, and I am interested in computer science. I am
             currently learning Python, Java, and TypeScript.{" "}
             <Link href="/about">Learn more about me!</Link>
           </p>
@@ -112,6 +123,30 @@ export default function Home() {
           <div className="workExperience">
             <h2 id="WorkingOn">Work Experience</h2>
             <List sx={{ width: "100%", color: "white" }}>
+              <ListItem>
+                <ListItemAvatar>
+                  <Box>
+                    <img
+                      src={wellingtonImage}
+                      alt="Wellington Management Logo"
+                      height={50}
+                    />
+                  </Box>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <>
+                      <b>Wellington Management</b>{" "}
+                      {workDateFormat("Incoming Spring 2026 Co-op")}
+                    </>
+                  }
+                  secondary="Fixed Income Credit Research Intern"
+                  sx={{
+                    color: "white",
+                    "& .MuiListItemText-secondary": { color: "white" },
+                  }}
+                />
+              </ListItem>
               <ListItem>
                 <ListItemAvatar>
                   <Box>
