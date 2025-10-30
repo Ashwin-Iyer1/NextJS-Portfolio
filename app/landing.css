@@ -9,3 +9,12 @@ footer {
   align-items: center;
   padding-right: 4px;
 }
+
+@media (max-width: 840px) {
+  .work-date {
+    display: inline-block;
+    box-sizing: border-box;
+    max-width: fit-content;
+    padding-right: 4px !important;
+  }
+}

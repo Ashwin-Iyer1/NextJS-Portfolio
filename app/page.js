@@ -30,6 +30,7 @@ const workDateFormat = (date) => {
         padding: "2px 4px",
         borderRadius: "4px",
       }}
+      className="work-date"
     >
       {date}
     </span>
@@ -140,7 +141,7 @@ export default function Home() {
                       {workDateFormat("Incoming Spring 2026 Co-op")}
                     </>
                   }
-                  secondary="Fixed Income Credit Research Intern"
+                  secondary="Fixed Income Credit Research Co-op"
                   sx={{
                     color: "white",
                     "& .MuiListItemText-secondary": { color: "white" },
