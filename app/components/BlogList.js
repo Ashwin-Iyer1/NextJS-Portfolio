@@ -48,11 +48,11 @@ const blogs = [
     title: "My Mission Statement",
     description: "My mission statement and guiding principles.",
   },
-  // {
-  //   slug: "three-faces",
-  //   title: "🙈🙉🙊",
-  //   description: "My three faces.",
-  // },
+  {
+    slug: "cut-the-lines",
+    title: "Cut The Lines",
+    description: "A boat is safest when it is in harbor, but that is not what boats are for.",
+  },
 ];
 
 export default function BlogList() {
