@@ -1,0 +1,71 @@
+/* Skills Component Styles */
+
+.Skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.Skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(138, 44, 226, 0.08), rgba(0, 0, 0, 0.3));
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(138, 44, 226, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-width: 140px;
+  max-width: 180px;
+}
+
+.Skill:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(138, 44, 226, 0.3);
+}
+
+.Skill h3 {
+  color: #c596ee;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.Skill svg {
+  width: 60px;
+  height: 60px;
+  margin: 12px 0;
+}
+
+.Skill p {
+  color: rgb(228, 228, 228);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  .Skills {
+    gap: 16px;
+    padding: 16px 0;
+  }
+
+  .Skill {
+    min-width: 120px;
+    max-width: 140px;
+    padding: 16px;
+  }
+
+  .Skill h3 {
+    font-size: 1rem;
+  }
+
+  .Skill svg {
+    width: 50px;
+    height: 50px;
+  }
+}

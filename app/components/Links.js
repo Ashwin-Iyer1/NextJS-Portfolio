@@ -9,6 +9,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import Box from "@mui/material/Box";
 import React from "react";
 import { styled } from "@mui/material/styles";
+import styles from "./Links.module.css";
 
 export default function Links() {
   const SocialIcon = styled(Image)({
@@ -25,7 +26,7 @@ export default function Links() {
   });
 
   return (
-    <div className="links">
+    <div className={styles.links}>
       <Box
         component="section"
         sx={{
@@ -45,7 +46,7 @@ export default function Links() {
           //
           backgroundColor: "transparent",
         }}
-        className="Socials"
+        className={styles.Socials}
       >
         <ImageList
           sx={{

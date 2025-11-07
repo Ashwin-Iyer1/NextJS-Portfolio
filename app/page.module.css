@@ -1,0 +1,242 @@
+/* Home Page Styles */
+
+.Home {
+  text-align: left;
+  max-width: 1200px;
+  width: 100%;
+  padding: 24px;
+}
+
+.Container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 28px;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.basic {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.12));
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: rgb(255, 255, 255);
+  text-align: left;
+}
+
+.basic h2 {
+  color: #c596ee;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.basic p {
+  max-width: 100%;
+  color: rgb(228, 228, 228);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.basic p a {
+  color: #a35aed;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.basic p a:hover {
+  color: #c596ee;
+}
+
+.Info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.College {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(138, 44, 226, 0.08), rgba(0, 0, 0, 0.3));
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(138, 44, 226, 0.2);
+}
+
+.College img {
+  max-height: 140px;
+  border-radius: 8px;
+}
+
+.workExperience {
+  margin-top: 32px;
+}
+
+.workExperience h2 {
+  color: #c596ee;
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.Projects {
+  text-align: left;
+  margin-top: 32px;
+}
+
+.Projects h2 {
+  color: #c596ee;
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.ProjectStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.SeeAllText {
+  color: rgb(172, 216, 255);
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.SeeAllText:hover {
+  color: #a35aed;
+  transform: translateY(-2px);
+}
+
+.MiscProj {
+  margin-top: 48px;
+}
+
+.MiscProj h2 {
+  color: #c596ee;
+  margin-bottom: 24px;
+}
+
+.MiscProjContainer {
+  margin-bottom: 48px;
+}
+
+.Contact {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.Contact h2 {
+  color: #c596ee;
+  margin-bottom: 24px;
+}
+
+.Contact p {
+  color: rgb(233, 233, 233);
+  text-align: center;
+  font-size: 1rem;
+}
+
+.Contact a {
+  color: #6868fe;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.Contact a:hover {
+  color: #a35aed;
+}
+
+/* Responsive Styles */
+@media (max-width: 980px) {
+  .Container {
+    grid-template-columns: 1fr;
+  }
+  
+  .Home {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .Home {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .Container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .basic {
+    text-align: center;
+    align-items: center;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .basic h2 {
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto 12px;
+  }
+
+  .basic p {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+
+  .Info {
+    padding-right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .College {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .Projects {
+    padding-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .Projects h2,
+  .workExperience h2 {
+    text-align: center;
+  }
+
+  .ProjectStack {
+    justify-content: center;
+  }
+
+  .SeeAllText {
+    text-align: center;
+    display: block;
+  }
+}
+
+@media (max-width: 400px) {
+  .basic {
+    padding: 16px;
+  }
+}

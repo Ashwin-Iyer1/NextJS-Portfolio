@@ -1,4 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
+
+.NameAnim {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100%;
+  background-color: rgb(19, 16, 16);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.NameAnim h1 {
+  font: 700 20vw "Caveat", cursive;
+  color: #8a2ce2;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  display: block;
+}
 
 .container {
   min-height: 100vh;

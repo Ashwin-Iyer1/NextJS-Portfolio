@@ -9,13 +9,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
-import GetTime from "./components/getTime.js";
+import GetTimeWrapper from "./components/GetTimeWrapper.js";
 import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
 import Stack from "@mui/material/Stack";
 import useIntersectionObserver from "./components/useIntersectionObserver";
 import List from "@mui/material/List";
 import "./landing.css";
+import styles from "./page.module.css";
 const zealImage = "/Images/zeal.png";
 const wellingtonImage = "/Images/wellington_management_logo.jpeg";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
@@ -83,10 +84,10 @@ export default function Home() {
     );
   }
   return (
-    <div className={`Home ${fadeIn ? "fade-in" : ""}`}>
+    <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`}>
       <Bar />
-      <div className="Container">
-        <div className="basic">
+      <div className={styles.Container}>
+        <div className={styles.basic}>
           <h2>Sophomore at Northeastern University</h2>
           <p>
             I am currently a sophomore at Northeastern University in Boston,
@@ -95,22 +96,10 @@ export default function Home() {
             <Link href="/about">Learn more about me!</Link>
           </p>
         </div>
-        <div className="Info">
+        <div className={styles.Info}>
           <Links />
-          <Box
-            sx={{
-              bgcolor: "blueviolet",
-              borderRadius: 1,
-              boxShadow: "10px 10px #260c3e",
-            }}
-            className="Time"
-          >
-            <div className="Working">
-              <h2>Current coding time</h2>
-              <GetTime />
-            </div>
-          </Box>
-          <div className="College">
+          <GetTimeWrapper />
+          <div className={styles.College}>
             <Image
               src={NEU}
               id={"person"}
@@ -121,7 +110,7 @@ export default function Home() {
           </div>
         </div>
         <div>
-          <div className="workExperience">
+          <div className={styles.workExperience}>
             <h2 id="WorkingOn">Work Experience</h2>
             <List sx={{ width: "100%", color: "white" }}>
               <ListItem>
@@ -170,7 +159,7 @@ export default function Home() {
               </ListItem>
             </List>
           </div>
-          <div className="Projects">
+          <div className={styles.Projects}>
             <h2 id="WorkingOn">Projects</h2>
             <Stack
               spacing={{ xs: 1, sm: 1 }}
@@ -218,7 +207,7 @@ export default function Home() {
             </Stack>
           </div>
           <h3>
-            <Link className="SeeAllText" href="/projects">
+            <Link className={styles.SeeAllText} href="/projects">
               See All
             </Link>
           </h3>
@@ -226,11 +215,11 @@ export default function Home() {
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Skills</h2>
         <Skills />
       </div>
-      <div className="MiscProj">
+      <div className={styles.MiscProj}>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>
           Miscellaneous Projects
         </h2>
-        <div className="MiscProjContainer" ref={miscProjSection}>
+        <div className={styles.MiscProjContainer} ref={miscProjSection}>
           {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
             <Suspense fallback={<div className="loading">Loading...</div>}>
               <LazyMiscProj />
@@ -240,7 +229,7 @@ export default function Home() {
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
         <BlogList />
       </div>
-      <div className="Contact">
+      <div className={styles.Contact}>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
         <Contact />
         <p style={{ margin: "0 auto", marginTop: "16px" }}>
