@@ -54,25 +54,67 @@
 
 .Info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px;
   text-align: left;
+  align-items: stretch;
+  flex: 1;
+}
+
+.basicRow {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.basicRow .basic {
+  flex: 0 0 calc(77% - 8px);
+}
+
+.basicRow > *:last-child {
+  flex: 0 0 calc(23% - 8px);
+}
+
+.workExperienceRow {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.workExperienceRow .workExperience {
+  flex: 0 0 calc(77% - 8px);
+}
+
+.rightColumn {
+  flex: 0 0 calc(23% - 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
 }
 
 .Intro {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 32px;
+  flex: 1;
 }
 
 .topSection {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 32px;
   width: 100%;
-  align-items: flex-start;
-  height: auto;
+}
+
+.BasicInfo {
+  display: flex;
+}
+
+.bottomSection {
+  display: flex;
 }
 
 .College {
@@ -96,7 +138,6 @@
 }
 
 .workExperience {
-  margin-top: 32px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.02),
@@ -108,6 +149,8 @@
   border: 1px solid rgba(255, 255, 255, 0.03);
   color: rgb(255, 255, 255);
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .workExperience h2 {
@@ -209,6 +252,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .basicRow,
+  .workExperienceRow {
+    flex-direction: column;
+  }
+
+  .basicRow .basic,
+  .workExperienceRow .workExperience {
+    flex: 1;
+  }
+
+  .rightColumn {
+    flex: 1;
   }
 
   .basic {

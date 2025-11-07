@@ -3,8 +3,6 @@ import React, { lazy, Suspense, useRef, useEffect, useState } from "react";
 const NEU = "/Images/NEU.webp";
 import NameAnim from "./components/NameAnim.js";
 import Links from "./components/Links.js";
-import projects from "./data/repos.json";
-import Box from "@mui/material/Box";
 import Image from "next/image";
 import Link from "next/link";
 import Skills from "./components/Skills.js";
@@ -12,7 +10,6 @@ import Contact from "./components/Contact.js";
 import GetTimeWrapper from "./components/GetTimeWrapper.js";
 import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
-import Stack from "@mui/material/Stack";
 import useIntersectionObserver from "./components/useIntersectionObserver";
 import "./landing.css";
 import styles from "./page.module.css";
@@ -70,7 +67,7 @@ export default function Home() {
       <Bar />
       <div className={styles.Container}>
         <div className={styles.topSection}>
-          <div className={styles.Intro}>
+          <div className={styles.basicRow}>
             <div className={styles.basic}>
               <h2>Sophomore at Northeastern University</h2>
               <p>
@@ -80,73 +77,28 @@ export default function Home() {
                 <Link href="/about">Learn more about me!</Link>
               </p>
             </div>
+            <Links />
+          </div>
+          <div className={styles.workExperienceRow}>
             <div className={styles.workExperience}>
               <h2 id="WorkingOn">Work Experience</h2>
               <WorkExperience />
             </div>
-          </div>
-          <div className={styles.Info}>
-            <Links />
-            <GetTimeWrapper />
-            <div className={styles.College}>
-              <Image
-                src={NEU}
-                id={"person"}
-                alt="Northeastern"
-                width={200}
-                height={200}
-              />
+            <div className={styles.rightColumn}>
+              <GetTimeWrapper />
+              <div className={styles.College}>
+                <Image
+                  src={NEU}
+                  id={"person"}
+                  alt="Northeastern"
+                  width={200}
+                  height={200}
+                />
+              </div>
             </div>
           </div>
         </div>
         <div>
-          {/* <div className={styles.Projects}>
-            <h2 id="WorkingOn">Projects</h2>
-            <Stack
-              spacing={{ xs: 1, sm: 1 }}
-              direction="row"
-              useFlexGap
-              sx={{
-                flexWrap: "wrap",
-                margin: "0 auto",
-              }}
-              className="ProjectStack"
-            >
-              {projects.slice(0, 4).map((project, index) => {
-                const hue = (index * (360 / projects.length)) % 360; // Dynamically calculate hue
-                const textColor = `hsl(${hue}, 70%, 50%)`; // Saturation and Lightness are set for vivid colors
-                const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`; // Add transparency to the background
-                return (
-                  <Box
-                    sx={{
-                      border: `2px solid ${textColor}`,
-                      bgcolor: backgroundColor,
-                      boxShadow: `2px 3px ${textColor}`,
-                      borderRadius: 1,
-                      height: "130px",
-                      maxWidth: "400px",
-                      width: "100%",
-                    }}
-                    key={project.reponame}
-                  >
-                    <h2 style={{ paddingLeft: "10px" }}>
-                      <a
-                        href={project.html_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ color: textColor }}
-                      >
-                        {project.reponame}
-                      </a>
-                    </h2>
-                    <p style={{ color: "white", paddingLeft: "10px" }}>
-                      {project.description}
-                    </p>
-                  </Box>
-                );
-              })}
-            </Stack>
-          </div> */}
         </div>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Skills</h2>
         <Skills />

@@ -1,7 +1,7 @@
 const zealImage = "/Images/zeal.png";
 const wellingtonImage = "/Images/wellington_management_logo.jpeg";
 import Box from "@mui/material/Box";
-import { List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import { Divider, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import React from "react";
 const workDateFormat = (date) => {
   return (
@@ -20,8 +20,8 @@ const workDateFormat = (date) => {
 
 export default function WorkExperience() {
   return (
-    <List sx={{ width: "100%", color: "white" }}>
-      <ListItem>
+    <List sx={{ width: "100%",  display: "flex", flexDirection: "column", gap: 2 }}>
+      <ListItem sx={{borderBottom: "none !important"}}>
         <ListItemAvatar>
           <Box>
             <img
@@ -45,6 +45,9 @@ export default function WorkExperience() {
           }}
         />
       </ListItem>
+      <Divider sx={{
+        border: "1px solid rgba(255, 255, 255, 0.05)"
+      }}/>
       <ListItem>
         <ListItemAvatar>
           <Box>
