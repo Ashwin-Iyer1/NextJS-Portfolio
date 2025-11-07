@@ -34,7 +34,7 @@ body {
   line-height: 1.25;
   letter-spacing: -0.022em;
   margin-bottom: 12px;
-  margin-top: 64px;
+  margin-top: 0px;
   color: #e8e8e8;
 }
 
@@ -448,13 +448,10 @@ Image {
 @media (min-width: 1025px) and (max-width: 1440px) {
   .half-width-wrapper {
     max-width: 900px;
-    width: 70vw;
-    padding: 70px 50px;
   }
   
   .half-width-wrapper h1 {
     font-size: 44px;
-    margin-top: 72px;
   }
   
   .half-width-wrapper h2 {
