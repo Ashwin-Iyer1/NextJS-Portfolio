@@ -47,7 +47,16 @@ main {
 /* Global Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--accent-secondary);
-  font-weight: 600;
+  font-family: "aquavit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+p {
+  font-family: "oxanium", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
 }
 
 a {

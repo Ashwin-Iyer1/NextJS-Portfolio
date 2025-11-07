@@ -14,29 +14,11 @@ import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
 import Stack from "@mui/material/Stack";
 import useIntersectionObserver from "./components/useIntersectionObserver";
-import List from "@mui/material/List";
 import "./landing.css";
 import styles from "./page.module.css";
-const zealImage = "/Images/zeal.png";
-const wellingtonImage = "/Images/wellington_management_logo.jpeg";
-import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import WorkExperience from "./components/WorkExperience.js";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
-
-const workDateFormat = (date) => {
-  return (
-    <span
-      style={{
-        backgroundColor: "#6E6E6E90",
-        padding: "2px 4px",
-        borderRadius: "4px",
-      }}
-      className="work-date"
-    >
-      {date}
-    </span>
-  );
-};
 
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -87,79 +69,38 @@ export default function Home() {
     <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`}>
       <Bar />
       <div className={styles.Container}>
-        <div className={styles.basic}>
-          <h2>Sophomore at Northeastern University</h2>
-          <p>
-            I am currently a sophomore at Northeastern University in Boston,
-            Massachusetts, and I am interested in computer science. I am
-            currently learning Python, Java, and TypeScript.{" "}
-            <Link href="/about">Learn more about me!</Link>
-          </p>
-        </div>
-        <div className={styles.Info}>
-          <Links />
-          <GetTimeWrapper />
-          <div className={styles.College}>
-            <Image
-              src={NEU}
-              id={"person"}
-              alt="Northeastern"
-              width={200}
-              height={200}
-            />
+        <div className={styles.topSection}>
+          <div className={styles.Intro}>
+            <div className={styles.basic}>
+              <h2>Sophomore at Northeastern University</h2>
+              <p>
+                I am currently a sophomore at Northeastern University in Boston,
+                Massachusetts, and I am interested in computer science. I am
+                currently learning Python, Java, and TypeScript.{" "}
+                <Link href="/about">Learn more about me!</Link>
+              </p>
+            </div>
+            <div className={styles.workExperience}>
+              <h2 id="WorkingOn">Work Experience</h2>
+              <WorkExperience />
+            </div>
+          </div>
+          <div className={styles.Info}>
+            <Links />
+            <GetTimeWrapper />
+            <div className={styles.College}>
+              <Image
+                src={NEU}
+                id={"person"}
+                alt="Northeastern"
+                width={200}
+                height={200}
+              />
+            </div>
           </div>
         </div>
         <div>
-          <div className={styles.workExperience}>
-            <h2 id="WorkingOn">Work Experience</h2>
-            <List sx={{ width: "100%", color: "white" }}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Box>
-                    <img
-                      src={wellingtonImage}
-                      alt="Wellington Management Logo"
-                      height={50}
-                    />
-                  </Box>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <>
-                      <b>Wellington Management</b>{" "}
-                      {workDateFormat("Incoming Spring 2026 Co-op")}
-                    </>
-                  }
-                  secondary="Fixed Income Credit Research Co-op"
-                  sx={{
-                    color: "white",
-                    "& .MuiListItemText-secondary": { color: "white" },
-                  }}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemAvatar>
-                  <Box>
-                    <img src={zealImage} alt="Zeal" height={50} />
-                  </Box>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <>
-                      <b>Zeal IT Consultants</b>{" "}
-                      {workDateFormat("May 2025 - August 2025")}
-                    </>
-                  }
-                  secondary="Frontend Developer Intern"
-                  sx={{
-                    color: "white",
-                    "& .MuiListItemText-secondary": { color: "white" },
-                  }}
-                />
-              </ListItem>
-            </List>
-          </div>
-          <div className={styles.Projects}>
+          {/* <div className={styles.Projects}>
             <h2 id="WorkingOn">Projects</h2>
             <Stack
               spacing={{ xs: 1, sm: 1 }}
@@ -205,12 +146,7 @@ export default function Home() {
                 );
               })}
             </Stack>
-          </div>
-          <h3>
-            <Link className={styles.SeeAllText} href="/projects">
-              See All
-            </Link>
-          </h3>
+          </div> */}
         </div>
         <h2 style={{ textAlign: "center", fontSize: "2em" }}>Skills</h2>
         <Skills />

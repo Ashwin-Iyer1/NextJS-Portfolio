@@ -1,10 +1,19 @@
+.resume {
+  padding: 24px;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.resumeIframe {
+  width: 100%;
+  height: 90vh;
+  border: 0;
+}
+
 @media (max-width: 767px) {
-  .resume iframe {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    width: 70%;
-    max-width: 600px;
+  .resumeIframe {
     height: 500px;
   }
 }

@@ -9,7 +9,8 @@ export default function Skills() {
     <div className={styles.Skills}>
       <Stack
         direction="row"
-        spacing={2}
+        spacing={3}
+        gap={2}
         flexWrap="wrap"
         sx={{
           alignContent: "center",

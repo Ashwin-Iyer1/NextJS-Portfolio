@@ -4,11 +4,11 @@ import styles from "./page.module.css";
 
 export default function Resume() {
   return (
-    <div className={styles.resume} style={{ height: "90vh", width: "100vw" }}>
+    <div className={styles.resume}>
       <Bar />
       <iframe
         src="https://ashwin-iyer1.github.io/resume/Ashwin_Iyer_CV.pdf"
-        style={{ width: "100vw", height: "90vh" }}
+        className={styles.resumeIframe}
         frameBorder="0"
       />
     </div>

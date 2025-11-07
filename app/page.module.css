@@ -8,7 +8,6 @@
 }
 
 .Container {
-  display: grid;
   grid-template-columns: 1fr 320px;
   gap: 28px;
   align-items: start;
@@ -16,7 +15,11 @@
 }
 
 .basic {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.12));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.12)
+  );
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
@@ -56,12 +59,32 @@
   text-align: left;
 }
 
+.Intro {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  align-items: flex-start;
+  height: auto;
+}
+
 .College {
   padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(138, 44, 226, 0.08), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(
+    135deg,
+    rgba(138, 44, 226, 0.08),
+    rgba(0, 0, 0, 0.3)
+  );
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(138, 44, 226, 0.2);
@@ -74,6 +97,17 @@
 
 .workExperience {
   margin-top: 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.12)
+  );
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: rgb(255, 255, 255);
+  text-align: left;
 }
 
 .workExperience h2 {
@@ -130,7 +164,6 @@
 
 .Contact {
   margin-top: 48px;
-  margin-bottom: 48px;
 }
 
 .Contact h2 {
@@ -159,7 +192,7 @@
   .Container {
     grid-template-columns: 1fr;
   }
-  
+
   .Home {
     padding: 16px;
   }

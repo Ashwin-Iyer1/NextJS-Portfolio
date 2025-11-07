@@ -30,21 +30,6 @@ export default function Links() {
       <Box
         component="section"
         sx={{
-          p: 2,
-          border: "2px solid white",
-          padding: "0",
-          alignItems: "center",
-          textAlign: "center",
-          borderRadius: 1,
-          bgcolor: "#000000", // Fixed value (had one too few zeros)
-          maxHeight: "162.8px",
-          minHeight: "150px",
-          height: "100%",
-          minWidth: "150px",
-          maxWidth: "220px",
-          margin: "0 auto",
-          //
-          backgroundColor: "transparent",
         }}
         className={styles.Socials}
       >

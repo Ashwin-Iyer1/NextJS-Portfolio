@@ -1,8 +1,7 @@
-@media (min-width: 1080px) {
-  .About {
-    padding-left: 50px;
-    padding-right: 50px;
-  }
+.About {
+  padding: 24px;
+  max-width: 1200px;
+  width: 100%;
 }
 
 .About .songsHeading {

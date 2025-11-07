@@ -2,12 +2,10 @@
 
 /* Footer Styles */
 footer {
-  padding: 28px 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.42);
   text-align: center;
   font-size: 0.95rem;
-  margin-top: 60px;
 }
 
 /* MUI Component Overrides */
@@ -48,7 +46,6 @@ footer {
 
 @media (max-width: 767px) {
   footer {
-    padding: 20px 24px;
     font-size: 0.85rem;
   }
 }
