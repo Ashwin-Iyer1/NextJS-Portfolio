@@ -48,34 +48,89 @@ export default function ProjectList() {
     return (
       <Grid
         container
-        rowSpacing={1}
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 6, sm: 9, md: 12 }}
-        sx={{ alignContent: "center", textAlign: "center" }}
-        flexWrap={"wrap"}
+        spacing={{ xs: 2, sm: 3, md: 4 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        sx={{
+          padding: { xs: 2, md: 3 },
+          maxWidth: "1400px",
+          margin: "0 auto",
+        }}
       >
-        {[...Array(16)].map((_, index) => (
+        {[...Array(9)].map((_, index) => (
           <Grid
-            size={3}
-            sx={{
-              border: `2px solid gray`,
-              bgcolor: "white",
-              boxShadow: `2px 3px gray`,
-              borderRadius: 1,
-            }}
+            item
+            xs={4}
+            sm={4}
+            md={4}
             key={index}
+            sx={{
+              display: "flex",
+              minHeight: 0,
+            }}
           >
-            <h2>
-              <a target="_blank" rel="noreferrer" style={{ color: "white" }}>
-                Lorem ipsum
-              </a>
-            </h2>
-            <p style={{ color: "white" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut{" "}
-            </p>
+            <div
+              style={{
+                width: "250px",
+                background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
+                borderRadius: "12px",
+                padding: "24px",
+                borderLeft: "4px solid #3a3a3a",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                height: "200px",
+                animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              }}
+            >
+              <div
+                style={{
+                  height: "28px",
+                  background:
+                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
+                  backgroundSize: "200% 100%",
+                  animation: "shimmer 2s infinite",
+                  borderRadius: "6px",
+                  width: "70%",
+                }}
+              />
+              <div
+                style={{
+                  height: "16px",
+                  background:
+                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
+                  backgroundSize: "200% 100%",
+                  animation: "shimmer 2s infinite",
+                  borderRadius: "4px",
+                  width: "100%",
+                  animationDelay: "0.1s",
+                }}
+              />
+              <div
+                style={{
+                  height: "16px",
+                  background:
+                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
+                  backgroundSize: "200% 100%",
+                  animation: "shimmer 2s infinite",
+                  borderRadius: "4px",
+                  width: "90%",
+                  animationDelay: "0.2s",
+                }}
+              />
+            </div>
           </Grid>
         ))}
+        <style jsx>{`
+          @keyframes shimmer {
+            0% {
+              background-position: 200% 0;
+            }
+            100% {
+              background-position: -200% 0;
+            }
+          }
+        `}</style>
       </Grid>
     );
   }
@@ -83,37 +138,135 @@ export default function ProjectList() {
   return (
     <Grid
       container
-      rowSpacing={1}
-      spacing={{ xs: 2, md: 3 }}
-      columns={{ xs: 6, sm: 9, md: 12 }}
-      sx={{ alignContent: "center", textAlign: "center" }}
-      flexWrap={"wrap"}
+      spacing={{ xs: 2, sm: 3, md: 4 }}
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      sx={{
+        padding: { xs: 2, md: 3 },
+        maxWidth: "1400px",
+        margin: "0 auto",
+      }}
     >
       {projects.map((project, index) => {
-        const hue = (index * (360 / projects.length)) % 360; // Dynamically calculate hue
-        const textColor = `hsl(${hue}, 70%, 50%)`; // Saturation and Lightness are set for vivid colors
-        const backgroundColor = `hsla(${hue}, 100%, 50%, 0.3)`; // Add transparency to the background
+        const hue = (index * (360 / projects.length)) % 360;
+        const accentColor = `hsl(${hue}, 70%, 55%)`;
+        const hoverColor = `hsl(${hue}, 70%, 45%)`;
+
         return (
           <Grid
-            size={3}
+            item
+            xs={4}
+            sm={4}
+            md={4}
+            key={project.id || index}
             sx={{
-              border: `2px solid ${textColor}`,
-              bgcolor: backgroundColor,
-              boxShadow: `2px 3px ${textColor}`,
-              borderRadius: 1,
+              display: "flex",
+              minHeight: 0,
             }}
           >
-            <h2>
+            <div
+              style={{
+                width: "250px",
+                background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
+                borderRadius: "12px",
+                padding: "24px",
+                border: `2px solid transparent`,
+                borderLeftColor: accentColor,
+                borderLeftWidth: "4px",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                height: "200px",
+                position: "relative",
+                overflow: "hidden",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = `0 12px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px ${accentColor}`;
+                e.currentTarget.style.borderLeftWidth = "6px";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 6px rgba(0, 0, 0, 0.1)";
+                e.currentTarget.style.borderLeftWidth = "4px";
+              }}
+            >
+              {/* Subtle background gradient overlay */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: "100px",
+                  height: "100px",
+                  background: `radial-gradient(circle, ${accentColor}15 0%, transparent 70%)`,
+                  pointerEvents: "none",
+                }}
+              />
+
+              <h3
+                style={{
+                  color: accentColor,
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  margin: 0,
+                  lineHeight: "1.4",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {project.reponame}
+              </h3>
+
+              <p
+                style={{
+                  color: "#b0b0b0",
+                  fontSize: "0.9rem",
+                  lineHeight: "1.6",
+                  margin: 0,
+                  flex: 1,
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {project.description || "No description available"}
+              </p>
+
+              {/* View project indicator */}
               <a
                 href={project.html_url}
                 target="_blank"
                 rel="noreferrer"
-                style={{ color: textColor }}
+                style={{
+                  textDecoration: "none",
+                }}
               >
-                {project.reponame}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    color: accentColor,
+                    fontSize: "0.85rem",
+                    fontWeight: "500",
+                    marginTop: "auto",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <span>View Project</span>
+                  <span style={{ fontSize: "1rem" }}>→</span>
+                </div>
               </a>
-            </h2>
-            <p style={{ color: "white" }}>{project.description}</p>
+            </div>
           </Grid>
         );
       })}
