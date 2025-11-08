@@ -69,7 +69,7 @@ export default function BlogList() {
       }}
     >
       <Stack
-        spacing={{ xs: 2, sm: 2.5, md: 3 }}
+        spacing={{ xs: 1.5, sm: 2.5, md: 3 }}
         direction="row"
         useFlexGap
         sx={{ flexWrap: "wrap", justifyContent: "center" }}
@@ -101,13 +101,19 @@ export default function BlogList() {
             >
               <Box
                 sx={{
-                  width: "100%",
-                  width: 300,
-                  minHeight: 200,
+                  width: {
+                    xs: "calc(40vw - 24px)", // 2 columns on extra small screens
+                    sm: 300,
+                  },
+                  minWidth: {
+                    xs: 140, // Minimum width for mobile
+                    sm: 300,
+                  },
+                  minHeight: { xs: "100%", sm: 200 },
                   background:
                     "linear-gradient(135deg, #1a1a1a 0%, #252525 100%)",
-                  borderRadius: "16px",
-                  padding: "28px",
+                  borderRadius: { xs: "12px", sm: "16px" },
+                  padding: { xs: "16px", sm: "28px" },
                   border: "1px solid rgba(138, 44, 226, 0.15)",
                   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
                   position: "relative",
@@ -169,8 +175,8 @@ export default function BlogList() {
 
                 <h2
                   style={{
-                    marginBottom: "16px",
-                    fontSize: "1.4rem",
+                    marginBottom: "12px",
+                    fontSize: "clamp(1rem, 3.5vw, 1.4rem)",
                     position: "relative",
                     zIndex: 1,
                     fontWeight: 500,
@@ -228,8 +234,8 @@ export default function BlogList() {
                   style={{
                     marginTop: 0,
                     color: "#9aa4b2",
-                    fontSize: "0.95rem",
-                    lineHeight: "1.7",
+                    fontSize: "clamp(0.8rem, 2.5vw, 0.95rem)",
+                    lineHeight: "1.6",
                     position: "relative",
                     zIndex: 1,
                     fontWeight: 300,
