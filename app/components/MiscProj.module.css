@@ -109,7 +109,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.796);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -121,7 +121,7 @@
 }
 
 .indicator.active {
-  background: rgba(0, 0, 0, 0.8);
+  background: #c596ee;
   width: 14px;
   height: 14px;
 }

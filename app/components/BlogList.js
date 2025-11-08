@@ -64,7 +64,6 @@ export default function BlogList() {
         alignContent: "center",
         textAlign: "center",
         justifyContent: "center",
-        maxWidth: "14200px",
         padding: { xs: 2, md: 3 },
       }}
     >
@@ -102,7 +101,7 @@ export default function BlogList() {
               <Box
                 sx={{
                   width: {
-                    xs: "calc(40vw - 24px)", // 2 columns on extra small screens
+                    xs: "calc(50vw - 24px)", // 2 columns on extra small screens
                     sm: 300,
                   },
                   minWidth: {

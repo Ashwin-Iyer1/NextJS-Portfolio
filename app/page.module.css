@@ -328,6 +328,11 @@
     max-width: 100%;
   }
 
+  .MiscProjContainer {
+    min-height: 0px;
+    margin-bottom: 0px;
+  }
+
   .Projects h2,
   .workExperience h2,
   .MiscProj h2,
