@@ -50,13 +50,15 @@ export default function ProjectList() {
         style={{
           width: "100%",
           padding: "16px",
+          boxSizing: "border-box",
         }}
       >
         <div
+          className="projects-grid"
           style={{
             display: "grid",
+            gap: "12px",
             gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-            gap: "16px",
             maxWidth: "1400px",
             margin: "0 auto",
           }}
@@ -64,6 +66,7 @@ export default function ProjectList() {
           {[...Array(9)].map((_, index) => (
             <div
               key={index}
+              className="skeleton-card"
               style={{
                 width: "100%",
                 background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
@@ -76,6 +79,7 @@ export default function ProjectList() {
                 gap: "12px",
                 minHeight: "200px",
                 animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                boxSizing: "border-box",
               }}
             >
               <div
@@ -126,9 +130,29 @@ export default function ProjectList() {
             }
           }
           
-          @media (max-width: 899px) {
-            div[style*="gridTemplateColumns"] {
+          @media (max-width: 1160px) {
+            .projects-grid {
               grid-template-columns: repeat(2, 1fr) !important;
+              gap: 8px !important;
+              padding: 0 8px;
+            }
+            
+            :global(.skeleton-card) {
+              padding: 16px !important;
+              min-height: 180px !important;
+              border-radius: 8px !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .projects-grid {
+              gap: 6px !important;
+              padding: 0 4px;
+            }
+            
+            :global(.skeleton-card) {
+              padding: 12px !important;
+              min-height: 160px !important;
             }
           }
         `}</style>
@@ -137,296 +161,181 @@ export default function ProjectList() {
   }
 
   return (
-    <>
-      {/* Mobile: 2 columns grid with vertical scroll */}
+    <div
+      style={{
+        width: "100%",
+        padding: "16px",
+        boxSizing: "border-box",
+      }}
+    >
       <div
+        className="projects-grid"
         style={{
-          display: "block",
-          width: "100%",
-          padding: "16px",
-        }}
-        className="mobile-grid"
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "16px",
-            maxWidth: "100%",
-          }}
-        >
-          {projects.map((project, index) => {
-            const hue = (index * (360 / projects.length)) % 360;
-            const accentColor = `hsl(${hue}, 70%, 55%)`;
-
-            return (
-              <div
-                key={project.id || index}
-                style={{
-                  width: "100%",
-                  background:
-                    "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
-                  borderRadius: "12px",
-                  padding: "16px",
-                  border: `2px solid transparent`,
-                  borderLeftColor: accentColor,
-                  borderLeftWidth: "4px",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
-                  minHeight: "200px",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = `0 12px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px ${accentColor}`;
-                  e.currentTarget.style.borderLeftWidth = "6px";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 6px rgba(0, 0, 0, 0.1)";
-                  e.currentTarget.style.borderLeftWidth = "4px";
-                }}
-              >
-                {/* Subtle background gradient overlay */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    width: "100px",
-                    height: "100px",
-                    pointerEvents: "none",
-                  }}
-                />
-
-                <h3
-                  style={{
-                    color: accentColor,
-                    fontSize: "1.1rem",
-                    fontWeight: "600",
-                    margin: 0,
-                    lineHeight: "1.4",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  {project.reponame}
-                </h3>
-
-                <p
-                  style={{
-                    color: "#b0b0b0",
-                    fontSize: "0.85rem",
-                    lineHeight: "1.5",
-                    margin: 0,
-                    flex: 1,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  {project.description || "No description available"}
-                </p>
-
-                {/* View project indicator */}
-                <a
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      color: accentColor,
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                      marginTop: "auto",
-                      position: "relative",
-                      zIndex: 1,
-                    }}
-                  >
-                    <span>View Project</span>
-                    <span style={{ fontSize: "0.9rem" }}>→</span>
-                  </div>
-                </a>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Desktop: Grid layout */}
-      <Grid
-        container
-        spacing={{ xs: 2, sm: 3, md: 4 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        sx={{
-          padding: { xs: 2, md: 3 },
+          display: "grid",
+          gap: "16px",
+          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
           maxWidth: "1400px",
           margin: "0 auto",
-          justifyContent: { xs: "center", md: "flex-start" },
-          display: { xs: "none", md: "flex" },
         }}
-        className="desktop-grid"
       >
         {projects.map((project, index) => {
           const hue = (index * (360 / projects.length)) % 360;
           const accentColor = `hsl(${hue}, 70%, 55%)`;
 
           return (
-            <Grid
-              item
-              xs={4}
-              sm={4}
-              md={4}
+            <div
               key={project.id || index}
-              sx={{
+              className="project-card"
+              style={{
+                width: "100%",
+                background:
+                  "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
+                borderRadius: "12px",
+                padding: "24px",
+                border: `2px solid transparent`,
+                borderLeftColor: accentColor,
+                borderLeftWidth: "4px",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                cursor: "pointer",
                 display: "flex",
-                minHeight: 0,
+                flexDirection: "column",
+                gap: "12px",
+                minHeight: "200px",
+                position: "relative",
+                overflow: "hidden",
+                boxSizing: "border-box",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = `0 12px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px ${accentColor}`;
+                e.currentTarget.style.borderLeftWidth = "6px";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 6px rgba(0, 0, 0, 0.1)";
+                e.currentTarget.style.borderLeftWidth = "4px";
               }}
             >
+              {/* Subtle background gradient overlay */}
               <div
                 style={{
-                  width: "250px",
-                  background:
-                    "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
-                  borderRadius: "12px",
-                  padding: "24px",
-                  border: `2px solid transparent`,
-                  borderLeftColor: accentColor,
-                  borderLeftWidth: "4px",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "12px",
-                  height: "200px",
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: "100px",
+                  height: "100px",
+                  pointerEvents: "none",
+                }}
+              />
+
+              <h3
+                style={{
+                  color: accentColor,
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  margin: 0,
+                  lineHeight: "1.4",
                   position: "relative",
-                  overflow: "hidden",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = `0 12px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px ${accentColor}`;
-                  e.currentTarget.style.borderLeftWidth = "6px";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 6px rgba(0, 0, 0, 0.1)";
-                  e.currentTarget.style.borderLeftWidth = "4px";
+                  zIndex: 1,
                 }}
               >
-                {/* Subtle background gradient overlay */}
+                {project.reponame}
+              </h3>
+
+              <p
+                style={{
+                  color: "#b0b0b0",
+                  fontSize: "0.9rem",
+                  lineHeight: "1.6",
+                  margin: 0,
+                  flex: 1,
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {project.description || "No description available"}
+              </p>
+
+              {/* View project indicator */}
+              <a
+                href={project.html_url}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: "none",
+                }}
+              >
                 <div
                   style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    width: "100px",
-                    height: "100px",
-                    background: `radial-gradient(circle, ${accentColor}15 0%, transparent 70%)`,
-                    pointerEvents: "none",
-                  }}
-                />
-
-                <h3
-                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
                     color: accentColor,
-                    fontSize: "1.25rem",
-                    fontWeight: "600",
-                    margin: 0,
-                    lineHeight: "1.4",
+                    fontSize: "0.85rem",
+                    fontWeight: "500",
+                    marginTop: "auto",
                     position: "relative",
                     zIndex: 1,
                   }}
                 >
-                  {project.reponame}
-                </h3>
-
-                <p
-                  style={{
-                    color: "#b0b0b0",
-                    fontSize: "0.9rem",
-                    lineHeight: "1.6",
-                    margin: 0,
-                    flex: 1,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  {project.description || "No description available"}
-                </p>
-
-                {/* View project indicator */}
-                <a
-                  href={project.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    textDecoration: "none",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      color: accentColor,
-                      fontSize: "0.85rem",
-                      fontWeight: "500",
-                      marginTop: "auto",
-                      position: "relative",
-                      zIndex: 1,
-                    }}
-                  >
-                    <span>View Project</span>
-                    <span style={{ fontSize: "1rem" }}>→</span>
-                  </div>
-                </a>
-              </div>
-            </Grid>
+                  <span>View Project</span>
+                  <span style={{ fontSize: "1rem" }}>→</span>
+                </div>
+              </a>
+            </div>
           );
         })}
-      </Grid>
-
+      </div>
       <style jsx>{`
-        .mobile-grid {
-          display: block;
-        }
-        .desktop-grid {
-          display: none !important;
+        @media (max-width: 1160px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+            padding: 0 8px;
+          }
+          
+          :global(.project-card) {
+            padding: 16px !important;
+            min-height: 180px !important;
+            border-radius: 8px !important;
+          }
+          
+          :global(.project-card) h3 {
+            font-size: 1rem !important;
+          }
+          
+          :global(.project-card) p {
+            font-size: 0.8rem !important;
+          }
         }
         
-        @media (min-width: 900px) {
-          .mobile-grid {
-            display: none !important;
+        @media (max-width: 480px) {
+          .projects-grid {
+            gap: 6px !important;
+            padding: 0 4px;
           }
-          .desktop-grid {
-            display: flex !important;
+          
+          :global(.project-card) {
+            padding: 12px !important;
+            min-height: 160px !important;
+          }
+          
+          :global(.project-card) h3 {
+            font-size: 0.9rem !important;
+          }
+          
+          :global(.project-card) p {
+            font-size: 0.75rem !important;
           }
         }
       `}</style>
-    </>
+    </div>
   );
 }
