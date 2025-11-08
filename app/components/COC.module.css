@@ -5,19 +5,61 @@
   text-align: center; /* Center text within each item */
   padding: 20px; /* Add some padding */
   padding-bottom: 0px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .container h2 {
   margin-bottom: 10px; /* Space between heading and first paragraph */
+  text-align: center;
 }
 
 .container p {
   margin: 5px 0; /* Space between paragraphs */
   max-width: 100%;
+  text-align: center;
 }
 
 .container img {
   margin-top: 10px; /* Space above the image */
   width: 50px; /* Set a fixed width for the image */
   height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 16px 12px;
+    padding-bottom: 0;
+  }
+
+  .container h2 {
+    font-size: 1.3rem;
+  }
+
+  .container p {
+    font-size: 0.9rem;
+  }
+
+  .container img {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px 8px;
+    padding-bottom: 0;
+  }
+
+  .container h2 {
+    font-size: 1.2rem;
+  }
+
+  .container p {
+    font-size: 0.85rem;
+  }
+
+  .container img {
+    width: 35px;
+  }
 }

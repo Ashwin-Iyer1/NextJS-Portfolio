@@ -1,13 +1,16 @@
 import React from "react";
 import Stack from "@mui/material/Stack";
+import styles from "./Skills.module.css";
+
 export default function Skills() {
   let date = new Date();
   date = date.getFullYear();
   return (
-    <div className="Skills">
+    <div className={styles.Skills}>
       <Stack
         direction="row"
-        spacing={2}
+        spacing={3}
+        gap={2}
         flexWrap="wrap"
         sx={{
           alignContent: "center",
@@ -15,7 +18,7 @@ export default function Skills() {
           justifyContent: "center",
         }}
       >
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>Python</h3>
           <svg
             fill="#3776AB"
@@ -28,7 +31,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2018} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>Java</h3>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +50,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2020} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>Kotlin</h3>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
             {" "}
@@ -75,7 +78,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2024} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>C++</h3>
           <svg
             role="img"
@@ -88,7 +91,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2022} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>JavaScript</h3>
           <svg
             role="img"
@@ -101,7 +104,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2021} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>ReactJS</h3>
           <svg
             role="img"
@@ -114,7 +117,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2022} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>NextJS</h3>
           <svg
             role="img"
@@ -127,7 +130,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2024} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>PostgreSQL</h3>
           <svg
             role="img"
@@ -140,7 +143,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2023} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>Git</h3>
           <svg
             role="img"
@@ -153,7 +156,7 @@ export default function Skills() {
           </svg>
           <p>{date - 2020} years</p>
         </div>
-        <div className="Skill">
+        <div className={styles.Skill}>
           <h3>Heroku</h3>
           <svg
             role="img"

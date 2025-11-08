@@ -1,441 +1,119 @@
+/* Global Font Imports */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
-.fade-out {
-  transition: opacity 0.5s ease-in-out; /* Adjust duration as needed */
-  opacity: 1; /* Starting opacity */
+/* CSS Variables */
+:root {
+  --bg-primary: #0f1114;
+  --bg-secondary: #13100f;
+  --accent-primary: #8a2ce2;
+  --accent-secondary: #c596ee;
+  --text-primary: #e8eef6;
+  --text-secondary: #9aa4b2;
+  --border-color: rgba(255, 255, 255, 0.03);
+  --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 28px rgba(2, 6, 23, 0.6);
+  --radius: 12px;
+  --max-width: 1200px;
 }
 
-.fade {
-  opacity: 0; /* End opacity */
-}
-.fade-in {
-  opacity: 0; /* Starting opacity */
-  transition: opacity 0.3s ease-in-out; /* Adjust duration as needed */
-  opacity: 1; /* End opacity */
+/* Global Reset & Body Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-svg {
-  height: 80px;
+html {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
-  background-color: rgb(19, 16, 16);
+  background-color: var(--bg-secondary);
   display: flex;
   justify-content: center;
   font-family: "Roboto", sans-serif;
-}
-.NameAnim {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  width: 100%;
-  background-color: rgb(19, 16, 16);
-  margin: 0;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   padding: 0;
-  overflow: hidden;
+  margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
 }
 
-.NameAnim h1 {
-  font: 700 20vw "Caveat", cursive;
-  /* Make 80% of screen width*/
-  color: #8a2ce2;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  display: block;
-}
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-footer {
-  color: rgba(255, 255, 255, 0.42);
-}
-
-.Home {
-  text-align: left;
-
-  max-width: 1200px;
-}
-.Color {
-  height: 150px;
-  background-color: antiquewhite;
-}
-.basic {
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: rgb(255, 255, 255);
-  text-align: left;
-}
-.basic h1 {
-  font: 700 2.5rem "Caveat", cursive;
-  color: blueviolet;
-}
-
-.basic p {
-  max-width: 80%;
-  color: rgb(228, 228, 228);
-}
-
-.basic p a {
-  color: #a35aed;
-  text-decoration: none;
-}
-
-.Info {
-  display: flex;
-  text-align: left;
-  padding-top: 20px;
-  padding-right: 50px;
-}
-
-.Info > * {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-.Links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 150px;
-  border-radius: 8px;
-  border-color: white;
-  border-style: solid;
-  border-width: 2px;
-}
-
-.Links Box ImageList ImageListItem a img {
-  width: auto;
-  height: 50px;
-  margin: 5px;
-  filter: brightness(80%);
-  transition: 0.3s;
-}
-
-.Links Box ImageList ImageListItem a img:hover {
-  filter: grayscale(0%);
-  filter: brightness(100%);
-  scale: 1.1;
-}
-
-.College {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  align-items: center;
-  background-color: rgb(37, 37, 37);
-  border-radius: 8px;
-  box-shadow: 10px 10px rgb(12, 12, 12);
-}
-
-.College img {
-  max-height: 140px;
-}
-#AHHH {
-  color: rgb(167, 94, 235);
-}
-
-.Working {
-  padding-left: 10px;
-  padding-right: 50px;
-}
-.Working,
-.College,
-.Links {
-  margin-right: 7px;
-}
-
-.Working:last-child,
-.College:last-child,
-.Links:last-child {
-  margin-right: 0;
-}
-.Working h2 {
-  color: rgb(214, 214, 214);
-}
-#WorkingOn {
-  color: rgb(97, 97, 97);
-  text-align: left;
-}
-
-.Projects {
-  text-align: left;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 100%;
-  margin: 0 0;
-}
-
-@media (max-width: 840px) {
-  .Projects {
-    justify-content: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    max-width: 100%;
-    margin: 0 auto; /* Center the container */
-  }
-  .ProjectStack {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    justify-content: center;
-  }
-}
-.Project {
-  width: 90%; /* Adjust the width of each project card */
-  max-width: 400px; /* Set a maximum width */
-  height: 130px;
-  padding-left: 0px;
-  border-radius: 8px;
-  border-width: 5px;
-  margin-bottom: 10px;
-}
-
-.Project1 .BG {
-  background-color: rgb(0, 71, 60);
-  height: 200px;
   width: 100%;
-  padding: 0;
-  z-index: 1; /* Ensure it appears above other elements */
-}
-
-.Projects.skeleton {
-  padding-top: 20px;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.Project.placeholder {
-  border: 2px solid #ccc; /* Light gray border */
-  background-color: #f0f0f0; /* Light gray background */
-  border-radius: 5px; /* Rounded corners */
-  min-height: 100px; /* Minimum height for placeholder */
-}
-
-.skeleton-text {
-  height: 20px;
-  background-color: #e0e0e0; /* Slightly darker gray */
-  margin-bottom: 10px; /* Space below the text */
-  border-radius: 4px;
-}
-
-.skeleton-description {
-  height: 15px;
-  background-color: #e0e0e0; /* Slightly darker gray */
-  border-radius: 4px;
-}
-
-.Home .SeeAllText {
-  color: rgb(172, 216, 255);
-}
-.Bar1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 40%;
-}
-h1 {
-  color: blueviolet;
-}
-
-h2 {
-  color: rgb(164, 102, 223);
-}
-
-.Project p {
-  color: rgb(233, 233, 233);
-  padding-left: 10px;
-}
-
-.Skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-}
-.Skill {
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-left: 10px;
-  color: rgb(228, 228, 228);
-  align-items: center;
-  text-align: center;
-}
-
-.ContactLinks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-}
-.ContactText svg {
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
-  filter: brightness(80%) grayscale(90%);
-  transition: filter 0.3s; /* Use transition for filter */
-}
-
-.ContactText svg:hover {
-  filter: brightness(100%) grayscale(0%);
-  transition-duration: 0.5s;
-}
-.Contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-  padding-top: 20px;
-}
-.Contact p {
-  color: rgb(233, 233, 233);
-}
-
-.Contact a {
-  text-decoration: none;
-  color: #6868fe;
-}
-
-.Socials {
-  width: 150px;
-}
-
-.Time {
-  margin-right: 8px;
-}
-
-@media (min-width: 1080px) {
-  .Home {
-    padding-left: 50px;
-  }
-  .Project h2 {
-    padding-left: 10px;
-  }
-}
-
-@media (max-width: 400px) {
-  .Project h2 {
-    font-size: 1.4rem;
-  }
-  .Project p {
-    font-size: 1.1rem;
-  }
+  max-width: var(--max-width);
+  overflow-x: hidden;
+  padding: 0 16px;
 }
 
 @media (max-width: 767px) {
-  .Working {
-    align-items: center;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+  main {
+    padding: 0 12px;
   }
-  .Time {
-    margin: 0;
-  }
-  .Socials,
-  .College {
-    width: 220px;
-  }
-  .College {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-  }
-  .Home {
-    padding-left: 0px;
-  }
-  .Container {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-  }
-  .Color {
-    height: 150px;
-    max-width: 100%;
-    background-color: antiquewhite;
-  }
+}
 
-  body {
-    text-align: center;
-  }
-  .basic {
-    text-align: center;
-    align-items: center;
-    max-width: 100%;
-  }
-  .basic h1 {
-    padding-top: 50px;
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-  }
-  .basic h2 {
-    max-width: 70%;
-    text-align: center;
-    margin: 0 auto;
-    text-wrap: wrap;
-  }
-  .basic p {
-    text-align: center;
-    margin: 0 auto;
-    padding-top: 10px;
-  }
-  .basic a {
-    text-align: center;
-  }
+/* Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-secondary);
+  font-family: "aquavit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  .Info {
-    padding-right: 0px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    padding-top: 20px;
-  }
-  .Info > * {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .Links {
-    justify-content: center;
-    max-width: 60%;
-    align-items: center;
-  }
+p {
+  font-family: "oxanium", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 
-  .Projects {
-    padding-top: 20px;
-    text-align: center; /* Center the text */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    max-width: 100%; /* Adjust the maximum width */
-  }
+}
 
-  .Project {
-    width: 90%; /* Adjust the width of each project card */
-    max-width: 400px; /* Set a maximum width */
-    height: 130px;
-    padding-left: 0px;
-    border-radius: 8px;
-    border-width: 5px;
-    margin-bottom: 10px;
+a {
+  color: var(--accent-primary);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Global SVG Sizing */
+svg {
+  height: 80px;
+}
+
+/* Fade Animations */
+.fade-out {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.fade {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-  #WorkingOn {
-    text-align: center;
-  }
-  h3 {
-    text-align: center;
-  }
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
 }

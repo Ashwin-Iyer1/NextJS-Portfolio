@@ -43,7 +43,7 @@ export default function getTime() {
     ); // Return loading skeleton
   }
   return (
-    <div className="wakatime" style={{ color: "white" }}>
+    <div className="wakatime" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
       <p style={{ fontSize: "1em" }}>
         Total: {(wakatime[0]?.total_seconds / 60 / 60).toFixed(1)} Hours
       </p>
@@ -55,6 +55,9 @@ export default function getTime() {
         <a
           href="https://wakatime.com/@bc413433-56e4-4dee-b14c-d8c669a8be79"
           target="_blank"
+          style={{
+            color: "#c596ee"
+          }}
         >
           Wakatime
         </a>

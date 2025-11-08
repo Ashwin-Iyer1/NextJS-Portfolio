@@ -1,236 +1,643 @@
 .full-width-wrapper {
+  max-width: 1200px;
   margin: 0;
-  width: 100%;
-  max-width: 90vw; /* Ensures it doesn't go beyond 90% of the viewport width */
+  width: 100vw;
+  min-height: 100vh;
+  padding: 24px;
 }
+
 .half-width-wrapper {
   text-align: left;
-  width: 70vw;
+  max-width: 680px; /* Medium's typical content width */
   margin: 0 auto;
+  padding: 24px 0;
+  line-height: 1.8;
 }
+
 .center-image {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 48px auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
+/* Typography - Medium style */
 .half-width-wrapper h1 {
-  font-family: "Roboto", sans-serif;
-}
-p {
-  color: azure;
-}
-h2 {
-  color: rgb(168, 118, 214);
-}
-h3 {
-  color: rgb(190, 156, 221);
+  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+  margin-top: 0px;
+  color: #e8e8e8;
 }
 
-h4 {
-  color: rgb(190, 156, 221);
+.half-width-wrapper h2 {
+  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.018em;
+  margin-top: 48px;
+  margin-bottom: 12px;
+  color: #d4b5f0;
+}
+
+.half-width-wrapper h3 {
+  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.014em;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  color: #c9a8e2;
+}
+
+.half-width-wrapper h4 {
+  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  color: #c9a8e2;
+}
+
+/* Paragraph styling - Medium uses Georgia for body text */
+.half-width-wrapper p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.8;
+  letter-spacing: -0.003em;
+  color: #e0e0e0;
+  margin-bottom: 24px;
+  margin-top: 0;
+}
+
+/* First paragraph after h1 - Medium style subtitle */
+.half-width-wrapper h1 + p {
+  font-size: 22px;
+  line-height: 1.7;
+  color: #b8b8b8;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+/* Links - Medium style */
+.half-width-wrapper a {
+  color: #8b6fb8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.half-width-wrapper a:hover {
+  color: #a888cc;
+}
+
+/* Lists */
+.half-width-wrapper ul,
+.half-width-wrapper ol {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #e0e0e0;
+  margin: 24px 0;
+  padding-left: 30px;
+}
+
+.half-width-wrapper li {
+  margin-bottom: 12px;
+}
+
+/* Blockquotes - Medium style */
+.half-width-wrapper blockquote {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.7;
+  color: #b8b8b8;
+  margin: 40px 0;
+  padding-left: 24px;
+  border-left: 4px solid #8b6fb8;
+}
+
+/* Code blocks */
+.half-width-wrapper pre {
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 32px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.half-width-wrapper code {
+  font-family: "Monaco", "Menlo", "Courier New", monospace;
+  background-color: #1a1a1a;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 18px;
+  color: #e8e8e8;
+}
+
+.half-width-wrapper pre code {
+  padding: 0;
+  background-color: transparent;
+}
+
+/* Horizontal rule */
+.half-width-wrapper hr {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 48px 0;
 }
 
 center {
-  color: azure;
+  color: #e0e0e0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.8;
 }
 
+/* Tables - Medium style */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 40px 0;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 18px;
   text-align: left;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
+  border: 1px solid #2a2a2a;
 }
 
 thead {
-  background-color: #2c3e50;
-  color: white;
+  background-color: #1a1a1a;
+  color: #e8e8e8;
 }
 
 th,
 td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a2a2a;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #34495e;
+tbody tr {
+  background-color: #0f0f0f;
+  transition: background-color 0.2s ease;
 }
 
-tbody tr:nth-child(odd) {
-  background-color: #2c3e50;
+tbody tr:hover {
+  background-color: #1a1a1a;
 }
 
 th {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 td {
-  color: #ecf0f1;
+  color: #d0d0d0;
 }
 
 .flexbox {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 24px;
   justify-items: center;
-  width: auto; /* Change from 100% to auto */
-  max-width: 1200px;
-  margin: 0 auto;
+  width: auto;
+  max-width: 100%;
+  margin: 40px 0;
 }
 
 a {
-  color: rgb(168, 118, 214);
+  color: #8b6fb8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
+
+/* Book cards - Medium style */
 .book {
   display: flex;
   flex-wrap: wrap;
-  background-color: #444444; /* Gray background */
-  padding: 10px;
-  margin-bottom: 15px; /* Padding between books */
-  border-radius: 8px;
+  background-color: #1a1a1a;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 4px;
   align-items: center;
   max-width: 100%;
+  border: 1px solid #2a2a2a;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.book p {
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .flexboxVideos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-  gap: 40px; /* Space between items */
-  justify-items: center; /* Center items in their respective columns */
-  width: 100%; /* Ensure the container takes full width */
-  max-width: 1200px; /* Optional: to limit width on large screens */
-  margin: 0 auto; /* Center the container horizontally */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  justify-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 40px 0;
 }
+
 .image-container .flex-image {
   filter: blur(10px);
 }
+
 .image-container {
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 4px;
 }
+
 .image-container img {
   filter: blur(500px);
   transform: scale(10);
   image-rendering: pixelated;
   transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
+
 .image-container.revealed img {
   filter: blur(0);
   transform: scale(1);
 }
+
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
+  font-family: "Segoe UI", "Roboto", sans-serif;
   transition: opacity 0.3s;
 }
+
 .image-container.revealed .overlay {
   opacity: 0;
   pointer-events: none;
 }
+
 Image {
   filter: blur(500px);
 }
 
+/* Video cards - Medium style */
 .video {
   width: 100%;
-  background-color: #444444; /* Gray background */
-  padding: 10px;
-  margin-bottom: 15px; /* Padding between videos */
-  border-radius: 8px;
+  background-color: #1a1a1a;
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 4px;
+  border: 1px solid #2a2a2a;
   align-items: center;
-  display: flex; /* Ensures the content inside the .video div stays aligned */
-  flex-direction: column; /* Aligns the title and image vertically */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.video a {
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .video .flex-image {
-  max-width: 100%; /* Ensures the image doesn't overflow */
+  max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin-top: 10px;
+  border-radius: 4px;
+  margin-top: 12px;
 }
 .flexbox .flex-image {
-  max-width: 100%; /* Ensures the image doesn't overflow */
+  max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin-top: 10px;
+  border-radius: 4px;
+  margin-top: 12px;
 }
 
 .flex-image {
   max-width: 100%;
   height: auto;
   aspect-ratio: inherit;
+  border-radius: 4px;
 }
 
 .YoutubeVideo {
   width: 100%;
-  max-width: 80vw; /* Scales with the window but prevents excessive stretching */
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9; /* Maintains the correct aspect ratio */
-  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  margin: 40px 0;
   display: block;
+  border-radius: 4px;
 }
 
 .book .center-image {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin-right: 0; /* Optional: adds rounded corners to images */
+  border-radius: 4px;
+  margin-right: 16px;
 }
 
+/* Desktop View Optimization - Large Screens */
+@media (min-width: 1441px) {
+  .half-width-wrapper {
+    max-width: 1200px;
+    width: 75vw;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .half-width-wrapper h2 {
+    font-size: 36px;
+    margin-top: 56px;
+  }
+
+  .half-width-wrapper h3 {
+    font-size: 28px;
+    margin-top: 48px;
+  }
+
+  .half-width-wrapper h4 {
+    font-size: 22px;
+  }
+
+  .half-width-wrapper p,
+  .half-width-wrapper ul,
+  .half-width-wrapper ol {
+    font-size: 21px;
+    line-height: 1.9;
+  }
+
+  .half-width-wrapper h1 + p {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  .center-image {
+    margin: 56px auto;
+    max-width: 90%;
+  }
+
+  .half-width-wrapper blockquote {
+    font-size: 24px;
+    margin: 48px 0;
+    padding-left: 32px;
+  }
+
+  table {
+    font-size: 19px;
+  }
+
+  th,
+  td {
+    padding: 18px 24px;
+  }
+
+  .flexboxVideos {
+    max-width: 100%;
+  }
+
+  .flexbox {
+    max-width: 100%;
+  }
+}
+
+/* Desktop View - Standard Large Screens */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .half-width-wrapper {
+    max-width: 900px;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 44px;
+  }
+
+  .half-width-wrapper h2 {
+    font-size: 34px;
+  }
+
+  .half-width-wrapper h3 {
+    font-size: 26px;
+  }
+
+  .center-image {
+    margin: 52px auto;
+    max-width: 85%;
+  }
+
+  .flexboxVideos {
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .flexbox {
+    gap: 28px;
+    max-width: 100%;
+  }
+}
+
+/* Responsive Design - Medium style breakpoints */
 @media (max-width: 1000px) {
   .zeal-image-big {
     display: block !important;
   }
+
+  .half-width-wrapper {
+    padding: 48px 32px;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 36px;
+  }
+
+  .half-width-wrapper h2 {
+    font-size: 28px;
+  }
+
+  .half-width-wrapper h3 {
+    font-size: 22px;
+  }
 }
 
 @media (max-width: 768px) {
-
   .zeal-image {
     display: block !important;
   }
-  ul {
-    text-align: center;
-    margin: 0 auto;
-    padding-left: 0;
-  }
-  .half-width-wrapper {
-    text-align: center;
-  }
-  .flexboxVideos {
-    grid-template-columns: 1fr; /* 1 column on small screens */
+
+  .full-width-wrapper {
+    padding: 20px 16px;
+    width: 100%;
+    overflow-x: hidden;
   }
 
-  h1 {
+  .half-width-wrapper {
+    padding: 40px 20px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 32px;
+    margin-top: 32px;
     text-align: center;
   }
-  h2 {
+
+  .half-width-wrapper h2 {
+    font-size: 26px;
+    margin-top: 32px;
     text-align: center;
   }
-  h3 {
+
+  .half-width-wrapper h3 {
+    font-size: 20px;
+    margin-top: 24px;
     text-align: center;
   }
-  p {
+
+  .half-width-wrapper h4 {
+    font-size: 18px;
     text-align: center;
   }
+
+  .half-width-wrapper p,
+  .half-width-wrapper ul,
+  .half-width-wrapper ol {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  ul {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 24px;
+  }
+
+  .flexboxVideos {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
+  }
+
+  .flexbox {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
+  }
+
   .center-image {
     max-width: 100%;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 32px auto;
+  }
+
+  table {
+    font-size: 16px;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th,
+  td {
+    padding: 12px 16px;
+  }
+
+  .book {
+    padding: 16px;
+    flex-direction: column;
+  }
+
+  .video {
+    padding: 16px;
+  }
+
+  .YoutubeVideo {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .full-width-wrapper {
+    padding: 16px 12px;
+  }
+
+  .half-width-wrapper {
+    padding: 32px 16px;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 28px;
+  }
+
+  .half-width-wrapper h2 {
+    font-size: 24px;
+  }
+
+  .half-width-wrapper h3 {
+    font-size: 18px;
+  }
+
+  .half-width-wrapper p,
+  .half-width-wrapper ul,
+  .half-width-wrapper ol {
+    font-size: 16px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+  }
+
+  .book {
+    padding: 12px;
+  }
+
+  .video {
+    padding: 12px;
   }
 }

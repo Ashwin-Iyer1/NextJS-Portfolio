@@ -9,6 +9,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import Box from "@mui/material/Box";
 import React from "react";
 import { styled } from "@mui/material/styles";
+import styles from "./Links.module.css";
 
 export default function Links() {
   const SocialIcon = styled(Image)({
@@ -25,27 +26,12 @@ export default function Links() {
   });
 
   return (
-    <div className="links">
+    <div className={styles.links}>
       <Box
         component="section"
         sx={{
-          p: 2,
-          border: "2px solid white",
-          padding: "0",
-          alignItems: "center",
-          textAlign: "center",
-          borderRadius: 1,
-          bgcolor: "#000000", // Fixed value (had one too few zeros)
-          maxHeight: "162.8px",
-          minHeight: "150px",
-          height: "100%",
-          minWidth: "150px",
-          maxWidth: "220px",
-          margin: "0 auto",
-          //
-          backgroundColor: "transparent",
         }}
-        className="Socials"
+        className={styles.Socials}
       >
         <ImageList
           sx={{

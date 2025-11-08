@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import styles from "./Contact.module.css";
 
 export default function Contact() {
   return (
-    <div className="ContactLinks">
-      <div className="ContactText">
+    <div className={styles.ContactLinks}>
+      <div className={styles.ContactText}>
         <a
           href="https://github.com/Ashwin-Iyer1"
           target="_blank"
@@ -21,7 +22,7 @@ export default function Contact() {
           </svg>
         </a>
       </div>
-      <div className="ContactText">
+      <div className={styles.ContactText}>
         <a
           href="https://www.linkedin.com/in/ashwin-hao-iyer"
           target="_blank"
@@ -38,7 +39,7 @@ export default function Contact() {
           </svg>
         </a>
       </div>
-      <div className="ContactText">
+      <div className={styles.ContactText}>
         <Link href="/resume">
           <svg
             role="img"

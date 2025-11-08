@@ -29,12 +29,13 @@ export default function RootLayout({ children }) {
 
         <title>{metadata.title}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://use.typekit.net/cxf0gov.css"></link>
       </head>
       <body>
         {/* Layout UI */}
         <main>
           {children}
-          <footer style={{ paddingTop: "20px" }}>
+          <footer>
             <span
               className="text-xs text-slate-400 text-center"
               style={{ color: "#7c7c7c" }}

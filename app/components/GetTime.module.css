@@ -1,0 +1,68 @@
+/* GetTime Component Styles */
+
+.Time {
+  width: 100%;
+  background: blueviolet;
+  border-radius: 12px;
+  box-shadow: 10px 10px #260c3e;
+  overflow: hidden;
+}
+
+.Working {
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.Working h2 {
+  color: rgb(214, 214, 214);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.Working p {
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+}
+
+@media (max-width: 767px) {
+  .Working {
+    align-items: center;
+    text-align: center;
+    padding: 12px 16px;
+  }
+
+  .Working h2 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .Working p {
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .Time {
+    margin: 0 auto;
+    max-width: 300px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .Working {
+    padding: 10px 12px;
+  }
+
+  .Working h2 {
+    font-size: 1rem;
+  }
+
+  .Working p {
+    font-size: 0.9rem;
+  }
+
+  .Time {
+    max-width: 280px;
+  }
+}
