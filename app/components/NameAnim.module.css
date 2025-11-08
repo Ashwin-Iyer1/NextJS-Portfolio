@@ -6,7 +6,8 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
-  width: 100%;
+  width: 100vw;
+  align-items: center;
   background-color: rgb(19, 16, 16);
   margin: 0;
   padding: 0;
@@ -25,7 +26,6 @@
 
 .container {
   min-height: 100vh;
-  width: 90vw;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -37,6 +37,7 @@
 
 .logo {
   max-width: 100%; /* Make sure the SVG does not overflow */
+  
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -57,19 +58,15 @@
 @media (max-width: 767px) {
   .NameAnim {
     padding: 0 12px;
+    align-items: center;
   }
 
   .NameAnim h1 {
     font-size: 15vw;
   }
 
-  .container {
-    width: 95vw;
-    padding: 0 8px;
-  }
-
   .logo {
-    max-width: 100%;
+    max-width: 85%;
     width: 100%;
     height: auto;
   }
@@ -84,7 +81,4 @@
     font-size: 18vw;
   }
 
-  .container {
-    width: 98vw;
-  }
 }

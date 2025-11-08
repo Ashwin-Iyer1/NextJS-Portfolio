@@ -51,12 +51,18 @@ main {
   width: 100%;
   max-width: var(--max-width);
   overflow-x: hidden;
-  padding: 0 16px;
+  padding: 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   main {
     padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 0 8px;
   }
 }
 

@@ -506,7 +506,7 @@ Image {
   }
 
   .full-width-wrapper {
-    padding: 20px 16px;
+    padding: 16px 12px;
     width: 100%;
     overflow-x: hidden;
   }
@@ -599,7 +599,7 @@ Image {
 
 @media (max-width: 480px) {
   .full-width-wrapper {
-    padding: 16px 12px;
+    padding: 12px 8px;
   }
 
   .half-width-wrapper {
