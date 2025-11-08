@@ -5,6 +5,8 @@
   justify-content: center; /* Center content vertically */
   min-height: 100vh; /* Ensures the container takes full height of the viewport */
   padding: 20px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .Blogs {
@@ -41,3 +43,32 @@
 }
 
 /* Make the last item maintain its width */
+
+@media (max-width: 767px) {
+  .container {
+    padding: 16px 12px;
+  }
+
+  .Blogs {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .Blog {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px 8px;
+  }
+
+  .Blogs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 0;
+  }
+}

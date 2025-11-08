@@ -5,6 +5,7 @@
   max-width: 1200px;
   width: 100%;
   text-align: left;
+  overflow-x: hidden;
 }
 
 /* Section Title */
@@ -74,15 +75,41 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .Project1 {
-    padding: 16px;
+    padding: 16px 12px;
+    text-align: center;
   }
   
   #WorkingOnP {
     font-size: 1.6rem;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .Project {
     padding: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .Project h3 {
+    text-align: center;
+  }
+  
+  .Project p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .Project1 {
+    padding: 12px 8px;
+  }
+  
+  #WorkingOnP {
+    font-size: 1.4rem;
+  }
+  
+  .Project {
+    padding: 16px;
   }
 }

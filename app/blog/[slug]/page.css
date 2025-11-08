@@ -505,23 +505,39 @@ Image {
     display: block !important;
   }
 
+  .full-width-wrapper {
+    padding: 20px 16px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
   .half-width-wrapper {
     padding: 40px 20px;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .half-width-wrapper h1 {
     font-size: 32px;
     margin-top: 32px;
+    text-align: center;
   }
 
   .half-width-wrapper h2 {
     font-size: 26px;
     margin-top: 32px;
+    text-align: center;
   }
 
   .half-width-wrapper h3 {
     font-size: 20px;
     margin-top: 24px;
+    text-align: center;
+  }
+
+  .half-width-wrapper h4 {
+    font-size: 18px;
+    text-align: center;
   }
 
   .half-width-wrapper p,
@@ -539,10 +555,14 @@ Image {
 
   .flexboxVideos {
     grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
   }
 
   .flexbox {
     grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
   }
 
   .center-image {
@@ -553,6 +573,8 @@ Image {
 
   table {
     font-size: 16px;
+    overflow-x: auto;
+    display: block;
   }
 
   th,
@@ -562,9 +584,60 @@ Image {
 
   .book {
     padding: 16px;
+    flex-direction: column;
   }
 
   .video {
     padding: 16px;
+  }
+
+  .YoutubeVideo {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .full-width-wrapper {
+    padding: 16px 12px;
+  }
+
+  .half-width-wrapper {
+    padding: 32px 16px;
+  }
+
+  .half-width-wrapper h1 {
+    font-size: 28px;
+  }
+
+  .half-width-wrapper h2 {
+    font-size: 24px;
+  }
+
+  .half-width-wrapper h3 {
+    font-size: 18px;
+  }
+
+  .half-width-wrapper p,
+  .half-width-wrapper ul,
+  .half-width-wrapper ol {
+    font-size: 16px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 10px 12px;
+  }
+
+  .book {
+    padding: 12px;
+  }
+
+  .video {
+    padding: 12px;
   }
 }

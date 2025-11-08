@@ -18,7 +18,25 @@
 }
 
 @media (max-width: 767px) {
+  .resume {
+    padding: 16px 12px;
+    width: 100%;
+    min-width: 100%;
+    overflow-x: hidden;
+  }
+
   .resumeIframe {
     height: 500px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume {
+    padding: 12px 8px;
+  }
+
+  .resumeIframe {
+    height: 400px;
   }
 }

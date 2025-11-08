@@ -10,7 +10,7 @@
   background-color: rgb(19, 16, 16);
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .NameAnim h1 {
@@ -53,9 +53,38 @@
   max-width: 780px;
   height: 500px;
 }
+
 @media (max-width: 767px) {
+  .NameAnim {
+    padding: 0 12px;
+  }
+
+  .NameAnim h1 {
+    font-size: 15vw;
+  }
+
+  .container {
+    width: 95vw;
+    padding: 0 8px;
+  }
+
   .logo {
-    max-width: 767px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .NameAnim {
+    padding: 0 8px;
+  }
+
+  .NameAnim h1 {
+    font-size: 18vw;
+  }
+
+  .container {
+    width: 98vw;
   }
 }

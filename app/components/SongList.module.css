@@ -63,13 +63,15 @@
 /* Mobile specific styles */
 @media (max-width: 767px) {
   .song-list {
-    padding: 0;
+    padding: 0 8px;
     gap: 0.5rem;
+    justify-content: center;
   }
 
   .song-item {
     max-width: 100%; /* Allow full width on mobile */
-    padding: 0.25rem;
+    padding: 0.5rem;
+    text-align: center;
   }
 
   .song-item.mobile {
@@ -77,11 +79,41 @@
     transform: translateY(0);
   }
 
+  .song-info {
+    text-align: center;
+  }
+
   .song-name {
     font-size: 0.9rem;
+    text-align: center;
   }
 
   .artist-name {
     font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .song-list {
+    padding: 0 4px;
+    gap: 0.4rem;
+  }
+
+  .song-item {
+    padding: 0.4rem;
+  }
+
+  .song-cover {
+    width: 80px;
+    height: 80px;
+  }
+
+  .song-name {
+    font-size: 0.85rem;
+  }
+
+  .artist-name {
+    font-size: 0.75rem;
   }
 }

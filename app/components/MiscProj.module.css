@@ -144,7 +144,8 @@
 
 @media (max-width: 1080px) {
   .carousel {
-    gap: 15px;
+    gap: 10px;
+    padding: 0 8px;
   }
 
   .sideVideo {
@@ -152,9 +153,9 @@
   }
 
   .videoWrapper iframe {
-    width: 90vw;
+    width: calc(100vw - 120px);
     max-width: 560px;
-    height: calc(90vw * 9 / 16);
+    height: calc((100vw - 120px) * 9 / 16);
     max-height: 315px;
   }
 
@@ -165,30 +166,55 @@
   }
 }
 
-@media (max-width: 568px) {
+@media (max-width: 767px) {
+  .carouselContainer {
+    padding: 16px 8px;
+  }
+
+  .carousel {
+    gap: 8px;
+    padding: 0;
+  }
+
   .videoWrapper iframe {
-    width: 90vw;
-    height: calc(90vw * 9 / 16);
+    width: calc(100vw - 120px);
+    max-width: calc(100vw - 120px);
+    height: calc((100vw - 120px) * 9 / 16);
   }
 
   .carouselButton {
-    font-size: 28px;
-    width: 40px;
-    height: 40px;
-    padding: 5px 10px;
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    padding: 4px 8px;
   }
 
   .indicators {
-    gap: 8px;
+    gap: 6px;
+    margin-top: 16px;
   }
 
   .indicator {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   .indicator.active {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .videoWrapper iframe {
+    width: calc(100vw - 100px);
+    max-width: calc(100vw - 100px);
+    height: calc((100vw - 100px) * 9 / 16);
+  }
+
+  .carouselButton {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
   }
 }

@@ -243,8 +243,9 @@
 
 @media (max-width: 767px) {
   .Home {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 16px 12px;
+    overflow-x: hidden;
+    width: 90vw;
   }
 
   .Container {
@@ -252,27 +253,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
   }
 
   .basicRow,
   .workExperienceRow {
     flex-direction: column;
+    width: 100%;
   }
 
   .basicRow .basic,
   .workExperienceRow .workExperience {
     flex: 1;
+    width: 100%;
   }
 
   .rightColumn {
     flex: 1;
+    align-items: center;
+    width: 100%;
   }
 
   .basic {
     text-align: center;
     align-items: center;
+    width: 100%;
     max-width: 100%;
-    padding: 20px;
+    padding: 20px 16px;
   }
 
   .basic h2 {
@@ -285,6 +292,7 @@
     text-align: center;
     margin: 0 auto;
     padding-top: 10px;
+    max-width: 100%;
   }
 
   .Info {
@@ -293,6 +301,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
   }
 
   .College {
@@ -307,26 +316,51 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
     max-width: 100%;
   }
 
   .Projects h2,
-  .workExperience h2 {
+  .workExperience h2,
+  .MiscProj h2,
+  .Contact h2 {
+    text-align: center;
+  }
+
+  .workExperience {
+    padding: 20px 16px;
     text-align: center;
   }
 
   .ProjectStack {
     justify-content: center;
+    width: 100%;
   }
 
   .SeeAllText {
     text-align: center;
     display: block;
   }
+
+  .MiscProj {
+    text-align: center;
+  }
+
+  .Contact {
+    text-align: center;
+  }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+  .Home {
+    padding: 12px 8px;
+  }
+
   .basic {
-    padding: 16px;
+    padding: 16px 12px;
+  }
+
+  .workExperience {
+    padding: 16px 12px;
   }
 }

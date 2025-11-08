@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MiscProj.module.css";
 
 export default function MiscProj() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
   const videos = [
     {
@@ -25,6 +26,10 @@ export default function MiscProj() {
     }
   ];
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === videos.length - 1 ? 0 : prevIndex + 1
@@ -43,6 +48,45 @@ export default function MiscProj() {
 
   const prevIndex = currentIndex === 0 ? videos.length - 1 : currentIndex - 1;
   const nextIndex = currentIndex === videos.length - 1 ? 0 : currentIndex + 1;
+
+  // Prevent hydration mismatch by only rendering interactive elements on client
+  if (!isClient) {
+    return (
+      <div className={styles.carouselContainer}>
+        <div className={styles.carousel}>
+          <button className={styles.carouselButton} aria-label="Previous video" disabled>
+            ‹
+          </button>
+          
+          <div className={styles.videoWrapper}>
+            <iframe
+              src={videos[0].src}
+              title={videos[0].title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <button className={styles.carouselButton} aria-label="Next video" disabled>
+            ›
+          </button>
+        </div>
+
+        <div className={styles.indicators}>
+          {videos.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.indicator} ${index === 0 ? styles.active : ''}`}
+              aria-label={`Go to video ${index + 1}`}
+              disabled
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.carouselContainer}>

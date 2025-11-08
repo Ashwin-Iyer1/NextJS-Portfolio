@@ -34,10 +34,35 @@
 
   .Working h2 {
     font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .Working p {
+    text-align: center;
+    font-size: 0.95rem;
   }
 
   .Time {
     margin: 0 auto;
     max-width: 300px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .Working {
+    padding: 10px 12px;
+  }
+
+  .Working h2 {
+    font-size: 1rem;
+  }
+
+  .Working p {
+    font-size: 0.9rem;
+  }
+
+  .Time {
+    max-width: 280px;
   }
 }

@@ -170,8 +170,9 @@
 
 @media (max-width: 767px) {
   .About {
-    padding-left: 8px;
-    padding-right: 8px;
+    width: 90vw;
+    padding: 16px 12px;
+    text-align: center;
   }
 
   .sectionTitle {
@@ -179,12 +180,23 @@
     text-align: center;
   }
 
+  .card {
+    padding: 20px 16px;
+    text-align: center;
+  }
+
   .card h3 {
     font-size: 1.2rem;
+    text-align: center;
   }
 
   .card p {
     font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .resumeCard {
+    padding: 20px 16px;
   }
 
   .resumeCard h3 {
@@ -193,5 +205,40 @@
 
   .resumeCard p {
     font-size: 0.95rem;
+  }
+
+  .linksCard {
+    background: linear-gradient(
+    195deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(164, 164, 164, 0.02)
+  );
+    padding: 20px 16px;
+  }
+
+  .songsCard {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .About {
+    padding: 12px 8px;
+  }
+
+  .card {
+    padding: 16px 12px;
+  }
+
+  .resumeCard {
+    padding: 16px 12px;
+  }
+
+  .linksCard {
+    padding: 16px 12px;
+  }
+
+  .songsCard {
+    padding: 16px 12px;
   }
 }
