@@ -39,7 +39,7 @@ export default function Home() {
   useEffect(() => {
     // Check sessionStorage only on client side after mount
     const loaded = sessionStorage.getItem("loaded");
-    
+
     if (loaded === null) {
       // First time loading - show animation
       setFadeIn(false); // Hide content initially
@@ -58,77 +58,90 @@ export default function Home() {
     // If loaded before, fadeIn is already true from initial state
   }, []);
 
+  if (shouldLoad) {
+    return (
+      <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
+        <NameAnim />
+      </div>
+    );
+  }
+
   // Always render the main content, but conditionally show loader overlay
   return (
     <>
-      {shouldLoad && (
-        <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
-          <NameAnim />
-        </div>
-      )}
-      <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`} style={{ opacity: shouldLoad ? 0 : 1, visibility: shouldLoad ? 'hidden' : 'visible', transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out' }}>
-      <Bar />
-      <div className={styles.Container}>
-        <div className={styles.topSection}>
-          <div className={styles.basicRow}>
-            <div className={styles.basic}>
-              <h2>Sophomore at Northeastern University</h2>
-              <p>
-                I am currently a sophomore at Northeastern University in Boston,
-                Massachusetts, and I am interested in computer science. I am
-                currently learning Python, Java, and TypeScript.{" "}
-                <Link href="/about">Learn more about me!</Link>
-              </p>
+      <div
+        className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`}
+        style={{
+          opacity: shouldLoad ? 0 : 1,
+          visibility: shouldLoad ? "hidden" : "visible",
+          transition: "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+        }}
+      >
+        <Bar />
+        <div className={styles.Container}>
+          <div className={styles.topSection}>
+            <div className={styles.basicRow}>
+              <div className={styles.basic}>
+                <h2>Sophomore at Northeastern University</h2>
+                <p>
+                  I am currently a sophomore at Northeastern University in
+                  Boston, Massachusetts, and I am interested in computer
+                  science. I am currently learning Python, Java, and TypeScript.{" "}
+                  <Link href="/about">Learn more about me!</Link>
+                </p>
+              </div>
+              <Links />
             </div>
-            <Links />
-          </div>
-          <div className={styles.workExperienceRow}>
-            <div className={styles.workExperience}>
-              <h2 id="WorkingOn">Work Experience</h2>
-              <WorkExperience />
-            </div>
-            <div className={styles.rightColumn}>
-              <GetTimeWrapper />
-              <div className={styles.College}>
-                <Image
-                  src={NEU}
-                  id={"person"}
-                  alt="Northeastern"
-                  width={200}
-                  height={200}
-                />
+            <div className={styles.workExperienceRow}>
+              <div className={styles.workExperience}>
+                <h2 id="WorkingOn">Work Experience</h2>
+                <WorkExperience />
+              </div>
+              <div className={styles.rightColumn}>
+                <GetTimeWrapper />
+                <div className={styles.College}>
+                  <Image
+                    src={NEU}
+                    id={"person"}
+                    alt="Northeastern"
+                    width={200}
+                    height={200}
+                  />
+                </div>
               </div>
             </div>
           </div>
+          <div></div>
+          <h2
+            style={{ textAlign: "center", fontSize: "2em", marginTop: "48px" }}
+          >
+            Skills
+          </h2>
+          <Skills />
         </div>
-        <div>
+        <div className={styles.MiscProj}>
+          <h2 style={{ textAlign: "center", fontSize: "2em" }}>
+            Miscellaneous Projects
+          </h2>
+          <div className={styles.MiscProjContainer} ref={miscProjSection}>
+            {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
+              <Suspense fallback={<div className="loading">Loading...</div>}>
+                <LazyMiscProj />
+              </Suspense>
+            )}
+          </div>
+          <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
+          <BlogList />
         </div>
-        <h2 style={{ textAlign: "center", fontSize: "2em", marginTop: "48px" }}>Skills</h2>
-        <Skills />
-      </div>
-      <div className={styles.MiscProj}>
-        <h2 style={{ textAlign: "center", fontSize: "2em" }}>
-          Miscellaneous Projects
-        </h2>
-        <div className={styles.MiscProjContainer} ref={miscProjSection}>
-          {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
-            <Suspense fallback={<div className="loading">Loading...</div>}>
-              <LazyMiscProj />
-            </Suspense>
-          )}
+        <div className={styles.Contact}>
+          <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
+          <Contact />
+          <p style={{ margin: "0 auto", marginTop: "16px" }}>
+            Email:{" "}
+            <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
+          </p>
         </div>
-        <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
-        <BlogList />
       </div>
-      <div className={styles.Contact}>
-        <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
-        <Contact />
-        <p style={{ margin: "0 auto", marginTop: "16px" }}>
-          Email:{" "}
-          <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
-        </p>
-      </div>
-    </div>
     </>
   );
 }
