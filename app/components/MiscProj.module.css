@@ -1,28 +1,194 @@
-.container {
+.carouselContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
   max-width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
+  padding: 20px;
 }
 
-.container iframe {
-  padding-left: 20px;
-  width: 519px;
-  height: 292px;
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.videoWrapper {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.videoWrapper iframe {
+  width: 640px;
+  height: 360px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.sideVideo {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  transform: scale(0.75);
+}
+
+.sideVideo:hover {
+  opacity: 0.8;
+  transform: scale(0.8);
+}
+
+.sideVideo iframe {
+  width: 480px;
+  height: 270px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.carouselButton {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.carouselButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.carouselButton:active {
+  transform: scale(0.95);
+}
+
+.indicators {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: scale(1.2);
+}
+
+.indicator.active {
+  background: rgba(0, 0, 0, 0.8);
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 1280px) {
+  .sideVideo {
+    transform: scale(0.65);
+  }
+
+  .sideVideo:hover {
+    transform: scale(0.7);
+  }
+
+  .sideVideo iframe {
+    width: 400px;
+    height: 225px;
+  }
+
+  .videoWrapper iframe {
+    width: 560px;
+    height: 315px;
+  }
 }
 
 @media (max-width: 1080px) {
-  .container {
-    flex-direction: column;
+  .carousel {
+    gap: 15px;
+  }
+
+  .sideVideo {
+    display: none;
+  }
+
+  .videoWrapper iframe {
+    width: 90vw;
+    max-width: 560px;
+    height: calc(90vw * 9 / 16);
+    max-height: 315px;
+  }
+
+  .carouselButton {
+    font-size: 36px;
+    width: 50px;
+    height: 50px;
   }
 }
+
 @media (max-width: 568px) {
-  .container iframe {
-    width: 43vh;
-    height: 25vh;
+  .videoWrapper iframe {
+    width: 90vw;
+    height: calc(90vw * 9 / 16);
+  }
+
+  .carouselButton {
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    padding: 5px 10px;
+  }
+
+  .indicators {
+    gap: 8px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .indicator.active {
+    width: 12px;
+    height: 12px;
   }
 }

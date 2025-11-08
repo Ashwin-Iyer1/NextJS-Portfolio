@@ -1,79 +1,197 @@
+/* About Page Styles */
+
 .About {
   padding: 24px;
   max-width: 1200px;
   width: 100%;
+  text-align: left;
 }
 
-.About .songsHeading {
-  font-family: Roboto, sans-serif;
-  display: block;
-  font-size: 2em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-  unicode-bidi: isolate;
+.Container {
+  margin-top: 24px;
 }
-.About .text {
-  padding-top: 14px;
+
+.mainContent {
   display: flex;
   flex-direction: column;
+  gap: 40px;
+}
+
+/* Section Titles */
+.sectionTitle {
+  color: #c596ee;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Card Styles */
+.card {
+  background: linear-gradient(
+    195deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(0, 0, 0, 0.12)
+  );
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  color: #c596ee;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.card p {
+  color: rgb(228, 228, 228);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.card p b {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.projectLink {
+  color: #a35aed;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.projectLink:hover {
+  color: #c596ee;
+}
+
+/* Intro Section */
+.introSection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Links Section */
+.linksSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.linksCard {
+  background: linear-gradient(
+    195deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(0, 0, 0, 0.12)
+  );
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 18px;
+  margin-bottom: 20px;
 }
 
-.About h2 {
-  align-items: left;
-  text-align: left;
-  color: rgb(167, 94, 235);
+/* Resume Link */
+.resumeLink {
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  display: block;
 }
-@media (min-width: 767px) {
-  .About .text p {
-    max-width: 60%;
-    text-align: left;
-  }
 
-  .About .songs {
-    max-width: 100% !important;
-    text-align: center !important;
+.resumeLink:hover {
+  transform: translateY(-2px);
+}
+
+.resumeCard {
+  background: linear-gradient(
+    135deg,
+    rgba(138, 44, 226, 0.30),
+    rgba(0, 0, 0, 0.3)
+  );
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(138, 44, 226, 0.2);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.resumeCard:hover {
+  box-shadow: 0 12px 36px rgba(138, 44, 226, 0.4);
+}
+
+.resumeCard h3 {
+  color: #c596ee;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.resumeCard p {
+  color: rgb(228, 228, 228);
+  font-size: 1rem;
+}
+
+/* Music Section */
+.musicSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.songsCard {
+  background: linear-gradient(
+    195deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(0, 0, 0, 0.12)
+  );
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* COC Section */
+.cocSection {
+  margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 980px) {
+  .About {
+    padding: 16px;
   }
 }
+
 @media (max-width: 767px) {
-  .About p {
-    max-width: 90%;
+  .About {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
     text-align: center;
   }
-  .About .Links2 {
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+
+  .card h3 {
+    font-size: 1.2rem;
   }
-}
 
-.About p {
-  align-items: left;
-  color: rgb(155, 155, 155);
-}
+  .card p {
+    font-size: 0.95rem;
+  }
 
-#AHHH {
-  color: rgb(167, 94, 235);
-}
+  .resumeCard h3 {
+    font-size: 1.2rem;
+  }
 
-.About .BG {
-  background-color: rgb(0, 10, 66);
-  height: 200px;
-  width: 100%;
-  padding: 0;
-}
-
-.About .Links2 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-  padding: 0;
-  margin: 0 auto;
-  width: 234px;
-  height: 178px;
+  .resumeCard p {
+    font-size: 0.95rem;
+  }
 }

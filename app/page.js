@@ -22,6 +22,7 @@ export default function Home() {
   const [fadeOut, setFadeOut] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
   const [forceMiscProjLoad, setForceMiscProjLoad] = useState(false);
+  const [hasLoadedBefore, setHasLoadedBefore] = useState(true); // Default to true for SSR
   const miscProjSection = useRef(null);
   const isMiscProjVisible = useIntersectionObserver(miscProjSection);
 
@@ -37,7 +38,11 @@ export default function Home() {
   }, [fadeIn]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("loaded") === null) {
+    // Check sessionStorage only on client side
+    const loaded = sessionStorage.getItem("loaded");
+    
+    if (loaded === null) {
+      setHasLoadedBefore(false);
       setShouldLoad(true);
       setTimeout(() => {
         setFadeOut(true); // Start fade-out
@@ -51,19 +56,20 @@ export default function Home() {
       }, 2200);
     } else {
       // If already loaded previously, set fadeIn true immediately
+      setHasLoadedBefore(true);
       setFadeIn(true);
     }
   }, []);
 
-  if (shouldLoad) {
-    return (
-      <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
-        <NameAnim />
-      </div>
-    );
-  }
+  // Always render the main content, but conditionally show loader overlay
   return (
-    <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`}>
+    <>
+      {shouldLoad && (
+        <div className={`fade-out ${fadeOut ? "fade" : ""}`}>
+          <NameAnim />
+        </div>
+      )}
+      <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`} style={{ display: shouldLoad ? 'none' : 'block' }}>
       <Bar />
       <div className={styles.Container}>
         <div className={styles.topSection}>
@@ -126,5 +132,6 @@ export default function Home() {
         </p>
       </div>
     </div>
+    </>
   );
 }

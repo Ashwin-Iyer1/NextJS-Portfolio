@@ -41,7 +41,7 @@ const blogs = [
   {
     slug: "zeal-it-consultants",
     title: "Zeal IT Consultants",
-    description: "My experience interning at Zeal IT Consultants."
+    description: "My experience interning at Zeal IT Consultants.",
   },
   {
     slug: "mission",
@@ -51,7 +51,8 @@ const blogs = [
   {
     slug: "cut-the-lines",
     title: "Cut The Lines",
-    description: "A boat is safest when it is in harbor, but that is not what boats are for.",
+    description:
+      "A boat is safest when it is in harbor, but that is not what boats are for.",
   },
 ];
 
@@ -63,51 +64,181 @@ export default function BlogList() {
         alignContent: "center",
         textAlign: "center",
         justifyContent: "center",
+        maxWidth: "14200px",
+        padding: { xs: 2, md: 3 },
       }}
     >
       <Stack
-        spacing={{ xs: 1, sm: 2 }}
+        spacing={{ xs: 2, sm: 2.5, md: 3 }}
         direction="row"
         useFlexGap
         sx={{ flexWrap: "wrap", justifyContent: "center" }}
       >
-        {blogs.slice(0, blogs.length).map((blog) => {
+        {blogs.slice(0, blogs.length).map((blog, index) => {
           const isExternal = blog.slug.startsWith("http");
-          const textColor = "black";
-          const backgroundColor = "#818181";
 
           return (
-            <Box
-              sx={{
-                width: "100%",
-                maxWidth: 300,
-                borderRadius: 1,
-                padding: 2,
-                "&:hover": {
-                  filter: "brightness(110%)",
-                  transform: "translateY(-5px)",
-                  transition:
-                    "transform 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                  boxShadow: `0 4px 12px ${textColor}`,
-                },
-                transition:
-                  "transform 0.3s ease-in-out, filter 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-              }}
+            <a
               key={blog.slug}
-              bgcolor={backgroundColor}
+              href={isExternal ? blog.slug : `/blog/${blog.slug}`}
+              target={isExternal ? "_blank" : "_self"}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              style={{
+                color: "#e8eef6",
+                textDecoration: "none",
+                transition: "all 0.3s ease",
+                display: "inline-block",
+                position: "relative",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#c596ee";
+                e.currentTarget.style.transform = "translateX(4px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "#e8eef6";
+                e.currentTarget.style.transform = "translateX(0)";
+              }}
             >
-              <h2>
-                <a
-                  href={isExternal ? blog.slug : `/blog/${blog.slug}`}
-                  target={isExternal ? "_blank" : "_self"}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  style={{ color: textColor, textDecoration: "underline" }}
+              <Box
+                sx={{
+                  width: "100%",
+                  width: 300,
+                  minHeight: 200,
+                  background:
+                    "linear-gradient(135deg, #1a1a1a 0%, #252525 100%)",
+                  borderRadius: "16px",
+                  padding: "28px",
+                  border: "1px solid rgba(138, 44, 226, 0.15)",
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+                  position: "relative",
+                  overflow: "hidden",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  "&:hover": {
+                    transform: "translateY(-8px) scale(1.02)",
+                    boxShadow:
+                      "0 16px 48px rgba(138, 44, 226, 0.25), 0 0 0 1px rgba(197, 150, 238, 0.3)",
+                    border: "1px solid rgba(138, 44, 226, 0.4)",
+                    "&::before": {
+                      opacity: 1,
+                    },
+                    "&::after": {
+                      transform: "translateX(0) rotate(45deg)",
+                    },
+                  },
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "3px",
+                    background:
+                      "linear-gradient(90deg, #8a2ce2 0%, #c596ee 50%, #8a2ce2 100%)",
+                    opacity: 0,
+                    transition: "opacity 0.4s ease",
+                  },
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    top: "-50%",
+                    right: "-50%",
+                    width: "200%",
+                    height: "200%",
+                    background:
+                      "radial-gradient(circle, rgba(138, 44, 226, 0.03) 0%, transparent 70%)",
+                    transform: "translateX(100%) rotate(45deg)",
+                    transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                    pointerEvents: "none",
+                  },
+                }}
+              >
+                {/* Subtle corner accent */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    width: "60px",
+                    height: "60px",
+                    background:
+                      "radial-gradient(circle at top right, rgba(138, 44, 226, 0.08), transparent)",
+                    borderRadius: "0 16px 0 100%",
+                    pointerEvents: "none",
+                  }}
+                />
+
+                <h2
+                  style={{
+                    marginBottom: "16px",
+                    fontSize: "1.4rem",
+                    position: "relative",
+                    zIndex: 1,
+                    fontWeight: 500,
+                    letterSpacing: "-0.01em",
+                  }}
                 >
-                  {blog.title}
-                </a>
-              </h2>
-              <p style={{ marginTop: 8, color: "#333" }}>{blog.description}</p>
-            </Box>
+                  <a
+                    href={isExternal ? blog.slug : `/blog/${blog.slug}`}
+                    target={isExternal ? "_blank" : "_self"}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    style={{
+                      color: "#e8eef6",
+                      textDecoration: "none",
+                      transition: "all 0.3s ease",
+                      display: "inline-block",
+                      position: "relative",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#c596ee";
+                      e.currentTarget.style.transform = "translateX(4px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "#e8eef6";
+                      e.currentTarget.style.transform = "translateX(0)";
+                    }}
+                  >
+                    {blog.title}
+                    {isExternal && (
+                      <span
+                        style={{
+                          marginLeft: "8px",
+                          fontSize: "0.75em",
+                          opacity: 0.7,
+                        }}
+                      >
+                        ↗
+                      </span>
+                    )}
+                  </a>
+                </h2>
+
+                {/* Elegant divider line */}
+                <Box
+                  sx={{
+                    width: "40px",
+                    height: "2px",
+                    background: "linear-gradient(90deg, #8a2ce2, transparent)",
+                    marginBottom: "16px",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+
+                <p
+                  style={{
+                    marginTop: 0,
+                    color: "#9aa4b2",
+                    fontSize: "0.95rem",
+                    lineHeight: "1.7",
+                    position: "relative",
+                    zIndex: 1,
+                    fontWeight: 300,
+                  }}
+                >
+                  {blog.description}
+                </p>
+              </Box>
+            </a>
           );
         })}
       </Stack>
