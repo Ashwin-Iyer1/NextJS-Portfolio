@@ -5,6 +5,7 @@
   max-width: 1200px;
   width: 100%;
   text-align: left;
+  overflow-x: hidden;
 }
 
 .Container {
@@ -168,9 +169,8 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .About {
-    width: 90vw;
     padding: 16px 12px;
     text-align: center;
   }

@@ -20,9 +20,8 @@ const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [fadeIn, setFadeIn] = useState(false);
+  const [fadeIn, setFadeIn] = useState(true); // Default to true to show content immediately on server
   const [forceMiscProjLoad, setForceMiscProjLoad] = useState(false);
-  const [hasLoadedBefore, setHasLoadedBefore] = useState(true); // Default to true for SSR
   const miscProjSection = useRef(null);
   const isMiscProjVisible = useIntersectionObserver(miscProjSection);
 
@@ -38,11 +37,12 @@ export default function Home() {
   }, [fadeIn]);
 
   useEffect(() => {
-    // Check sessionStorage only on client side
+    // Check sessionStorage only on client side after mount
     const loaded = sessionStorage.getItem("loaded");
     
     if (loaded === null) {
-      setHasLoadedBefore(false);
+      // First time loading - show animation
+      setFadeIn(false); // Hide content initially
       setShouldLoad(true);
       setTimeout(() => {
         setFadeOut(true); // Start fade-out
@@ -54,11 +54,8 @@ export default function Home() {
           setFadeIn(true); // Start fade-in
         }, 400); // Adjust this duration to match your CSS fade-out time
       }, 2200);
-    } else {
-      // If already loaded previously, set fadeIn true immediately
-      setHasLoadedBefore(true);
-      setFadeIn(true);
     }
+    // If loaded before, fadeIn is already true from initial state
   }, []);
 
   // Always render the main content, but conditionally show loader overlay
@@ -69,7 +66,7 @@ export default function Home() {
           <NameAnim />
         </div>
       )}
-      <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`} style={{ display: shouldLoad ? 'none' : 'block' }}>
+      <div className={`${styles.Home} ${fadeIn ? "fade-in" : ""}`} style={{ opacity: shouldLoad ? 0 : 1, visibility: shouldLoad ? 'hidden' : 'visible', transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out' }}>
       <Bar />
       <div className={styles.Container}>
         <div className={styles.topSection}>
@@ -106,7 +103,7 @@ export default function Home() {
         </div>
         <div>
         </div>
-        <h2 style={{ textAlign: "center", fontSize: "2em" }}>Skills</h2>
+        <h2 style={{ textAlign: "center", fontSize: "2em", marginTop: "48px" }}>Skills</h2>
         <Skills />
       </div>
       <div className={styles.MiscProj}>

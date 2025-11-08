@@ -14,8 +14,8 @@ const useIntersectionObserver = (reference) => {
     // Create the observer, passing in the callback
     const observer = new IntersectionObserver(handleIntersect);
 
-    // If we have a ref value, start observing it
-    if (reference) {
+    // If we have a ref value and it has a current element, start observing it
+    if (reference && reference.current) {
       observer.observe(reference.current);
     }
 

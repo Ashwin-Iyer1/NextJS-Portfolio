@@ -6,6 +6,7 @@ import styles from "./MiscProj.module.css";
 export default function MiscProj() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isClient, setIsClient] = useState(false);
+  const [loadedVideos, setLoadedVideos] = useState({});
 
   const videos = [
     {
@@ -30,6 +31,10 @@ export default function MiscProj() {
     setIsClient(true);
   }, []);
 
+  const handleIframeLoad = (index) => {
+    setLoadedVideos(prev => ({ ...prev, [index]: true }));
+  };
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
       prevIndex === videos.length - 1 ? 0 : prevIndex + 1
@@ -49,6 +54,15 @@ export default function MiscProj() {
   const prevIndex = currentIndex === 0 ? videos.length - 1 : currentIndex - 1;
   const nextIndex = currentIndex === videos.length - 1 ? 0 : currentIndex + 1;
 
+  // Skeleton loader component
+  const VideoSkeleton = ({ isMain = false, className = "" }) => (
+    <div className={`${styles.skeleton} ${isMain ? styles.skeletonMain : styles.skeletonSide} ${className}`}>
+      <div className={styles.skeletonContent}>
+        <div className={styles.skeletonPlayButton}></div>
+      </div>
+    </div>
+  );
+
   // Prevent hydration mismatch by only rendering interactive elements on client
   if (!isClient) {
     return (
@@ -59,14 +73,7 @@ export default function MiscProj() {
           </button>
           
           <div className={styles.videoWrapper}>
-            <iframe
-              src={videos[0].src}
-              title={videos[0].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+            <VideoSkeleton isMain />
           </div>
 
           <button className={styles.carouselButton} aria-label="Next video" disabled>
@@ -96,6 +103,7 @@ export default function MiscProj() {
         </button>
         
         <div className={styles.sideVideo} onClick={prevSlide}>
+          {!loadedVideos[prevIndex] && <VideoSkeleton className={styles.skeletonSide} />}
           <iframe
             src={videos[prevIndex].src}
             title={videos[prevIndex].title}
@@ -104,11 +112,14 @@ export default function MiscProj() {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen={false}
             className={styles.previewIframe}
+            onLoad={() => handleIframeLoad(prevIndex)}
+            style={{ opacity: loadedVideos[prevIndex] ? 1 : 0 }}
           ></iframe>
           <div className={styles.overlay}></div>
         </div>
 
         <div className={styles.videoWrapper}>
+          {!loadedVideos[currentIndex] && <VideoSkeleton isMain />}
           <iframe
             key={currentIndex}
             src={videos[currentIndex].src}
@@ -117,10 +128,13 @@ export default function MiscProj() {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
+            onLoad={() => handleIframeLoad(currentIndex)}
+            style={{ opacity: loadedVideos[currentIndex] ? 1 : 0, transition: 'opacity 0.3s ease' }}
           ></iframe>
         </div>
 
         <div className={styles.sideVideo} onClick={nextSlide}>
+          {!loadedVideos[nextIndex] && <VideoSkeleton className={styles.skeletonSide} />}
           <iframe
             src={videos[nextIndex].src}
             title={videos[nextIndex].title}
@@ -129,6 +143,8 @@ export default function MiscProj() {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen={false}
             className={styles.previewIframe}
+            onLoad={() => handleIframeLoad(nextIndex)}
+            style={{ opacity: loadedVideos[nextIndex] ? 1 : 0 }}
           ></iframe>
           <div className={styles.overlay}></div>
         </div>

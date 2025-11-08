@@ -5,7 +5,9 @@
   justify-content: center;
   gap: 20px;
   max-width: 100%;
+  width: 100%;
   padding: 20px;
+  overflow: hidden;
 }
 
 .carousel {
@@ -15,6 +17,7 @@
   gap: 20px;
   width: 100%;
   max-width: 1400px;
+  overflow: hidden;
 }
 
 .videoWrapper {
@@ -23,6 +26,7 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  position: relative;
 }
 
 .videoWrapper iframe {
@@ -122,6 +126,70 @@
   height: 14px;
 }
 
+/* Skeleton Loader Styles */
+.skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.skeletonMain {
+  width: 640px;
+  height: 360px;
+}
+
+.skeletonSide {
+  width: 480px;
+  height: 270px;
+  transform: scale(0.75);
+}
+
+.skeletonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeletonPlayButton {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.skeletonPlayButton::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 25px solid rgba(0, 0, 0, 0.15);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 @media (max-width: 1280px) {
   .sideVideo {
     transform: scale(0.65);
@@ -139,6 +207,17 @@
   .videoWrapper iframe {
     width: 560px;
     height: 315px;
+  }
+
+  .skeletonMain {
+    width: 560px;
+    height: 315px;
+  }
+
+  .skeletonSide {
+    width: 400px;
+    height: 225px;
+    transform: scale(0.65);
   }
 }
 
@@ -163,6 +242,17 @@
     font-size: 36px;
     width: 50px;
     height: 50px;
+  }
+
+  .skeletonMain {
+    width: calc(100vw - 120px);
+    max-width: 560px;
+    height: calc((100vw - 120px) * 9 / 16);
+    max-height: 315px;
+  }
+
+  .skeletonSide {
+    display: none;
   }
 }
 
@@ -192,6 +282,23 @@
   .indicators {
     gap: 6px;
     margin-top: 16px;
+  }
+
+  .skeletonMain {
+    width: calc(100vw - 120px);
+    max-width: calc(100vw - 120px);
+    height: calc((100vw - 120px) * 9 / 16);
+  }
+
+  .skeletonPlayButton {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skeletonPlayButton::after {
+    border-left: 20px solid rgba(0, 0, 0, 0.15);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
   }
 
   .indicator {
