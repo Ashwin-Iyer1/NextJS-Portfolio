@@ -62,7 +62,7 @@ const KalshiPositions = () => {
     <div className={styles["positions-container"]}>
       <h2 className={styles["positions-title"]}>Kalshi Positions</h2>
       <Box sx={{ flexGrow: 1, padding: 2 }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className={styles["positions-grid"]}>
           {positions.map((position) => (
             <Grid item key={position.id}>
               <div className={styles["position-card"]}>

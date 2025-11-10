@@ -177,6 +177,10 @@
   .positions-title {
     font-size: 2rem;
   }
+  .positions-grid {
+    display: flex;
+    justify-content: center;
+  }
 
   .position-card {
     padding: 1rem;
