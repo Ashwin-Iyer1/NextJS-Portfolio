@@ -14,6 +14,7 @@ import useIntersectionObserver from "./components/useIntersectionObserver";
 import "./landing.css";
 import styles from "./page.module.css";
 import WorkExperience from "./components/WorkExperience.js";
+import KalshiPositions from "./components/KalshiPositions.js";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 
@@ -133,6 +134,7 @@ export default function Home() {
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
           <BlogList />
         </div>
+        <KalshiPositions />
         <div className={styles.Contact}>
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
           <Contact />
