@@ -14,6 +14,11 @@
   font-weight: bold;
 }
 
+  .positions-grid {
+    display: flex;
+    justify-content: center;
+  }
+
 .loading-container,
 .error-container {
   text-align: center;
@@ -176,10 +181,6 @@
 @media (max-width: 768px) {
   .positions-title {
     font-size: 2rem;
-  }
-  .positions-grid {
-    display: flex;
-    justify-content: center;
   }
 
   .position-card {
