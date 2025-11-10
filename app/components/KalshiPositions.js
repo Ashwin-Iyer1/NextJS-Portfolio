@@ -64,7 +64,7 @@ const KalshiPositions = () => {
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={3}>
           {positions.map((position) => (
-            <Grid item xs={12} sm={6} md={4} key={position.id}>
+            <Grid item key={position.id}>
               <div className={styles["position-card"]}>
                 <div className={styles["card-header"]}>
                   <span className={styles["category-badge"]}>
