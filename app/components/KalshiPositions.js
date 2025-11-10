@@ -38,7 +38,7 @@ const KalshiPositions = () => {
 
   const formatPnL = (pnl) => {
     const sign = pnl > 0 ? "+" : "";
-    const dollars = (pnl / 10).toFixed(2);
+    const dollars = (pnl / 100).toFixed(2);
     return `${sign}$${dollars}`;
   };
 

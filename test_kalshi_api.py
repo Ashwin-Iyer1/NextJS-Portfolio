@@ -62,8 +62,10 @@ def test_api_fetch():
         print("\nFirst 3 market positions:")
         for i, pos in enumerate(market_positions[:3], 1):
             print(f"\n  {i}. {pos.get('ticker', 'N/A')}")
-            print(f"     Position: {pos.get('position', 0)}")
+            print(f"     Position: {pos.get('position', 0)} contracts")
             print(f"     Realized P&L: ${pos.get('realized_pnl', 0) / 100:.2f}")
+            print(f"     Total Cost: ${pos.get('total_cost', 0) / 100:.2f}")
+            print(f"     Fees Paid: ${pos.get('fees_paid', 0) / 100:.2f}")
     
     return holdings_data
 
@@ -86,8 +88,9 @@ def test_data_processing(holdings_data):
         print(f"  Series Ticker: {pos.get('series_ticker')}")
         print(f"  Series Title: {pos.get('series_title') or 'N/A'}")
         print(f"  Event Ticker: {pos.get('event_ticker')}")
-        print(f"  Position: {pos.get('signed_open_position')}")
-        print(f"  P&L: ${pos.get('pnl', 0) / 100:.2f}")
+        print(f"  Position: {pos.get('signed_open_position')} contracts ({pos.get('position_side')})")
+        print(f"  Current Price: {pos.get('current_price')}¢")
+        print(f"  Total P&L: ${pos.get('pnl', 0) / 100:.2f}")
     
     return enriched
 

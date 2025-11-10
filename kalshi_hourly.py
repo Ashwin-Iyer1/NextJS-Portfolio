@@ -83,7 +83,8 @@ def main():
             
             if pnl_change != 0:
                 change_symbol = "+" if pnl_change > 0 else ""
-                print(f"  P&L Change: {change_symbol}${pnl_change / 100:.2f}")
+                change_emoji = "📈" if pnl_change > 0 else "📉"
+                print(f"  P&L Change: {change_symbol}${pnl_change / 100:.2f} {change_emoji}")
             
             # Print detailed summary
             print_positions_summary()

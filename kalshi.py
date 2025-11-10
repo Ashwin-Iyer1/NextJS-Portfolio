@@ -53,6 +53,62 @@ def get_market_info(market_ticker: str) -> Optional[Dict]:
         return None
 
 
+def get_user_trades(ticker: Optional[str] = None, limit: int = 100) -> Optional[Dict]:
+    """
+    Fetch user's trade history from Kalshi API.
+    
+    Args:
+        ticker: Optional ticker to filter trades for a specific market
+        limit: Maximum number of trades to return (default: 100)
+        
+    Returns:
+        Dictionary containing trades data or None if request fails
+    """
+    api_path = "/trade-api/v2/portfolio/fills"
+    api_url = f"https://api.elections.kalshi.com{api_path}"
+    
+    # Add query parameters
+    params = {"limit": limit}
+    if ticker:
+        params["ticker"] = ticker
+    
+    # Get credentials from environment
+    access_key = os.getenv("KALSHI-ACCESS-KEY")
+    private_key = os.getenv("KALSHI-ACCESS-SIGNATURE")
+    
+    if not access_key or not private_key:
+        print("Error: KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE must be set in .env file")
+        return None
+    
+    # Generate timestamp in milliseconds
+    timestamp = str(int(time.time() * 1000))
+    
+    # Generate signature (path without query params)
+    try:
+        signature = sign_request(timestamp, "GET", api_path, private_key)
+    except Exception as e:
+        print(f"Error generating signature: {e}")
+        return None
+    
+    # Set up headers with authentication
+    headers = {
+        "KALSHI-ACCESS-KEY": access_key,
+        "KALSHI-ACCESS-SIGNATURE": signature,
+        "KALSHI-ACCESS-TIMESTAMP": timestamp
+    }
+    
+    try:
+        response = requests.get(api_url, headers=headers, params=params)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching trades: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"Response status: {e.response.status_code}")
+            print(f"Response body: {e.response.text}")
+        return None
+
+
 def sign_request(timestamp: str, method: str, path: str, private_key_pem: str) -> str:
     """
     Generate RSA signature for Kalshi API request.
@@ -101,6 +157,55 @@ def sign_request(timestamp: str, method: str, path: str, private_key_pem: str) -
     
     # Return base64-encoded signature
     return base64.b64encode(signature).decode('utf-8')
+
+
+def get_event_positions() -> Optional[Dict]:
+    """
+    Fetch user event positions from Kalshi API using the v1 endpoint.
+    This endpoint provides position_cost which is the actual cost basis.
+    
+    Returns:
+        Dictionary containing event positions data or None if request fails
+    """
+    user_id = "7b8f944b-1a09-41e5-9e7f-bf75a5ca0408"
+    api_path = f"/v1/users/{user_id}/event_positions"
+    api_url = f"https://api.elections.kalshi.com{api_path}"
+    
+    # Get credentials from environment
+    access_key = os.getenv("KALSHI-ACCESS-KEY")
+    private_key = os.getenv("KALSHI-ACCESS-SIGNATURE")
+    
+    if not access_key or not private_key:
+        print("Error: KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE must be set in .env file")
+        return None
+    
+    # Generate timestamp in milliseconds
+    timestamp = str(int(time.time() * 1000))
+    
+    # Generate signature (include query params in path)
+    try:
+        signature = sign_request(timestamp, "GET", f"{api_path}?position_status=open", private_key)
+    except Exception as e:
+        print(f"Error generating signature: {e}")
+        return None
+    
+    # Set up headers with authentication
+    headers = {
+        "KALSHI-ACCESS-KEY": access_key,
+        "KALSHI-ACCESS-SIGNATURE": signature,
+        "KALSHI-ACCESS-TIMESTAMP": timestamp
+    }
+    
+    try:
+        response = requests.get(api_url, headers=headers, params={"position_status": "open"})
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching event positions: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"Response status: {e.response.status_code}")
+            print(f"Response body: {e.response.text}")
+        return None
 
 
 def get_user_holdings() -> Optional[Dict]:
@@ -156,24 +261,121 @@ def get_user_holdings() -> Optional[Dict]:
         return None
 
 
+def calculate_pnl_from_trades(ticker: str) -> Dict:
+    """
+    Calculate P&L for a specific ticker from trade history.
+    
+    Args:
+        ticker: The market ticker to calculate P&L for
+        
+    Returns:
+        Dictionary with P&L breakdown: {
+            'total_cost': total amount spent on buys,
+            'total_sales': total amount received from sells,
+            'net_position': current net position (contracts),
+            'realized_pnl': P&L from closed positions,
+            'avg_cost': average cost per contract
+        }
+    """
+    trades_data = get_user_trades(ticker=ticker)
+    
+    if not trades_data or 'fills' not in trades_data:
+        return {
+            'total_cost': 0,
+            'total_sales': 0,
+            'net_position': 0,
+            'realized_pnl': 0,
+            'avg_cost': 0,
+            'total_fees': 0
+        }
+    
+    fills = trades_data['fills']
+    
+    total_cost = 0
+    total_sales = 0
+    net_position = 0
+    total_fees = 0
+    
+    for fill in fills:
+        count = fill.get('count', 0)
+        yes_price = fill.get('yes_price', 0)
+        no_price = fill.get('no_price', 0)
+        side = fill.get('side', '')  # 'yes' or 'no'
+        action = fill.get('action', '')  # 'buy' or 'sell'
+        
+        # Calculate trade value
+        price = yes_price if side == 'yes' else no_price
+        trade_value = count * price
+        
+        if action == 'buy':
+            total_cost += trade_value
+            net_position += count if side == 'yes' else -count
+        elif action == 'sell':
+            total_sales += trade_value
+            net_position -= count if side == 'yes' else -count
+    
+    # Calculate realized P&L (only for closed positions)
+    realized_pnl = total_sales - total_cost
+    
+    # Calculate average cost
+    avg_cost = (total_cost / abs(net_position)) if net_position != 0 else 0
+    
+    return {
+        'total_cost': total_cost,
+        'total_sales': total_sales,
+        'net_position': net_position,
+        'realized_pnl': realized_pnl,
+        'avg_cost': avg_cost,
+        'total_fees': total_fees
+    }
+
+
 def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
     """
     Process portfolio positions data and enrich it with series and market information.
+    Uses the event_positions endpoint to get accurate position_cost for P&L calculations.
     
     Args:
-        holdings_data: Raw portfolio positions data from API
+        holdings_data: Raw portfolio positions data from API (v2 endpoint)
         
     Returns:
         List of enriched positions with series and market information
     """
     enriched_holdings = []
     
+    # Get event positions with accurate position_cost data
+    event_positions_data = get_event_positions()
+    
+    # Create a map of event_ticker to position data for quick lookup
+    # We'll use event_ticker since v2 API doesn't return market_id
+    position_cost_map = {}
+    if event_positions_data and 'event_positions' in event_positions_data:
+        for event_pos in event_positions_data['event_positions']:
+            event_ticker = event_pos.get('event_ticker', '')
+            for market_pos in event_pos.get('market_positions', []):
+                market_id = market_pos.get('market_id')
+                position_cost = market_pos.get('position_cost', 0)
+                realized_pnl = market_pos.get('realized_pnl', 0)
+                fees_paid = market_pos.get('fees_paid', 0)
+                # Store by both market_id and event_ticker for matching
+                position_cost_map[market_id] = {
+                    'position_cost': position_cost,
+                    'realized_pnl': realized_pnl,
+                    'fees_paid': fees_paid
+                }
+                position_cost_map[event_ticker] = {
+                    'position_cost': position_cost,
+                    'realized_pnl': realized_pnl,
+                    'fees_paid': fees_paid
+                }
+    
     # Process market positions
     for market_pos in holdings_data.get('market_positions', []):
         ticker = market_pos.get('ticker', '')
         position = market_pos.get('position', 0)
+        market_id = market_pos.get('market_id', '')
         
-        # Skip positions with 0 shares (closed positions)
+        # Skip closed positions (only show active positions with open contracts)
         if position == 0:
             continue
         
@@ -199,6 +401,31 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
         # Get market details
         market_data = market_info.get('market', {}) if market_info else {}
         
+        # Get current market price (in cents)
+        current_price = market_data.get('last_price', 0)
+        
+        # Get position cost, realized P&L, and fees from event positions endpoint
+        # Try to match by event_ticker since v2 API doesn't provide market_id
+        position_data = position_cost_map.get(event_ticker, {})
+        position_cost = position_data.get('position_cost', 0)
+        realized_pnl = position_data.get('realized_pnl', 0)
+        fees_paid = position_data.get('fees_paid', 0)
+        
+        # Calculate current market value based on current price and position
+        # For YES positions: value = position * current_price
+        # For NO positions: value = abs(position) * (100 - current_price)
+        if position > 0:
+            # YES position
+            current_market_value = abs(position) * current_price
+        else:
+            # NO position (short on YES = long on NO)
+            current_market_value = abs(position) * (100 - current_price)
+        
+        # Calculate total P&L including unrealized gains/losses:
+        # Total P&L = (Current Market Value) - (Position Cost) + (Realized P&L) - (Fees)
+        # position_cost is the actual cost basis for the current position
+        total_pnl = current_market_value - position_cost + realized_pnl - fees_paid
+        
         enriched_holding = {
             'event_ticker': event_ticker,
             'series_ticker': series_ticker,
@@ -213,8 +440,8 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
             'no_sub_title': market_data.get('no_sub_title'),
             'position_side': position_side,
             'signed_open_position': position,
-            'current_price': market_data.get('last_price', 0),
-            'pnl': market_pos.get('realized_pnl', 0),  # PnL in cents
+            'current_price': current_price,
+            'pnl': total_pnl,  # Total P&L in cents (realized + unrealized)
             'social_id': None  # Not provided in this API endpoint
         }
         enriched_holdings.append(enriched_holding)
