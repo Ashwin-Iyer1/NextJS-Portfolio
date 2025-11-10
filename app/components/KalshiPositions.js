@@ -42,6 +42,16 @@ const KalshiPositions = () => {
     return `${sign}$${dollars}`;
   };
 
+  const calculateFees = (position) => {
+    const purchaseAmt =
+      position.total_absolute_position * position.purchase_price;
+    const currentValue =
+      position.total_absolute_position * position.current_price;
+    const profit = currentValue - purchaseAmt;
+    const fee = Math.abs(position.pnl - profit);
+    return (fee / 100).toFixed(2);
+  };
+
   if (loading) {
     return (
       <div className={styles["loading-container"]}>
@@ -103,20 +113,40 @@ const KalshiPositions = () => {
                       {position.current_price}¢
                     </span>
                   </div>
+                  <div className={styles["detail-row"]}>
+                    <span className={styles["detail-label"]}>
+                      Purchase Price:
+                    </span>
+                    <span className={styles["detail-value"]}>
+                      {position.purchase_price}¢
+                    </span>
+                  </div>
 
                   <div className={styles["detail-row"]}>
                     <span className={styles["detail-label"]}>P&L:</span>
-                    <span
-                      className={`${styles["detail-value"]} ${
-                        position.pnl > 0
-                          ? styles["pnl-positive"]
-                          : position.pnl < 0
-                          ? styles["pnl-negative"]
-                          : styles["pnl-neutral"]
-                      }`}
-                    >
-                      {formatPnL(position.pnl)}
-                    </span>
+                    <div style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end"
+                    }}>
+                      <span
+                        className={`${styles["detail-value"]} ${
+                          position.pnl > 0
+                            ? styles["pnl-positive"]
+                            : position.pnl < 0
+                            ? styles["pnl-negative"]
+                            : styles["pnl-neutral"]
+                        }`}
+                      >
+                        {formatPnL(position.pnl)}
+                      </span>
+                      <div>
+                        <span className={styles["detail-label"]}>Fees: </span>
+                        <span className={styles["detail-label"]}>
+                          ${calculateFees(position)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

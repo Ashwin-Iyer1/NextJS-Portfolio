@@ -60,6 +60,7 @@ def create_kalshi_positions_table() -> bool:
         "position_side": "VARCHAR(10)",
         "signed_open_position": "INTEGER",
         "current_price": "INTEGER",
+        "purchase_price": "INTEGER",
         "pnl": "INTEGER",
         "last_updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
     }

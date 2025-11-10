@@ -4,12 +4,11 @@ import requests
 import hashlib
 import base64
 from typing import Dict, List, Optional
-from dotenv import load_dotenv
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
-
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 def get_series_info(series_ticker: str) -> Optional[Dict]:
     """
@@ -426,6 +425,9 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
         # position_cost is the actual cost basis for the current position
         total_pnl = current_market_value - position_cost + realized_pnl - fees_paid
         
+        # Calculate average purchase price (cost per contract in cents)
+        purchase_price = int(position_cost / abs(position)) if position != 0 else 0
+        
         enriched_holding = {
             'event_ticker': event_ticker,
             'series_ticker': series_ticker,
@@ -441,6 +443,7 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
             'position_side': position_side,
             'signed_open_position': position,
             'current_price': current_price,
+            'purchase_price': purchase_price,  # Average purchase price per contract in cents
             'pnl': total_pnl,  # Total P&L in cents (realized + unrealized)
             'social_id': None  # Not provided in this API endpoint
         }
