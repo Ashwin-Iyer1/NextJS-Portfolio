@@ -3,7 +3,7 @@ Kalshi Position Tracker - Database Management
 Tracks user positions from Kalshi trading platform
 """
 
-from test import (
+from db_helpers import (
     create_table, 
     insert_record, 
     insert_many,
@@ -12,7 +12,8 @@ from test import (
     delete_record,
     truncate_table,
     table_exists,
-    count_records
+    count_records,
+    execute_query
 )
 from kalshi import get_user_holdings, process_holdings_with_series_info
 from typing import List, Dict
@@ -154,8 +155,6 @@ def get_total_pnl() -> int:
     Returns:
         Total PnL in cents
     """
-    from test import execute_query
-    
     query = "SELECT SUM(pnl) FROM kalshi_positions;"
     result = execute_query(query, fetch_one=True)
     return result[0] if result and result[0] else 0
@@ -168,8 +167,6 @@ def get_pnl_by_series() -> List[Dict]:
     Returns:
         List of dictionaries with series ticker, title, and total PnL
     """
-    from test import execute_query
-    
     query = """
         SELECT 
             series_ticker, 
