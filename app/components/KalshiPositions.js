@@ -53,16 +53,6 @@ const KalshiPositions = () => {
     return `${sign}$${dollars}`;
   };
 
-  const calculateFees = (position) => {
-    const purchaseAmt =
-      position.total_absolute_position * position.purchase_price;
-    const currentValue =
-      position.total_absolute_position * position.current_price;
-    const profit = currentValue - purchaseAmt;
-    const fee = Math.abs(position.pnl - profit);
-    return (fee / 100).toFixed(2);
-  };
-
   if (loading) {
     return (
       <div className={styles["loading-container"]}>
@@ -125,11 +115,7 @@ const KalshiPositions = () => {
 
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={3} className={styles["positions-grid"]}>
-          {
-            positions.length === 0 ? (
-              <p>No open positions.</p>
-            ) : null
-          }
+          {positions.length === 0 ? <p>No open positions.</p> : null}
           {positions.map((position) => (
             <Grid item key={position.id}>
               <div className={styles["position-card"]}>
@@ -167,9 +153,10 @@ const KalshiPositions = () => {
                       Current Price:
                     </span>
                     <span className={styles["detail-value"]}>
-                      {position.position_side === "NO" 
-                        ? (100 - position.current_price)
-                        : position.current_price}¢
+                      {position.position_side === "NO"
+                        ? 100 - position.current_price
+                        : position.current_price}
+                      ¢
                     </span>
                   </div>
                   <div className={styles["detail-row"]}>
@@ -178,8 +165,9 @@ const KalshiPositions = () => {
                     </span>
                     <span className={styles["detail-value"]}>
                       {position.position_side === "NO"
-                        ? (100 - position.purchase_price)
-                        : position.purchase_price}¢
+                        ? 100 - position.purchase_price
+                        : position.purchase_price}
+                      ¢
                     </span>
                   </div>
 
@@ -206,7 +194,7 @@ const KalshiPositions = () => {
                       <div>
                         <span className={styles["detail-label"]}>Fees: </span>
                         <span className={styles["detail-label"]}>
-                          ${position.fees_paid/100}
+                          ${position.fees_paid / 100}
                         </span>
                       </div>
                     </div>
