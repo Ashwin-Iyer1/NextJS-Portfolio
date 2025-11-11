@@ -17,6 +17,107 @@ from db_helpers import (
 )
 from kalshi import get_user_holdings, process_holdings_with_series_info
 from typing import List, Dict
+import requests
+
+
+def create_kalshi_profile_table() -> bool:
+    """
+    Create the kalshi_profile table to track user profile metrics.
+    
+    Table Schema:
+    - id: Primary key (always 1, as we only store one user's profile)
+    - nickname: User's Kalshi nickname
+    - pnl: Total profit/loss in cents
+    - volume: Total volume traded in cents
+    - open_interest: Current open interest in cents
+    - num_markets_traded: Number of markets traded
+    - last_updated: Timestamp of last update
+    """
+    schema = {
+        "id": "INTEGER PRIMARY KEY DEFAULT 1",
+        "nickname": "VARCHAR(255)",
+        "pnl": "INTEGER",
+        "volume": "INTEGER",
+        "open_interest": "INTEGER",
+        "num_markets_traded": "INTEGER",
+        "last_updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+    }
+    
+    return create_table("kalshi_profile", schema)
+
+
+def fetch_profile_metrics(nickname: str = "Turtlecap") -> Dict:
+    """
+    Fetch profile metrics from Kalshi API.
+    
+    Args:
+        nickname: The Kalshi username
+        
+    Returns:
+        Dictionary containing profile metrics
+    """
+    url = f"https://api.elections.kalshi.com/v1/social/profile/metrics?nickname={nickname}&since_day_before=0"
+    
+    try:
+        response = requests.get(url, headers={'Content-Type': 'application/json'})
+        response.raise_for_status()
+        data = response.json()
+        
+        # Extract metrics
+        metrics = data.get('metrics', {})
+        return {
+            'nickname': nickname,
+            'pnl': metrics.get('pnl', 0),
+            'volume': metrics.get('volume', 0),
+            'open_interest': metrics.get('open_interest', 0),
+            'num_markets_traded': metrics.get('num_markets_traded', 0)
+        }
+    except Exception as e:
+        print(f"Error fetching profile metrics: {e}")
+        return None
+
+
+def upsert_profile_metrics(metrics: Dict) -> bool:
+    """
+    Insert or update profile metrics. Always keeps only one row.
+    
+    Args:
+        metrics: Dictionary containing profile metrics
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        # Check if profile exists
+        existing = query_table("kalshi_profile", condition="id = 1", use_dict=True)
+        
+        # Add id field
+        metrics_with_id = {**metrics, 'id': 1}
+        
+        if existing:
+            # Update existing profile
+            update_record("kalshi_profile", metrics, "id = 1")
+            print("Profile metrics updated successfully")
+        else:
+            # Insert new profile
+            insert_record("kalshi_profile", metrics_with_id)
+            print("Profile metrics inserted successfully")
+        
+        return True
+    except Exception as e:
+        print(f"Error upserting profile metrics: {e}")
+        return False
+
+
+def get_profile_metrics() -> Dict:
+    """
+    Get profile metrics from database.
+    
+    Returns:
+        Dictionary containing profile metrics or None if not found
+    """
+    result = query_table("kalshi_profile", condition="id = 1", use_dict=True)
+    return result[0] if result else None
 
 
 def create_kalshi_positions_table() -> bool:

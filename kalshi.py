@@ -214,7 +214,8 @@ def get_user_holdings() -> Optional[Dict]:
     Returns:
         Dictionary containing positions data or None if request fails
     """
-    api_path = "/trade-api/v2/portfolio/positions/?closed_positions=false"
+    # Remove the query parameter - try fetching all positions
+    api_path = "/trade-api/v2/portfolio/positions"
     api_url = f"https://api.elections.kalshi.com{api_path}"
     
     # Get credentials from environment
