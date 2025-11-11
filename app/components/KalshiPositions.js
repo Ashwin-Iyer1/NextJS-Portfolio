@@ -4,30 +4,41 @@ import React, { useEffect, useState } from "react";
 import styles from "./KalshiPositions.module.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Link from "next/link";
 
 const KalshiPositions = () => {
   const [positions, setPositions] = useState([]);
+  const [profileMetrics, setProfileMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPositions = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch("/api/kalshi");
-        if (!res.ok) {
+        // Fetch positions
+        const positionsRes = await fetch("/api/kalshi");
+        if (!positionsRes.ok) {
           throw new Error("Failed to fetch Kalshi positions");
         }
-        const data = await res.json();
-        setPositions(data);
+        const positionsData = await positionsRes.json();
+        setPositions(positionsData);
+
+        // Fetch profile metrics
+        const profileRes = await fetch("/api/kalshi-profile");
+        if (!profileRes.ok) {
+          throw new Error("Failed to fetch Kalshi profile");
+        }
+        const profileData = await profileRes.json();
+        setProfileMetrics(profileData.metrics);
       } catch (error) {
-        console.error("Error fetching Kalshi positions:", error);
+        console.error("Error fetching Kalshi data:", error);
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPositions();
+    fetchData();
   }, []);
 
   const getSubtitle = (position) => {
@@ -68,9 +79,50 @@ const KalshiPositions = () => {
     );
   }
 
+  // Get overall P&L from profile metrics
+  const overallPnL = profileMetrics?.pnl / 100 || 0;
+
   return (
-    <div className={styles["positions-container"]}>
+    <div
+      className={styles["positions-container"]}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <h2 className={styles["positions-title"]}>Kalshi Positions</h2>
+
+      {/* Overall Profile P&L Display */}
+      <div className={styles["total-pnl-container"]}>
+        <h3 className={styles["total-pnl-title"]}>Overall P&L</h3>
+        <p
+          className={`${styles["total-pnl-value"]} ${
+            overallPnL > 0
+              ? styles["positive"]
+              : overallPnL < 0
+              ? styles["negative"]
+              : styles["neutral"]
+          }`}
+        >
+          {formatPnL(overallPnL)}
+        </p>
+        {profileMetrics && (
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "1rem",
+              color: "#94a3b8",
+              fontSize: "0.9rem",
+            }}
+          >
+            <div>Markets Traded: {profileMetrics.num_markets_traded}</div>
+            <div>Volume: ${profileMetrics.volume.toLocaleString()}</div>
+            <div>Open Interest: ${profileMetrics.open_interest}</div>
+          </div>
+        )}
+      </div>
+
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={3} className={styles["positions-grid"]}>
           {positions.map((position) => (
@@ -124,11 +176,13 @@ const KalshiPositions = () => {
 
                   <div className={styles["detail-row"]}>
                     <span className={styles["detail-label"]}>P&L:</span>
-                    <div style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end"
-                    }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                      }}
+                    >
                       <span
                         className={`${styles["detail-value"]} ${
                           position.pnl > 0
@@ -164,6 +218,15 @@ const KalshiPositions = () => {
           ))}
         </Grid>
       </Box>
+      <Link
+        href="https://kalshi.com/ideas/profiles/Turtlecap"
+        target="_blank"
+        className={styles.resumeLink}
+      >
+        <div className={styles.resumeCard}>
+          <h3>View My Profile</h3>
+        </div>
+      </Link>
     </div>
   );
 };
