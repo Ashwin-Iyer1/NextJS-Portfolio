@@ -117,7 +117,7 @@ const KalshiPositions = () => {
             }}
           >
             <div>Markets Traded: {profileMetrics.num_markets_traded}</div>
-            <div>Volume: ${profileMetrics.volume.toLocaleString()}</div>
+            <div>Volume: {profileMetrics.volume.toLocaleString()}</div>
             <div>Open Interest: ${profileMetrics.open_interest}</div>
           </div>
         )}
@@ -125,6 +125,11 @@ const KalshiPositions = () => {
 
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={3} className={styles["positions-grid"]}>
+          {
+            positions.length === 0 ? (
+              <p>No open positions.</p>
+            ) : null
+          }
           {positions.map((position) => (
             <Grid item key={position.id}>
               <div className={styles["position-card"]}>
