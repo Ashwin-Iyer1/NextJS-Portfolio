@@ -214,7 +214,7 @@ def get_user_holdings() -> Optional[Dict]:
     Returns:
         Dictionary containing positions data or None if request fails
     """
-    api_path = "/trade-api/v2/portfolio/positions"
+    api_path = "/trade-api/v2/portfolio/positions/?closed_positions=false"
     api_url = f"https://api.elections.kalshi.com{api_path}"
     
     # Get credentials from environment
@@ -445,6 +445,7 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
             'current_price': current_price,
             'purchase_price': purchase_price,  # Average purchase price per contract in cents
             'pnl': total_pnl,  # Total P&L in cents (realized + unrealized)
+            'fees_paid': fees_paid,  # Total fees paid in cents
             'social_id': None  # Not provided in this API endpoint
         }
         enriched_holdings.append(enriched_holding)

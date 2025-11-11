@@ -40,7 +40,9 @@ def create_kalshi_positions_table() -> bool:
     - position_side: Which side taken (YES/NO)
     - signed_open_position: Signed open position (positive/negative)
     - current_price: Current market price in cents
+    - purchase_price: Average purchase price per contract in cents
     - pnl: Profit and loss in cents
+    - fees_paid: Total fees paid in cents
     - last_updated: Timestamp of last update
     """
     schema = {
@@ -62,6 +64,7 @@ def create_kalshi_positions_table() -> bool:
         "current_price": "INTEGER",
         "purchase_price": "INTEGER",
         "pnl": "INTEGER",
+        "fees_paid": "INTEGER",
         "last_updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
     }
     

@@ -162,7 +162,9 @@ const KalshiPositions = () => {
                       Current Price:
                     </span>
                     <span className={styles["detail-value"]}>
-                      {position.current_price}¢
+                      {position.position_side === "NO" 
+                        ? (100 - position.current_price)
+                        : position.current_price}¢
                     </span>
                   </div>
                   <div className={styles["detail-row"]}>
@@ -170,7 +172,9 @@ const KalshiPositions = () => {
                       Purchase Price:
                     </span>
                     <span className={styles["detail-value"]}>
-                      {position.purchase_price}¢
+                      {position.position_side === "NO"
+                        ? (100 - position.purchase_price)
+                        : position.purchase_price}¢
                     </span>
                   </div>
 
@@ -197,7 +201,7 @@ const KalshiPositions = () => {
                       <div>
                         <span className={styles["detail-label"]}>Fees: </span>
                         <span className={styles["detail-label"]}>
-                          ${calculateFees(position)}
+                          ${position.fees_paid/100}
                         </span>
                       </div>
                     </div>
