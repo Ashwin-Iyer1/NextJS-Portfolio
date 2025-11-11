@@ -40,7 +40,16 @@ def get_spotify_cover(song, bearer):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        return data['tracks']['items'][0]['album']['images'][1]['url']
+        # Check if we have search results
+        if data['tracks']['items']:
+            images = data['tracks']['items'][0]['album']['images']
+            # Try to get the second image (medium size), fall back to first if not available
+            if len(images) > 1:
+                return images[1]['url']
+            elif len(images) > 0:
+                return images[0]['url']
+        print(f"No Spotify results found for: {song[0]} by {song[1]}")
+        return None
     else:
         print(f"Failed to get Spotify cover: {response.status_code}, {response.text}")
         return None
