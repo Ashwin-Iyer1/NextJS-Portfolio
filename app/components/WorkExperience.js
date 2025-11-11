@@ -38,7 +38,7 @@ export default function WorkExperience() {
               {workDateFormat("Incoming Spring 2026 Co-op")}
             </>
           }
-          secondary="Fixed Income Credit Research Co-op"
+          secondary="Global Risk and Analytics Co-op"
           sx={{
             color: "white",
             "& .MuiListItemText-secondary": { color: "white" },
