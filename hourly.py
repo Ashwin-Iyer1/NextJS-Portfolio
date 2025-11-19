@@ -1,23 +1,37 @@
-from databaseMod import clear_entries, insertData, wakatime_db_data
-from wakatime import get_wakatime_data
+from api_helpers import get_wakatime_stats
+from portfolio_operations import get_wakatime_db_data, update_wakatime_data
 
-data = get_wakatime_data()
-db_data = wakatime_db_data()[0][0]
-print(data['data']['total_seconds'])
-print(db_data)
-#remove parenthesis and comma from string
-if(data['data']['total_seconds'] > db_data + 1):
-    print("New Data!")
-    clear_entries("wakatime")
-    insertData(data['data']['total_seconds'], data['data']['daily_average'])
-else:
-    print("Data already in database")
+def main():
+    print("Fetching WakaTime data...")
+    data = get_wakatime_stats()
+    
+    if not data or 'data' not in data:
+        print("Failed to fetch WakaTime data.")
+        return
 
+    current_total_seconds = data['data']['total_seconds']
+    daily_average = data['data']['daily_average']
+    
+    # Fetch existing data from DB
+    db_result = get_wakatime_db_data()
+    
+    # Check if we need to update
+    should_update = True
+    if db_result:
+        # db_result is a list of RealDictRow or tuples depending on cursor
+        # portfolio_operations uses tuples for this specific query
+        db_total_seconds = db_result[0][0]
+        
+        print(f"Current API Seconds: {current_total_seconds}")
+        print(f"DB Seconds: {db_total_seconds}")
+        
+        if current_total_seconds <= db_total_seconds + 1:
+            print("Data already in database (no significant change).")
+            should_update = False
+            
+    if should_update:
+        print("New Data detected! Updating database...")
+        update_wakatime_data(current_total_seconds, daily_average)
 
-
-# def main():
-#     data = get_wakatime_data()
-#     # clear_entries("wakatime")
-#     insertData(data['data']['total_seconds'], data['data']['daily_average'])
-
-# main()
+if __name__ == "__main__":
+    main()
