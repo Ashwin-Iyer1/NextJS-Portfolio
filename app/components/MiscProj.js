@@ -23,7 +23,11 @@ export default function MiscProj() {
     },
     {
       src: "https://www.youtube.com/embed/NANJDR9GeSE",
-      title: "The Wolf of Skyblock"
+      title: "White Mountain National Forest Vlog"
+    },
+    {
+      src: "https://www.youtube.com/embed/HEUlochQ9fc",
+      title: "Puerto Rico Vlog"
     }
   ];
 
