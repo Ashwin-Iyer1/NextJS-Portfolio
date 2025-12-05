@@ -3,7 +3,8 @@ import path from "path";
 import Bar from "../../components/Bar";
 import "./page.css";
 
-export default async function Page({ params }) {
+export default async function Page(props) {
+  const params = await props.params;
   const { slug } = params;
 
   try {
