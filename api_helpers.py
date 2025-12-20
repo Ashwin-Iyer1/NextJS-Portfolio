@@ -147,7 +147,13 @@ def get_github_repos() -> List[Tuple[str, str, str]]:
     manual_repos = [
         {"name": "Cookle", "description": "Food guessing game similar to Wordle", "html_url": "https://s-pat6.github.io/cookle/"},
         {"name": "HerImpact", "description": "The HerImpact project website", "html_url": "https://herimpactproject.org/"},
-        {"name": "Stridez", "description": "A Strava clone made with NextJS and MySQL for CS3200", "html_url": "https://github.com/RoboticReaper/CS3200-Strava-Project"}
+        {"name": "Stridez", "description": "A Strava clone made with NextJS and MySQL for CS3200", "html_url": "https://github.com/RoboticReaper/CS3200-Strava-Project"},
+        {"name": "Tactus", "description": "The website for Tactus Music", "html_url": "https://tactusmusic.com/"},
+        {
+            "name": "Fridge Flow",
+            "description": "App that allows fridge sharing among roommates, cost-splitting, receipt parsing, and grocery list management",
+            "html_url": "https://github.com/nickym11111/forge_fall_25_project"
+        }
     ]
     
     repo_list = []
