@@ -35,7 +35,7 @@ export default function WorkExperience() {
           primary={
             <>
               <b>Wellington Management</b>{" "}
-              {workDateFormat("Incoming Spring 2026 Co-op")}
+              {workDateFormat("Spring 2026 Co-op")}
             </>
           }
           secondary="Global Risk and Analytics Co-op"
