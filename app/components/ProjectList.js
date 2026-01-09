@@ -8,8 +8,35 @@ export default function ProjectList() {
   const [projects, setProjects] = useState([]); // State for projects
   const [loading, setLoading] = useState(true); // State for loading
 
+  const [allProjects, setAllProjects] = useState([]);
+
+  const handleShowAll = () => {
+    setProjects(allProjects);
+  };
+
   useEffect(() => {
     const fetchProjects = async () => {
+      const list_to_remove = [
+        "7110A_Code",
+        "7110A-Website",
+        "AskGPT",
+        "Cookle",
+        "Email-Writer-with-web-search",
+        "homereadypro",
+        "marketviewr.koreader",
+        "openai_merch_bot",
+        "Ashwin-Iyer1",
+        "Pomodoro-App",
+        "ReactPortfolio",
+        "resume",
+        "tiktodv4",
+        "TikTok-Video-Creator",
+        "HerImpact",
+        "Game-Pigeon-Anagrams",
+        "GPTvsGeminiTrader",
+        "",
+      ];
+
       try {
         // Attempt to fetch the data from the external API
         const res = await fetch(`/api/data`);
@@ -23,7 +50,13 @@ export default function ProjectList() {
         const sortedProjects = data.sort((a, b) =>
           a.reponame.localeCompare(b.reponame)
         );
-        setProjects(sortedProjects); // Set the fetched projects
+
+        setAllProjects(sortedProjects);
+        setProjects(
+          sortedProjects.filter(
+            (project) => !list_to_remove.includes(project.reponame)
+          )
+        );
       } catch (error) {
         console.error(
           "Failed to fetch from API, falling back to local data:",
@@ -34,7 +67,12 @@ export default function ProjectList() {
         const sortedLocalProjects = projects1.sort((a, b) =>
           a.reponame.localeCompare(b.reponame)
         );
-        setProjects(sortedLocalProjects); // Use the local projects data
+        setAllProjects(sortedLocalProjects);
+        setProjects(
+          sortedLocalProjects.filter(
+            (project) => !list_to_remove.includes(project.reponame)
+          )
+        );
       } finally {
         setLoading(false); // Set loading to false when done
       }
@@ -129,27 +167,27 @@ export default function ProjectList() {
               background-position: -200% 0;
             }
           }
-          
+
           @media (max-width: 1160px) {
             .projects-grid {
               grid-template-columns: repeat(2, 1fr) !important;
               gap: 8px !important;
               padding: 0 8px;
             }
-            
+
             :global(.skeleton-card) {
               padding: 16px !important;
               min-height: 180px !important;
               border-radius: 8px !important;
             }
           }
-          
+
           @media (max-width: 480px) {
             .projects-grid {
               gap: 6px !important;
               padding: 0 4px;
             }
-            
+
             :global(.skeleton-card) {
               padding: 12px !important;
               min-height: 160px !important;
@@ -188,8 +226,7 @@ export default function ProjectList() {
               className="project-card"
               style={{
                 width: "100%",
-                background:
-                  "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
+                background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
                 borderRadius: "12px",
                 padding: "24px",
                 border: `2px solid transparent`,
@@ -292,6 +329,39 @@ export default function ProjectList() {
             </div>
           );
         })}
+        {projects.length !== allProjects.length && (
+          <button
+            onClick={handleShowAll}
+            style={{
+              gridColumn: "1 / -1",
+              padding: "16px 32px",
+              background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
+              color: "#fff",
+              border: "1px solid #333",
+              borderRadius: "12px",
+              cursor: "pointer",
+              fontSize: "1rem",
+              fontWeight: "600",
+              margin: "20px auto 0",
+              display: "block",
+              width: "fit-content",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.borderColor = "#555";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+              e.currentTarget.style.borderColor = "#333";
+            }}
+          >
+            Show All Projects ({allProjects.length - projects.length} hidden)
+          </button>
+        )}
       </div>
       <style jsx>{`
         @media (max-width: 1160px) {
@@ -300,37 +370,37 @@ export default function ProjectList() {
             gap: 8px !important;
             padding: 0 8px;
           }
-          
+
           :global(.project-card) {
             padding: 16px !important;
             min-height: 180px !important;
             border-radius: 8px !important;
           }
-          
+
           :global(.project-card) h3 {
             font-size: 1rem !important;
           }
-          
+
           :global(.project-card) p {
             font-size: 0.8rem !important;
           }
         }
-        
+
         @media (max-width: 480px) {
           .projects-grid {
             gap: 6px !important;
             padding: 0 4px;
           }
-          
+
           :global(.project-card) {
             padding: 12px !important;
             min-height: 160px !important;
           }
-          
+
           :global(.project-card) h3 {
             font-size: 0.9rem !important;
           }
-          
+
           :global(.project-card) p {
             font-size: 0.75rem !important;
           }
