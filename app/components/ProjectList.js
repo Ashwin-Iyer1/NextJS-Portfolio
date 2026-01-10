@@ -51,6 +51,12 @@ export default function ProjectList() {
           a.reponame.localeCompare(b.reponame)
         );
 
+        sortedProjects.forEach((project) => {
+          if (project.reponame === "NUWorks-Co-op-grader") {
+            project.html_url = "https://nucoop.app/"
+          }
+        });
+
         setAllProjects(sortedProjects);
         setProjects(
           sortedProjects.filter(

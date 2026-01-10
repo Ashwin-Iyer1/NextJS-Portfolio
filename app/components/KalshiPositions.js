@@ -70,8 +70,11 @@ const KalshiPositions = () => {
   }
 
   // Get overall P&L from profile metrics
-  const overallPnL = profileMetrics?.pnl / 100 || 0;
+  let overallPnL = profileMetrics?.pnl / 100 || 0;
 
+  let secondAcctPnl = 400 * 100;
+
+  overallPnL = overallPnL + secondAcctPnl;
   return (
     <div
       className={styles["positions-container"]}
@@ -215,6 +218,8 @@ const KalshiPositions = () => {
           ))}
         </Grid>
       </Box>
+      <p>Discrepencies between account PNL and PNL above are due to multiple accounts.</p>
+
       <Link
         href="https://kalshi.com/ideas/profiles/Turtlecap"
         target="_blank"
