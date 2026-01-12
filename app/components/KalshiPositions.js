@@ -82,7 +82,7 @@ const KalshiPositions = () => {
         alignItems: "center",
       }}
     >
-      <h2 className={styles["positions-title"]} id="kalshi-positions">Kalshi Positions</h2>
+      <h2 className={styles["positions-title"]} id="kalshi_positions">Kalshi Positions</h2>
 
       {/* Overall Profile P&L Display */}
       <div className={styles["total-pnl-container"]}>
