@@ -55,7 +55,7 @@ const KalshiPositions = ({ id }) => {
 
   if (loading) {
     return (
-      <div className={styles["loading-container"]}>
+      <div className={styles["loading-container"]} id={id}>
         <p>Loading positions...</p>
       </div>
     );
@@ -63,7 +63,7 @@ const KalshiPositions = ({ id }) => {
 
   if (error) {
     return (
-      <div className={styles["error-container"]}>
+      <div className={styles["error-container"]} id={id}>
         <p>Error: {error}</p>
       </div>
     );
