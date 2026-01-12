@@ -43,18 +43,21 @@ export default function Home() {
 
     if (loaded === null) {
       // First time loading - show animation
-      setFadeIn(false); // Hide content initially
-      setShouldLoad(true);
-      setTimeout(() => {
-        setFadeOut(true); // Start fade-out
-        sessionStorage.setItem("loaded", "true");
-
-        // Wait for the fade-out duration before removing the loader
+      const timer = setTimeout(() => {
+        setFadeIn(false); // Hide content initially
+        setShouldLoad(true);
         setTimeout(() => {
-          setShouldLoad(false);
-          setFadeIn(true); // Start fade-in
-        }, 400); // Adjust this duration to match your CSS fade-out time
-      }, 2200);
+          setFadeOut(true); // Start fade-out
+          sessionStorage.setItem("loaded", "true");
+
+          // Wait for the fade-out duration before removing the loader
+          setTimeout(() => {
+            setShouldLoad(false);
+            setFadeIn(true); // Start fade-in
+          }, 400); // Adjust this duration to match your CSS fade-out time
+        }, 2200);
+      }, 0);
+      return () => clearTimeout(timer);
     }
     // If loaded before, fadeIn is already true from initial state
   }, []);
@@ -134,7 +137,7 @@ export default function Home() {
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
           <BlogList />
         </div>
-        <KalshiPositions />
+        <KalshiPositions id="kalshi_positions" />
         <div className={styles.Contact}>
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
           <Contact />

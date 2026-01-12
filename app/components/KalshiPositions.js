@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "next/link";
 
-const KalshiPositions = () => {
+const KalshiPositions = ({ id }) => {
   const [positions, setPositions] = useState([]);
   const [profileMetrics, setProfileMetrics] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -81,8 +81,9 @@ const KalshiPositions = () => {
         flexDirection: "column",
         alignItems: "center",
       }}
+      id={id}
     >
-      <h2 className={styles["positions-title"]} id="kalshi_positions">Kalshi Positions</h2>
+      <h2 className={styles["positions-title"]}>Kalshi Positions</h2>
 
       {/* Overall Profile P&L Display */}
       <div className={styles["total-pnl-container"]}>
