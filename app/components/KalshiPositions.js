@@ -219,7 +219,7 @@ const KalshiPositions = ({ id }) => {
       </Box>
       <p style={{
         textAlign: "center"
-      }}>Discrepencies between Kalshi PNL and PNL above are due to group portfolios.</p>
+      }}>Discrepancies between Kalshi PNL and PNL above are due to group portfolios.</p>
 
       <Link
         href="https://kalshi.com/ideas/profiles/Turtlecap"
