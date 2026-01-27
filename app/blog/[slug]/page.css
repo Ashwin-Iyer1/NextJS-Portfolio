@@ -6,6 +6,11 @@
   padding: 24px;
 }
 
+main {
+    overflow: visible;
+
+}
+
 .half-width-wrapper {
   text-align: left;
   max-width: 680px; /* Medium's typical content width */
