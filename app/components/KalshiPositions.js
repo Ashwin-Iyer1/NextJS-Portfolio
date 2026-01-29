@@ -71,7 +71,7 @@ const KalshiPositions = ({ id }) => {
 
   // Get overall P&L from profile metrics
   let overallPnL = profileMetrics?.pnl / 100 || 0;
-  let secondAcctPnl = 700 * 100;
+  let secondAcctPnl = 950 * 100;
   overallPnL = overallPnL + secondAcctPnl;
   return (
     <div
