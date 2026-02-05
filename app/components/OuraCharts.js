@@ -3,7 +3,10 @@ import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
 import { scaleTime, scaleLinear, scaleBand } from '@visx/scale';
 import { AxisBottom, AxisLeft } from '@visx/axis';
-import { GridRows } from '@visx/grid';
+import { GridRows, GridColumns } from '@visx/grid';
+// ... (keep lines 7-683 same or rely on smart replace)
+// Actually I'll just do separate replacements for safety.
+
 import { LinearGradient } from '@visx/gradient';
 import { AreaClosed, LinePath } from '@visx/shape';
 import { curveMonotoneX } from '@visx/curve';
@@ -680,7 +683,7 @@ export const SpO2Chart = ({ data, darkMode = false }) => {
 };
 
 // --- Heart Rate Chart ---
-export const HeartRateChart = ({ data, darkMode = false }) => {
+export const HeartRateChart = ({ data, darkMode = false, xDomain }) => {
   const theme = getTheme(darkMode);
 
   if (!hasValidData(data)) return <EmptyState title="HEART RATE" darkMode={darkMode} />;
@@ -700,7 +703,7 @@ export const HeartRateChart = ({ data, darkMode = false }) => {
 
           const xScale = scaleTime({
             range: [0, xMax],
-            domain: [Math.min(...data.map(d => getDate(d).getTime())) || 0, Math.max(...data.map(d => getDate(d).getTime())) || 0],
+            domain: xDomain || [Math.min(...data.map(d => getDate(d).getTime())) || 0, Math.max(...data.map(d => getDate(d).getTime())) || 0],
           });
 
           // Ensure domain is safe
@@ -716,11 +719,12 @@ export const HeartRateChart = ({ data, darkMode = false }) => {
             <BaseChart width={width} height={height} darkMode={darkMode} title="HEART RATE">
               <Group left={margin.left} top={margin.top}>
                 <GridRows scale={yScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
+                <GridColumns scale={xScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
                 
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={5}
+                  numTicks={8}
                   tickFormat={(d) => format(d, 'HH:mm')}
                   stroke={theme.text}
                   tickStroke={theme.text}

@@ -65,9 +65,29 @@ export default function OuraDashboard({
   `;
 
   // Define all available widgets with unique keys and titles
-  const allWidgets = [
+    // Filter heart rate for last 24 hours only
+    const now = new Date();
+    const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    
+    // Process data: Strip 'Z' to treat as local time, and filter
+    const heartRateProcessed = data.heart_rate
+        .map(d => ({ ...d, timestamp: d.timestamp.endsWith('Z') ? d.timestamp.slice(0, -1) : d.timestamp }))
+        .filter(d => {
+            const t = parseISO(d.timestamp);
+            return t >= oneDayAgo;
+        });
+
+    // Determine domain end (max of currently "now" or the latest data point)
+    // This handles cases where Oura data might be slightly ahead or clock skew
+    const maxDate = heartRateProcessed.length > 0 
+        ? new Date(Math.max(now.getTime(), parseISO(heartRateProcessed[heartRateProcessed.length - 1].timestamp).getTime())) 
+        : now;
+
+    const hrDomain = [oneDayAgo, maxDate];
+
+    const allWidgets = [
     { key: 'activity', component: <div className={cardClassName} style={getCardStyle()}><ActivityChart data={data.activity} darkMode={darkMode} /></div> },
-    { key: 'heart_rate', component: <div className={cardClassName} style={getCardStyle()}><HeartRateChart data={data.heart_rate} darkMode={darkMode} /></div> },
+    { key: 'heart_rate', component: <div className={cardClassName} style={getCardStyle()}><HeartRateChart data={heartRateProcessed} xDomain={hrDomain} darkMode={darkMode} /></div> },
     { key: 'sleep', component: <div className={cardClassName} style={getCardStyle()}><SleepChart data={data.sleep} darkMode={darkMode} /></div> },
     { key: 'sleep_detail', component: <div className={cardClassName} style={getCardStyle()}><SleepDetailChart data={data.sleep} darkMode={darkMode} /></div> },
     { key: 'readiness', component: <div className={cardClassName} style={getCardStyle()}><ReadinessChart data={data.readiness} darkMode={darkMode} /></div> },
