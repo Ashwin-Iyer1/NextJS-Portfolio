@@ -23,11 +23,11 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
           'sleep_time': 'sleep_time',
           'sessions': 'session',
           'workout': 'workout',
-          'tags': 'tag',
-          'enhanced_tags': 'enhanced_tag', // Explicit support
+          // 'tags': 'tag',
+          // 'enhanced_tags': 'enhanced_tag', // Explicit support
           'personal_info': 'personal_info',
           // 'ring_config': 'ring_configuration', // REMOVED
-          'rest_mode': 'rest_mode_period',
+          // 'rest_mode': 'rest_mode_period',
           'vo2_max': 'vo2_max',
           'cardio_age': 'cardio_age'
         };
@@ -35,10 +35,10 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
         let endpoints = [
           'activity', 'readiness', 'sleep_daily', 'daily_stress', 
           'daily_spo2', 'daily_resilience', 'cardio_age', 'heart_rate',
-          'sleep_detailed', 'sleep_time', 'session', 'workout', 
-          'tag', 'enhanced_tag', 'rest_mode_period', 'vo2_max',
+          'sleep_detailed', 'sleep_time', 'workout', 
+          'vo2_max',
           'personal_info' // Added
-          // 'ring_configuration' // Removed
+          // 'session', 'tag', 'enhanced_tag', 'rest_mode_period', 'ring_configuration' // Removed
         ];
 
         // If a subset is provided, filter endpoints to only those requested
