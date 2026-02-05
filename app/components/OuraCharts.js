@@ -24,7 +24,49 @@ const getTheme = (darkMode) => ({
   areaGradientFrom: darkMode ? '#8a2ce2' : '#000000',
   areaGradientTo: darkMode ? '#c596ee' : '#ffffff',
   accent: darkMode ? '#ff0844' : '#ff0000', // For critical alerts or high stress
+  recovery: darkMode ? '#00f260' : '#00aa44', // Green for recovery
 });
+
+// Helper to check if data is valid for charting
+const hasValidData = (data) => Array.isArray(data) && data.length > 0;
+
+// Empty State Component
+const EmptyState = ({ title, darkMode }) => {
+  const theme = getTheme(darkMode);
+  return (
+    <div style={{
+      width: '100%',
+      height: '100%',
+      minHeight: '150px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.background,
+      color: theme.text,
+      fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif',
+    }}>
+      <div style={{ 
+        textTransform: 'uppercase', 
+        fontSize: '12px', 
+        letterSpacing: '2px', 
+        fontWeight: 'bold',
+        opacity: 0.8,
+        marginBottom: '12px'
+      }}>
+        {title}
+      </div>
+      <div style={{ 
+        fontSize: '11px', 
+        opacity: 0.5,
+        textAlign: 'center',
+        padding: '0 20px'
+      }}>
+        No data available
+      </div>
+    </div>
+  );
+};
 
 // Helper for dates
 const getX = (d) => new Date(d.day);
@@ -62,6 +104,8 @@ const BaseChart = ({ width, height, darkMode, title, children }) => {
 // --- Activity Chart ---
 export const ActivityChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+  
+  if (!hasValidData(data)) return <EmptyState title="STEPS" darkMode={darkMode} />;
   
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
@@ -249,90 +293,142 @@ export const ReadinessChart = ({ data, darkMode = false }) => {
   );
 };
 
-// --- Sleep Chart ---
+// --- Sleep Chart (Grouped Bar) ---
 export const SleepChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+  
+  // Define colors for each contributor - each is an independent score [1-100]
+  const contributors = [
+    { key: 'deep_sleep', label: 'Deep', color: '#4facfe' },      // Blue
+    { key: 'rem_sleep', label: 'REM', color: '#c596ee' },        // Purple
+    { key: 'efficiency', label: 'Eff', color: '#00f260' },       // Green
+    { key: 'latency', label: 'Lat', color: '#fdbb2d' },          // Orange
+    { key: 'restfulness', label: 'Rest', color: '#ff0844' },     // Red
+    { key: 'timing', label: 'Time', color: '#16d9e3' },          // Cyan
+    { key: 'total_sleep', label: 'Total', color: '#b21f1f' }     // Dark Red
+  ];
 
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
-      <ParentSize>
-        {({ width, height }) => {
-          if (width < 10 || height < 10) return null;
-          
-          const margin = { top: 20, right: 10, bottom: 20, left: 30 };
-          const xMax = width - margin.left - margin.right;
-          const yMax = height - margin.top - margin.bottom;
+    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+       {/* Legend */}
+       <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          flexWrap: 'wrap', 
+          gap: '8px', 
+          padding: '4px 8px 0',
+          fontSize: '9px',
+          fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+        }}>
+          {contributors.map(c => (
+            <div key={c.key} style={{ display: 'flex', alignItems: 'center', color: theme.text }}>
+              <div style={{ width: 6, height: 6, borderRadius: '2px', backgroundColor: c.color, marginRight: 3 }} />
+              <span style={{ opacity: 0.8 }}>{c.label}</span>
+            </div>
+          ))}
+      </div>
 
-          const getScore = (d) => d.score;
+      <div style={{ flex: 1, minHeight: 0 }}>
+        <ParentSize>
+          {({ width, height }) => {
+            if (width < 10 || height < 10) return null;
+            
+            const margin = { top: 10, right: 10, bottom: 20, left: 30 };
+            const xMax = width - margin.left - margin.right;
+            const yMax = height - margin.top - margin.bottom;
 
-          const xScale = scaleBand({
-            range: [0, xMax],
-            round: true,
-            domain: data.map(d => d.day),
-            padding: 0.2,
-          });
+            const getVal = (d, key) => d.contributors ? (d.contributors[key] || 0) : 0;
 
-          const yScale = scaleLinear({
-            range: [yMax, 0],
-            domain: [0, 100],
-          });
+            // Outer scale for days
+            const xScale = scaleBand({
+              range: [0, xMax],
+              round: true,
+              domain: data.map(d => d.day),
+              padding: 0.1,
+            });
 
-          return (
-            <BaseChart width={width} height={height} darkMode={darkMode} title="SLEEP">
-              <Group left={margin.left} top={margin.top}>
-                <GridRows scale={yScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
-                
-                <AxisBottom
-                  top={yMax}
-                  scale={xScale}
-                  tickFormat={(d) => format(parseISO(d), 'dd')}
-                  stroke={theme.text}
-                  tickStroke={theme.text}
-                  tickLabelProps={() => ({
-                    fill: theme.text,
-                    fontSize: 8,
-                    textAnchor: 'middle',
-                    fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+            // Inner scale for contributors within each day
+            const xInnerScale = scaleBand({
+              range: [0, xScale.bandwidth()],
+              domain: contributors.map(c => c.key),
+              padding: 0.05,
+            });
+
+            // Y scale: each contributor is 0-100
+            const yScale = scaleLinear({
+              range: [yMax, 0],
+              domain: [0, 100],
+            });
+
+            return (
+              <BaseChart width={width} height={height} darkMode={darkMode} title="SLEEP CONTRIBUTORS">
+                <Group left={margin.left} top={margin.top}>
+                  <GridRows scale={yScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
+                  
+                  <AxisBottom
+                    top={yMax}
+                    scale={xScale}
+                    tickFormat={(d) => format(parseISO(d), 'dd')}
+                    stroke={theme.text}
+                    tickStroke={theme.text}
+                    tickLabelProps={() => ({
+                      fill: theme.text,
+                      fontSize: 8,
+                      textAnchor: 'middle',
+                      fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+                    })}
+                  />
+                  
+                  <AxisLeft
+                    scale={yScale}
+                    stroke={theme.text}
+                    tickStroke={theme.text}
+                    numTicks={4}
+                    tickLabelProps={() => ({
+                      fill: theme.text,
+                      fontSize: 8,
+                      textAnchor: 'end',
+                      dy: '0.33em',
+                      fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+                    })}
+                  />
+
+                  {/* Grouped bars for each day */}
+                  {data.map((d) => {
+                    const day = d.day;
+                    const groupX = xScale(day);
+                    
+                    return (
+                      <Group key={`group-${day}`} left={groupX}>
+                        {contributors.map((c) => {
+                          const value = getVal(d, c.key);
+                          const barWidth = xInnerScale.bandwidth();
+                          const barHeight = yMax - yScale(value);
+                          const barX = xInnerScale(c.key);
+                          const barY = yMax - barHeight;
+                          
+                          return (
+                            <Bar
+                              key={`bar-${day}-${c.key}`}
+                              x={barX}
+                              y={barY}
+                              width={barWidth}
+                              height={barHeight}
+                              fill={c.color}
+                              fillOpacity={0.85}
+                            />
+                          );
+                        })}
+                      </Group>
+                    );
                   })}
-                />
-                
-                <AxisLeft
-                  scale={yScale}
-                  stroke={theme.text}
-                  tickStroke={theme.text}
-                  numTicks={4}
-                  tickLabelProps={() => ({
-                    fill: theme.text,
-                    fontSize: 8,
-                    textAnchor: 'end',
-                    dy: '0.33em',
-                    fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
-                  })}
-                />
-
-                {data.map((d) => {
-                  const day = d.day;
-                  const barWidth = xScale.bandwidth();
-                  const barHeight = yMax - (yScale(getScore(d) || 0) ?? 0);
-                  const barX = xScale(day);
-                  const barY = yMax - barHeight;
-                  return (
-                    <Bar
-                      key={`bar-${day}`}
-                      x={barX}
-                      y={barY}
-                      width={barWidth}
-                      height={barHeight}
-                      fill={theme.bar}
-                      fillOpacity={1}
-                    />
-                  );
-                })}
-              </Group>
-            </BaseChart>
-          );
-        }}
-      </ParentSize>
+                  
+                </Group>
+              </BaseChart>
+            );
+          }}
+        </ParentSize>
+      </div>
     </div>
   );
 };
