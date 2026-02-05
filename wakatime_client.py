@@ -3,6 +3,8 @@ import os
 import json
 from typing import Dict, Any, Optional
 
+from token_manager import TokenManager
+
 class WakaTimeClient:
     """Client for WakaTime API with automated token management."""
     
@@ -12,57 +14,24 @@ class WakaTimeClient:
     def __init__(self, client_id: str, client_secret: str, token_file: str = "wakatime_tokens.json"):
         self.client_id = client_id
         self.client_secret = client_secret
-        self.token_file = token_file
+        self.token_manager = TokenManager("wakatime", token_file)
         self.session = requests.Session()
         self.tokens = {}
         self._load_tokens()
 
     def _load_tokens(self):
-        """Load tokens from environment variable or file."""
-        # 1. Try Environment Variable first
-        env_tokens = os.getenv("WAKA_TOKENS_JSON")
-        if env_tokens:
-            try:
-                self.tokens = json.loads(env_tokens)
-                access_token = self.tokens.get('access_token')
-                if access_token:
-                    self.session.headers.update({
-                        "Authorization": f"Bearer {access_token}"
-                    })
-                    print("✅ Loaded WakaTime tokens from environment variable.")
-                    return
-                else:
-                    print("⚠️ WAKA_TOKENS_JSON set but missing access_token.")
-            except json.JSONDecodeError:
-                print("❌ Error: WAKA_TOKENS_JSON environment variable is not valid JSON.")
-
-        # 2. Try File
-        if os.path.exists(self.token_file):
-            try:
-                with open(self.token_file, 'r') as f:
-                    self.tokens = json.load(f)
-                
-                access_token = self.tokens.get('access_token')
-                if access_token:
-                    self.session.headers.update({
-                        "Authorization": f"Bearer {access_token}"
-                    })
-                    # print(f"✅ Loaded WakaTime tokens from {self.token_file}.")
-                else:
-                    print(f"⚠️ WakaTime token file exists but has no access_token.")
-            except json.JSONDecodeError:
-                print(f"❌ Error: {self.token_file} is corrupted.")
-                self.tokens = {}
-        else:
-            if not env_tokens:
-                print(f"⚠️ Warning: WakaTime token file {self.token_file} not found and WAKA_TOKENS_JSON not set.")
-                self.tokens = {}
+        """Load tokens using TokenManager."""
+        self.tokens = self.token_manager.load_tokens()
+        access_token = self.tokens.get('access_token')
+        if access_token:
+            self.session.headers.update({
+                "Authorization": f"Bearer {access_token}"
+            })
 
     def _save_tokens(self, tokens: Dict[str, Any]):
-        """Save tokens to file."""
+        """Save tokens using TokenManager."""
         self.tokens = tokens
-        with open(self.token_file, 'w') as f:
-            json.dump(tokens, f, indent=4)
+        self.token_manager.save_tokens(tokens)
         
         self.session.headers.update({
             "Authorization": f"Bearer {self.tokens.get('access_token')}"

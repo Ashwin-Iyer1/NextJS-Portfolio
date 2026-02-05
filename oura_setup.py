@@ -4,7 +4,7 @@ import json
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-from dotenv import load_dotenv
+from token_manager import TokenManager
 
 # Load environment variables
 # load_dotenv()
@@ -13,6 +13,8 @@ CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
 TOKEN_FILE = "oura_tokens.json"
+
+token_manager = TokenManager("oura", TOKEN_FILE)
 
 if not CLIENT_ID or not CLIENT_SECRET:
     print("❌ Error: OURA_CLIENT_ID or OURA_CLIENT_SECRET not found in .env file.")
@@ -57,7 +59,7 @@ def exchange_code_for_token(code):
         tokens = response.json()
         print("✅ Tokens received!")
         save_tokens(tokens)
-        print(f"✅ Tokens saved to {TOKEN_FILE}")
+        print(f"✅ Tokens saved via TokenManager (Database & {TOKEN_FILE})")
         print("\n🎉 Setup complete! You can now run the fetcher.")
         # Stop the server
         os._exit(0)
@@ -66,8 +68,8 @@ def exchange_code_for_token(code):
         os._exit(1)
 
 def save_tokens(tokens):
-    with open(TOKEN_FILE, "w") as f:
-        json.dump(tokens, f, indent=4)
+    """Save tokens using TokenManager."""
+    token_manager.save_tokens(tokens)
 
 def main():
     print("--- Oura OAuth2 Setup ---")

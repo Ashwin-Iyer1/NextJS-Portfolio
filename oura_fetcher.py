@@ -4,6 +4,7 @@ from typing import Dict, Any, Optional
 import os
 import json
 from dotenv import load_dotenv
+from token_manager import TokenManager
 from oura_db import create_oura_table, upsert_oura_data
 
 # Load environment variables
@@ -21,47 +22,22 @@ class OuraClient:
     def __init__(self, client_id: str, client_secret: str, token_file: str = "oura_tokens.json"):
         self.client_id = client_id
         self.client_secret = client_secret
-        self.token_file = token_file
+        self.token_manager = TokenManager("oura", token_file)
         self.session = requests.Session()
         self._load_tokens()
 
     def _load_tokens(self):
-        """Load tokens from environment variable or file."""
-        # 1. Try Environment Variable first
-        env_tokens = os.getenv("OURA_TOKENS_JSON")
-        if env_tokens:
-            try:
-                self.tokens = json.loads(env_tokens)
-                self.session.headers.update({
-                    "Authorization": f"Bearer {self.tokens.get('access_token')}"
-                })
-                print("✅ Loaded tokens from environment variable.")
-                return
-            except json.JSONDecodeError:
-                print("❌ Error: OURA_TOKENS_JSON environment variable is not valid JSON.")
-        
-        # 2. Try File
-        if os.path.exists(self.token_file):
-            try:
-                with open(self.token_file, 'r') as f:
-                    self.tokens = json.load(f)
-                self.session.headers.update({
-                    "Authorization": f"Bearer {self.tokens.get('access_token')}"
-                })
-                print(f"✅ Loaded tokens from {self.token_file}.")
-            except json.JSONDecodeError:
-                print(f"❌ Error: {self.token_file} is corrupted.")
-                self.tokens = {}
-        else:
-            if not env_tokens:
-                print(f"⚠️ Warning: Token file {self.token_file} not found and OURA_TOKENS_JSON not set. You may need to run oura_setup.py.")
-                self.tokens = {}
+        """Load tokens using TokenManager."""
+        self.tokens = self.token_manager.load_tokens()
+        if self.tokens.get('access_token'):
+            self.session.headers.update({
+                "Authorization": f"Bearer {self.tokens.get('access_token')}"
+            })
 
     def _save_tokens(self, tokens: Dict[str, Any]):
-        """Save tokens to file."""
+        """Save tokens using TokenManager."""
         self.tokens = tokens
-        with open(self.token_file, 'w') as f:
-            json.dump(tokens, f, indent=4)
+        self.token_manager.save_tokens(tokens)
         
         self.session.headers.update({
             "Authorization": f"Bearer {self.tokens.get('access_token')}"
