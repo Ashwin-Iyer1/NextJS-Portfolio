@@ -124,19 +124,6 @@ export default function Home() {
           </h2>
           <Skills />
         </div>
-        
-        <div style={{ marginTop: '40px', marginBottom: '40px' }}>
-          <h2 style={{ textAlign: "center", fontSize: "2em", marginBottom: '20px' }}>Live Health Stats</h2>
-          <div style={{ 
-            background: 'linear-gradient(135deg, rgba(138, 44, 226, 0.30), rgba(0, 0, 0, 0.3))',
-            border: '1px solid rgba(138, 44, 226, 0.2)',
-            borderRadius: '16px', 
-            overflow: 'hidden',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)'
-          }}>
-            <OuraDashboard subset={['activity', 'sleep', 'stress']} />
-          </div>
-        </div>
 
         <div className={styles.MiscProj}>
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>
@@ -152,7 +139,56 @@ export default function Home() {
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
           <BlogList />
         </div>
-        <KalshiPositions id="kalshi_positions" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            width: "100%",
+            gap: "40px",
+            flexWrap: "wrap",
+            padding: "0 20px",
+            maxWidth: "1400px",
+            margin: "0 auto",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              minWidth: "320px",
+              marginTop: "40px",
+              marginBottom: "40px",
+            }}
+          >
+            <h2
+              style={{
+                textAlign: "center",
+                fontSize: "2em",
+                marginBottom: "20px",
+                marginTop: "0",
+              }}
+            >
+              Live Health Stats
+            </h2>
+            <div
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(138, 44, 226, 0.30), rgba(0, 0, 0, 0.3))",
+                border: "1px solid rgba(138, 44, 226, 0.2)",
+                borderRadius: "16px",
+                overflow: "hidden",
+                boxShadow: "0 4px 16px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              <OuraDashboard subset={["activity", "sleep", "stress"]} columns={1} />
+            </div>
+          </div>
+
+          <div style={{ flex: 1, minWidth: "320px", marginTop: "40px" }}>
+            <KalshiPositions id="kalshi_positions" />
+          </div>
+        </div>
         <div className={styles.Contact}>
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
           <Contact />

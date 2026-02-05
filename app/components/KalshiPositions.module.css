@@ -1,15 +1,17 @@
 /* KalshiPositions.module.css */
 
 .positions-container {
-  width: 100%;
-  padding: 2rem 1rem;
+  width: auto;
+  padding: 0 1rem 1rem 1rem;
   color: white;
+  max-width: 100%;
 }
 
 .positions-title {
   text-align: center;
   font-size: 2em;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .positions-grid {
@@ -318,7 +320,7 @@
 .total-pnl-container {
   width: 100%;
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 1.5rem;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border-radius: 12px;

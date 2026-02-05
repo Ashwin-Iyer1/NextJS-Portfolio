@@ -11,7 +11,7 @@ import { format, subDays } from 'date-fns';
 import Masonry from '@mui/lab/Masonry';
 import { Box } from '@mui/material';
 
-export default function OuraDashboard({ subset = null }) {
+export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2, lg: 3 } }) {
   const [useSandbox, setUseSandbox] = useState(false); // Default to false for prod
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode for aesthetics
   const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
@@ -125,7 +125,7 @@ export default function OuraDashboard({ subset = null }) {
       </div>
       
       <Box sx={{ width: '100%', padding: 2 }}>
-        <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={3}>
+        <Masonry columns={columns} spacing={3}>
             {visibleWidgets.map((widget) => (
                 <div key={widget.key}>
                     {widget.component}
