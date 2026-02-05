@@ -2,7 +2,7 @@
 Database Helper Functions
 Provides database connection and query utilities
 """
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 # load_dotenv()
 
 import psycopg2

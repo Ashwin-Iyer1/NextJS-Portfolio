@@ -5,6 +5,7 @@ import Bar from "../components/Bar";
 import SongList from "../components/SongList";
 import Coc from "../components/COC";
 import Link from "next/link";
+import OuraDashboard from "../components/OuraDashboard";
 
 export default function About() {
   return (
@@ -64,6 +65,13 @@ export default function About() {
             <div className={styles.songsCard}>
               <SongList />
             </div>
+
+          <div className={styles.ouraSection}>
+             <h2 className={styles.sectionTitle}>My Health Stats (Oura)</h2>
+             <div className={styles.ouraCard} style={{ width: '100%', overflow: 'hidden' }}>
+                <OuraDashboard />
+             </div>
+          </div>
           </div>
 
           <div className={styles.cocSection}>

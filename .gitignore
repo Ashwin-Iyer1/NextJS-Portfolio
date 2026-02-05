@@ -12,6 +12,8 @@
 # testing
 /coverage
 
+oura_tokens.json
+
 # next.js
 /.next/
 /out/
@@ -42,3 +44,4 @@ vars.env
 .env
 test.py
 test2.py
+wakatime_tokens.json

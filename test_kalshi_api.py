@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 from kalshi import get_user_holdings, process_holdings_with_series_info
 
-load_dotenv()
+# load_dotenv()
 
 def test_api_credentials():
     """Test if API credentials are configured"""

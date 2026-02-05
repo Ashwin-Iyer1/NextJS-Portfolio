@@ -15,6 +15,7 @@ import "./landing.css";
 import styles from "./page.module.css";
 import WorkExperience from "./components/WorkExperience.js";
 import KalshiPositions from "./components/KalshiPositions.js";
+import OuraDashboard from "./components/OuraDashboard.js";
 
 const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 
@@ -123,6 +124,14 @@ export default function Home() {
           </h2>
           <Skills />
         </div>
+        
+        <div style={{ marginTop: '40px', marginBottom: '40px' }}>
+          <h2 style={{ textAlign: "center", fontSize: "2em", marginBottom: '20px' }}>Live Health Stats</h2>
+          <div style={{ border: '1px solid #333', borderRadius: '16px', overflow: 'hidden' }}>
+            <OuraDashboard subset={['activity', 'sleep', 'stress']} />
+          </div>
+        </div>
+
         <div className={styles.MiscProj}>
           <h2 style={{ textAlign: "center", fontSize: "2em" }}>
             Miscellaneous Projects
