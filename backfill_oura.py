@@ -103,8 +103,17 @@ def main():
     print_result("Tags", client.get_tags(start_date, end_date), "tag")
     print_result("Enhanced Tags", client.get_enhanced_tags(start_date, end_date), "enhanced_tag")
     print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
-    print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
+    # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
     print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
+
+    # Fetch Personal Info (Singleton) - Backfilling this basically just grabs the current state
+    p_info = client.get_personal_info()
+    if p_info:
+        # Use latest date for backfill
+        upsert_oura_data("personal_info", today.isoformat(), p_info)
+        print("✅ Personal Info: Fetched and saved.")
+    else:
+        print("⚠️ Personal Info: No data.")
 
     print("\n🎉 Backfill Complete!")
 

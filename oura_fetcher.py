@@ -8,7 +8,7 @@ from token_manager import TokenManager
 from oura_db import create_oura_table, upsert_oura_data
 
 # Load environment variables
-# load_dotenv()
+load_dotenv()
 
 OURA_CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 OURA_CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
@@ -335,13 +335,36 @@ def main():
     # Fetch Rest Mode Periods
     print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
 
-    # Fetch Ring Config
-    print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
+    # Fetch Ring Config - REMOVED per user request
+    # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
 
     # Fetch VO2 Max
     print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
 
-
+    # Fetch Personal Info (Singleton)
+    # Personal Info does not use start/end dates usually, it's just the current snapshot or user info.
+    # Looking at spec, it has NO parameters? Or minimal? Spec says: GET /v2/usercollection/personal_info
+    # Let's check the client method: def get_personal_info(self) -> Dict[str, Any]: return self._get("/usercollection/personal_info")
+    # It has no date params.
+    
+    p_info = client.get_personal_info()
+    if p_info:
+        print(f"✅ Personal Info: Fetched.")
+        # upsert expects a dict. we can use a dummy date or "latest"?
+        # Schema is (data_type, date, data).
+        # Since personal info is static/current, maybe we use today's date?
+        # Or a fixed constant date like '1970-01-01' to just store the single latest record?
+        # Let's use today's date so we have history of it changing?
+        # Actually, user probably just wants the latest.
+        # But our schema requires a date.
+        
+        # Checking schema in oura_db.py: 
+        # PRIMARY KEY (id), UNIQUE (data_type, date)
+        
+        # Let's store it with today's date.
+        upsert_oura_data("personal_info", today.isoformat(), p_info)
+    else:
+        print("⚠️ Personal Info: No data.")
 
     print("\n✅ Oura data update complete.")
 

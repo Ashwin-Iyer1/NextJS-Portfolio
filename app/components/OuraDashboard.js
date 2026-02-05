@@ -5,9 +5,9 @@ import { usePortfolioOuraData } from '../../hooks/usePortfolioOuraData';
 import { 
   ActivityChart, ReadinessChart, SleepChart, StressChart, SpO2Chart, 
   HeartRateChart, WorkoutChart, ResilienceChart, CardioAgeChart, VO2MaxChart,
-  SleepDetailChart, RingConfigCard, SleepTimeCard, RestModeCard, SimpleListCard
+  SleepDetailChart, PersonalInfoCard, SleepTimeCard, RestModeCard, SimpleListCard
 } from './OuraCharts';
-import { format, subDays } from 'date-fns';
+import { format, subDays, parseISO } from 'date-fns';
 import Masonry from '@mui/lab/Masonry';
 import { Box } from '@mui/material';
 
@@ -78,7 +78,8 @@ export default function OuraDashboard({
     { key: 'vo2_max', component: <div className={cardClassName} style={getCardStyle()}><VO2MaxChart data={data.vo2_max} darkMode={darkMode} /></div> },
     { key: 'workout', component: <div className={cardClassName} style={getCardStyle()}><WorkoutChart data={data.workout} darkMode={darkMode} /></div> },
     { key: 'sleep_time', component: <div className={cardClassName} style={getCardStyle()}><SleepTimeCard data={data.sleep_time} darkMode={darkMode} /></div> },
-    { key: 'ring_config', component: <div className={cardClassName} style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
+    // { key: 'ring_config', component: <div className={cardClassName} style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
+    { key: 'personal_info', component: <div className={cardClassName} style={getCardStyle(null, compact ? '100%' : '350px')}><PersonalInfoCard data={data.personal_info} darkMode={darkMode} /></div> },
     { key: 'rest_mode', component: <div className={cardClassName} style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
     { key: 'tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
         <SimpleListCard 
@@ -88,6 +89,19 @@ export default function OuraDashboard({
             renderItem={(d) => (
                 <div style={{fontSize: '10px'}}>
                     <span style={{color: '#aaa'}}>{d.day}</span>: {d.text || d.tags?.join(', ')}
+                </div>
+            )}
+        />
+    </div> },
+    { key: 'enhanced_tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
+        <SimpleListCard 
+            title="ENHANCED TAGS" 
+            data={data.enhanced_tag} 
+            darkMode={darkMode}
+            renderItem={(d) => (
+                <div style={{fontSize: '10px'}}>
+                    <span style={{color: '#aaa'}}>{d.day}</span>: {d.tag_type_code}
+                    {d.start_time && <div style={{opacity: 0.5, fontSize: '8px'}}>{format(parseISO(d.start_time), 'HH:mm')} - {format(parseISO(d.end_time), 'HH:mm')}</div>}
                 </div>
             )}
         />

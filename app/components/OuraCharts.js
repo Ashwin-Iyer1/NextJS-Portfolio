@@ -1285,19 +1285,25 @@ const InfoCardContainer = ({ title, darkMode, children }) => {
   );
 };
 
-export const RingConfigCard = ({ data, darkMode = false }) => (
-  <InfoCardContainer title="RING CONFIG" darkMode={darkMode}>
-    {data.map((d, i) => (
-      <div key={i} style={{ marginBottom: 8, borderBottom: '1px solid #333', paddingBottom: 4 }}>
-        <div><strong>Color:</strong> {d.color}</div>
-        <div><strong>Size:</strong> {d.size}</div>
-        <div><strong>Firmware:</strong> {d.firmware_version}</div>
-        <div><strong>Setup:</strong> {d.set_up_at.split('T')[0]}</div>
+export const PersonalInfoCard = ({ data, darkMode = false }) => {
+  // Data is a single object, not an array of days usually.
+  // But our hook maps it: 'personal_info: mergedData.personal_info || null'
+  // So data is the object directly.
+  
+  if (!data) return <div style={{opacity: 0.5, padding: 20}}>No Personal Info</div>;
+  data = data[0];
+  return (
+  <InfoCardContainer title="PERSONAL INFO" darkMode={darkMode}>
+      <div style={{ marginBottom: 8, borderBottom: '1px solid #333', paddingBottom: 4 }}>
+        <div><strong>Age:</strong> {data.age}</div>
+        <div><strong>Weight:</strong> {data.weight} kg</div>
+        <div><strong>Height:</strong> {data.height} m</div>
+        <div><strong>Sex:</strong> {data.biological_sex}</div>
+        <div><strong>Email:</strong> {data.email}</div>
       </div>
-    ))}
-    {data.length === 0 && <div style={{ opacity: 0.5 }}>No Data</div>}
   </InfoCardContainer>
-);
+  );
+};
 
 export const SleepTimeCard = ({ data, darkMode = false }) => (
   <InfoCardContainer title="SLEEP WINDOWS" darkMode={darkMode}>

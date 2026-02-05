@@ -24,7 +24,9 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
           'sessions': 'session',
           'workout': 'workout',
           'tags': 'tag',
-          'ring_config': 'ring_configuration',
+          'enhanced_tags': 'enhanced_tag', // Explicit support
+          'personal_info': 'personal_info',
+          // 'ring_config': 'ring_configuration', // REMOVED
           'rest_mode': 'rest_mode_period',
           'vo2_max': 'vo2_max',
           'cardio_age': 'cardio_age'
@@ -34,7 +36,9 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
           'activity', 'readiness', 'sleep_daily', 'daily_stress', 
           'daily_spo2', 'daily_resilience', 'cardio_age', 'heart_rate',
           'sleep_detailed', 'sleep_time', 'session', 'workout', 
-          'tag', 'enhanced_tag', 'rest_mode_period', 'ring_configuration', 'vo2_max'
+          'tag', 'enhanced_tag', 'rest_mode_period', 'vo2_max',
+          'personal_info' // Added
+          // 'ring_configuration' // Removed
         ];
 
         // If a subset is provided, filter endpoints to only those requested
@@ -79,7 +83,8 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
             tag: mergedData.tag || [],
             enhanced_tag: mergedData.enhanced_tag || [],
             rest_mode_period: mergedData.rest_mode_period || [],
-            ring_configuration: mergedData.ring_configuration || [],
+            // ring_configuration: mergedData.ring_configuration || [],
+            personal_info: mergedData.personal_info || null, // Singleton
             vo2_max: mergedData.vo2_max || []
         };
 
