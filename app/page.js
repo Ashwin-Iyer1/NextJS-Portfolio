@@ -127,7 +127,13 @@ export default function Home() {
         
         <div style={{ marginTop: '40px', marginBottom: '40px' }}>
           <h2 style={{ textAlign: "center", fontSize: "2em", marginBottom: '20px' }}>Live Health Stats</h2>
-          <div style={{ border: '1px solid #333', borderRadius: '16px', overflow: 'hidden' }}>
+          <div style={{ 
+            background: 'linear-gradient(135deg, rgba(138, 44, 226, 0.30), rgba(0, 0, 0, 0.3))',
+            border: '1px solid rgba(138, 44, 226, 0.2)',
+            borderRadius: '16px', 
+            overflow: 'hidden',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)'
+          }}>
             <OuraDashboard subset={['activity', 'sleep', 'stress']} />
           </div>
         </div>

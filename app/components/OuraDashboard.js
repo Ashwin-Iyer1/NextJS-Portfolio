@@ -33,29 +33,46 @@ export default function OuraDashboard({ subset = null }) {
     minHeight: '200px'
   };
   
-  // Dynamic height for specific cards if needed, otherwise default 280px
   const getCardStyle = (h = '280px') => ({
-      ...cardStyle,
-      height: h
+    background: darkMode 
+      ? 'linear-gradient(135deg, rgba(138, 44, 226, 0.08), rgba(0, 0, 0, 0.3))' 
+      : '#fff',
+    border: darkMode ? '1px solid rgba(138, 44, 226, 0.2)' : '1px solid #ddd',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    boxShadow: darkMode ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 2px 10px rgba(0,0,0,0.1)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    height: h,
+    position: 'relative'
   });
+
+  // Unique class for hover effect
+  const cardClassName = "oura-card-widget";
+  
+  const hoverStyles = `
+    .oura-card-widget:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(138, 44, 226, 0.3) !important;
+    }
+  `;
 
   // Define all available widgets with unique keys and titles
   const allWidgets = [
-    { key: 'activity', component: <div style={getCardStyle()}><ActivityChart data={data.activity} darkMode={darkMode} /></div> },
-    { key: 'readiness', component: <div style={getCardStyle()}><ReadinessChart data={data.readiness} darkMode={darkMode} /></div> },
-    { key: 'sleep', component: <div style={getCardStyle()}><SleepChart data={data.sleep} darkMode={darkMode} /></div> },
-    { key: 'sleep_detail', component: <div style={getCardStyle()}><SleepDetailChart data={data.sleep} darkMode={darkMode} /></div> },
-    { key: 'stress', component: <div style={getCardStyle()}><StressChart data={data.daily_stress} darkMode={darkMode} /></div> },
-    { key: 'spo2', component: <div style={getCardStyle()}><SpO2Chart data={data.daily_spo2} darkMode={darkMode} /></div> },
-    { key: 'resilience', component: <div style={getCardStyle()}><ResilienceChart data={data.daily_resilience} darkMode={darkMode} /></div> },
-    { key: 'heart_rate', component: <div style={getCardStyle()}><HeartRateChart data={data.heart_rate} darkMode={darkMode} /></div> },
-    { key: 'cardio_age', component: <div style={getCardStyle()}><CardioAgeChart data={data.daily_cardiovascular_age} darkMode={darkMode} /></div> },
-    { key: 'vo2_max', component: <div style={getCardStyle()}><VO2MaxChart data={data.vo2_max} darkMode={darkMode} /></div> },
-    { key: 'workout', component: <div style={getCardStyle()}><WorkoutChart data={data.workout} darkMode={darkMode} /></div> },
-    { key: 'sleep_time', component: <div style={getCardStyle()}><SleepTimeCard data={data.sleep_time} darkMode={darkMode} /></div> },
-    { key: 'ring_config', component: <div style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
-    { key: 'rest_mode', component: <div style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
-    { key: 'tags', component: <div style={getCardStyle('350px')}>
+    { key: 'activity', component: <div className={cardClassName} style={getCardStyle()}><ActivityChart data={data.activity} darkMode={darkMode} /></div> },
+    { key: 'readiness', component: <div className={cardClassName} style={getCardStyle()}><ReadinessChart data={data.readiness} darkMode={darkMode} /></div> },
+    { key: 'sleep', component: <div className={cardClassName} style={getCardStyle()}><SleepChart data={data.sleep} darkMode={darkMode} /></div> },
+    { key: 'sleep_detail', component: <div className={cardClassName} style={getCardStyle()}><SleepDetailChart data={data.sleep} darkMode={darkMode} /></div> },
+    { key: 'stress', component: <div className={cardClassName} style={getCardStyle()}><StressChart data={data.daily_stress} darkMode={darkMode} /></div> },
+    { key: 'spo2', component: <div className={cardClassName} style={getCardStyle()}><SpO2Chart data={data.daily_spo2} darkMode={darkMode} /></div> },
+    { key: 'resilience', component: <div className={cardClassName} style={getCardStyle()}><ResilienceChart data={data.daily_resilience} darkMode={darkMode} /></div> },
+    { key: 'heart_rate', component: <div className={cardClassName} style={getCardStyle()}><HeartRateChart data={data.heart_rate} darkMode={darkMode} /></div> },
+    { key: 'cardio_age', component: <div className={cardClassName} style={getCardStyle()}><CardioAgeChart data={data.daily_cardiovascular_age} darkMode={darkMode} /></div> },
+    { key: 'vo2_max', component: <div className={cardClassName} style={getCardStyle()}><VO2MaxChart data={data.vo2_max} darkMode={darkMode} /></div> },
+    { key: 'workout', component: <div className={cardClassName} style={getCardStyle()}><WorkoutChart data={data.workout} darkMode={darkMode} /></div> },
+    { key: 'sleep_time', component: <div className={cardClassName} style={getCardStyle()}><SleepTimeCard data={data.sleep_time} darkMode={darkMode} /></div> },
+    { key: 'ring_config', component: <div className={cardClassName} style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
+    { key: 'rest_mode', component: <div className={cardClassName} style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
+    { key: 'tags', component: <div className={cardClassName} style={getCardStyle('350px')}>
         <SimpleListCard 
             title="TAGS" 
             data={data.tag} 
@@ -67,7 +84,7 @@ export default function OuraDashboard({ subset = null }) {
             )}
         />
     </div> },
-    { key: 'sessions', component: <div style={getCardStyle('350px')}>
+    { key: 'sessions', component: <div className={cardClassName} style={getCardStyle('350px')}>
         <SimpleListCard 
             title="SESSIONS" 
             data={data.session} 
@@ -87,18 +104,27 @@ export default function OuraDashboard({ subset = null }) {
     : allWidgets;
 
   return (
-    <div style={{ backgroundColor: darkMode ? '#000' : '#fff', minHeight: '100%', paddingBottom: '40px' }}>
-      <div className="p-6 flex justify-between items-center bg-black border-b border-gray-900 sticky top-0 z-50 backdrop-blur-md bg-opacity-80">
+    <div style={{ backgroundColor: 'black', minHeight: '100%', paddingBottom: '40px' }}>
+      <div className="p-6 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md" 
+           style={{
+             background: 'rgba(255, 255, 255, 0.03)',
+             borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+           }}>
+        <style>{hoverStyles}</style>
         <div>
-            <h1 className="text-2xl font-bold text-white tracking-[0.2em] font-mono">OURA <span style={{color: '#00f2fe'}}>STATS</span></h1>
-            <div className="text-[10px] text-gray-500 font-mono mt-1 tracking-widest">SYSTEM ONLINE // MONITORING ACTIVE</div>
+            <h2 className="text-2xl font-bold font-sans" style={{ color: '#c596ee', margin: 0 }}>OURA STATS</h2>
         </div>
-        <div className="text-xs text-[#00f2fe] font-mono border border-[#00f2fe] px-3 py-1 rounded-full bg-[#00f2fe10]">
-            {startDate} <span className="mx-2 text-gray-600">to</span> {endDate}
+        <div className="text-sm font-sans px-3 py-1 rounded-full" 
+             style={{ 
+               color: '#e4e4e4',
+               background: 'rgba(255, 255, 255, 0.1)',
+               border: '1px solid rgba(255, 255, 255, 0.1)'
+             }}>
+            {startDate} <span className="mx-2 text-gray-400">to</span> {endDate}
         </div>
       </div>
       
-      <Box sx={{ width: '100%', minHeight: 800, padding: 2 }}>
+      <Box sx={{ width: '100%', padding: 2 }}>
         <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={3}>
             {visibleWidgets.map((widget) => (
                 <div key={widget.key}>

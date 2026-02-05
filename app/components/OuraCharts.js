@@ -16,12 +16,13 @@ const getTheme = (darkMode) => ({
   text: darkMode ? '#e0e0e0' : '#000000',
   grid: darkMode ? '#222222' : '#e0e0e0',
   tooltipBg: darkMode ? '#111111' : '#ffffff',
-  tooltipColor: darkMode ? '#00f2fe' : '#000000',
+  tooltipBg: darkMode ? '#111111' : '#ffffff',
+  tooltipColor: darkMode ? '#c596ee' : '#000000',
   tooltipBorder: darkMode ? '#333333' : '#cccccc',
-  bar: darkMode ? '#00f2fe' : '#000000',
-  line: darkMode ? '#00f2fe' : '#000000',
-  areaGradientFrom: darkMode ? '#4facfe' : '#000000',
-  areaGradientTo: darkMode ? '#00f2fe' : '#ffffff',
+  bar: darkMode ? '#c596ee' : '#000000',
+  line: darkMode ? '#c596ee' : '#000000',
+  areaGradientFrom: darkMode ? '#8a2ce2' : '#000000',
+  areaGradientTo: darkMode ? '#c596ee' : '#ffffff',
   accent: darkMode ? '#ff0844' : '#ff0000', // For critical alerts or high stress
 });
 
@@ -45,7 +46,7 @@ const BaseChart = ({ width, height, darkMode, title, children }) => {
         letterSpacing: '2px',
         fontWeight: 'bold',
         opacity: 0.8,
-        textShadow: darkMode ? '0 0 5px rgba(0, 242, 254, 0.5)' : 'none',
+        textShadow: darkMode ? '0 0 5px rgba(197, 150, 238, 0.5)' : 'none',
         zIndex: 10
       }}>
         {title}
@@ -219,12 +220,12 @@ export const ReadinessChart = ({ data, darkMode = false }) => {
                   curve={curveMonotoneX}
                 />
 
-                <LinePath
+                  <LinePath
                   data={data}
                   x={d => xScale(getX(d)) ?? 0}
                   y={d => yScale(getScore(d) || 0) ?? 0}
                   stroke={theme.line}
-                  strokeWidth={1} 
+                  strokeWidth={2} 
                   curve={curveMonotoneX}
                 />
                 
@@ -761,20 +762,12 @@ export const ResilienceChart = ({ data, darkMode = false }) => {
                   strokeWidth={1} 
                   curve={curveMonotoneX}
                 />
-                 <LinePath
-                  data={data}
-                  x={d => xScale(getX(d)) ?? 0}
-                  y={d => yScale(getContributor(d, 'daytime_recovery')) ?? 0}
-                  stroke="#00f2fe" // Cyan
-                  strokeWidth={1} 
-                  curve={curveMonotoneX}
-                />
-                 <LinePath
+                  <LinePath
                   data={data}
                   x={d => xScale(getX(d)) ?? 0}
                   y={d => yScale(getContributor(d, 'stress')) ?? 0}
                   stroke="#ff0844" // Red
-                  strokeWidth={1} 
+                  strokeWidth={2} 
                   curve={curveMonotoneX}
                 />
               </Group>
