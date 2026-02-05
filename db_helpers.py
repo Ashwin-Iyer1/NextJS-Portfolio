@@ -14,14 +14,28 @@ import os
 
 
 # Database connection parameters from environment variables
-db_params = {
-    'dbname': os.getenv('dbname'),
-    'user': os.getenv('user'),
-    'password': os.getenv('password'),  # Replace with your actual password
-    'host': os.getenv('host'),
-    'port': '5432'
-}
+from urllib.parse import urlparse
 
+def get_db_params():
+    """Parsing database params from DATABASE_URL or individual env vars."""
+    database_url = os.getenv('DATABASE_URL')
+    if database_url:
+        result = urlparse(database_url)
+        return {
+            'dbname': result.path[1:],
+            'user': result.username,
+            'password': result.password,
+            'host': result.hostname,
+            'port': result.port
+        }
+    else:
+        return {
+            'dbname': os.getenv('dbname'),
+            'user': os.getenv('user'),
+            'password': os.getenv('password'),
+            'host': os.getenv('host'),
+            'port': '5432'
+        }
 
 @contextmanager
 def get_db_connection(use_dict_cursor: bool = False):
@@ -35,13 +49,14 @@ def get_db_connection(use_dict_cursor: bool = False):
     connection = None
     cursor = None
     try:
-        connection = psycopg2.connect(**db_params)
+        connection = psycopg2.connect(**get_db_params())
         cursor = connection.cursor(cursor_factory=RealDictCursor) if use_dict_cursor else connection.cursor()
         yield connection, cursor
     except Exception as error:
         if connection:
             connection.rollback()
         raise error
+
     finally:
         if cursor:
             cursor.close()
