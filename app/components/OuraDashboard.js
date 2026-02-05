@@ -11,13 +11,20 @@ import { format, subDays } from 'date-fns';
 import Masonry from '@mui/lab/Masonry';
 import { Box } from '@mui/material';
 
-export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2, lg: 3 } }) {
+export default function OuraDashboard({ 
+  subset = null, 
+  columns = { xs: 1, sm: 2, lg: 3 },
+  chartHeight = '280px',
+  chartWidth = '100%',
+  showHeader = true,
+  compact = false
+}) {
   const [useSandbox, setUseSandbox] = useState(false); // Default to false for prod
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode for aesthetics
   const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [startDate, setStartDate] = useState(format(subDays(new Date(), 30), 'yyyy-MM-dd')); // Last 30 days
 
-  const { data, loading, error } = usePortfolioOuraData(startDate, endDate);
+  const { data, loading, error } = usePortfolioOuraData(startDate, endDate, subset);
 
   if (loading) return <div className="text-white p-4 font-mono">LOADING OURA DATA...</div>;
   if (error) return <div className="text-red-500 p-4 font-mono">ERROR: {error}</div>;
@@ -33,7 +40,7 @@ export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2,
     minHeight: '200px'
   };
   
-  const getCardStyle = (h = '280px') => ({
+  const getCardStyle = (h = chartHeight, w = chartWidth) => ({
     background: darkMode 
       ? 'linear-gradient(135deg, rgba(138, 44, 226, 0.08), rgba(0, 0, 0, 0.3))' 
       : '#fff',
@@ -43,6 +50,7 @@ export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2,
     boxShadow: darkMode ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 2px 10px rgba(0,0,0,0.1)',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
     height: h,
+    width: w,
     position: 'relative'
   });
 
@@ -59,20 +67,20 @@ export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2,
   // Define all available widgets with unique keys and titles
   const allWidgets = [
     { key: 'activity', component: <div className={cardClassName} style={getCardStyle()}><ActivityChart data={data.activity} darkMode={darkMode} /></div> },
-    { key: 'readiness', component: <div className={cardClassName} style={getCardStyle()}><ReadinessChart data={data.readiness} darkMode={darkMode} /></div> },
+    { key: 'heart_rate', component: <div className={cardClassName} style={getCardStyle()}><HeartRateChart data={data.heart_rate} darkMode={darkMode} /></div> },
     { key: 'sleep', component: <div className={cardClassName} style={getCardStyle()}><SleepChart data={data.sleep} darkMode={darkMode} /></div> },
     { key: 'sleep_detail', component: <div className={cardClassName} style={getCardStyle()}><SleepDetailChart data={data.sleep} darkMode={darkMode} /></div> },
+    { key: 'readiness', component: <div className={cardClassName} style={getCardStyle()}><ReadinessChart data={data.readiness} darkMode={darkMode} /></div> },
     { key: 'stress', component: <div className={cardClassName} style={getCardStyle()}><StressChart data={data.daily_stress} darkMode={darkMode} /></div> },
     { key: 'spo2', component: <div className={cardClassName} style={getCardStyle()}><SpO2Chart data={data.daily_spo2} darkMode={darkMode} /></div> },
     { key: 'resilience', component: <div className={cardClassName} style={getCardStyle()}><ResilienceChart data={data.daily_resilience} darkMode={darkMode} /></div> },
-    { key: 'heart_rate', component: <div className={cardClassName} style={getCardStyle()}><HeartRateChart data={data.heart_rate} darkMode={darkMode} /></div> },
     // { key: 'cardio_age', component: <div className={cardClassName} style={getCardStyle()}><CardioAgeChart data={data.daily_cardiovascular_age} darkMode={darkMode} /></div> },
     // { key: 'vo2_max', component: <div className={cardClassName} style={getCardStyle()}><VO2MaxChart data={data.vo2_max} darkMode={darkMode} /></div> },
     // { key: 'workout', component: <div className={cardClassName} style={getCardStyle()}><WorkoutChart data={data.workout} darkMode={darkMode} /></div> },
     { key: 'sleep_time', component: <div className={cardClassName} style={getCardStyle()}><SleepTimeCard data={data.sleep_time} darkMode={darkMode} /></div> },
     { key: 'ring_config', component: <div className={cardClassName} style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
     { key: 'rest_mode', component: <div className={cardClassName} style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
-    { key: 'tags', component: <div className={cardClassName} style={getCardStyle('350px')}>
+    { key: 'tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
         <SimpleListCard 
             title="TAGS" 
             data={data.tag} 
@@ -84,7 +92,7 @@ export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2,
             )}
         />
     </div> },
-    { key: 'sessions', component: <div className={cardClassName} style={getCardStyle('350px')}>
+    { key: 'sessions', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
         <SimpleListCard 
             title="SESSIONS" 
             data={data.session} 
@@ -104,28 +112,31 @@ export default function OuraDashboard({ subset = null, columns = { xs: 1, sm: 2,
     : allWidgets;
 
   return (
-    <div style={{ backgroundColor: 'black', minHeight: '100%', paddingBottom: '40px' }}>
-      <div className="p-6 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md" 
-           style={{
-             background: 'rgba(255, 255, 255, 0.03)',
-             borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
-           }}>
-        <style>{hoverStyles}</style>
-        <div>
-            <h2 className="text-2xl font-bold font-sans" style={{ color: '#c596ee', margin: 0 }}>OURA STATS</h2>
-        </div>
-        <div className="text-sm font-sans px-3 py-1 rounded-full" 
-             style={{ 
-               color: '#e4e4e4',
-               background: 'rgba(255, 255, 255, 0.1)',
-               border: '1px solid rgba(255, 255, 255, 0.1)'
-             }}>
-            {startDate} <span className="mx-2 text-gray-400">to</span> {endDate}
-        </div>
-      </div>
+    <div style={{ backgroundColor: 'black', minHeight: '100%', paddingBottom: compact ? '0' : '40px' }}>
+      <style>{hoverStyles}</style>
       
-      <Box sx={{ width: '100%', padding: 2 }}>
-        <Masonry columns={columns} spacing={3}>
+      {showHeader && (
+        <div className="p-6 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md" 
+             style={{
+               background: 'rgba(255, 255, 255, 0.03)',
+               borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+             }}>
+          <div>
+              <h2 className="text-2xl font-bold font-sans" style={{ color: '#c596ee', margin: 0 }}>OURA STATS</h2>
+          </div>
+          <div className="text-sm font-sans px-3 py-1 rounded-full" 
+               style={{ 
+                 color: '#e4e4e4',
+                 background: 'rgba(255, 255, 255, 0.1)',
+                 border: '1px solid rgba(255, 255, 255, 0.1)'
+               }}>
+              {startDate} <span className="mx-2 text-gray-400">to</span> {endDate}
+          </div>
+        </div>
+      )}
+      
+      <Box sx={{ width: '100%', padding: compact ? 1 : 2 }}>
+        <Masonry columns={columns} spacing={compact ? 1 : 3}>
             {visibleWidgets.map((widget) => (
                 <div key={widget.key}>
                     {widget.component}

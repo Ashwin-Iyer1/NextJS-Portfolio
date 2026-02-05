@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePortfolioOuraData = (startDate, endDate) => {
+export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,12 +10,44 @@ export const usePortfolioOuraData = (startDate, endDate) => {
       setLoading(true);
       setError(null);
       try {
-        const endpoints = [
+        // Mapping from OuraDashboard subset keys to API endpoint types
+        const subsetToEndpointMap = {
+          'activity': 'activity',
+          'readiness': 'readiness',
+          'sleep': 'sleep_daily',
+          'sleep_detail': 'sleep_detailed',
+          'stress': 'daily_stress',
+          'spo2': 'daily_spo2',
+          'resilience': 'daily_resilience',
+          'heart_rate': 'heart_rate',
+          'sleep_time': 'sleep_time',
+          'sessions': 'session',
+          'workout': 'workout',
+          'tags': 'tag',
+          'ring_config': 'ring_configuration',
+          'rest_mode': 'rest_mode_period',
+          'vo2_max': 'vo2_max',
+          'cardio_age': 'cardio_age'
+        };
+
+        let endpoints = [
           'activity', 'readiness', 'sleep_daily', 'daily_stress', 
           'daily_spo2', 'daily_resilience', 'cardio_age', 'heart_rate',
           'sleep_detailed', 'sleep_time', 'session', 'workout', 
           'tag', 'enhanced_tag', 'rest_mode_period', 'ring_configuration', 'vo2_max'
         ];
+
+        // If a subset is provided, filter endpoints to only those requested
+        if (subset && Array.isArray(subset)) {
+          endpoints = subset
+            .map(key => subsetToEndpointMap[key])
+            .filter(endpoint => endpoint !== undefined);
+            
+          // If tags are requested, always include enhanced_tag as well for fallback/completeness
+          if (subset.includes('tags')) {
+            endpoints.push('enhanced_tag');
+          }
+        }
 
         const results = await Promise.all(
           endpoints.map(type => 
@@ -31,19 +63,15 @@ export const usePortfolioOuraData = (startDate, endDate) => {
         // Merge all results into a single object
         const mergedData = results.reduce((acc, curr) => ({ ...acc, ...curr }), {});
         
-        // Map keys to match the visualizer's expected prop names if necessary
-        // The visualizer expects: activity, readiness, sleep, daily_stress, etc.
-        // My endpoints use keys like 'sleep_daily'.
-        
         const mappedData = {
             activity: mergedData.activity || [],
             readiness: mergedData.readiness || [],
-            sleep: mergedData.sleep_daily || [], // "sleep" in visualizer matches daily_sleep
+            sleep: mergedData.sleep_daily || [],
             daily_stress: mergedData.daily_stress || [],
             daily_spo2: mergedData.daily_spo2 || [],
             daily_resilience: mergedData.daily_resilience || [],
             daily_cardiovascular_age: mergedData.cardio_age || [],
-            heart_rate: mergedData.heart_rate || [], // Flattened or processed by API? API returns flat list if 'heart_rate'.
+            heart_rate: mergedData.heart_rate || [],
             workout: mergedData.workout || [],
             sleep_documents: mergedData.sleep_detailed || [],
             sleep_time: mergedData.sleep_time || [],
@@ -67,7 +95,7 @@ export const usePortfolioOuraData = (startDate, endDate) => {
     if (startDate && endDate) {
       fetchData();
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, JSON.stringify(subset)]);
 
   return { data, loading, error };
 };

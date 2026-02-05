@@ -181,7 +181,14 @@ export default function Home() {
                 boxShadow: "0 4px 16px rgba(0, 0, 0, 0.4)",
               }}
             >
-              <OuraDashboard subset={["activity", "sleep", "stress"]} columns={1} />
+              <OuraDashboard 
+                subset={["activity", "heart_rate", "sleep", "stress"]} 
+                columns={1} 
+                chartHeight="180px"
+                chartWidth="100%"
+                showHeader={true}
+                compact={true}
+              />
             </div>
           </div>
 
