@@ -196,6 +196,8 @@ export const ActivityChart = ({ data, darkMode = false }) => {
 export const ReadinessChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
 
+  if (!hasValidData(data)) return <EmptyState title="READINESS" darkMode={darkMode} />;
+
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
       <ParentSize>
@@ -296,6 +298,8 @@ export const ReadinessChart = ({ data, darkMode = false }) => {
 // --- Sleep Chart (Grouped Bar) ---
 export const SleepChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+  
+  if (!hasValidData(data)) return <EmptyState title="SLEEP CONTRIBUTORS" darkMode={darkMode} />;
   
   // Define colors for each contributor - each is an independent score [1-100]
   const contributors = [
@@ -433,88 +437,142 @@ export const SleepChart = ({ data, darkMode = false }) => {
   );
 };
 
-// --- Stress Chart ---
+// --- Stress Chart (Grouped: Stress vs Recovery) ---
 export const StressChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
   
+  if (!hasValidData(data)) return <EmptyState title="STRESS & RECOVERY" darkMode={darkMode} />;
+  
+  // Define the two metrics to show
+  const metrics = [
+    { key: 'stress_high', label: 'Stress', color: theme.accent },
+    { key: 'recovery_high', label: 'Recovery', color: theme.recovery }
+  ];
+
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
-      <ParentSize>
-        {({ width, height }) => {
-          if (width < 10 || height < 10) return null;
-          
-          const margin = { top: 20, right: 10, bottom: 20, left: 30 };
-          const xMax = width - margin.left - margin.right;
-          const yMax = height - margin.top - margin.bottom;
+    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* Legend */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        gap: '16px', 
+        padding: '4px 8px 0',
+        fontSize: '9px',
+        fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+      }}>
+        {metrics.map(m => (
+          <div key={m.key} style={{ display: 'flex', alignItems: 'center', color: theme.text }}>
+            <div style={{ width: 8, height: 8, borderRadius: '2px', backgroundColor: m.color, marginRight: 4 }} />
+            <span style={{ opacity: 0.8 }}>{m.label}</span>
+          </div>
+        ))}
+      </div>
 
-          const getStress = (d) => d.stress_high;
-          
-          const xScale = scaleBand({
-            range: [0, xMax],
-            round: true,
-            domain: data.map(d => d.day),
-            padding: 0.2,
-          });
-          
-          const yScale = scaleLinear({
-            range: [yMax, 0],
-            round: true,
-            domain: [0, Math.max(...data.map(getStress), 100) || 100],
-          });
+      <div style={{ flex: 1, minHeight: 0 }}>
+        <ParentSize>
+          {({ width, height }) => {
+            if (width < 10 || height < 10) return null;
+            
+            const margin = { top: 10, right: 10, bottom: 20, left: 35 };
+            const xMax = width - margin.left - margin.right;
+            const yMax = height - margin.top - margin.bottom;
 
-          return (
-            <BaseChart width={width} height={height} darkMode={darkMode} title="STRESS (HIGH)">
-              <Group left={margin.left} top={margin.top}>
-                <GridRows scale={yScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
-                <AxisBottom
-                  top={yMax}
-                  scale={xScale}
-                  tickFormat={(d) => format(parseISO(d), 'dd')}
-                  stroke={theme.text}
-                  tickStroke={theme.text}
-                  tickLabelProps={() => ({
-                    fill: theme.text,
-                    fontSize: 8,
-                    textAnchor: 'middle',
-                    fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+            const getVal = (d, key) => d[key] || 0;
+            
+            // Outer scale for days
+            const xScale = scaleBand({
+              range: [0, xMax],
+              round: true,
+              domain: data.map(d => d.day),
+              padding: 0.15,
+            });
+            
+            // Inner scale for the two metrics
+            const xInnerScale = scaleBand({
+              range: [0, xScale.bandwidth()],
+              domain: metrics.map(m => m.key),
+              padding: 0.1,
+            });
+            
+            // Find max across both metrics
+            const maxVal = Math.max(
+              ...data.map(d => Math.max(getVal(d, 'stress_high'), getVal(d, 'recovery_high'))),
+              60
+            );
+            
+            const yScale = scaleLinear({
+              range: [yMax, 0],
+              round: true,
+              domain: [0, maxVal],
+            });
+
+            return (
+              <BaseChart width={width} height={height} darkMode={darkMode} title="STRESS & RECOVERY">
+                <Group left={margin.left} top={margin.top}>
+                  <GridRows scale={yScale} width={xMax} height={yMax} stroke={theme.grid} strokeDasharray="1 3" strokeWidth={0.5} />
+                  <AxisBottom
+                    top={yMax}
+                    scale={xScale}
+                    tickFormat={(d) => format(parseISO(d), 'dd')}
+                    stroke={theme.text}
+                    tickStroke={theme.text}
+                    tickLabelProps={() => ({
+                      fill: theme.text,
+                      fontSize: 8,
+                      textAnchor: 'middle',
+                      fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+                    })}
+                  />
+                  <AxisLeft
+                    scale={yScale}
+                    stroke={theme.text}
+                    tickStroke={theme.text}
+                    numTicks={4}
+                    tickFormat={(v) => `${Math.round(v / 60)}m`}
+                    tickLabelProps={() => ({
+                      fill: theme.text,
+                      fontSize: 8,
+                      textAnchor: 'end',
+                      dy: '0.33em',
+                      fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+                    })}
+                  />
+                  
+                  {/* Grouped bars for each day */}
+                  {data.map((d) => {
+                    const day = d.day;
+                    const groupX = xScale(day);
+                    
+                    return (
+                      <Group key={`group-${day}`} left={groupX}>
+                        {metrics.map((m) => {
+                          const value = getVal(d, m.key);
+                          const barWidth = xInnerScale.bandwidth();
+                          const barHeight = yMax - yScale(value);
+                          const barX = xInnerScale(m.key);
+                          const barY = yMax - barHeight;
+                          
+                          return (
+                            <Bar
+                              key={`bar-${day}-${m.key}`}
+                              x={barX}
+                              y={barY}
+                              width={barWidth}
+                              height={barHeight}
+                              fill={m.color}
+                              fillOpacity={0.85}
+                            />
+                          );
+                        })}
+                      </Group>
+                    );
                   })}
-                />
-                <AxisLeft
-                  scale={yScale}
-                  stroke={theme.text}
-                  tickStroke={theme.text}
-                  numTicks={4}
-                  tickLabelProps={() => ({
-                    fill: theme.text,
-                    fontSize: 8,
-                    textAnchor: 'end',
-                    dy: '0.33em',
-                    fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
-                  })}
-                />
-                {data.map((d) => {
-                  const day = d.day;
-                  const barWidth = xScale.bandwidth();
-                  const barHeight = yMax - (yScale(getStress(d)) ?? 0);
-                  const barX = xScale(day);
-                  const barY = yMax - barHeight;
-                  return (
-                    <Bar
-                      key={`bar-${day}`}
-                      x={barX}
-                      y={barY}
-                      width={barWidth}
-                      height={barHeight}
-                      fill={theme.bar}
-                      fillOpacity={1}
-                    />
-                  );
-                })}
-              </Group>
-            </BaseChart>
-          );
-        }}
-      </ParentSize>
+                </Group>
+              </BaseChart>
+            );
+          }}
+        </ParentSize>
+      </div>
     </div>
   );
 };
@@ -522,6 +580,8 @@ export const StressChart = ({ data, darkMode = false }) => {
 // --- SpO2 Chart ---
 export const SpO2Chart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+
+  if (!hasValidData(data)) return <EmptyState title="SpO2 %" darkMode={darkMode} />;
 
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
@@ -623,6 +683,8 @@ export const SpO2Chart = ({ data, darkMode = false }) => {
 export const HeartRateChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
 
+  if (!hasValidData(data)) return <EmptyState title="HEART RATE" darkMode={darkMode} />;
+
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
       <ParentSize>
@@ -704,6 +766,8 @@ export const HeartRateChart = ({ data, darkMode = false }) => {
 // --- Workout Chart ---
 export const WorkoutChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+  
+  if (!hasValidData(data)) return <EmptyState title="WORKOUT CALS" darkMode={darkMode} />;
   
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
@@ -794,6 +858,8 @@ export const WorkoutChart = ({ data, darkMode = false }) => {
 export const ResilienceChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
 
+  if (!hasValidData(data)) return <EmptyState title="RESILIENCE" darkMode={darkMode} />;
+
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
       <ParentSize>
@@ -879,6 +945,8 @@ export const ResilienceChart = ({ data, darkMode = false }) => {
 // --- Cardiovascular Age Chart ---
 export const CardioAgeChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+
+  if (!hasValidData(data)) return <EmptyState title="VASCULAR AGE" darkMode={darkMode} />;
 
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
@@ -974,6 +1042,8 @@ export const CardioAgeChart = ({ data, darkMode = false }) => {
 export const VO2MaxChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
 
+  if (!hasValidData(data)) return <EmptyState title="VO2 MAX" darkMode={darkMode} />;
+
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
       <ParentSize>
@@ -1066,6 +1136,8 @@ export const VO2MaxChart = ({ data, darkMode = false }) => {
 // --- Sleep Detail Chart (Stacked Durations) ---
 export const SleepDetailChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
+
+  if (!hasValidData(data)) return <EmptyState title="SLEEP PHASES" darkMode={darkMode} />;
 
   return (
     <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
