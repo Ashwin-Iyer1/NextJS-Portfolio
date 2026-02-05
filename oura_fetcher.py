@@ -324,22 +324,22 @@ def main():
     print_result("Workouts", client.get_workouts(start_date, end_date), "workout")
 
     # Fetch Sessions
-    print_result("Sessions", client.get_sessions(start_date, end_date), "session")
+    # print_result("Sessions", client.get_sessions(start_date, end_date), "session")
 
-    # Fetch Tags
-    print_result("Tags", client.get_tags(start_date, end_date), "tag")
+    # # Fetch Tags
+    # print_result("Tags", client.get_tags(start_date, end_date), "tag")
 
-    # Fetch Enhanced Tags
-    print_result("Enhanced Tags", client.get_enhanced_tags(start_date, end_date), "enhanced_tag")
+    # # Fetch Enhanced Tags
+    # print_result("Enhanced Tags", client.get_enhanced_tags(start_date, end_date), "enhanced_tag")
 
-    # Fetch Rest Mode Periods
-    print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
+    # # Fetch Rest Mode Periods
+    # print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
 
-    # Fetch Ring Config - REMOVED per user request
-    # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
+    # # Fetch Ring Config - REMOVED per user request
+    # # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
 
-    # Fetch VO2 Max
-    print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
+    # # Fetch VO2 Max
+    # print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
 
     # Fetch Personal Info (Singleton)
     # Personal Info does not use start/end dates usually, it's just the current snapshot or user info.
