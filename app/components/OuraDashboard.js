@@ -80,44 +80,44 @@ export default function OuraDashboard({
     { key: 'sleep_time', component: <div className={cardClassName} style={getCardStyle()}><SleepTimeCard data={data.sleep_time} darkMode={darkMode} /></div> },
     // { key: 'ring_config', component: <div className={cardClassName} style={getCardStyle()}><RingConfigCard data={data.ring_configuration} darkMode={darkMode} /></div> },
     { key: 'personal_info', component: <div className={cardClassName} style={getCardStyle(null, compact ? '100%' : '350px')}><PersonalInfoCard data={data.personal_info} darkMode={darkMode} /></div> },
-    { key: 'rest_mode', component: <div className={cardClassName} style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
-    { key: 'tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
-        <SimpleListCard 
-            title="TAGS" 
-            data={data.tag} 
-            darkMode={darkMode}
-            renderItem={(d) => (
-                <div style={{fontSize: '10px'}}>
-                    <span style={{color: '#aaa'}}>{d.day}</span>: {d.text || d.tags?.join(', ')}
-                </div>
-            )}
-        />
-    </div> },
-    { key: 'enhanced_tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
-        <SimpleListCard 
-            title="ENHANCED TAGS" 
-            data={data.enhanced_tag} 
-            darkMode={darkMode}
-            renderItem={(d) => (
-                <div style={{fontSize: '10px'}}>
-                    <span style={{color: '#aaa'}}>{d.day}</span>: {d.tag_type_code}
-                    {d.start_time && <div style={{opacity: 0.5, fontSize: '8px'}}>{format(parseISO(d.start_time), 'HH:mm')} - {format(parseISO(d.end_time), 'HH:mm')}</div>}
-                </div>
-            )}
-        />
-    </div> },
-    { key: 'sessions', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
-        <SimpleListCard 
-            title="SESSIONS" 
-            data={data.session} 
-            darkMode={darkMode}
-            renderItem={(d) => (
-                <div style={{fontSize: '10px'}}>
-                    <span style={{color: '#aaa'}}>{d.day}</span>: {d.type} ({Math.round(d.duration / 60)}m)
-                </div>
-            )}
-        />
-    </div> }
+    // { key: 'rest_mode', component: <div className={cardClassName} style={getCardStyle()}><RestModeCard data={data.rest_mode_period} darkMode={darkMode} /></div> },
+    // { key: 'tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
+    //     <SimpleListCard 
+    //         title="TAGS" 
+    //         data={data.tag} 
+    //         darkMode={darkMode}
+    //         renderItem={(d) => (
+    //             <div style={{fontSize: '10px'}}>
+    //                 <span style={{color: '#aaa'}}>{d.day}</span>: {d.text || d.tags?.join(', ')}
+    //             </div>
+    //         )}
+    //     />
+    // </div> },
+    // { key: 'enhanced_tags', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
+    //     <SimpleListCard 
+    //         title="ENHANCED TAGS" 
+    //         data={data.enhanced_tag} 
+    //         darkMode={darkMode}
+    //         renderItem={(d) => (
+    //             <div style={{fontSize: '10px'}}>
+    //                 <span style={{color: '#aaa'}}>{d.day}</span>: {d.tag_type_code}
+    //                 {d.start_time && <div style={{opacity: 0.5, fontSize: '8px'}}>{format(parseISO(d.start_time), 'HH:mm')} - {format(parseISO(d.end_time), 'HH:mm')}</div>}
+    //             </div>
+    //         )}
+    //     />
+    // </div> },
+    // { key: 'sessions', component: <div className={cardClassName} style={getCardStyle(compact ? '250px' : '350px')}>
+    //     <SimpleListCard 
+    //         title="SESSIONS" 
+    //         data={data.session} 
+    //         darkMode={darkMode}
+    //         renderItem={(d) => (
+    //             <div style={{fontSize: '10px'}}>
+    //                 <span style={{color: '#aaa'}}>{d.day}</span>: {d.type} ({Math.round(d.duration / 60)}m)
+    //             </div>
+    //         )}
+    //     />
+    // </div> }
   ];
 
   // Filter widgets if subset is provided
