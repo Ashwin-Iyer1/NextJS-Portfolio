@@ -15,11 +15,39 @@ export async function GET(request) {
     if (type) {
       conditions.push(`data_type = $${values.length + 1}`);
       values.push(type);
+      
+      // OPTIMIZATION: If requesting heart_rate, limit to last 1 days (24h)
+      // The frontend only needs the last 24h, but we fetch 48h to be safe with timezones/rolling windows.
+      if (type === 'heart_rate') {
+          const oneDayAgo = new Date();
+          oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+          const formattedDate = oneDayAgo.toISOString().split('T')[0]; // YYYY-MM-DD
+          
+          // Override or set startDate
+          // We don't change the `values` array for startDate yet because we handle it below
+          // But we need to make sure we don't double-add if startDate was passed in query
+          // Actually, let's just update the local variable `startDate` which is used below.
+          // BUT `startDate` is a const from searchParams. We need to use a let or a new variable.
+      }
     }
 
-    if (startDate) {
+    // Use a mutable variable for effective start date
+    let effectiveStartDate = startDate;
+    if (type === 'heart_rate') {
+       const oneDayAgo = new Date();
+       oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+       const limitDate = oneDayAgo.toISOString().split('T')[0]; // YYYY-MM-DD
+       
+       // If user didn't request a date, or requested a date older than our limit, enforce limit.
+       // If user requested a date NEWER than our limit (e.g. "today"), respect it.
+       if (!startDate || startDate < limitDate) {
+           effectiveStartDate = limitDate;
+       }
+    }
+
+    if (effectiveStartDate) {
       conditions.push(`date >= $${values.length + 1}`);
-      values.push(startDate);
+      values.push(effectiveStartDate);
     }
 
     if (endDate) {

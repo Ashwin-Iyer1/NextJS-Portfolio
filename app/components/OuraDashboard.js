@@ -7,7 +7,7 @@ import {
   HeartRateChart, WorkoutChart, ResilienceChart, CardioAgeChart, VO2MaxChart,
   SleepDetailChart, PersonalInfoCard, SleepTimeCard, RestModeCard, SimpleListCard
 } from './OuraCharts';
-import { format, subDays, parseISO } from 'date-fns';
+import { format, subDays, parseISO, addDays } from 'date-fns';
 import Masonry from '@mui/lab/Masonry';
 import { Box } from '@mui/material';
 
@@ -21,8 +21,8 @@ export default function OuraDashboard({
 }) {
   const [useSandbox, setUseSandbox] = useState(false); // Default to false for prod
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode for aesthetics
-  const [endDate, setEndDate] = useState(format(new Date(), 'yyyy-MM-dd'));
-  const [startDate, setStartDate] = useState(format(subDays(new Date(), 30), 'yyyy-MM-dd')); // Last 30 days
+  const [endDate, setEndDate] = useState(format(addDays(new Date(), 1), 'yyyy-MM-dd'));
+  const [startDate, setStartDate] = useState(format(subDays(new Date(), 10), 'yyyy-MM-dd')); // Last 30 days
 
   const { data, loading, error } = usePortfolioOuraData(startDate, endDate, subset);
 

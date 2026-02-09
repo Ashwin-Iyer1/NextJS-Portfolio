@@ -703,8 +703,10 @@ export const HeartRateChart = ({ data, darkMode = false, xDomain }) => {
 
           const xScale = scaleTime({
             range: [0, xMax],
-            domain: xDomain || [Math.min(...data.map(d => getDate(d).getTime())) || 0, Math.max(...data.map(d => getDate(d).getTime())) || 0],
+            domain: xDomain || [Math.min(...data.map(d => getDate(d).getTime() - 1 * 3600000)) || 0, Math.max(...data.map(d => getDate(d).getTime() - 1 * 3600000)) || 0],
           });
+
+          const getX = (d) => getDate(d).getTime() - 1 * 3600000;
 
           // Ensure domain is safe
           const minBpm = Math.min(...data.map(getBpm));

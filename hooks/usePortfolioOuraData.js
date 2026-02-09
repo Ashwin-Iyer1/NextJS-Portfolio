@@ -54,15 +54,25 @@ export const usePortfolioOuraData = (startDate, endDate, subset = null) => {
         }
 
         const results = await Promise.all(
-          endpoints.map(type => 
-            fetch(`/api/oura?type=${type}&start_date=${startDate}&end_date=${endDate}`)
+          endpoints.map(type => {
+            let queryStartDate = startDate;
+            
+            // Optimization: Heart rate data is heavy and we only show the last 24h.
+            // Requesting 30 days of heart rate data is unnecessary and slow.
+            if (type === 'heart_rate') {
+                const d = new Date();
+                d.setDate(d.getDate() - 1); 
+                queryStartDate = d.toISOString().split('T')[0];
+            }
+
+            return fetch(`/api/oura?type=${type}&start_date=${queryStartDate}&end_date=${endDate}`)
               .then(res => {
                   if (!res.ok) throw new Error(`Failed to fetch ${type}`);
                   return res.json();
               })
               .then(json => ({ [type]: json.data }))
+        })
           )
-        );
 
         // Merge all results into a single object
         const mergedData = results.reduce((acc, curr) => ({ ...acc, ...curr }), {});
