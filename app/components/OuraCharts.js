@@ -706,8 +706,6 @@ export const HeartRateChart = ({ data, darkMode = false, xDomain }) => {
             domain: xDomain || [Math.min(...data.map(d => getDate(d).getTime())) || 0, Math.max(...data.map(d => getDate(d).getTime())) || 0],
           });
 
-          const getX = (d) => getDate(d).getTime();
-
           // Ensure domain is safe
           const minBpm = Math.min(...data.map(getBpm));
           const maxBpm = Math.max(...data.map(getBpm));

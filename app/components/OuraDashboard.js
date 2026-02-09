@@ -76,7 +76,7 @@ export default function OuraDashboard({
           // We manually shift by -3 hours here
           const raw = d.timestamp.endsWith('Z') ? d.timestamp.slice(0, -1) : d.timestamp;
           const t = parseISO(raw);
-          const shifted = subHours(t, 3);
+          const shifted = subHours(t, 4);
           return { ...d, timestamp: shifted.toISOString() };
         })
         .filter(d => {
