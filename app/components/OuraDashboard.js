@@ -7,7 +7,7 @@ import {
   HeartRateChart, WorkoutChart, ResilienceChart, CardioAgeChart, VO2MaxChart,
   SleepDetailChart, PersonalInfoCard, SleepTimeCard, RestModeCard, SimpleListCard
 } from './OuraCharts';
-import { format, subDays, parseISO, addDays } from 'date-fns';
+import { format, subDays, parseISO, addDays, subHours } from 'date-fns';
 import Masonry from '@mui/lab/Masonry';
 import { Box } from '@mui/material';
 
@@ -71,7 +71,14 @@ export default function OuraDashboard({
     
     // Process data: Strip 'Z' to treat as local time, and filter
     const heartRateProcessed = data.heart_rate
-        .map(d => ({ ...d, timestamp: d.timestamp.endsWith('Z') ? d.timestamp.slice(0, -1) : d.timestamp }))
+        .map(d => {
+          // Parse timestamp, strip Z if needed (but date-fns handles ISO usually)
+          // We manually shift by -3 hours here
+          const raw = d.timestamp.endsWith('Z') ? d.timestamp.slice(0, -1) : d.timestamp;
+          const t = parseISO(raw);
+          const shifted = subHours(t, 3);
+          return { ...d, timestamp: shifted.toISOString() };
+        })
         .filter(d => {
             const t = parseISO(d.timestamp);
             return t >= oneDayAgo;

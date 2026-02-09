@@ -5,7 +5,7 @@ import os
 import json
 from dotenv import load_dotenv
 from token_manager import TokenManager
-from oura_db import create_oura_table, upsert_oura_data
+from oura_db import create_oura_table, upsert_oura_data, get_oura_data
 
 # Load environment variables
 load_dotenv()
@@ -310,7 +310,34 @@ def main():
             hr_by_day[d].append(item)
         
         for d, items in hr_by_day.items():
-            upsert_oura_data("heart_rate", d, {"data": items}) # Wrap in dict
+            # Fetch existing data for this day to merge
+            existing_records = get_oura_data("heart_rate", d, d)
+            
+            # Start with existing data points if any
+            merged_items_map = {}
+            if existing_records:
+                # Expecting existing_records[0]['data'] to be the dict we saved, which has a 'data' key with list of points
+                # API returns list of rows/tuples or dicts depending on fetch=True, use_dict=True in get_oura_data
+                # oura_db.py get_oura_data uses fetch=True, use_dict=True, so it returns list of dicts:
+                # [{'id': ..., 'data_type': 'heart_rate', 'date': ..., 'data': {'data': [...]}, ...}]
+                
+                if len(existing_records) > 0:
+                    current_db_data = existing_records[0].get('data', {})
+                    if 'data' in current_db_data:
+                        for pt in current_db_data['data']:
+                            merged_items_map[pt['timestamp']] = pt
+            
+            # Add/Overwrite with new items
+            for item in items:
+                merged_items_map[item['timestamp']] = item
+            
+            # Convert back to list and sort
+            final_items = list(merged_items_map.values())
+            final_items.sort(key=lambda x: x['timestamp'])
+            
+            print(f"   For day {d}: Merged {len(items)} new points with existing, total {len(final_items)} points.")
+            
+            upsert_oura_data("heart_rate", d, {"data": final_items}) # Wrap in dict
     else:
         print("⚠️ Heart Rate: No data.")
 
