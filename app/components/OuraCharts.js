@@ -440,16 +440,16 @@ export const SleepChart = ({ data, darkMode = false }) => {
   );
 };
 
-// --- Stress Chart (Grouped: Stress vs Recovery) ---
+// --- Stress Chart (Stacked: Recovery bottom, Stress top) ---
 export const StressChart = ({ data, darkMode = false }) => {
   const theme = getTheme(darkMode);
   
   if (!hasValidData(data)) return <EmptyState title="STRESS & RECOVERY" darkMode={darkMode} />;
   
-  // Define the two metrics to show
-  const metrics = [
-    { key: 'stress_high', label: 'Stress', color: theme.accent },
-    { key: 'recovery_high', label: 'Recovery', color: theme.recovery }
+  // Stack order: recovery on bottom, stress on top
+  const stackItems = [
+    { key: 'recovery_high', label: 'Recovery', color: theme.recovery },
+    { key: 'stress_high', label: 'Stress', color: theme.accent }
   ];
 
   return (
@@ -463,7 +463,7 @@ export const StressChart = ({ data, darkMode = false }) => {
         fontSize: '9px',
         fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
       }}>
-        {metrics.map(m => (
+        {stackItems.map(m => (
           <div key={m.key} style={{ display: 'flex', alignItems: 'center', color: theme.text }}>
             <div style={{ width: 8, height: 8, borderRadius: '2px', backgroundColor: m.color, marginRight: 4 }} />
             <span style={{ opacity: 0.8 }}>{m.label}</span>
@@ -482,24 +482,16 @@ export const StressChart = ({ data, darkMode = false }) => {
 
             const getVal = (d, key) => d[key] || 0;
             
-            // Outer scale for days
             const xScale = scaleBand({
               range: [0, xMax],
               round: true,
               domain: data.map(d => d.day),
-              padding: 0.15,
+              padding: 0.2,
             });
             
-            // Inner scale for the two metrics
-            const xInnerScale = scaleBand({
-              range: [0, xScale.bandwidth()],
-              domain: metrics.map(m => m.key),
-              padding: 0.1,
-            });
-            
-            // Find max across both metrics
+            // Max is the sum of both metrics for any single day
             const maxVal = Math.max(
-              ...data.map(d => Math.max(getVal(d, 'stress_high'), getVal(d, 'recovery_high'))),
+              ...data.map(d => getVal(d, 'stress_high') + getVal(d, 'recovery_high')),
               60
             );
             
@@ -541,32 +533,43 @@ export const StressChart = ({ data, darkMode = false }) => {
                     })}
                   />
                   
-                  {/* Grouped bars for each day */}
+                  {/* Stacked bars: recovery on bottom, stress on top */}
                   {data.map((d) => {
                     const day = d.day;
-                    const groupX = xScale(day);
+                    const barX = xScale(day);
+                    const barWidth = xScale.bandwidth();
+                    
+                    const recoveryVal = getVal(d, 'recovery_high');
+                    const stressVal = getVal(d, 'stress_high');
+                    
+                    // Recovery bar (bottom segment)
+                    const recoveryBarHeight = yMax - yScale(recoveryVal);
+                    const recoveryBarY = yMax - recoveryBarHeight;
+                    
+                    // Stress bar (top segment, stacked above recovery)
+                    const stressBarHeight = yMax - yScale(stressVal);
+                    const stressBarY = recoveryBarY - stressBarHeight;
                     
                     return (
-                      <Group key={`group-${day}`} left={groupX}>
-                        {metrics.map((m) => {
-                          const value = getVal(d, m.key);
-                          const barWidth = xInnerScale.bandwidth();
-                          const barHeight = yMax - yScale(value);
-                          const barX = xInnerScale(m.key);
-                          const barY = yMax - barHeight;
-                          
-                          return (
-                            <Bar
-                              key={`bar-${day}-${m.key}`}
-                              x={barX}
-                              y={barY}
-                              width={barWidth}
-                              height={barHeight}
-                              fill={m.color}
-                              fillOpacity={0.85}
-                            />
-                          );
-                        })}
+                      <Group key={`stack-${day}`}>
+                        {/* Recovery (bottom) */}
+                        <Bar
+                          x={barX}
+                          y={recoveryBarY}
+                          width={barWidth}
+                          height={recoveryBarHeight}
+                          fill={theme.recovery}
+                          fillOpacity={0.85}
+                        />
+                        {/* Stress (top) */}
+                        <Bar
+                          x={barX}
+                          y={stressBarY}
+                          width={barWidth}
+                          height={stressBarHeight}
+                          fill={theme.accent}
+                          fillOpacity={0.85}
+                        />
                       </Group>
                     );
                   })}
