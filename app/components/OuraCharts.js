@@ -1146,8 +1146,33 @@ export const SleepDetailChart = ({ data, darkMode = false }) => {
 
   if (!hasValidData(data)) return <EmptyState title="SLEEP PHASES" darkMode={darkMode} />;
 
+  const sleepStages = [
+    { key: 'deep', label: 'Deep', color: '#4facfe' },
+    { key: 'rem', label: 'REM', color: '#b721ff' },
+    { key: 'light', label: 'Light', color: '#21d4fd' },
+    { key: 'awake', label: 'Awake', color: '#ff0844' },
+  ];
+
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' }}>
+    <div style={{ width: '100%', height: '100%', minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* Legend */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        gap: '16px', 
+        padding: '4px 8px 0',
+        fontSize: '9px',
+        fontFamily: darkMode ? '"Courier New", Courier, monospace' : 'sans-serif'
+      }}>
+        {sleepStages.map(s => (
+          <div key={s.key} style={{ display: 'flex', alignItems: 'center', color: theme.text }}>
+            <div style={{ width: 8, height: 8, borderRadius: '2px', backgroundColor: s.color, marginRight: 4 }} />
+            <span style={{ opacity: 0.8 }}>{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ flex: 1, minHeight: 0 }}>
       <ParentSize>
         {({ width, height }) => {
           if (width < 10 || height < 10) return null;
@@ -1253,6 +1278,7 @@ export const SleepDetailChart = ({ data, darkMode = false }) => {
           );
         }}
       </ParentSize>
+      </div>
     </div>
   );
 };

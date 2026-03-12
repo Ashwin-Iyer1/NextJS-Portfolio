@@ -5,6 +5,7 @@ Similar to hourly.py for WakaTime tracking
 Uses insert_positions_bulk() to efficiently update all positions
 """
 
+from dotenv import load_dotenv
 # from dotenv import load_dotenv
 # load_dotenv()
 

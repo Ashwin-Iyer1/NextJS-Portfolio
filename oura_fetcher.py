@@ -8,7 +8,7 @@ from token_manager import TokenManager
 from oura_db import create_oura_table, upsert_oura_data, get_oura_data
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
 
 OURA_CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 OURA_CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
@@ -59,6 +59,8 @@ class OuraClient:
         }
         
         response = requests.post(url, data=data)
+        if response.status_code != 200:
+            print(f"❌ Token refresh response ({response.status_code}): {response.text}")
         response.raise_for_status()
         
         new_tokens = response.json()

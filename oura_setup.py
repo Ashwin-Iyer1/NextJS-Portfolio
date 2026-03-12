@@ -5,6 +5,7 @@ import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from token_manager import TokenManager
+from dotenv import load_dotenv
 
 # Load environment variables
 # load_dotenv()
