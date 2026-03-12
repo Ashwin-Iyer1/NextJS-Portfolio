@@ -1,4 +1,4 @@
-from oura_fetcher import OuraClient, OURA_CLIENT_ID, OURA_CLIENT_SECRET, TOKEN_FILE, upsert_oura_data
+from oura_fetcher import OuraClient, OURA_CLIENT_ID, OURA_CLIENT_SECRET, upsert_oura_data
 from datetime import date, timedelta
 import oura_db
 
@@ -19,7 +19,7 @@ def main():
     
     print(f"Time Range: {start_date} to {end_date}")
     
-    client = OuraClient(OURA_CLIENT_ID, OURA_CLIENT_SECRET, TOKEN_FILE)
+    client = OuraClient(OURA_CLIENT_ID, OURA_CLIENT_SECRET)
     
     # Initialize DB (just in case)
     oura_db.create_oura_table()

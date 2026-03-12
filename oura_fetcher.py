@@ -3,26 +3,21 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 import os
 import json
-from dotenv import load_dotenv
 from token_manager import TokenManager
 from oura_db import create_oura_table, upsert_oura_data, get_oura_data
 
-# Load environment variables
-# load_dotenv()
-
 OURA_CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 OURA_CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
-TOKEN_FILE = "oura_tokens.json"
 
 class OuraClient:
     """Client for Oura V2 API with automated token management."""
     
     BASE_URL = "https://api.ouraring.com/v2"
 
-    def __init__(self, client_id: str, client_secret: str, token_file: str = "oura_tokens.json"):
+    def __init__(self, client_id: str, client_secret: str):
         self.client_id = client_id
         self.client_secret = client_secret
-        self.token_manager = TokenManager("oura", token_file)
+        self.token_manager = TokenManager("oura")
         self.session = requests.Session()
         self._load_tokens()
 
@@ -219,7 +214,7 @@ def main():
         print("❌ Error: Environment variables OURA_CLIENT_ID and OURA_CLIENT_SECRET are required.")
         return
 
-    client = OuraClient(OURA_CLIENT_ID, OURA_CLIENT_SECRET, TOKEN_FILE)
+    client = OuraClient(OURA_CLIENT_ID, OURA_CLIENT_SECRET)
     
     # Example: Fetch data for yesterday and today
     # You can adjust dates as needed. For "hourly" runs, mostly we care about the latest data.

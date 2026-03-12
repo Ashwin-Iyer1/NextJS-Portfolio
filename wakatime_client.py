@@ -11,10 +11,10 @@ class WakaTimeClient:
     BASE_URL = "https://wakatime.com/api/v1"
     TOKEN_URL = "https://wakatime.com/oauth/token"
 
-    def __init__(self, client_id: str, client_secret: str, token_file: str = "wakatime_tokens.json"):
+    def __init__(self, client_id: str, client_secret: str):
         self.client_id = client_id
         self.client_secret = client_secret
-        self.token_manager = TokenManager("wakatime", token_file)
+        self.token_manager = TokenManager("wakatime")
         self.session = requests.Session()
         self.tokens = {}
         self._load_tokens()

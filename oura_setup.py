@@ -13,9 +13,7 @@ from dotenv import load_dotenv
 CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
-TOKEN_FILE = "oura_tokens.json"
-
-token_manager = TokenManager("oura", TOKEN_FILE)
+token_manager = TokenManager("oura")
 
 if not CLIENT_ID or not CLIENT_SECRET:
     print("❌ Error: OURA_CLIENT_ID or OURA_CLIENT_SECRET not found in .env file.")
@@ -60,7 +58,7 @@ def exchange_code_for_token(code):
         tokens = response.json()
         print("✅ Tokens received!")
         save_tokens(tokens)
-        print(f"✅ Tokens saved via TokenManager (Database & {TOKEN_FILE})")
+        print("✅ Tokens saved via TokenManager (Database)")
         print("\n🎉 Setup complete! You can now run the fetcher.")
         # Stop the server
         os._exit(0)

@@ -4,15 +4,15 @@ import json
 import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-from dotenv import load_dotenv
+from token_manager import TokenManager
 
 # Load environment variables
-# load_dotenv()
 
 CLIENT_ID = os.getenv("WAKA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("WAKA_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
-TOKEN_FILE = "wakatime_tokens.json"
+
+token_manager = TokenManager("wakatime")
 
 class OAuthHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -64,7 +64,7 @@ def exchange_code_for_token(code):
             tokens = response.json()
             print("✅ Tokens received!")
             save_tokens(tokens)
-            print(f"✅ Tokens saved to {TOKEN_FILE}")
+            print("✅ Tokens saved to Database")
             
             # Print the tokens compactly so user can copy to env if needed
             print(f"\n[OPTIONAL] You can set this as WAKA_TOKENS_JSON in your env:\n{json.dumps(tokens)}")
@@ -80,8 +80,7 @@ def exchange_code_for_token(code):
         os._exit(1)
 
 def save_tokens(tokens):
-    with open(TOKEN_FILE, "w") as f:
-        json.dump(tokens, f, indent=4)
+    token_manager.save_tokens(tokens)
 
 def main():
     print("--- WakaTime OAuth2 Setup ---")
