@@ -22,15 +22,13 @@ const LazyMiscProj = lazy(() => import("./components/MiscProj"));
 export default function Home() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [fadeIn, setFadeIn] = useState(true); // Default to true to show content immediately on server
+  const [fadeIn, setFadeIn] = useState(true);
   const [forceMiscProjLoad, setForceMiscProjLoad] = useState(false);
   const miscProjSection = useRef(null);
   const isMiscProjVisible = useIntersectionObserver(miscProjSection);
 
-  // Add this effect to force load MiscProj component after main content appears
   useEffect(() => {
     if (fadeIn) {
-      // Small delay to ensure intersection observer has initialized
       const timer = setTimeout(() => {
         setForceMiscProjLoad(true);
       }, 300);
@@ -39,28 +37,23 @@ export default function Home() {
   }, [fadeIn]);
 
   useEffect(() => {
-    // Check sessionStorage only on client side after mount
     const loaded = sessionStorage.getItem("loaded");
 
     if (loaded === null) {
-      // First time loading - show animation
       const timer = setTimeout(() => {
-        setFadeIn(false); // Hide content initially
+        setFadeIn(false);
         setShouldLoad(true);
         setTimeout(() => {
-          setFadeOut(true); // Start fade-out
+          setFadeOut(true);
           sessionStorage.setItem("loaded", "true");
-
-          // Wait for the fade-out duration before removing the loader
           setTimeout(() => {
             setShouldLoad(false);
-            setFadeIn(true); // Start fade-in
-          }, 400); // Adjust this duration to match your CSS fade-out time
+            setFadeIn(true);
+          }, 400);
         }, 2200);
       }, 0);
       return () => clearTimeout(timer);
     }
-    // If loaded before, fadeIn is already true from initial state
   }, []);
 
   if (shouldLoad) {
@@ -71,7 +64,6 @@ export default function Home() {
     );
   }
 
-  // Always render the main content, but conditionally show loader overlay
   return (
     <>
       <div
@@ -116,19 +108,15 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div></div>
-          <h2
-            style={{ textAlign: "center", fontSize: "2em", marginTop: "48px" }}
-          >
-            Skills
-          </h2>
+        </div>
+
+        <div className={styles.skillsSection}>
+          <h2 className={styles.sectionTitle}>Skills</h2>
           <Skills />
         </div>
 
         <div className={styles.MiscProj}>
-          <h2 style={{ textAlign: "center", fontSize: "2em" }}>
-            Miscellaneous Projects
-          </h2>
+          <h2 className={styles.sectionTitle}>Miscellaneous Projects</h2>
           <div className={styles.MiscProjContainer} ref={miscProjSection}>
             {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
               <Suspense fallback={<div className="loading">Loading...</div>}>
@@ -136,54 +124,17 @@ export default function Home() {
               </Suspense>
             )}
           </div>
-          <h2 style={{ textAlign: "center", fontSize: "2em" }}>My Blogs</h2>
+          <h2 className={styles.sectionTitle}>My Blogs</h2>
           <BlogList />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            justifyContent: "center",
-            width: "100%",
-            gap: "40px",
-            flexWrap: "wrap",
-            padding: "0 20px",
-            maxWidth: "1400px",
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              flex: 1,
-              minWidth: "320px",
-              marginTop: "40px",
-              marginBottom: "40px",
-            }}
-          >
-            <h2
-              style={{
-                textAlign: "center",
-                fontSize: "2em",
-                marginBottom: "20px",
-                marginTop: "0",
-              }}
-            >
-              Live Health Stats
-            </h2>
-            <div
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(138, 44, 226, 0.30), rgba(0, 0, 0, 0.3))",
-                border: "1px solid rgba(138, 44, 226, 0.2)",
-                borderRadius: "16px",
-                overflow: "hidden",
-                boxShadow: "0 4px 16px rgba(0, 0, 0, 0.4)",
-              }}
-            >
-              <OuraDashboard 
-                subset={["activity", "heart_rate", "sleep", "stress"]} 
-                columns={1} 
+
+        <div className={styles.dashboardRow}>
+          <div className={styles.dashboardColumn}>
+            <h2 className={styles.sectionTitle}>Live Health Stats</h2>
+            <div className={styles.dashboardCard}>
+              <OuraDashboard
+                subset={["activity", "heart_rate", "sleep", "stress"]}
+                columns={1}
                 chartHeight="180px"
                 chartWidth="100%"
                 showHeader={true}
@@ -192,14 +143,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ flex: 1, minWidth: "320px", marginTop: "40px" }}>
+          <div className={styles.dashboardColumn}>
             <KalshiPositions id="kalshi_positions" />
           </div>
         </div>
+
         <div className={styles.Contact}>
-          <h2 style={{ textAlign: "center", fontSize: "2em" }}>Contact Me</h2>
+          <h2 className={styles.sectionTitle}>Contact Me</h2>
           <Contact />
-          <p style={{ margin: "0 auto", marginTop: "16px" }}>
+          <p>
             Email:{" "}
             <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
           </p>

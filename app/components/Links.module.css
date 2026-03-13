@@ -9,19 +9,18 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
-  border: 2px solid rgba(138, 44, 226, 0.4);
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(138, 44, 226, 0.05), rgba(0, 0, 0, 0.2));
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
   min-width: 150px;
   max-width: 100%;
   margin: 0 auto;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-slow);
 }
 
 .Socials:hover {
-  border-color: rgba(138, 44, 226, 0.6);
-  box-shadow: 0 6px 20px rgba(138, 44, 226, 0.2);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 @media (max-width: 767px) {

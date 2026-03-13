@@ -1,74 +1,110 @@
-.container {
+/* Blog List Styles */
+
+.blogGrid {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
-  min-height: 100vh; /* Ensures the container takes full height of the viewport */
-  padding: 20px;
-  overflow-x: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: 0 var(--space-md);
   width: 100%;
 }
 
-.Blogs {
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(200px, 1fr)
-  ); /* Creates a responsive grid */
-  gap: 16px; /* Adds spacing between the items */
-  width: 100%; /* Ensures the grid takes the full width */
-  max-width: 70%; /* Optional: Limits the maximum width of the grid */
-  margin: 0 auto; /* Center the grid container horizontally */
+.blogCard {
+  width: 300px;
+  min-height: 180px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-slow);
+  text-decoration: none;
+  display: block;
 }
 
-/* Special container for the last row to handle the centered last item */
-.last-row-container {
-  grid-column: 1 / -1; /* Span across all columns */
-  display: flex;
-  justify-content: center; /* Center the last item horizontally */
-  margin-top: 16px; /* Add some spacing from the items above */
+.blogCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-card-hover);
 }
 
-.Blog {
-  padding: 16px;
-  border-radius: 8px;
-  background-color: white;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
+.blogCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
 }
 
-.Blog:hover {
-  transform: translateY(-5px); /* Adds a small hover effect */
+.blogCard:hover::before {
+  opacity: 1;
 }
 
-/* Make the last item maintain its width */
+.blogCardTitle {
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  transition: color var(--transition-fast);
+}
+
+.blogCard:hover .blogCardTitle {
+  color: var(--accent-secondary);
+}
+
+.blogCardDivider {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  margin-bottom: var(--space-md);
+  border-radius: 1px;
+}
+
+.blogCardDescription {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.externalIcon {
+  margin-left: 6px;
+  font-size: 0.75em;
+  opacity: 0.6;
+}
 
 @media (max-width: 767px) {
-  .container {
-    padding: 16px 12px;
+  .blogGrid {
+    gap: var(--space-md);
+    padding: 0 var(--space-sm);
   }
 
-  .Blogs {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-    max-width: 100%;
-    padding: 0 8px;
+  .blogCard {
+    width: calc(50vw - 28px);
+    min-width: 140px;
+    min-height: auto;
+    padding: var(--space-md);
   }
 
-  .Blog {
-    padding: 12px;
+  .blogCardTitle {
+    font-size: 1rem;
+  }
+
+  .blogCardDescription {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 12px 8px;
-  }
-
-  .Blogs {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 0;
+  .blogCard {
+    width: 100%;
+    min-width: unset;
   }
 }

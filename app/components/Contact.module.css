@@ -5,82 +5,39 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: var(--space-xl);
   max-width: 100%;
-  padding: 32px 0;
+  padding: var(--space-lg) 0;
 }
 
 .ContactText {
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.ContactText::before {
-  content: '';
-  position: absolute;
-  inset: -12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  border-radius: 16px;
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: -1;
-}
-
-.ContactText:hover::before {
-  opacity: 1;
-  inset: -16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-slow);
 }
 
 .ContactText:hover {
-  transform: translateY(-8px) scale(1.1);
-}
-
-.ContactText:active {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-4px);
 }
 
 .ContactText svg {
-  width: 56px;
-  height: 56px;
-  filter: brightness(80%) grayscale(80%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+  transition: all var(--transition-base);
 }
 
-.ContactText svg:hover {
-  filter: brightness(110%) grayscale(0%) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+.ContactText:hover svg {
+  opacity: 1;
 }
 
 @media (max-width: 767px) {
   .ContactLinks {
-    gap: 24px;
-    padding: 24px 0;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
   }
 
   .ContactText svg {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .ContactText::before {
-    inset: -10px;
-  }
-  
-  .ContactText:hover::before {
-    inset: -12px;
-  }
-  
-  .ContactText:hover {
-    transform: translateY(-6px) scale(1.08);
+    width: 40px;
+    height: 40px;
   }
 }

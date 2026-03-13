@@ -1,7 +1,7 @@
 /* About Page Styles */
 
 .About {
-  padding: 24px;
+  padding: var(--space-lg);
   max-width: 1200px;
   width: 100%;
   text-align: left;
@@ -9,67 +9,70 @@
 }
 
 .Container {
-  margin-top: 24px;
+  margin-top: var(--space-lg);
   width: 100%;
 }
 
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: var(--space-2xl);
   width: 100%;
 }
 
 /* Section Titles */
 .sectionTitle {
-  color: #c596ee;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-lg);
   font-weight: 600;
   text-align: left;
+  letter-spacing: -0.02em;
 }
 
 /* Card Styles */
 .card {
-  background: linear-gradient(
-    195deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(0, 0, 0, 0.12)
-  );
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  color: rgb(255, 255, 255);
-  margin-bottom: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--space-lg);
+  transition: all var(--transition-slow);
 }
 
-.card h3 {
-  color: #c596ee;
-  font-size: 1.3rem;
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.card h3,
+.cardSubtitle {
+  color: var(--text-primary);
+  font-size: 1.15rem;
   margin-bottom: 12px;
   font-weight: 600;
 }
 
 .card p {
-  color: rgb(228, 228, 228);
-  line-height: 1.6;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
 
 .card p b {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .projectLink {
-  color: #a35aed;
+  color: var(--accent-primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  transition: color var(--transition-fast);
 }
 
 .projectLink:hover {
-  color: #c596ee;
+  color: var(--accent-secondary);
 }
 
 /* Intro Section */
@@ -85,60 +88,57 @@
 }
 
 .linksCard {
-  background: linear-gradient(
-    195deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(0, 0, 0, 0.12)
-  );
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-lg);
+  transition: all var(--transition-slow);
+}
+
+.linksCard:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 /* Resume Link */
 .resumeLink {
   text-decoration: none;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-base);
   display: block;
 }
 
 .resumeLink:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .resumeCard {
-  background: linear-gradient(
-    135deg,
-    rgba(138, 44, 226, 0.3),
-    rgba(0, 0, 0, 0.3)
-  );
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(138, 44, 226, 0.2);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
   text-align: center;
-  transition: all 0.2s ease;
+  transition: all var(--transition-slow);
 }
 
 .resumeCard:hover {
-  box-shadow: 0 12px 36px rgba(138, 44, 226, 0.4);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .resumeCard h3 {
-  color: #c596ee;
-  font-size: 1.4rem;
+  color: var(--accent-secondary);
+  font-size: 1.15rem;
   margin-bottom: 8px;
   font-weight: 600;
 }
 
 .resumeCard p {
-  color: rgb(228, 228, 228);
-  font-size: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
 /* Music Section */
@@ -148,83 +148,98 @@
 }
 
 .songsCard {
-  background: linear-gradient(
-    195deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(0, 0, 0, 0.12)
-  );
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-slow);
+}
+
+.songsCard:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Oura Section */
+.ouraSection {
+  margin-top: var(--space-xl);
+}
+
+.ouraCard {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+.ouraCard:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 /* COC Section */
 .cocSection {
-  margin-top: 20px;
+  margin-top: var(--space-lg);
 }
 
 /* Responsive Styles */
 @media (max-width: 980px) {
   .About {
-    padding: 16px;
+    padding: var(--space-md);
   }
+
   .Container {
-    padding-left: 16px;
-    padding-right: 16px;
-    margin-top: 0px;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    margin-top: 0;
   }
 }
 
 @media (max-width: 768px) {
   .About {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
     text-align: center;
   }
 
   .sectionTitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
   }
 
   .card {
-    padding: 20px 16px;
+    padding: var(--space-lg) var(--space-md);
     text-align: center;
   }
 
   .card h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: center;
   }
 
   .card p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-align: center;
   }
 
   .resumeCard {
-    padding: 20px 16px;
+    padding: var(--space-lg) var(--space-md);
   }
 
   .resumeCard h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .resumeCard p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .linksCard {
-    background: linear-gradient(
-      195deg,
-      rgba(255, 255, 255, 0.15),
-      rgba(164, 164, 164, 0.02)
-    );
-    padding: 20px 16px;
+    padding: var(--space-lg) var(--space-md);
   }
 
   .songsCard {
-    padding: 20px 16px;
+    padding: var(--space-lg) var(--space-md);
   }
 }
 
@@ -234,18 +249,18 @@
   }
 
   .card {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
   }
 
   .resumeCard {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
   }
 
   .linksCard {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
   }
 
   .songsCard {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
   }
 }

@@ -3,15 +3,27 @@
 .positions-container {
   width: auto;
   padding: 0 1rem 1rem 1rem;
-  color: white;
+  color: var(--text-primary);
   max-width: 100%;
 }
 
 .positions-title {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+.positions-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  margin: 12px auto 0;
+  border-radius: 1px;
 }
 
 .positions-grid {
@@ -23,123 +35,77 @@
 .error-container {
   text-align: center;
   padding: 2rem;
-  font-size: 1.2rem;
-  color: white;
+  font-size: 1rem;
+  color: var(--text-secondary);
 }
 
 .error-container {
-  color: #ff6b6b;
+  color: #ef4444;
 }
 
 .resumeLink {
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
   display: block;
-  margin-top: 3rem;
+  margin-top: 2rem;
   max-width: 350px;
   width: 100%;
 }
 
 .resumeLink:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-3px);
 }
 
 .resumeCard {
-  background: linear-gradient(
-    135deg,
-    rgba(99, 102, 241, 0.15) 0%,
-    rgba(139, 92, 246, 0.15) 50%,
-    rgba(168, 85, 247, 0.15) 100%
-  );
-  border-radius: 12px;
-  padding: 20px 28px;
-  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3),
-              0 0 0 1px rgba(139, 92, 246, 0.3);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  border: 1px solid var(--border-color);
   text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all var(--transition-slow);
 }
 
-.resumeCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(139, 92, 246, 0.2),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.resumeLink:hover .resumeCard::before {
-  left: 100%;
-}
-
-.resumeCard:hover {
-  box-shadow: 0 15px 50px rgba(99, 102, 241, 0.5),
-              0 0 0 1px rgba(139, 92, 246, 0.5),
-              inset 0 0 30px rgba(139, 92, 246, 0.1);
-  background: linear-gradient(
-    135deg,
-    rgba(99, 102, 241, 0.2) 0%,
-    rgba(139, 92, 246, 0.2) 50%,
-    rgba(168, 85, 247, 0.2) 100%
-  );
+.resumeLink:hover .resumeCard {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-card-hover);
 }
 
 .resumeCard h3 {
-  color: #e9d5ff;
-  font-size: 1.2rem;
-  font-weight: 700;
+  color: var(--accent-secondary);
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
-  position: relative;
-  z-index: 1;
+  letter-spacing: 0.02em;
 }
 
 .resumeCard h3::after {
-  content: ' →';
+  content: ' \2192';
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-fast);
   margin-left: 8px;
 }
 
 .resumeLink:hover .resumeCard h3::after {
-  transform: translateX(5px);
-}
-
-.resumeCard p {
-  color: #c4b5fd;
-  font-size: 1.05rem;
-  margin: 0;
-  position: relative;
-  z-index: 1;
+  transform: translateX(4px);
 }
 
 .position-card {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  border-radius: 12px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-slow);
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .position-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .card-header {
@@ -152,54 +118,56 @@
 }
 
 .category-badge {
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
+  background: rgba(139, 92, 246, 0.12);
+  color: var(--accent-secondary);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .position-badge {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .position-badge.yes {
-  background: rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.12);
   color: #86efac;
 }
 
 .position-badge.no {
-  background: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.12);
   color: #fca5a5;
 }
 
 .market-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text-primary);
   line-height: 1.4;
   min-height: 3rem;
 }
 
 .subtitle {
-  color: #94a3b8;
-  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   margin-bottom: 1.25rem;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border-left: 3px solid #6366f1;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--accent-primary);
 }
 
 .subtitle strong {
-  color: #e2e8f0;
+  color: var(--text-primary);
   margin-right: 0.5rem;
 }
 
@@ -216,19 +184,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .detail-label {
-  color: #94a3b8;
-  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
 .detail-value {
-  color: white;
+  color: var(--text-primary);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .pnl-positive {
@@ -240,7 +208,7 @@
 }
 
 .pnl-neutral {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .card-footer {
@@ -248,15 +216,15 @@
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
   margin-top: auto;
 }
 
 .ticker {
-  font-size: 0.75rem;
-  color: #64748b;
-  font-family: monospace;
-  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: "SF Mono", "Fira Code", monospace;
+  background: rgba(255, 255, 255, 0.03);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   overflow: hidden;
@@ -265,9 +233,8 @@
 }
 
 .last-updated {
-  font-size: 0.75rem;
-  color: #64748b;
-  font-style: italic;
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }
 
 /* Responsive Design */
@@ -277,7 +244,7 @@
   }
 
   .market-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     min-height: auto;
   }
 
@@ -287,15 +254,7 @@
   }
 
   .resumeCard {
-    padding: 20px 16px;
-  }
-
-  .resumeCard h3 {
-    font-size: 1.2rem;
-  }
-
-  .resumeCard p {
-    font-size: 0.95rem;
+    padding: 16px;
   }
 }
 
@@ -309,10 +268,11 @@
   }
 
   .detail-row {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
+
   .resumeCard {
-    padding: 16px 12px;
+    padding: 14px 12px;
   }
 }
 
@@ -322,16 +282,21 @@
   max-width: 400px;
   margin: 1rem auto;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-slow);
+}
+
+.total-pnl-container:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .total-pnl-title {
   text-align: center;
-  font-size: 1.2rem;
-  color: #94a3b8;
+  font-size: 0.85rem;
+  color: var(--text-muted);
   margin-bottom: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -340,9 +305,10 @@
 
 .total-pnl-value {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .total-pnl-value.positive {
@@ -354,5 +320,5 @@
 }
 
 .total-pnl-value.neutral {
-  color: #94a3b8;
+  color: var(--text-muted);
 }

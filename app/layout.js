@@ -1,4 +1,4 @@
-import "./globals.css"; // Your global CSS file
+import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
@@ -18,7 +18,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ashwin Iyer's Portfolio",
     description: "Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas.",
-    creator: "@ashwiniyer", // Optional: Add if known, or omit
+    creator: "@ashwiniyer",
   },
 };
 
@@ -26,17 +26,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* Layout UI */}
         <main>
           {children}
           <footer>
-            <span
-              className="text-xs text-slate-400 text-center"
-              style={{ color: "#7c7c7c" }}
-            >
-              &copy; {new Date().getFullYear()} Ashwin Iyer. All rights
-              reserved.
-            </span>
+            <span>&copy; {new Date().getFullYear()} Ashwin Iyer</span>
           </footer>
         </main>
         <GoogleAnalytics gaId="G-DFDFQZ1B7Q" />

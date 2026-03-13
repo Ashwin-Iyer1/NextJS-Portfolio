@@ -3,13 +3,17 @@ const wellingtonImage = "/Images/wellington_management_logo.jpeg";
 import Box from "@mui/material/Box";
 import { Divider, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import React from "react";
+
 const workDateFormat = (date) => {
   return (
     <span
       style={{
-        backgroundColor: "#6E6E6E90",
-        padding: "2px 4px",
-        borderRadius: "4px",
+        backgroundColor: "rgba(139, 92, 246, 0.15)",
+        color: "var(--accent-secondary)",
+        padding: "2px 8px",
+        borderRadius: "6px",
+        fontSize: "0.85rem",
+        fontWeight: 500,
       }}
       className="work-date"
     >
@@ -20,8 +24,8 @@ const workDateFormat = (date) => {
 
 export default function WorkExperience() {
   return (
-    <List sx={{ width: "100%",  display: "flex", flexDirection: "column", gap: 2 }}>
-      <ListItem sx={{borderBottom: "none !important"}}>
+    <List sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2 }}>
+      <ListItem sx={{ borderBottom: "none !important" }}>
         <ListItemAvatar>
           <Box>
             <img
@@ -40,13 +44,13 @@ export default function WorkExperience() {
           }
           secondary="Global Risk and Analytics Co-op"
           sx={{
-            color: "white",
-            "& .MuiListItemText-secondary": { color: "white" },
+            color: "var(--text-primary)",
+            "& .MuiListItemText-secondary": { color: "var(--text-secondary)" },
           }}
         />
       </ListItem>
       <Divider sx={{
-        border: "1px solid rgba(255, 255, 255, 0.05)"
+        border: "1px solid var(--border-color)"
       }}/>
       <ListItem>
         <ListItemAvatar>
@@ -63,8 +67,8 @@ export default function WorkExperience() {
           }
           secondary="Frontend Developer Intern"
           sx={{
-            color: "white",
-            "& .MuiListItemText-secondary": { color: "white" },
+            color: "var(--text-primary)",
+            "& .MuiListItemText-secondary": { color: "var(--text-secondary)" },
           }}
         />
       </ListItem>

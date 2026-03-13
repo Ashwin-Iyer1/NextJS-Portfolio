@@ -1,7 +1,7 @@
 /* Projects Page Styles */
 
 .Project1 {
-  padding: 24px;
+  padding: var(--space-lg);
   max-width: 1200px;
   width: 100%;
   text-align: left;
@@ -11,91 +11,86 @@
 
 /* Section Title */
 #WorkingOnP {
-  color: #c596ee;
-  font-size: 2rem;
-  margin-bottom: 30px;
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  margin-bottom: var(--space-xl);
   font-weight: 600;
   text-align: left;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
 }
 
-/* Remove the old BG element - we'll use a cleaner approach */
 .Project1 .BG {
   display: none;
 }
 
 /* Project Card Container */
 .Project {
-  background: linear-gradient(
-    195deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(0, 0, 0, 0.12)
-  );
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 8px 28px rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  color: rgb(255, 255, 255);
-  margin-bottom: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--space-lg);
   min-height: 130px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
 }
 
 .Project:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(138, 44, 226, 0.4);
-  border-color: rgba(197, 150, 238, 0.2);
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-card-hover);
 }
 
 /* Project Title */
 .Project h3 {
-  color: #c596ee;
-  font-size: 1.4rem;
+  color: var(--text-primary);
+  font-size: 1.2rem;
   margin-bottom: 12px;
   font-weight: 600;
 }
 
 /* Project Description */
 .Project p {
-  color: rgb(228, 228, 228);
-  line-height: 1.6;
-  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
 
 /* Project Links */
 .Project a {
-  color: #a35aed;
+  color: var(--accent-primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  transition: color var(--transition-fast);
 }
 
 .Project a:hover {
-  color: #c596ee;
+  color: var(--accent-secondary);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .Project1 {
-    padding: 16px 12px;
+    padding: var(--space-md) 12px;
     text-align: center;
   }
-  
+
   #WorkingOnP {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
     text-align: center;
   }
-  
+
   .Project {
-    padding: 20px;
+    padding: var(--space-lg);
     width: 100%;
     max-width: 100%;
   }
-  
+
   .Project h3 {
     text-align: center;
   }
-  
+
   .Project p {
     text-align: center;
   }
@@ -105,12 +100,12 @@
   .Project1 {
     padding: 12px 8px;
   }
-  
+
   #WorkingOnP {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
-  
+
   .Project {
-    padding: 16px;
+    padding: var(--space-md);
   }
 }

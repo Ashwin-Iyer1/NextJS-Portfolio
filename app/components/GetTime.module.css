@@ -2,44 +2,61 @@
 
 .Time {
   width: 100%;
-  background: blueviolet;
-  border-radius: 12px;
-  box-shadow: 10px 10px #260c3e;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  transition: all var(--transition-slow);
+  position: relative;
+}
+
+.Time::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.Time:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .Working {
-  padding: 16px 20px;
+  padding: var(--space-lg) var(--space-lg);
   text-align: center;
 }
 
 .Working h2 {
-  color: rgb(214, 214, 214);
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .Working p {
-  color: rgb(255, 255, 255);
-  font-size: 1rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 @media (max-width: 767px) {
   .Working {
-    align-items: center;
-    text-align: center;
-    padding: 12px 16px;
+    padding: 12px var(--space-md);
   }
 
   .Working h2 {
-    font-size: 1.1rem;
-    text-align: center;
+    font-size: 0.8rem;
   }
 
   .Working p {
-    text-align: center;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .Time {
@@ -55,11 +72,11 @@
   }
 
   .Working h2 {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 
   .Working p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .Time {

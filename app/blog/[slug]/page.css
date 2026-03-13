@@ -29,50 +29,46 @@ main {
 
 /* Typography - Medium style */
 .half-width-wrapper h1 {
-  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 42px;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.022em;
   margin-bottom: 12px;
   margin-top: 0px;
-  color: #e8e8e8;
+  color: var(--text-primary);
 }
 
 .half-width-wrapper h2 {
-  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 32px;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.018em;
   margin-top: 48px;
   margin-bottom: 12px;
-  color: #d4b5f0;
+  color: var(--text-primary);
 }
 
 .half-width-wrapper h3 {
-  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: -0.014em;
   margin-top: 40px;
   margin-bottom: 12px;
-  color: #c9a8e2;
+  color: var(--text-primary);
 }
 
 .half-width-wrapper h4 {
-  font-family: "Segoe UI", "Roboto", -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: 1.4;
   margin-top: 32px;
   margin-bottom: 12px;
-  color: #c9a8e2;
+  color: var(--text-primary);
 }
 
 /* Paragraph styling - Medium uses Georgia for body text */
@@ -97,7 +93,7 @@ main {
 
 /* Links - Medium style */
 .half-width-wrapper a {
-  color: #8b6fb8;
+  color: var(--accent-primary);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
@@ -105,7 +101,7 @@ main {
 }
 
 .half-width-wrapper a:hover {
-  color: #a888cc;
+  color: var(--accent-secondary);
 }
 
 /* Lists */
@@ -229,7 +225,7 @@ td {
 }
 
 a {
-  color: #8b6fb8;
+  color: var(--accent-primary);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;

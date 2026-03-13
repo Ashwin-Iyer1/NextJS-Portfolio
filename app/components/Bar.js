@@ -1,26 +1,34 @@
+"use client";
 import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import "./Bar.css";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+
 export default function Bar() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "About" },
+  ];
+
   return (
-    <div className="Bar">
-      <div className="name-section">
-        <h1>Ashwin Iyer</h1>
+    <nav className="Bar">
+      <Link href="/" className="logo">
+        Ashwin Iyer
+      </Link>
+      <div className="nav-links">
+        {navLinks.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`nav-link ${pathname === href ? "nav-link-active" : ""}`}
+          >
+            {label}
+          </Link>
+        ))}
       </div>
-      <div className="links-section">
-        <Stack direction="row" spacing={2}>
-          <Button href="/" color={"secondary"}>
-            <h2>Home</h2>
-          </Button>
-          <Button href="/projects" color={"secondary"}>
-            <h2>Projects</h2>
-          </Button>
-          <Button href="/about" color={"secondary"}>
-            <h2>About</h2>
-          </Button>
-        </Stack>
-      </div>
-    </div>
+    </nav>
   );
 }
