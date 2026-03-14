@@ -1,417 +1,212 @@
 "use client";
 
-import "./projects.module.css";
-import React, { useEffect, useState } from "react"; // Import useEffect and useState
+import React, { useEffect, useState, useRef } from "react";
 import projects1 from "../data/repos.json";
-import Grid from "@mui/material/Grid"; // Import Grid from Material-UI
-export default function ProjectList() {
-  const [projects, setProjects] = useState([]); // State for projects
-  const [loading, setLoading] = useState(true); // State for loading
+import styles from "./ProjectList.module.css";
 
+export default function ProjectList() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [allProjects, setAllProjects] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [visibleCards, setVisibleCards] = useState(new Set());
+  const cardRefs = useRef([]);
+
+  const list_to_remove = [
+    "7110A_Code",
+    "7110A-Website",
+    "AskGPT",
+    "Cookle",
+    "Email-Writer-with-web-search",
+    "homereadypro",
+    "marketviewr.koreader",
+    "openai_merch_bot",
+    "Ashwin-Iyer1",
+    "Pomodoro-App",
+    "ReactPortfolio",
+    "resume",
+    "tiktodv4",
+    "TikTok-Video-Creator",
+    "HerImpact",
+    "Game-Pigeon-Anagrams",
+    "GPTvsGeminiTrader",
+    "",
+  ];
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch(`/api/data`);
+        if (!res.ok) throw new Error("Network response was not ok");
+        const data = await res.json();
+        const sorted = data.sort((a, b) =>
+          a.reponame.localeCompare(b.reponame)
+        );
+        sorted.forEach((project) => {
+          if (project.reponame === "NUWorks-Co-op-grader") {
+            project.html_url = "https://nucoop.app/";
+          }
+        });
+        setAllProjects(sorted);
+        setProjects(
+          sorted.filter((p) => !list_to_remove.includes(p.reponame))
+        );
+      } catch {
+        const sorted = [...projects1].sort((a, b) =>
+          a.reponame.localeCompare(b.reponame)
+        );
+        setAllProjects(sorted);
+        setProjects(
+          sorted.filter((p) => !list_to_remove.includes(p.reponame))
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.dataset.idx);
+            setVisibleCards((prev) => new Set([...prev, idx]));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [projects, filter, loading]);
 
   const handleShowAll = () => {
     setProjects(allProjects);
   };
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const list_to_remove = [
-        "7110A_Code",
-        "7110A-Website",
-        "AskGPT",
-        "Cookle",
-        "Email-Writer-with-web-search",
-        "homereadypro",
-        "marketviewr.koreader",
-        "openai_merch_bot",
-        "Ashwin-Iyer1",
-        "Pomodoro-App",
-        "ReactPortfolio",
-        "resume",
-        "tiktodv4",
-        "TikTok-Video-Creator",
-        "HerImpact",
-        "Game-Pigeon-Anagrams",
-        "GPTvsGeminiTrader",
-        "",
-      ];
+  const displayed = filter
+    ? projects.filter(
+        (p) =>
+          p.reponame.toLowerCase().includes(filter.toLowerCase()) ||
+          (p.description || "").toLowerCase().includes(filter.toLowerCase())
+      )
+    : projects;
 
-      try {
-        // Attempt to fetch the data from the external API
-        const res = await fetch(`/api/data`);
-
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        // Await the JSON response to get the projects array
-        const data = await res.json(); // Make sure to await this
-        const sortedProjects = data.sort((a, b) =>
-          a.reponame.localeCompare(b.reponame)
-        );
-
-        sortedProjects.forEach((project) => {
-          if (project.reponame === "NUWorks-Co-op-grader") {
-            project.html_url = "https://nucoop.app/"
-          }
-        });
-
-        setAllProjects(sortedProjects);
-        setProjects(
-          sortedProjects.filter(
-            (project) => !list_to_remove.includes(project.reponame)
-          )
-        );
-      } catch (error) {
-        console.error(
-          "Failed to fetch from API, falling back to local data:",
-          error
-        );
-
-        // If the fetch fails, use the local JSON file
-        const sortedLocalProjects = projects1.sort((a, b) =>
-          a.reponame.localeCompare(b.reponame)
-        );
-        setAllProjects(sortedLocalProjects);
-        setProjects(
-          sortedLocalProjects.filter(
-            (project) => !list_to_remove.includes(project.reponame)
-          )
-        );
-      } finally {
-        setLoading(false); // Set loading to false when done
-      }
-    };
-
-    fetchProjects(); // Call the fetch function
-  }, []); // Empty dependency array to run once on mount
-
-  // Loading skeleton placeholder
   if (loading) {
     return (
-      <div
-        style={{
-          width: "100%",
-          padding: "16px",
-          boxSizing: "border-box",
-        }}
-      >
-        <div
-          className="projects-grid"
-          style={{
-            display: "grid",
-            gap: "12px",
-            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-            maxWidth: "1400px",
-            margin: "0 auto",
-          }}
-        >
-          {[...Array(9)].map((_, index) => (
+      <div className={styles.container}>
+        <div className={styles.searchBar}>
+          <div className={styles.searchSkeleton} />
+        </div>
+        <div className={styles.grid}>
+          {[...Array(8)].map((_, i) => (
             <div
-              key={index}
-              className="skeleton-card"
-              style={{
-                width: "100%",
-                background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
-                borderRadius: "12px",
-                padding: "24px",
-                borderLeft: "4px solid #3a3a3a",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                minHeight: "200px",
-                animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-                boxSizing: "border-box",
-              }}
+              key={i}
+              className={`${styles.card} ${styles.skeleton}`}
+              style={{ animationDelay: `${i * 0.08}s` }}
             >
+              <div className={styles.skeletonLine} style={{ width: "30%" }} />
               <div
-                style={{
-                  height: "28px",
-                  background:
-                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
-                  backgroundSize: "200% 100%",
-                  animation: "shimmer 2s infinite",
-                  borderRadius: "6px",
-                  width: "70%",
-                }}
+                className={styles.skeletonLine}
+                style={{ width: "70%", height: "20px" }}
               />
-              <div
-                style={{
-                  height: "16px",
-                  background:
-                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
-                  backgroundSize: "200% 100%",
-                  animation: "shimmer 2s infinite",
-                  borderRadius: "4px",
-                  width: "100%",
-                  animationDelay: "0.1s",
-                }}
-              />
-              <div
-                style={{
-                  height: "16px",
-                  background:
-                    "linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%)",
-                  backgroundSize: "200% 100%",
-                  animation: "shimmer 2s infinite",
-                  borderRadius: "4px",
-                  width: "90%",
-                  animationDelay: "0.2s",
-                }}
-              />
+              <div className={styles.skeletonLine} style={{ width: "90%" }} />
+              <div className={styles.skeletonLine} style={{ width: "60%" }} />
             </div>
           ))}
         </div>
-        <style jsx>{`
-          @keyframes shimmer {
-            0% {
-              background-position: 200% 0;
-            }
-            100% {
-              background-position: -200% 0;
-            }
-          }
-
-          @media (max-width: 1160px) {
-            .projects-grid {
-              grid-template-columns: repeat(2, 1fr) !important;
-              gap: 8px !important;
-              padding: 0 8px;
-            }
-
-            :global(.skeleton-card) {
-              padding: 16px !important;
-              min-height: 180px !important;
-              border-radius: 8px !important;
-            }
-          }
-
-          @media (max-width: 480px) {
-            .projects-grid {
-              gap: 6px !important;
-              padding: 0 4px;
-            }
-
-            :global(.skeleton-card) {
-              padding: 12px !important;
-              min-height: 160px !important;
-            }
-          }
-        `}</style>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        width: "100%",
-        padding: "16px",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        className="projects-grid"
-        style={{
-          display: "grid",
-          gap: "16px",
-          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-          maxWidth: "1400px",
-          margin: "0 auto",
-        }}
-      >
-        {projects.map((project, index) => {
-          const hue = (index * (360 / projects.length)) % 360;
-          const accentColor = `hsl(${hue}, 70%, 55%)`;
+    <div className={styles.container}>
+      <div className={styles.searchBar}>
+        <svg
+          className={styles.searchIcon}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className={styles.searchInput}
+        />
+        <span className={styles.projectCount}>
+          {displayed.length} project{displayed.length !== 1 ? "s" : ""}
+        </span>
+      </div>
+
+      <div className={styles.grid}>
+        {displayed.map((project, index) => {
+          const num = String(index + 1).padStart(2, "0");
+          const isVisible = visibleCards.has(index);
 
           return (
-            <div
+            <a
               key={project.id || index}
-              className="project-card"
-              style={{
-                width: "100%",
-                background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
-                borderRadius: "12px",
-                padding: "24px",
-                border: `2px solid transparent`,
-                borderLeftColor: accentColor,
-                borderLeftWidth: "4px",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                cursor: "pointer",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                minHeight: "200px",
-                position: "relative",
-                overflow: "hidden",
-                boxSizing: "border-box",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = `0 12px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px ${accentColor}`;
-                e.currentTarget.style.borderLeftWidth = "6px";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 6px rgba(0, 0, 0, 0.1)";
-                e.currentTarget.style.borderLeftWidth = "4px";
-              }}
+              href={project.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className={`${styles.card} ${isVisible ? styles.cardVisible : ""}`}
+              style={{ transitionDelay: `${(index % 6) * 0.06}s` }}
+              ref={(el) => (cardRefs.current[index] = el)}
+              data-idx={index}
             >
-              {/* Subtle background gradient overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  width: "100px",
-                  height: "100px",
-                  pointerEvents: "none",
-                }}
-              />
-
-              <h3
-                style={{
-                  color: accentColor,
-                  fontSize: "1.25rem",
-                  fontWeight: "600",
-                  margin: 0,
-                  lineHeight: "1.4",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {project.reponame}
-              </h3>
-
-              <p
-                style={{
-                  color: "#b0b0b0",
-                  fontSize: "0.9rem",
-                  lineHeight: "1.6",
-                  margin: 0,
-                  flex: 1,
-                  display: "-webkit-box",
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {project.description || "No description available"}
-              </p>
-
-              {/* View project indicator */}
-              <a
-                href={project.html_url}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    color: accentColor,
-                    fontSize: "0.85rem",
-                    fontWeight: "500",
-                    marginTop: "auto",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  <span>View Project</span>
-                  <span style={{ fontSize: "1rem" }}>→</span>
+              <div className={styles.cardInner}>
+                <span className={styles.index}>{num}</span>
+                <div className={styles.cardContent}>
+                  <h3 className={styles.title}>{project.reponame}</h3>
+                  <p className={styles.description}>
+                    {project.description || "No description available"}
+                  </p>
                 </div>
-              </a>
-            </div>
+                <div className={styles.cardFooter}>
+                  <span className={styles.viewLink}>
+                    View
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
           );
         })}
-        {projects.length !== allProjects.length && (
-          <button
-            onClick={handleShowAll}
-            style={{
-              gridColumn: "1 / -1",
-              padding: "16px 32px",
-              background: "linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)",
-              color: "#fff",
-              border: "1px solid #333",
-              borderRadius: "12px",
-              cursor: "pointer",
-              fontSize: "1rem",
-              fontWeight: "600",
-              margin: "20px auto 0",
-              display: "block",
-              width: "fit-content",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 6px 12px rgba(0, 0, 0, 0.2)";
-              e.currentTarget.style.borderColor = "#555";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
-              e.currentTarget.style.borderColor = "#333";
-            }}
-          >
-            Show All Projects ({allProjects.length - projects.length} hidden)
-          </button>
-        )}
       </div>
-      <style jsx>{`
-        @media (max-width: 1160px) {
-          .projects-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 8px !important;
-            padding: 0 8px;
-          }
 
-          :global(.project-card) {
-            padding: 16px !important;
-            min-height: 180px !important;
-            border-radius: 8px !important;
-          }
-
-          :global(.project-card) h3 {
-            font-size: 1rem !important;
-          }
-
-          :global(.project-card) p {
-            font-size: 0.8rem !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .projects-grid {
-            gap: 6px !important;
-            padding: 0 4px;
-          }
-
-          :global(.project-card) {
-            padding: 12px !important;
-            min-height: 160px !important;
-          }
-
-          :global(.project-card) h3 {
-            font-size: 0.9rem !important;
-          }
-
-          :global(.project-card) p {
-            font-size: 0.75rem !important;
-          }
-        }
-      `}</style>
+      {projects.length !== allProjects.length && (
+        <button onClick={handleShowAll} className={styles.showAllBtn}>
+          Show {allProjects.length - projects.length} more projects
+        </button>
+      )}
     </div>
   );
 }

@@ -2,94 +2,35 @@
 
 .Project1 {
   padding: var(--space-lg);
-  max-width: 1200px;
+  max-width: var(--max-width);
   width: 100%;
   text-align: left;
   overflow-x: hidden;
-  box-sizing: border-box;
 }
 
 /* Section Title */
 #WorkingOnP {
   color: var(--text-primary);
-  font-size: 1.75rem;
-  margin-bottom: var(--space-xl);
-  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+  font-weight: 700;
   text-align: left;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .Project1 .BG {
   display: none;
 }
 
-/* Project Card Container */
-.Project {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
-  margin-bottom: var(--space-lg);
-  min-height: 130px;
-  transition: all var(--transition-slow);
-}
-
-.Project:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card-hover);
-}
-
-/* Project Title */
-.Project h3 {
-  color: var(--text-primary);
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-/* Project Description */
-.Project p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-size: 0.95rem;
-}
-
-/* Project Links */
-.Project a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color var(--transition-fast);
-}
-
-.Project a:hover {
-  color: var(--accent-secondary);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .Project1 {
     padding: var(--space-md) 12px;
-    text-align: center;
   }
 
   #WorkingOnP {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-lg);
-    text-align: center;
-  }
-
-  .Project {
-    padding: var(--space-lg);
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .Project h3 {
-    text-align: center;
-  }
-
-  .Project p {
+    font-size: 1.6rem;
+    margin-bottom: var(--space-md);
     text-align: center;
   }
 }
@@ -100,10 +41,6 @@
   }
 
   #WorkingOnP {
-    font-size: 1.3rem;
-  }
-
-  .Project {
-    padding: var(--space-md);
+    font-size: 1.4rem;
   }
 }
