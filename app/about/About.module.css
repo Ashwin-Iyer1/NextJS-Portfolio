@@ -42,7 +42,7 @@
 
 .card:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+  /* subtle hover */
 }
 
 .card h3,
@@ -101,7 +101,7 @@
 
 .linksCard:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+  /* subtle hover */
 }
 
 /* Resume Link */
@@ -126,11 +126,11 @@
 
 .resumeCard:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+  /* subtle hover */
 }
 
 .resumeCard h3 {
-  color: var(--accent-secondary);
+  color: var(--text-primary);
   font-size: 1.15rem;
   margin-bottom: 8px;
   font-weight: 600;
@@ -157,7 +157,7 @@
 
 .songsCard:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+  /* subtle hover */
 }
 
 /* Oura Section */
@@ -175,7 +175,7 @@
 
 .ouraCard:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+  /* subtle hover */
 }
 
 /* COC Section */

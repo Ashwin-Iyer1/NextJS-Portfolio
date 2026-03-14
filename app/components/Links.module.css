@@ -20,7 +20,6 @@
 
 .Socials:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 @media (max-width: 767px) {

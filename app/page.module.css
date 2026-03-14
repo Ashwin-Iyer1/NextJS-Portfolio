@@ -40,12 +40,11 @@
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   border: 1px solid var(--border-color);
-  transition: all var(--transition-slow);
+  transition: border-color var(--transition-slow);
 }
 
 .basic:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 .basic h2 {
@@ -100,12 +99,11 @@
   border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-slow);
+  transition: border-color var(--transition-slow);
 }
 
 .workExperience:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 .workExperience h2 {
@@ -124,12 +122,11 @@
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
-  transition: all var(--transition-slow);
+  transition: border-color var(--transition-slow);
 }
 
 .College:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 .College img {
@@ -196,12 +193,11 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all var(--transition-slow);
+  transition: border-color var(--transition-slow);
 }
 
 .dashboardCard:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 /* Contact Section */

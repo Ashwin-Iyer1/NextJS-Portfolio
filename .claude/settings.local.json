@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(source /Users/ashwiniyer/Documents/Github/newportfolio/venv/bin/activate && echo \"Virtual environment activated successfully\" && which python)"
+    ]
+  }
+}

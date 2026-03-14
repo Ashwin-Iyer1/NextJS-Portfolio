@@ -16,14 +16,13 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  height: 1px;
+  background: var(--border-hover);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .Time:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
 }
 
 .Working {

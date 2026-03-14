@@ -46,7 +46,7 @@
 .song-name {
   font-size: 1rem;
   margin: 0.5rem 0 0.2rem;
-  color: white;
+  color: var(--text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
@@ -54,7 +54,7 @@
 
 .artist-name {
   font-size: 0.9rem;
-  color: gray;
+  color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;

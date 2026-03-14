@@ -14,14 +14,14 @@
   font-family: "Caveat", cursive;
   font-weight: 700;
   font-size: 2rem;
-  color: var(--accent-primary);
+  color: var(--text-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
   letter-spacing: -0.01em;
 }
 
 .logo:hover {
-  color: var(--accent-secondary);
+  color: var(--text-secondary);
 }
 
 .nav-links {
@@ -38,23 +38,43 @@
   text-decoration: none;
   padding: 8px 16px;
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast);
   letter-spacing: 0.01em;
 }
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link-active {
-  color: var(--accent-primary);
-  background: rgba(139, 92, 246, 0.08);
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .nav-link-active:hover {
-  color: var(--accent-primary);
-  background: rgba(139, 92, 246, 0.12);
+  color: var(--text-primary);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+  margin-left: 8px;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
 }
 
 @media (max-width: 767px) {

@@ -8,8 +8,8 @@ const workDateFormat = (date) => {
   return (
     <span
       style={{
-        backgroundColor: "rgba(139, 92, 246, 0.15)",
-        color: "var(--accent-secondary)",
+        backgroundColor: "var(--bg-card-hover)",
+        color: "var(--text-secondary)",
         padding: "2px 8px",
         borderRadius: "6px",
         fontSize: "0.85rem",

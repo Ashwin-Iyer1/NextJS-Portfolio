@@ -163,7 +163,7 @@ export default function OuraDashboard({
                borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
              }}>
           <div>
-              <h2 className="text-2xl font-bold font-sans" style={{ color: '#c596ee', margin: 0 }}>OURA STATS</h2>
+              <h2 className="text-2xl font-bold font-sans" style={{ color: 'var(--text-primary)', margin: 0 }}>OURA STATS</h2>
           </div>
           <div className="text-sm font-sans px-3 py-1 rounded-full" 
                style={{ 

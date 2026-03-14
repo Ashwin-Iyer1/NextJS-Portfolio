@@ -15,19 +15,18 @@ import { format, parseISO } from 'date-fns';
 import './OuraCharts.css';
 
 const getTheme = (darkMode) => ({
-  background: darkMode ? '#050505' : '#ffffff',
-  text: darkMode ? '#e0e0e0' : '#000000',
+  background: darkMode ? '#050505' : '#fafafa',
+  text: darkMode ? '#e0e0e0' : '#1a1a1a',
   grid: darkMode ? '#222222' : '#e0e0e0',
   tooltipBg: darkMode ? '#111111' : '#ffffff',
-  tooltipBg: darkMode ? '#111111' : '#ffffff',
-  tooltipColor: darkMode ? '#c596ee' : '#000000',
+  tooltipColor: darkMode ? '#a0a0a0' : '#333333',
   tooltipBorder: darkMode ? '#333333' : '#cccccc',
-  bar: darkMode ? '#c596ee' : '#000000',
-  line: darkMode ? '#c596ee' : '#000000',
-  areaGradientFrom: darkMode ? '#8a2ce2' : '#000000',
-  areaGradientTo: darkMode ? '#c596ee' : '#ffffff',
-  accent: darkMode ? '#ff0844' : '#ff0000', // For critical alerts or high stress
-  recovery: darkMode ? '#00f260' : '#00aa44', // Green for recovery
+  bar: darkMode ? '#888888' : '#333333',
+  line: darkMode ? '#999999' : '#333333',
+  areaGradientFrom: darkMode ? '#666666' : '#333333',
+  areaGradientTo: darkMode ? '#999999' : '#aaaaaa',
+  accent: darkMode ? '#ff0844' : '#ff0000',
+  recovery: darkMode ? '#00f260' : '#00aa44',
 });
 
 // Helper to check if data is valid for charting

@@ -35,9 +35,7 @@
 }
 
 .Project:hover {
-  transform: translateY(-3px);
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
   background: var(--bg-card-hover);
 }
 

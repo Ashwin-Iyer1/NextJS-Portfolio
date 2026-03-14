@@ -123,7 +123,7 @@
 }
 
 .indicator.active {
-  background: var(--accent-primary);
+  background: var(--text-primary);
   width: 12px;
   height: 12px;
 }
@@ -135,7 +135,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%);
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card-hover) 50%, var(--bg-secondary) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;

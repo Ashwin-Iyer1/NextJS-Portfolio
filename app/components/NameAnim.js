@@ -27,7 +27,7 @@ const NameAnim = () => {
         <g
           id="strokes"
           fill="none"
-          stroke="#bc85ff"
+          stroke="currentColor"
           strokeLinecap="round"
           stroke-linejoin="round"
         >

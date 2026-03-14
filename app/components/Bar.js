@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 import "./Bar.css";
 
 export default function Bar() {
@@ -28,6 +29,7 @@ export default function Bar() {
             {label}
           </Link>
         ))}
+        <ThemeToggle />
       </div>
     </nav>
   );
