@@ -16,7 +16,7 @@
 
 .NameAnim h1 {
   font: 700 20vw "Caveat", cursive;
-  color: var(--splash-stroke, #d4d4d4);
+  color: var(--splash-stroke, #e8e8e8);
   text-align: center;
   margin: 0;
   padding: 0;
@@ -33,7 +33,7 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: var(--splash-stroke, #d4d4d4);
+  color: var(--splash-stroke, #e8e8e8);
 }
 
 .logo {

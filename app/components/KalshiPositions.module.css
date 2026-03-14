@@ -21,9 +21,10 @@
   display: block;
   width: 40px;
   height: 1px;
-  background: var(--border-hover);
+  background: var(--text-muted);
   margin: 12px auto 0;
   border-radius: 1px;
+  opacity: 0.4;
 }
 
 .positions-grid {

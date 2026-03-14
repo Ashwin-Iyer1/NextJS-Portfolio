@@ -15,16 +15,16 @@ import { format, parseISO } from 'date-fns';
 import './OuraCharts.css';
 
 const getTheme = (darkMode) => ({
-  background: darkMode ? '#050505' : '#fafafa',
-  text: darkMode ? '#e0e0e0' : '#1a1a1a',
-  grid: darkMode ? '#222222' : '#e0e0e0',
-  tooltipBg: darkMode ? '#111111' : '#ffffff',
-  tooltipColor: darkMode ? '#a0a0a0' : '#333333',
-  tooltipBorder: darkMode ? '#333333' : '#cccccc',
-  bar: darkMode ? '#888888' : '#333333',
-  line: darkMode ? '#999999' : '#333333',
-  areaGradientFrom: darkMode ? '#666666' : '#333333',
-  areaGradientTo: darkMode ? '#999999' : '#aaaaaa',
+  background: darkMode ? '#0a0a0a' : '#f5f5f3',
+  text: darkMode ? '#e8e8e8' : '#111111',
+  grid: darkMode ? '#1e1e1e' : '#ddd',
+  tooltipBg: darkMode ? '#141414' : '#ffffff',
+  tooltipColor: darkMode ? '#8a8a8a' : '#444444',
+  tooltipBorder: darkMode ? '#2a2a2a' : '#ccc',
+  bar: darkMode ? '#777777' : '#444444',
+  line: darkMode ? '#888888' : '#444444',
+  areaGradientFrom: darkMode ? '#555555' : '#444444',
+  areaGradientTo: darkMode ? '#888888' : '#bbbbbb',
   accent: darkMode ? '#ff0844' : '#ff0000',
   recovery: darkMode ? '#00f260' : '#00aa44',
 });
