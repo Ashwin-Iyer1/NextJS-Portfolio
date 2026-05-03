@@ -1,6 +1,5 @@
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import CustomCursor from "./components/CustomCursor";
 
 export const metadata = {
   metadataBase: new URL("https://ashwiniyer.com"),
@@ -32,7 +31,6 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <CustomCursor />
         <main>
           {children}
           <footer>

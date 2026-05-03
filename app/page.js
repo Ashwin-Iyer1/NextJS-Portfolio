@@ -116,6 +116,17 @@ export default function Home() {
         </div>
 
         <div className={styles.MiscProj}>
+          <h2 className={styles.sectionTitle}>Research</h2>
+          <div className={styles.researchLinks}>
+            <a
+              href="/projects/NUSA Spring 26 RS - Equity Vol. Project.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.researchLink}
+            >
+              NUSA Spring 26 RS — Equity Volatility Project (PDF)
+            </a>
+          </div>
           <h2 className={styles.sectionTitle}>Miscellaneous Projects</h2>
           <div className={styles.MiscProjContainer} ref={miscProjSection}>
             {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (

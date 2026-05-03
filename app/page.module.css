@@ -148,6 +148,33 @@
   letter-spacing: -0.02em;
 }
 
+/* Research Links */
+.researchLinks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.researchLink {
+  display: inline-block;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: border-color var(--transition-slow), color var(--transition-fast);
+}
+
+.researchLink:hover {
+  border-color: var(--border-hover);
+  color: var(--accent-secondary);
+}
+
 /* Misc Projects */
 .MiscProj {
   margin-top: var(--space-3xl);
