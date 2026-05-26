@@ -18,11 +18,9 @@ export default function About() {
             <div className={styles.card}>
               <h3 className={styles.cardSubtitle}>Education</h3>
               <p>
-                My name is Ashwin Iyer, a current sophomore at{" "}
+                My name is Ashwin Iyer, a current junior at{" "}
                 <b>Northeastern University</b> studying{" "}
-                <b>Computer Science x Business Administration</b>. I am looking
-                forward to the co-op program as well as joining the{" "}
-                <b>finance</b> and the <b>computer science</b> clubs on campus.
+                <b>Computer Science x Business Administration</b>. I am currently at <b>Wellington Management</b> on a <b>Risk and Analytics</b> co-op and am also the treasurer at <b>Northeastern Systematic Alpha</b>.
               </p>
             </div>
             

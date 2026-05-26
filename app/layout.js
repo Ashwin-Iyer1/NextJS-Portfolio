@@ -5,10 +5,10 @@ export const metadata = {
   metadataBase: new URL("https://ashwiniyer.com"),
   title: "Ashwin Iyer's Portfolio",
   description:
-    "Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas.",
+    "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
   openGraph: {
     title: "Ashwin Iyer's Portfolio",
-    description: "Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas.",
+    description: "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
     url: "https://ashwiniyer.com",
     siteName: "Ashwin Iyer's Portfolio",
     locale: "en_US",
@@ -17,7 +17,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ashwin Iyer's Portfolio",
-    description: "Personal website of Ashwin Iyer, a sophomore at Northeastern University from Southlake, Texas.",
+    description: "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
     creator: "@ashwiniyer",
   },
 };

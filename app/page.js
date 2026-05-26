@@ -79,9 +79,9 @@ export default function Home() {
           <div className={styles.topSection}>
             <div className={styles.basicRow}>
               <div className={styles.basic}>
-                <h2>Sophomore at Northeastern University</h2>
+                <h2>Junior at Northeastern University</h2>
                 <p>
-                  I am currently a sophomore at Northeastern University in
+                  I am currently a junior at Northeastern University in
                   Boston, Massachusetts, and I am interested in computer
                   science. I am currently learning Python, Java, and TypeScript.{" "}
                   <Link href="/about">Learn more about me!</Link>
