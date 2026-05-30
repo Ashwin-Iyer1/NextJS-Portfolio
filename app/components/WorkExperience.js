@@ -1,5 +1,6 @@
 const zealImage = "/Images/zeal.png";
 const wellingtonImage = "/Images/wellington_management_logo.jpeg";
+const blackrockImage = "/Images/blackrock_logo.png";
 import Box from "@mui/material/Box";
 import { Divider, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import React from "react";
@@ -25,6 +26,33 @@ const workDateFormat = (date) => {
 export default function WorkExperience() {
   return (
     <List sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2 }}>
+      <ListItem sx={{ borderBottom: "none !important" }}>
+        <ListItemAvatar>
+          <Box>
+            <img
+              src={blackrockImage}
+              alt="BlackRock Logo"
+              height={50}
+            />
+          </Box>
+        </ListItemAvatar>
+        <ListItemText
+          primary={
+            <>
+              <b>BlackRock</b>{" "}
+              {workDateFormat("Incoming Summer 2027 Analyst")}
+            </>
+          }
+          secondary="Global Capital Markets - Trading"
+          sx={{
+            color: "var(--text-primary)",
+            "& .MuiListItemText-secondary": { color: "var(--text-secondary)" },
+          }}
+        />
+      </ListItem>
+      <Divider sx={{
+        border: "1px solid var(--border-color)"
+      }}/>
       <ListItem sx={{ borderBottom: "none !important" }}>
         <ListItemAvatar>
           <Box>
