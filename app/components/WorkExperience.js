@@ -26,7 +26,7 @@ const workDateFormat = (date) => {
 export default function WorkExperience() {
   return (
     <List sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 2 }}>
-      <ListItem sx={{ borderBottom: "none !important" }}>
+      {/* <ListItem sx={{ borderBottom: "none !important" }}>
         <ListItemAvatar>
           <Box>
             <img
@@ -49,7 +49,7 @@ export default function WorkExperience() {
             "& .MuiListItemText-secondary": { color: "var(--text-secondary)" },
           }}
         />
-      </ListItem>
+      </ListItem> */}
       <Divider sx={{
         border: "1px solid var(--border-color)"
       }}/>
