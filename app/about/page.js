@@ -20,7 +20,7 @@ export default function About() {
               <p>
                 My name is Ashwin Iyer, a current junior at{" "}
                 <b>Northeastern University</b> studying{" "}
-                <b>Computer Science x Business Administration</b>. I am currently at <b>Wellington Management</b> on a <b>Risk and Analytics</b> co-op and am also the treasurer at <b>Northeastern Systematic Alpha</b>.
+                <b>Computer Science x Business Administration</b>.
               </p>
             </div>
             
