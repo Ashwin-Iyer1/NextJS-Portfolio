@@ -16,15 +16,15 @@ main {
   overflow: visible;
 }
 
-/* Reading column — 68ch measure.
-   Headings, tables, and captions inherit the site sans from body;
-   prose elements below opt in to the Georgia serif. */
+/* Reading column — 920px desktop measure (owner preference: wider than the
+   classic 68ch editorial column). Headings, tables, and captions inherit
+   the site sans from body; prose elements below opt in to Georgia serif. */
 .half-width-wrapper {
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--text-primary);
   text-align: left;
-  max-width: 68ch;
+  max-width: 920px;
   margin: 0 auto;
   padding: var(--space-2xl) 0 var(--space-4xl);
 }
@@ -256,8 +256,8 @@ main {
 }
 
 /* ---- Content grids ----
-   Galleries and video grids break out of the 68ch text measure:
-   the prose keeps its editorial column, media gets room to breathe. */
+   Galleries and video grids break out of the text measure:
+   the prose keeps its reading column, media gets room to breathe. */
 .flexbox,
 .flexboxVideos,
 .zeal-image,
@@ -265,7 +265,7 @@ main {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: min(880px, calc(100vw - 3 * var(--space-lg)));
+  width: min(1100px, calc(100vw - 3 * var(--space-lg)));
   max-width: none;
 }
 
