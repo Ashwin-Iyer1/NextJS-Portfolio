@@ -111,18 +111,23 @@ a.researchLink:focus-visible,
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-lg);
-  align-items: start;
+  /* stretch: at desktop the experience card must equal the full height of
+     the aside column (coding-time card + NEU card) so the row bottoms align */
+  align-items: stretch;
 }
 
 .workCard {
   padding: var(--space-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .workAside {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-lg);
-  align-items: start;
 }
 
 .college {
@@ -251,6 +256,9 @@ a.researchLink:hover {
 
   .workAside {
     grid-template-columns: minmax(0, 1fr);
+    /* coding-time card keeps its natural height; the NEU card absorbs the
+       rest so the aside column exactly fills the stretched row */
+    grid-template-rows: auto 1fr;
   }
 
   .nowGrid {
