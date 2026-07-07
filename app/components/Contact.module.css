@@ -1,43 +1,93 @@
 /* Contact Component Styles */
 
-.ContactLinks {
+.contactLinks {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: var(--space-xl);
+  align-items: flex-start;
+  gap: var(--space-lg);
   max-width: 100%;
   padding: var(--space-lg) 0;
 }
 
-.ContactText {
-  position: relative;
-  transition: all var(--transition-slow);
+.contactLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  border-radius: var(--radius-md);
 }
 
-.ContactText:hover {
+.contactLink:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.iconButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contactLink:hover .iconButton,
+.contactLink:focus-visible .iconButton {
   transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
 }
 
-.ContactText svg {
-  width: 48px;
-  height: 48px;
-  opacity: 0.5;
-  transition: all var(--transition-base);
+.linkLabel {
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  transition: color var(--transition-base);
 }
 
-.ContactText:hover svg {
-  opacity: 1;
+.contactLink:hover .linkLabel,
+.contactLink:focus-visible .linkLabel {
+  color: var(--text-primary);
 }
 
-@media (max-width: 767px) {
-  .ContactLinks {
-    gap: var(--space-lg);
-    padding: var(--space-md) 0;
+@media (max-width: 640px) {
+  .iconButton {
+    width: 48px;
+    height: 48px;
   }
 
-  .ContactText svg {
-    width: 40px;
-    height: 40px;
+  .iconButton svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconButton,
+  .linkLabel {
+    transition: none;
+  }
+
+  .contactLink:hover .iconButton,
+  .contactLink:focus-visible .iconButton {
+    transform: none;
   }
 }
