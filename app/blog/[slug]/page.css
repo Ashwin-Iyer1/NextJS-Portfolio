@@ -9,7 +9,7 @@
 .full-width-wrapper {
   width: 100%;
   min-height: 100vh;
-  padding: var(--space-lg);
+  /* padding: var(--space-lg); */
 }
 
 main {
@@ -433,8 +433,10 @@ main {
   }
 
   .full-width-wrapper {
-    padding: var(--space-md) var(--space-sm);
-    overflow-x: hidden;
+    /* padding: var(--space-md) var(--space-sm); */
+    /* clip (not hidden): an overflow-x: hidden ancestor would disable the
+       sticky nav by becoming a scroll container */
+    overflow-x: clip;
   }
 
   .half-width-wrapper {
