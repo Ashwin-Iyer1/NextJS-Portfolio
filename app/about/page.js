@@ -11,24 +11,24 @@ export default function About() {
   return (
     <div className={styles.About}>
       <Bar />
-      <div className={styles.Container}>
-        <div className={styles.mainContent}>
-          <div className={styles.introSection}>
-            <h2 className={styles.sectionTitle}>About Me</h2>
-            <div className={styles.card}>
-              <h3 className={styles.cardSubtitle}>Education</h3>
+      <div className={styles.mainContent}>
+        <section>
+          <h2 className="section-title">About Me</h2>
+          <div className={styles.cardGrid}>
+            <div className={`glass-card ${styles.card}`}>
+              <h3>Education</h3>
               <p>
                 My name is Ashwin Iyer, a current junior at{" "}
                 <b>Northeastern University</b> studying{" "}
                 <b>Computer Science x Business Administration</b>.
               </p>
             </div>
-            
-            <div className={styles.card}>
-              <h3 className={styles.cardSubtitle}>Experience & Projects</h3>
+
+            <div className={`glass-card ${styles.card}`}>
+              <h3>Experience &amp; Projects</h3>
               <p>
-                I have been hobby coding for around 10~ years and have competed
-                in 2 hackathons, <b>HackUTD</b> and <b>AIFAHacks</b>, winning
+                I have been hobby coding for around 10 years and have competed
+                in two hackathons, <b>HackUTD</b> and <b>AIFAHacks</b>, winning
                 both competitions. I currently have a few side{" "}
                 <Link href="/projects" className={styles.projectLink}>
                   projects
@@ -37,45 +37,49 @@ export default function About() {
               </p>
             </div>
 
-            <div className={styles.card}>
-              <h3 className={styles.cardSubtitle}>Interests</h3>
+            <div className={`glass-card ${styles.card}`}>
+              <h3>Interests</h3>
               <p>
-                Beyond coding, I enjoy working out and listening to music 🎵!
+                Beyond coding, I enjoy working out, listening to music, and reading about financial markets. My top tracks and health stats are just below.
               </p>
             </div>
           </div>
+        </section>
 
-          <div className={styles.linksSection}>
-            <h2 className={styles.sectionTitle}>Connect With Me</h2>
-            <div className={styles.linksCard}>
+        <section>
+          <h2 className="section-title">Connect With Me</h2>
+          <div className={styles.connectRow}>
+            <div className={styles.linksWrap}>
               <Links />
             </div>
-            <Link href="/resume" className={styles.resumeLink}>
-              <div className={styles.resumeCard}>
-                <h3>View My Resume</h3>
-                <p>Check out my full professional background →</p>
-              </div>
+            <Link href="/resume" className={styles.resumeCta}>
+              View my resume
+              <span className={styles.ctaArrow} aria-hidden="true">
+                &rarr;
+              </span>
             </Link>
           </div>
+        </section>
 
-          <div className={styles.musicSection}>
-            <h2 className={styles.sectionTitle}>My Top Songs This Week</h2>
-            <div className={styles.songsCard}>
-              <SongList />
-            </div>
-
-          <div className={styles.ouraSection}>
-             <h2 className={styles.sectionTitle}>My Health Stats (Oura)</h2>
-             <div className={styles.ouraCard} style={{ width: '100%', overflow: 'hidden' }}>
-                <OuraDashboard />
-             </div>
+        <section>
+          <h2 className="section-title">Top Songs This Week</h2>
+          <div className={`glass-card ${styles.songsCard}`}>
+            <SongList />
           </div>
-          </div>
+        </section>
 
-          <div className={styles.cocSection}>
+        <section>
+          <h2 className="section-title">Health Stats (Oura)</h2>
+          <div className={`glass-card ${styles.ouraCard}`}>
+            <OuraDashboard showHeader={false} />
+          </div>
+        </section>
+
+        <section>
+          <div className={`glass-card ${styles.cocCard}`}>
             <Coc />
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
