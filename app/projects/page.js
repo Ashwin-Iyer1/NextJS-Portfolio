@@ -7,14 +7,16 @@ export default function Projects() {
   return (
     <div className="projects-page">
       <Bar />
-      <header className="projects-header">
-        <h2 className="section-title">Projects</h2>
-        <p className="projects-intro">
-          A working index of things I&apos;ve built — search by name,
-          description, or technology.
-        </p>
-      </header>
-      <ProjectList />
+      <div className="projects-content">
+        <header className="projects-header">
+          <h2 className="section-title">Projects</h2>
+          <p className="projects-intro">
+            A working index of things I&apos;ve built — search by name,
+            description, or technology.
+          </p>
+        </header>
+        <ProjectList />
+      </div>
     </div>
   );
 }

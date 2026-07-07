@@ -3,8 +3,14 @@
 .projects-page {
   width: 100%;
   max-width: var(--max-width);
-  padding: var(--space-lg) var(--space-lg) var(--space-4xl);
   text-align: left;
+}
+
+/* Gutter lives below the nav (Bar spans the full row, like the home page).
+   --space-lg matches home's .content gutter — the site-wide source of
+   truth — so /projects is exactly as wide as / at every viewport. */
+.projects-content {
+  padding: 0 var(--space-lg) var(--space-4xl);
 }
 
 /* Page header */
@@ -29,8 +35,9 @@
 
 /* Responsive */
 @media (max-width: 640px) {
-  .projects-page {
-    padding: var(--space-md) var(--space-md) var(--space-3xl);
+  .projects-content {
+    /* --space-md matches home's mobile gutter (source of truth) */
+    padding: 0 var(--space-md) var(--space-3xl);
   }
 
   .projects-header {
