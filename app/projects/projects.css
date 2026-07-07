@@ -1,46 +1,39 @@
 /* Projects Page Styles */
 
-.Project1 {
-  padding: var(--space-lg);
-  max-width: var(--max-width);
+.projects-page {
   width: 100%;
+  max-width: var(--max-width);
+  padding: var(--space-lg) var(--space-lg) var(--space-4xl);
   text-align: left;
-  overflow-x: hidden;
 }
 
-/* Section Title */
-#WorkingOnP {
-  color: var(--text-primary);
-  font-size: 2rem;
-  margin-bottom: var(--space-lg);
-  font-weight: 700;
-  text-align: left;
-  letter-spacing: -0.03em;
+/* Page header */
+.projects-header {
+  margin: var(--space-2xl) 0;
 }
 
-.Project1 .BG {
-  display: none;
+/* .section-title (global utility) handles the heading itself;
+   tighten its gap so the intro reads as the heading's sub-line. */
+.projects-header .section-title {
+  margin-bottom: var(--space-md);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .Project1 {
-    padding: var(--space-md) 12px;
+.projects-intro {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .projects-page {
+    padding: var(--space-md) var(--space-md) var(--space-3xl);
   }
 
-  #WorkingOnP {
-    font-size: 1.6rem;
-    margin-bottom: var(--space-md);
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .Project1 {
-    padding: 12px 8px;
-  }
-
-  #WorkingOnP {
-    font-size: 1.4rem;
+  .projects-header {
+    margin: var(--space-xl) 0;
   }
 }

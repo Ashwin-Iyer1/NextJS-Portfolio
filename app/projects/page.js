@@ -1,15 +1,19 @@
 import "./projects.css";
-import React from "react"; // Import useEffect and useState
 import Bar from "../components/Bar";
 
 import ProjectList from "../components/ProjectList";
 
 export default function Projects() {
   return (
-    <div className="Project1">
+    <div className="projects-page">
       <Bar />
-      <div className="BG" />
-      <h2 id="WorkingOnP">Projects</h2>
+      <header className="projects-header">
+        <h2 className="section-title">Projects</h2>
+        <p className="projects-intro">
+          A working index of things I&apos;ve built — search by name,
+          description, or technology.
+        </p>
+      </header>
       <ProjectList />
     </div>
   );

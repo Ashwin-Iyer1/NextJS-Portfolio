@@ -4,6 +4,51 @@ import React, { useEffect, useState, useRef } from "react";
 import projects1 from "../data/repos.json";
 import styles from "./ProjectList.module.css";
 
+// Tech/language labels per repository. The repo data source only exposes
+// name/description/url, so tags are maintained here (primary language from
+// GitHub, plus a domain hint).
+const TECH_TAGS = {
+  "7110A-Website": ["JavaScript", "Web"],
+  "7110A_Code": ["C++", "Robotics"],
+  ArbitrageFinder: ["Python", "Trading"],
+  AskGPT: ["Lua", "KOReader"],
+  "Chess-Bot-using-OpenCV": ["Python", "OpenCV"],
+  Cookle: ["JavaScript", "Game"],
+  "Email-Writer-with-web-search": ["Python", "Selenium"],
+  FourierSeries: ["HTML", "Math"],
+  "Fridge Flow": ["App"],
+  "Game-Pigeon-Anagrams": ["Python", "Automation"],
+  GPTvsGeminiTrader: ["Python", "LLMs", "Trading"],
+  HerImpact: ["Web"],
+  homereadypro: ["JavaScript", "Hackathon"],
+  insta_confirm_action: ["JavaScript"],
+  insta_following_order: ["HTML"],
+  IVTrading: ["Python", "Trading"],
+  "marketviewr.koreader": ["Lua", "KOReader"],
+  MLProjects: ["Python", "ML"],
+  "NextJS-Portfolio": ["Next.js", "React"],
+  "Northeastern-Co-op-Prestige-Hunt": ["Python", "Data"],
+  "NUWorks-Co-op-grader": ["Python", "Web"],
+  openai_merch_bot: ["Python", "Telegram"],
+  "Oura-message-bot": ["Python", "Automation"],
+  "oura-npm": ["TypeScript", "React"],
+  "pm-tradingdesk": ["Python", "Trading"],
+  PolymarketArbitrage: ["Python", "Trading"],
+  "Pomodoro-App": ["TypeScript"],
+  "Pothole-detector": ["Python", "ML"],
+  ReactPortfolio: ["React", "JavaScript"],
+  resume: ["LaTeX"],
+  row2reach: ["JavaScript", "Automation"],
+  SkyblockSniper: ["Python", "APIs"],
+  Stridez: ["Next.js", "MySQL"],
+  studentsdrivesafe: ["JavaScript", "ML"],
+  Tactus: ["Web"],
+  tiktodv4: ["Python", "Selenium"],
+  "TikTok-Video-Creator": ["Python", "Automation"],
+};
+
+const getTags = (project) => TECH_TAGS[project.reponame] || [];
+
 export default function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -90,11 +135,13 @@ export default function ProjectList() {
     setProjects(allProjects);
   };
 
-  const displayed = filter
+  const query = filter.trim().toLowerCase();
+  const displayed = query
     ? projects.filter(
         (p) =>
-          p.reponame.toLowerCase().includes(filter.toLowerCase()) ||
-          (p.description || "").toLowerCase().includes(filter.toLowerCase())
+          p.reponame.toLowerCase().includes(query) ||
+          (p.description || "").toLowerCase().includes(query) ||
+          getTags(p).some((tag) => tag.toLowerCase().includes(query))
       )
     : projects;
 
@@ -106,11 +153,7 @@ export default function ProjectList() {
         </div>
         <div className={styles.grid}>
           {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className={`${styles.card} ${styles.skeleton}`}
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
+            <div key={i} className={`${styles.card} ${styles.skeleton}`}>
               <div className={styles.skeletonLine} style={{ width: "30%" }} />
               <div
                 className={styles.skeletonLine}
@@ -148,6 +191,7 @@ export default function ProjectList() {
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className={styles.searchInput}
+          aria-label="Search projects"
         />
         <span className={styles.projectCount}>
           {displayed.length} project{displayed.length !== 1 ? "s" : ""}
@@ -158,6 +202,7 @@ export default function ProjectList() {
         {displayed.map((project, index) => {
           const num = String(index + 1).padStart(2, "0");
           const isVisible = visibleCards.has(index);
+          const tags = getTags(project);
 
           return (
             <a
@@ -166,7 +211,7 @@ export default function ProjectList() {
               target="_blank"
               rel="noreferrer"
               className={`${styles.card} ${isVisible ? styles.cardVisible : ""}`}
-              style={{ transitionDelay: `${(index % 6) * 0.06}s` }}
+              style={{ animationDelay: `${(index % 6) * 0.06}s` }}
               ref={(el) => (cardRefs.current[index] = el)}
               data-idx={index}
             >
@@ -179,6 +224,15 @@ export default function ProjectList() {
                   </p>
                 </div>
                 <div className={styles.cardFooter}>
+                  {tags.length > 0 && (
+                    <div className={styles.tags}>
+                      {tags.map((tag) => (
+                        <span key={tag} className={styles.tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <span className={styles.viewLink}>
                     View
                     <svg
