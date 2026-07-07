@@ -1,5 +1,12 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata = {
   metadataBase: new URL("https://ashwiniyer.com"),
@@ -26,11 +33,11 @@ export default function RootLayout({ children }) {
   const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`;
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      <body className={inter.className}>
         <main>
           {children}
           <footer>
