@@ -4,334 +4,299 @@
   text-align: left;
   max-width: 1200px;
   width: 100%;
-  padding: var(--space-lg);
-  overflow-x: hidden;
+  /* `clip` (not `hidden`) so the sticky nav keeps working — an overflow-x:
+     hidden ancestor would turn this wrapper into a scroll container. */
+  overflow-x: clip;
 }
 
-/* Hero Section */
-.Container {
-  margin-top: var(--space-lg);
+/* Page gutter lives below the nav so the Bar spans the full row. */
+.content {
+  padding: 0 var(--space-lg);
 }
 
-.topSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+/* ---------------------------------------------------------------------------
+   Section rhythm: 96px between sections on desktop, 64px below 640px.
+   Title-to-content spacing comes from the global .section-title utility.
+--------------------------------------------------------------------------- */
+.section {
+  margin-top: var(--space-4xl);
   width: 100%;
 }
 
-.basicRow {
+/* ---------------------------------------------------------------------------
+   Hero
+--------------------------------------------------------------------------- */
+.hero {
+  margin-top: var(--space-3xl);
   display: flex;
-  flex-direction: row;
-  gap: var(--space-lg);
-  align-items: stretch;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
 }
 
-.basicRow .basic {
-  flex: 0 0 calc(75% - 12px);
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.basicRow > *:last-child {
-  flex: 0 0 calc(25% - 12px);
+.heroEyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--accent-brand, #d4a24e);
 }
 
-.basic {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
-  transition: border-color var(--transition-slow);
-}
-
-.basic:hover {
-  border-color: var(--border-hover);
-}
-
-.basic h2 {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  margin-bottom: 12px;
+.heroTitle {
+  margin: 0;
+  font-size: 2.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-
-.basic p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-size: 0.95rem;
-}
-
-.basic p a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color var(--transition-fast);
-}
-
-.basic p a:hover {
-  color: var(--accent-secondary);
-}
-
-/* Work Experience Row */
-.workExperienceRow {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-lg);
-  align-items: stretch;
-}
-
-.workExperienceRow .workExperience {
-  flex: 0 0 calc(75% - 12px);
-}
-
-.rightColumn {
-  flex: 0 0 calc(25% - 12px);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  min-height: 100%;
-}
-
-.workExperience {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  transition: border-color var(--transition-slow);
-}
-
-.workExperience:hover {
-  border-color: var(--border-hover);
-}
-
-.workExperience h2 {
+  line-height: 1.2;
   color: var(--text-primary);
-  font-size: 1.5rem;
-  margin-bottom: var(--space-md);
-  font-weight: 600;
 }
 
-/* College Image */
-.College {
+.heroLede {
+  margin: 0;
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.heroLink {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
+}
+
+.heroLink:hover {
+  color: var(--text-primary);
+  text-decoration-color: var(--accent-brand, #d4a24e);
+}
+
+/* Shared brass focus ring for interactive elements on this page */
+.heroLink:focus-visible,
+a.researchLink:focus-visible,
+.contactEmail a:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+.heroLink:focus-visible,
+.contactEmail a:focus-visible {
+  border-radius: var(--radius-sm);
+}
+
+.heroSocial {
+  margin-top: var(--space-md);
+  width: 100%;
+  max-width: 360px;
+}
+
+/* ---------------------------------------------------------------------------
+   Work Experience
+--------------------------------------------------------------------------- */
+.workRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.workCard {
+  padding: var(--space-lg);
+}
+
+.workAside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.college {
   padding: var(--space-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  transition: border-color var(--transition-slow);
 }
 
-.College:hover {
-  border-color: var(--border-hover);
-}
-
-.College img {
+.college img {
   max-height: 140px;
+  width: auto;
   border-radius: var(--radius-sm);
 }
 
-/* Skills Section */
-.skillsSection {
-  margin-top: var(--space-3xl);
-}
-
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-align: center;
-  margin-bottom: var(--space-xl);
-  letter-spacing: -0.02em;
-}
-
-/* Research Links */
-.researchLinks {
+/* ---------------------------------------------------------------------------
+   Research
+--------------------------------------------------------------------------- */
+.researchRow {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  align-items: center;
-  margin-bottom: var(--space-2xl);
+  justify-content: center;
 }
 
-.researchLink {
-  display: inline-block;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
+/* `a.` prefix keeps these declarations ahead of the composed .glass-card
+   utility (which sets `transition: all`) regardless of stylesheet order. */
+a.researchLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
   padding: var(--space-md) var(--space-lg);
-  color: var(--accent-primary);
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: border-color var(--transition-slow), color var(--transition-fast);
-}
-
-.researchLink:hover {
-  border-color: var(--border-hover);
-  color: var(--accent-secondary);
-}
-
-/* Misc Projects */
-.MiscProj {
-  margin-top: var(--space-3xl);
-  overflow: hidden;
-  width: 100%;
-}
-
-.MiscProj h2 {
-  margin-bottom: var(--space-lg);
-}
-
-.MiscProjContainer {
-  margin-bottom: var(--space-2xl);
-  width: 100%;
-  max-width: 1200px;
-  min-height: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-}
-
-/* Dashboard Row */
-.dashboardRow {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  gap: var(--space-xl);
-  flex-wrap: wrap;
-  padding: 0 var(--space-md);
-  max-width: 1400px;
-  margin: var(--space-2xl) auto 0;
-}
-
-.dashboardColumn {
-  flex: 1;
-  min-width: 320px;
-}
-
-.dashboardCard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: border-color var(--transition-slow);
-}
-
-.dashboardCard:hover {
-  border-color: var(--border-hover);
-}
-
-/* Contact Section */
-.Contact {
-  margin-top: var(--space-3xl);
-  padding-bottom: var(--space-xl);
-}
-
-.Contact h2 {
-  margin-bottom: var(--space-lg);
-}
-
-.Contact p {
-  color: var(--text-secondary);
+  font-size: 1rem;
   text-align: center;
-  font-size: 0.95rem;
+  transition: transform var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base),
+    background var(--transition-base);
 }
 
-.Contact a {
-  color: var(--accent-primary);
-  text-decoration: none;
+a.researchLink:hover {
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------------------------------------------------------------------------
+   Miscellaneous Projects
+--------------------------------------------------------------------------- */
+.miscProjContainer {
+  width: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   Now — live widgets
+--------------------------------------------------------------------------- */
+.nowNote {
+  max-width: 65ch;
+  margin: 0 auto var(--space-xl);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.nowGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* Layout-only: card visuals come from the global .glass-card utility */
+.nowCard {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.nowCol {
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Contact
+--------------------------------------------------------------------------- */
+.contactEmail {
+  margin: var(--space-md) 0 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.contactEmail a {
+  color: var(--text-primary);
   font-weight: 500;
   transition: color var(--transition-fast);
 }
 
-.Contact a:hover {
+.contactEmail a:hover {
   color: var(--accent-secondary);
 }
 
-/* Responsive Styles */
-@media (max-width: 980px) {
-  .Home {
-    padding: var(--space-md);
+.contactEmail a:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive — breakpoints: 640px and 1024px only
+--------------------------------------------------------------------------- */
+@media (min-width: 640px) {
+  /* Side-by-side aside cards on tablet widths */
+  .workAside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 768px) {
-  .Home {
-    padding: var(--space-md) 12px;
+@media (min-width: 1024px) {
+  .workRow {
+    grid-template-columns: minmax(0, 1fr) 280px;
   }
 
-  .Container {
-    margin-top: 0;
+  .workAside {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .basicRow,
-  .workExperienceRow {
-    flex-direction: column;
-    width: 100%;
+  .nowGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 0 var(--space-md);
   }
 
-  .basicRow .basic,
-  .workExperienceRow .workExperience {
-    flex: 1;
-    width: 100%;
+  .section {
+    margin-top: var(--space-3xl);
   }
 
-  .rightColumn {
-    flex: 1;
-    align-items: center;
-    width: 100%;
+  .hero {
+    margin-top: var(--space-2xl);
   }
 
-  .basic {
-    text-align: center;
-    width: 100%;
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroLede {
+    font-size: 1rem;
+  }
+
+  .workCard {
     padding: var(--space-lg) var(--space-md);
   }
 
-  .basic h2 {
-    text-align: center;
-  }
-
-  .basic p {
-    text-align: center;
-  }
-
-  .College {
+  a.researchLink {
     width: 100%;
-    max-width: 300px;
+    justify-content: center;
   }
 
-  .workExperience {
-    padding: var(--space-lg) var(--space-md);
-    text-align: center;
-  }
-
-  .MiscProjContainer {
+  .miscProjContainer {
     min-height: 0;
-    margin-bottom: 0;
-  }
-
-  .sectionTitle {
-    font-size: 1.3rem;
   }
 }
 
-@media (max-width: 480px) {
-  .Home {
-    padding: 12px 8px;
-  }
-
-  .basic {
-    padding: var(--space-md) 12px;
-  }
-
-  .workExperience {
-    padding: var(--space-md) 12px;
+@media (prefers-reduced-motion: reduce) {
+  a.researchLink,
+  a.researchLink:hover {
+    transition: none;
+    transform: none;
   }
 }

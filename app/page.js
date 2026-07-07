@@ -75,28 +75,38 @@ export default function Home() {
         }}
       >
         <Bar />
-        <div className={styles.Container}>
-          <div className={styles.topSection}>
-            <div className={styles.basicRow}>
-              <div className={styles.basic}>
-                <h2>Junior at Northeastern University</h2>
-                <p>
-                  I am currently a junior at Northeastern University in
-                  Boston, Massachusetts, and I am interested in computer
-                  science. I am currently learning Python, Java, and TypeScript.{" "}
-                  <Link href="/about">Learn more about me!</Link>
-                </p>
-              </div>
+
+        <div className={styles.content}>
+          {/* Hero */}
+          <header className={styles.hero}>
+            <p className={styles.heroEyebrow}>
+              Junior &middot; Northeastern University &middot; Boston, MA
+            </p>
+            <h1 className={styles.heroTitle}>Ashwin Iyer</h1>
+            <p className={styles.heroLede}>
+              I&apos;m a computer science student at Northeastern, currently
+              learning Python, Java, and TypeScript.{" "}
+              <Link href="/about" className={styles.heroLink}>
+                More about me
+              </Link>
+            </p>
+            <div className={styles.heroSocial}>
               <Links />
             </div>
-            <div className={styles.workExperienceRow}>
-              <div className={styles.workExperience}>
-                <h2 id="WorkingOn">Work Experience</h2>
+          </header>
+
+          {/* Work Experience */}
+          <section className={styles.section}>
+            <h2 className="section-title" id="WorkingOn">
+              Work Experience
+            </h2>
+            <div className={styles.workRow}>
+              <div className={`glass-card ${styles.workCard}`}>
                 <WorkExperience />
               </div>
-              <div className={styles.rightColumn}>
+              <aside className={styles.workAside}>
                 <GetTimeWrapper />
-                <div className={styles.College}>
+                <div className={`glass-card ${styles.college}`}>
                   <Image
                     src={NEU}
                     id={"person"}
@@ -105,67 +115,84 @@ export default function Home() {
                     height={200}
                   />
                 </div>
+              </aside>
+            </div>
+          </section>
+
+          {/* Skills */}
+          <section className={styles.section}>
+            <h2 className="section-title">Skills</h2>
+            <Skills />
+          </section>
+
+          {/* Research */}
+          <section className={styles.section}>
+            <h2 className="section-title">Research</h2>
+            <div className={styles.researchRow}>
+              <a
+                href="/projects/NUSA Spring 26 RS - Equity Vol. Project.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`glass-card ${styles.researchLink}`}
+              >
+                NUSA Spring 26 RS — Equity Volatility Project (PDF)
+              </a>
+            </div>
+          </section>
+
+          {/* Miscellaneous Projects */}
+          <section className={styles.section}>
+            <h2 className="section-title">Miscellaneous Projects</h2>
+            <div className={styles.miscProjContainer} ref={miscProjSection}>
+              {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
+                <Suspense fallback={<div className="loading">Loading...</div>}>
+                  <LazyMiscProj />
+                </Suspense>
+              )}
+            </div>
+          </section>
+
+          {/* Writing */}
+          <section className={styles.section}>
+            <h2 className="section-title">Writing</h2>
+            <BlogList />
+          </section>
+
+          {/* Now — live widgets */}
+          <section className={styles.section} aria-labelledby="now-title">
+            <h2 className="section-title" id="now-title">
+              Now
+            </h2>
+            <p className={styles.nowNote}>
+              Live while you read — health metrics from my Oura ring and open
+              positions on Kalshi.
+            </p>
+            <div className={styles.nowGrid}>
+              <div className={`glass-card ${styles.nowCard}`}>
+                <OuraDashboard
+                  subset={["activity", "heart_rate", "sleep", "stress"]}
+                  columns={1}
+                  chartHeight="180px"
+                  chartWidth="100%"
+                  showHeader={true}
+                  compact={true}
+                />
+              </div>
+              <div className={styles.nowCol}>
+                <KalshiPositions id="kalshi_positions" />
               </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        <div className={styles.skillsSection}>
-          <h2 className={styles.sectionTitle}>Skills</h2>
-          <Skills />
-        </div>
-
-        <div className={styles.MiscProj}>
-          <h2 className={styles.sectionTitle}>Research</h2>
-          <div className={styles.researchLinks}>
-            <a
-              href="/projects/NUSA Spring 26 RS - Equity Vol. Project.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.researchLink}
-            >
-              NUSA Spring 26 RS — Equity Volatility Project (PDF)
-            </a>
-          </div>
-          <h2 className={styles.sectionTitle}>Miscellaneous Projects</h2>
-          <div className={styles.MiscProjContainer} ref={miscProjSection}>
-            {(isMiscProjVisible || fadeIn || forceMiscProjLoad) && (
-              <Suspense fallback={<div className="loading">Loading...</div>}>
-                <LazyMiscProj />
-              </Suspense>
-            )}
-          </div>
-          <h2 className={styles.sectionTitle}>My Blogs</h2>
-          <BlogList />
-        </div>
-
-        <div className={styles.dashboardRow}>
-          <div className={styles.dashboardColumn}>
-            <h2 className={styles.sectionTitle}>Live Health Stats</h2>
-            <div className={styles.dashboardCard}>
-              <OuraDashboard
-                subset={["activity", "heart_rate", "sleep", "stress"]}
-                columns={1}
-                chartHeight="180px"
-                chartWidth="100%"
-                showHeader={true}
-                compact={true}
-              />
-            </div>
-          </div>
-
-          <div className={styles.dashboardColumn}>
-            <KalshiPositions id="kalshi_positions" />
-          </div>
-        </div>
-
-        <div className={styles.Contact}>
-          <h2 className={styles.sectionTitle}>Contact Me</h2>
-          <Contact />
-          <p>
-            Email:{" "}
-            <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
-          </p>
+          {/* Contact */}
+          <section className={styles.section}>
+            <h2 className="section-title">Contact</h2>
+            <Contact />
+            <p className={styles.contactEmail}>
+              Email:{" "}
+              <a href="mailto:ashwiniyer06@gmail.com">ashwiniyer06@gmail.com</a>
+            </p>
+          </section>
         </div>
       </div>
     </>
