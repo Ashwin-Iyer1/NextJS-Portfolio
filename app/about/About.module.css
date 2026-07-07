@@ -1,62 +1,47 @@
-/* About Page Styles */
+/* About Page Styles
+   Cards compose the global .glass-card utility; only layout lives here.
+   Section titles use the global .section-title utility. */
 
+/* No padding here: Bar sits at the top full-width (it is sticky, so no
+   overflow-x: hidden ancestors — clip does not create a scroll container).
+   Content padding lives on .mainContent below. */
 .About {
-  padding: var(--space-lg);
   max-width: 1200px;
   width: 100%;
   text-align: left;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-.Container {
-  margin-top: var(--space-lg);
-  width: 100%;
-}
-
+/* Shared section rhythm: --space-4xl desktop, --space-3xl below 640px */
 .mainContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
+  gap: var(--space-4xl);
   width: 100%;
+  margin-top: var(--space-xl);
+  padding: 0 var(--space-lg) var(--space-2xl);
 }
 
-/* Section Titles */
-.sectionTitle {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  margin-bottom: var(--space-lg);
-  font-weight: 600;
-  text-align: left;
-  letter-spacing: -0.02em;
+/* About cards — equal-weight grid */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  align-items: stretch;
 }
 
-/* Card Styles */
 .card {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
-  margin-bottom: var(--space-lg);
-  transition: all var(--transition-slow);
+  padding: var(--space-lg);
 }
 
-.card:hover {
-  border-color: var(--border-hover);
-  /* subtle hover */
+.card h3 {
+  margin-bottom: var(--space-md);
 }
 
-.card h3,
-.cardSubtitle {
-  color: var(--text-primary);
-  font-size: 1.15rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
+/* Color and line-height come from the global p rule */
 .card p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  max-width: 65ch;
 }
 
 .card p b {
@@ -64,203 +49,145 @@
   font-weight: 600;
 }
 
+/* Inline link inside card prose */
 .projectLink {
-  color: var(--accent-primary);
-  text-decoration: none;
+  color: var(--text-primary);
   font-weight: 500;
-  transition: color var(--transition-fast);
+  text-decoration: underline;
+  text-decoration-color: var(--text-secondary);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
 }
 
 .projectLink:hover {
   color: var(--accent-secondary);
+  text-decoration-color: var(--accent-brand, #d4a24e);
 }
 
-/* Intro Section */
-.introSection {
+.projectLink:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Connect section */
+.connectRow {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
 }
 
-/* Links Section */
-.linksSection {
-  display: flex;
-  flex-direction: column;
-}
-
-.linksCard {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
+.linksWrap {
+  width: 100%;
+  max-width: 420px;
   display: flex;
   justify-content: center;
+}
+
+/* Resume CTA — button-style link */
+.resumeCta {
+  display: inline-flex;
   align-items: center;
-  margin-bottom: var(--space-lg);
-  transition: all var(--transition-slow);
-}
-
-.linksCard:hover {
-  border-color: var(--border-hover);
-  /* subtle hover */
-}
-
-/* Resume Link */
-.resumeLink {
-  text-decoration: none;
-  transition: transform var(--transition-base);
-  display: block;
-}
-
-.resumeLink:hover {
-  transform: translateY(-3px);
-}
-
-.resumeCard {
+  gap: var(--space-sm);
+  padding: 12px var(--space-xl);
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
   border: 1px solid var(--border-color);
-  text-align: center;
-  transition: all var(--transition-slow);
-}
-
-.resumeCard:hover {
-  border-color: var(--border-hover);
-  /* subtle hover */
-}
-
-.resumeCard h3 {
+  border-radius: var(--radius-md);
   color: var(--text-primary);
-  font-size: 1.15rem;
-  margin-bottom: 8px;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: background-color var(--transition-base),
+    border-color var(--transition-base), transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
-.resumeCard p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+.resumeCta:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Music Section */
-.musicSection {
-  display: flex;
-  flex-direction: column;
+.resumeCta:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
 }
 
+.ctaArrow {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.resumeCta:hover .ctaArrow {
+  transform: translateX(3px);
+}
+
+/* Songs section */
 .songsCard {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  border: 1px solid var(--border-color);
-  transition: all var(--transition-slow);
+  padding: var(--space-lg);
 }
 
-.songsCard:hover {
-  border-color: var(--border-hover);
-  /* subtle hover */
-}
-
-/* Oura Section */
-.ouraSection {
-  margin-top: var(--space-xl);
-}
-
+/* Oura section — no padding: the dashboard's dark panel fills the card
+   edge-to-edge and overflow clips it to the rounded corners */
 .ouraCard {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  width: 100%;
   overflow: hidden;
-  transition: all var(--transition-slow);
 }
 
-.ouraCard:hover {
-  border-color: var(--border-hover);
-  /* subtle hover */
+/* Clash of Clans — component brings its own top/side padding */
+.cocCard {
+  width: 100%;
+  padding-bottom: var(--space-lg);
 }
 
-/* COC Section */
-.cocSection {
-  margin-top: var(--space-lg);
+/* Responsive Styles — breakpoints: 1024px / 640px only */
+@media (max-width: 1024px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
-/* Responsive Styles */
-@media (max-width: 980px) {
-  .About {
+@media (max-width: 640px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .card:last-child {
+    grid-column: auto;
+  }
+
+  .mainContent {
+    gap: var(--space-3xl);
+    margin-top: var(--space-md);
+    padding: 0 12px var(--space-2xl);
+  }
+
+  .card,
+  .songsCard {
     padding: var(--space-md);
   }
-
-  .Container {
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-    margin-top: 0;
-  }
 }
 
-@media (max-width: 768px) {
-  .About {
-    padding: var(--space-md) 12px;
-    text-align: center;
+@media (prefers-reduced-motion: reduce) {
+  .resumeCta,
+  .ctaArrow,
+  .projectLink {
+    transition: none;
   }
 
-  .sectionTitle {
-    font-size: 1.3rem;
-    text-align: center;
+  .resumeCta:hover {
+    transform: none;
   }
 
-  .card {
-    padding: var(--space-lg) var(--space-md);
-    text-align: center;
-  }
-
-  .card h3 {
-    font-size: 1.1rem;
-    text-align: center;
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  .resumeCard {
-    padding: var(--space-lg) var(--space-md);
-  }
-
-  .resumeCard h3 {
-    font-size: 1.1rem;
-  }
-
-  .resumeCard p {
-    font-size: 0.9rem;
-  }
-
-  .linksCard {
-    padding: var(--space-lg) var(--space-md);
-  }
-
-  .songsCard {
-    padding: var(--space-lg) var(--space-md);
-  }
-}
-
-@media (max-width: 480px) {
-  .About {
-    padding: 12px 8px;
-  }
-
-  .card {
-    padding: var(--space-md) 12px;
-  }
-
-  .resumeCard {
-    padding: var(--space-md) 12px;
-  }
-
-  .linksCard {
-    padding: var(--space-md) 12px;
-  }
-
-  .songsCard {
-    padding: var(--space-md) 12px;
+  .resumeCta:hover .ctaArrow {
+    transform: none;
   }
 }
