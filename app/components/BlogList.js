@@ -76,6 +76,12 @@ export default function BlogList() {
             </h2>
             <div className="blogCardDivider" />
             <p className="blogCardDescription">{blog.description}</p>
+            <span className="blogCardMeta">
+              {isExternal ? "Opens in a new tab" : "Read post"}
+              <span aria-hidden="true" className="blogCardMetaArrow">
+                &#8594;
+              </span>
+            </span>
           </a>
         );
       })}

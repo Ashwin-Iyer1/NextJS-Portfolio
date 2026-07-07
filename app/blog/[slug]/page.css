@@ -1,279 +1,381 @@
+/* ---------------------------------------------------------------------------
+   Blog post template — editorial reading column.
+   Serif (Georgia) body at 1.125rem / 1.8 on a 68ch measure; headings in the
+   site sans (inherited from body);
+   brass accent reserved for link underlines, inline code, and focus rings.
+   Breakpoints: 640px and 1024px only.
+--------------------------------------------------------------------------- */
+
 .full-width-wrapper {
-  max-width: 1200px;
-  margin: 0;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
-  padding: 24px;
+  /* padding: var(--space-lg); */
 }
 
 main {
-    overflow: visible;
-
+  overflow: visible;
 }
 
+/* Reading column — 920px desktop measure (owner preference: wider than the
+   classic 68ch editorial column). Headings, tables, and captions inherit
+   the site sans from body; prose elements below opt in to Georgia serif. */
 .half-width-wrapper {
-  text-align: left;
-  max-width: 680px; /* Medium's typical content width */
-  margin: 0 auto;
-  padding: 24px 0;
+  font-size: 1.125rem;
   line-height: 1.8;
+  color: var(--text-primary);
+  text-align: left;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: var(--space-2xl) 0 var(--space-4xl);
 }
 
-.center-image {
-  display: block;
-  margin: 48px auto;
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+/* Serif prose */
+.half-width-wrapper p,
+.half-width-wrapper ul,
+.half-width-wrapper ol,
+.half-width-wrapper blockquote,
+.half-width-wrapper center {
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-/* Typography - Medium style */
+/* ---- Heading hierarchy (site sans, inherited from body) ---- */
 .half-width-wrapper h1 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.022em;
-  margin-bottom: 12px;
-  margin-top: 0px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-md);
   color: var(--text-primary);
 }
 
 .half-width-wrapper h2 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 32px;
+  font-size: 1.75rem;
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.018em;
-  margin-top: 48px;
-  margin-bottom: 12px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: var(--space-2xl) 0 var(--space-md);
   color: var(--text-primary);
 }
 
 .half-width-wrapper h3 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 24px;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.014em;
-  margin-top: 40px;
-  margin-bottom: 12px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: var(--space-xl) 0 var(--space-md);
   color: var(--text-primary);
 }
 
 .half-width-wrapper h4 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 20px;
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.4;
-  margin-top: 32px;
-  margin-bottom: 12px;
+  margin: var(--space-lg) 0 var(--space-md);
   color: var(--text-primary);
 }
 
-/* Paragraph styling - Medium uses Georgia for body text */
+/* ---- Body copy ---- */
 .half-width-wrapper p {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.8;
-  letter-spacing: -0.003em;
-  color: var(--text-primary);
-  margin-bottom: 24px;
-  margin-top: 0;
+  margin: 0 0 var(--space-lg);
 }
 
-/* First paragraph after h1 - Medium style subtitle */
+/* Lede — first paragraph after the title */
 .half-width-wrapper h1 + p {
-  font-size: 22px;
+  font-size: 1.25rem;
   line-height: 1.7;
   color: var(--text-secondary);
-  margin-top: 16px;
-  margin-bottom: 32px;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
-/* Links - Medium style */
+/* ---- Inline links: brass underline, brass on hover ---- */
 .half-width-wrapper a {
-  color: var(--accent-primary);
+  color: var(--text-primary);
   text-decoration: underline;
+  text-decoration-color: var(--accent-brand, #d4a24e);
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
 }
 
 .half-width-wrapper a:hover {
-  color: var(--accent-secondary);
+  color: var(--accent-brand, #d4a24e);
 }
 
-/* Lists */
+.half-width-wrapper a:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Lists ---- */
 .half-width-wrapper ul,
 .half-width-wrapper ol {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin: 24px 0;
-  padding-left: 30px;
+  margin: 0 0 var(--space-lg);
+  padding-left: var(--space-lg);
 }
 
 .half-width-wrapper li {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
 }
 
-/* Blockquotes - Medium style */
+.half-width-wrapper li::marker {
+  color: var(--text-secondary);
+}
+
+/* ---- Blockquote ---- */
 .half-width-wrapper blockquote {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 22px;
+  font-size: 1.25rem;
   font-style: italic;
   line-height: 1.7;
   color: var(--text-secondary);
-  margin: 40px 0;
-  padding-left: 24px;
-  border-left: 4px solid var(--border-hover);
+  margin: var(--space-xl) 0;
+  padding-left: var(--space-lg);
+  border-left: 2px solid var(--border-hover);
 }
 
-/* Code blocks */
+/* ---- Code ---- */
+.half-width-wrapper code {
+  font-family: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+  font-size: 0.875em;
+  color: var(--accent-brand, #d4a24e);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+}
+
 .half-width-wrapper pre {
   background-color: var(--bg-secondary);
-  border-radius: 4px;
-  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-xl) 0;
   overflow-x: auto;
-  margin: 32px 0;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.half-width-wrapper code {
-  font-family: "Monaco", "Menlo", "Courier New", monospace;
-  background-color: var(--bg-secondary);
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 18px;
-  color: var(--text-primary);
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
 
 .half-width-wrapper pre code {
-  padding: 0;
+  border: none;
   background-color: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: var(--text-primary);
 }
 
-/* Horizontal rule */
+/* ---- Rule ---- */
 .half-width-wrapper hr {
   border: none;
   border-top: 1px solid var(--border-color);
-  margin: 48px 0;
+  margin: var(--space-2xl) 0;
 }
 
-center {
+/* ---- Images ---- */
+.half-width-wrapper img {
+  max-width: 100%;
+  height: auto;
+}
+
+.center-image {
+  display: block;
+  margin: var(--space-2xl) auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.flex-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+/* Captions */
+.half-width-wrapper center {
   color: var(--text-primary);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
+  font-size: 1.125rem;
   line-height: 1.8;
 }
 
-/* Tables - Medium style */
-table {
+.image-with-caption center {
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-top: var(--space-sm);
+}
+
+/* ---- Tables ---- */
+.half-width-wrapper table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 40px 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: var(--space-xl) 0;
+  font-size: 1rem;
   text-align: left;
-  border-radius: 4px;
-  overflow: hidden;
   border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
-thead {
+.half-width-wrapper thead {
   background-color: var(--bg-secondary);
-  color: var(--text-primary);
 }
 
-th,
-td {
-  padding: 16px 20px;
+.half-width-wrapper th,
+.half-width-wrapper td {
+  padding: var(--space-md) var(--space-lg);
   border-bottom: 1px solid var(--border-color);
 }
 
-tbody tr {
-  background-color: var(--bg-primary);
-  transition: background-color 0.2s ease;
+.half-width-wrapper th {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
 }
 
-tbody tr:hover {
+.half-width-wrapper td {
+  color: var(--text-secondary);
+}
+
+.half-width-wrapper tbody tr {
+  background-color: var(--bg-primary);
+  transition: background-color var(--transition-base);
+}
+
+.half-width-wrapper tbody tr:hover {
   background-color: var(--bg-secondary);
 }
 
-th {
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.half-width-wrapper tbody tr:last-child td {
+  border-bottom: none;
 }
 
-td {
-  color: var(--text-secondary);
+/* ---- Content grids ----
+   Galleries and video grids break out of the text measure:
+   the prose keeps its reading column, media gets room to breathe. */
+.flexbox,
+.flexboxVideos,
+.zeal-image,
+.zeal-image-big {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100vw - 3 * var(--space-lg)));
+  max-width: none;
 }
 
 .flexbox {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  gap: var(--space-lg);
   justify-items: center;
-  width: auto;
-  max-width: 100%;
-  margin: 40px 0;
-}
-
-a {
-  color: var(--accent-primary);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-/* Book cards - Medium style */
-.book {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: var(--bg-secondary);
-  padding: 24px;
-  margin-bottom: 24px;
-  border-radius: 4px;
-  align-items: center;
-  max-width: 100%;
-  border: 1px solid var(--border-color);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.book:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.book p {
-  font-size: 18px;
-  line-height: 1.6;
+  margin: var(--space-xl) 0;
 }
 
 .flexboxVideos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-lg);
   justify-items: center;
+  margin: var(--space-xl) 0;
+}
+
+/* ---- Book cards ---- */
+.book {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  transition: transform var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.book:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+.book p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.book p:last-child {
+  margin-bottom: 0;
+}
+
+.book .center-image {
+  border-radius: var(--radius-md);
+  margin-right: var(--space-md);
+}
+
+/* ---- Video cards ---- */
+.video {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  transition: transform var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.video:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+.video a {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.video .flex-image,
+.flexbox .flex-image {
+  margin-top: var(--space-md);
+}
+
+.YoutubeVideo {
   width: 100%;
   max-width: 100%;
-  margin: 40px 0;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: var(--space-xl) 0;
+  display: block;
+  border-radius: var(--radius-lg);
 }
 
-.image-container .flex-image {
-  filter: blur(10px);
-}
-
+/* ---- Censored image reveal (CensoredImage.js) ---- */
 .image-container {
   position: relative;
   cursor: pointer;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.image-container .flex-image {
+  filter: blur(10px);
 }
 
 .image-container img {
@@ -295,14 +397,13 @@ a {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  color: white;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 600;
-  font-family: "Segoe UI", "Roboto", sans-serif;
-  transition: opacity 0.3s;
+  transition: opacity var(--transition-slow);
 }
 
 .image-container.revealed .overlay {
@@ -310,335 +411,118 @@ a {
   pointer-events: none;
 }
 
-Image {
-  filter: blur(500px);
-}
-
-/* Video cards - Medium style */
-.video {
-  width: 100%;
-  background-color: var(--bg-secondary);
-  padding: 24px;
-  margin-bottom: 32px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.video:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.video a {
-  font-family: "Segoe UI", "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.video .flex-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-top: 12px;
-}
-.flexbox .flex-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-top: 12px;
-}
-
-.flex-image {
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: inherit;
-  border-radius: 4px;
-}
-
-.YoutubeVideo {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  margin: 40px 0;
-  display: block;
-  border-radius: 4px;
-}
-
-.book .center-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin-right: 16px;
-}
-
-/* Desktop View Optimization - Large Screens */
-@media (min-width: 1441px) {
-  .half-width-wrapper {
-    max-width: 1200px;
-    width: 75vw;
-  }
-
-  .half-width-wrapper h1 {
-    font-size: 48px;
-    margin-bottom: 16px;
-  }
-
-  .half-width-wrapper h2 {
-    font-size: 36px;
-    margin-top: 56px;
-  }
-
-  .half-width-wrapper h3 {
-    font-size: 28px;
-    margin-top: 48px;
-  }
-
-  .half-width-wrapper h4 {
-    font-size: 22px;
-  }
-
-  .half-width-wrapper p,
-  .half-width-wrapper ul,
-  .half-width-wrapper ol {
-    font-size: 21px;
-    line-height: 1.9;
-  }
-
-  .half-width-wrapper h1 + p {
-    font-size: 24px;
-    margin-bottom: 40px;
-  }
-
-  .center-image {
-    margin: 56px auto;
-    max-width: 90%;
-  }
-
-  .half-width-wrapper blockquote {
-    font-size: 24px;
-    margin: 48px 0;
-    padding-left: 32px;
-  }
-
-  table {
-    font-size: 19px;
-  }
-
-  th,
-  td {
-    padding: 18px 24px;
-  }
-
-  .flexboxVideos {
-    max-width: 100%;
-  }
-
-  .flexbox {
-    max-width: 100%;
-  }
-}
-
-/* Desktop View - Standard Large Screens */
-@media (min-width: 1025px) and (max-width: 1440px) {
-  .half-width-wrapper {
-    max-width: 900px;
-  }
-
-  .half-width-wrapper h1 {
-    font-size: 44px;
-  }
-
-  .half-width-wrapper h2 {
-    font-size: 34px;
-  }
-
-  .half-width-wrapper h3 {
-    font-size: 26px;
-  }
-
-  .center-image {
-    margin: 52px auto;
-    max-width: 85%;
-  }
-
-  .flexboxVideos {
-    gap: 32px;
-    max-width: 100%;
-  }
-
-  .flexbox {
-    gap: 28px;
-    max-width: 100%;
-  }
-}
-
-/* Responsive Design - Medium style breakpoints */
-@media (max-width: 1000px) {
+/* ---- Tablet and below ---- */
+@media (max-width: 1024px) {
   .zeal-image-big {
     display: block !important;
   }
 
   .half-width-wrapper {
-    padding: 48px 32px;
+    padding: var(--space-2xl) var(--space-lg) var(--space-3xl);
   }
 
-  .half-width-wrapper h1 {
-    font-size: 36px;
-  }
-
-  .half-width-wrapper h2 {
-    font-size: 28px;
-  }
-
-  .half-width-wrapper h3 {
-    font-size: 22px;
+  .flexboxVideos {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+/* ---- Mobile ---- */
+@media (max-width: 640px) {
   .zeal-image {
     display: block !important;
   }
 
   .full-width-wrapper {
-    padding: 16px 12px;
-    width: 100%;
-    overflow-x: hidden;
+    /* padding: var(--space-md) var(--space-sm); */
+    /* clip (not hidden): an overflow-x: hidden ancestor would disable the
+       sticky nav by becoming a scroll container */
+    overflow-x: clip;
   }
 
   .half-width-wrapper {
-    padding: 40px 20px;
+    padding: var(--space-xl) var(--space-md) var(--space-2xl);
     max-width: 100%;
     overflow-x: hidden;
   }
 
   .half-width-wrapper h1 {
-    font-size: 32px;
-    margin-top: 32px;
-    text-align: center;
+    font-size: 2rem;
+    margin-top: var(--space-lg);
   }
 
   .half-width-wrapper h2 {
-    font-size: 26px;
-    margin-top: 32px;
-    text-align: center;
+    font-size: 1.5rem;
+    margin-top: var(--space-xl);
   }
 
   .half-width-wrapper h3 {
-    font-size: 20px;
-    margin-top: 24px;
-    text-align: center;
+    font-size: 1.25rem;
+    margin-top: var(--space-lg);
   }
 
   .half-width-wrapper h4 {
-    font-size: 18px;
-    text-align: center;
+    font-size: 1.0625rem;
   }
 
-  .half-width-wrapper p,
-  .half-width-wrapper ul,
-  .half-width-wrapper ol {
-    font-size: 18px;
-    line-height: 1.7;
+  .half-width-wrapper h1 + p {
+    font-size: 1.125rem;
   }
 
-  ul {
-    text-align: left;
-    margin: 20px 0;
-    padding-left: 24px;
+  /* Media no longer needs to break out of the measure on phones */
+  .flexbox,
+  .flexboxVideos,
+  .zeal-image,
+  .zeal-image-big {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
   }
 
+  .flexbox,
   .flexboxVideos {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 0;
-  }
-
-  .flexbox {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 0;
+    gap: var(--space-md);
   }
 
   .center-image {
-    max-width: 100%;
-    height: auto;
-    margin: 32px auto;
+    margin: var(--space-xl) auto;
   }
 
-  table {
-    font-size: 16px;
-    overflow-x: auto;
+  .half-width-wrapper table {
     display: block;
+    overflow-x: auto;
+    font-size: 0.9375rem;
   }
 
-  th,
-  td {
-    padding: 12px 16px;
+  .half-width-wrapper th,
+  .half-width-wrapper td {
+    padding: var(--space-sm) var(--space-md);
   }
 
   .book {
-    padding: 16px;
     flex-direction: column;
+    padding: var(--space-md);
+  }
+
+  .book .center-image {
+    margin: 0 auto var(--space-md);
   }
 
   .video {
-    padding: 16px;
-  }
-
-  .YoutubeVideo {
-    width: 100%;
-    height: auto;
+    padding: var(--space-md);
   }
 }
 
-@media (max-width: 480px) {
-  .full-width-wrapper {
-    padding: 12px 8px;
-  }
-
-  .half-width-wrapper {
-    padding: 32px 16px;
-  }
-
-  .half-width-wrapper h1 {
-    font-size: 28px;
-  }
-
-  .half-width-wrapper h2 {
-    font-size: 24px;
-  }
-
-  .half-width-wrapper h3 {
-    font-size: 18px;
-  }
-
-  .half-width-wrapper p,
-  .half-width-wrapper ul,
-  .half-width-wrapper ol {
-    font-size: 16px;
-  }
-
-  table {
-    font-size: 14px;
-  }
-
-  th,
-  td {
-    padding: 10px 12px;
-  }
-
-  .book {
-    padding: 12px;
-  }
-
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .book,
   .video {
-    padding: 12px;
+    transition: none;
+  }
+
+  .book:hover,
+  .video:hover {
+    transform: none;
   }
 }

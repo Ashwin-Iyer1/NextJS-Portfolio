@@ -15,14 +15,21 @@ export default async function Page(props) {
     return (
       <div className="full-width-wrapper">
         <Bar />
-        <div className="half-width-wrapper">
+        <article className="half-width-wrapper">
           <Post />
-        </div>
+        </article>
       </div>
     );
   } catch (error) {
     console.log(error);
-    return <p>Post not found</p>;
+    return (
+      <div className="full-width-wrapper">
+        <Bar />
+        <article className="half-width-wrapper">
+          <p>Post not found.</p>
+        </article>
+      </div>
+    );
   }
 }
 
