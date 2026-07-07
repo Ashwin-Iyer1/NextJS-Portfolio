@@ -74,16 +74,8 @@ const KalshiPositions = ({ id }) => {
   let secondAcctPnl = 950 * 100;
   overallPnL = overallPnL + secondAcctPnl;
   return (
-    <div
-      className={styles["positions-container"]}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-      id={id}
-    >
-      <h2 className={styles["positions-title"]}>Kalshi Positions</h2>
+    <div className={styles["positions-container"]} id={id}>
+      <h2 className="section-title">Kalshi Positions</h2>
 
       {/* Overall Profile P&L Display */}
       <div className={styles["total-pnl-container"]}>
@@ -100,17 +92,25 @@ const KalshiPositions = ({ id }) => {
           {formatPnL(overallPnL)}
         </p>
         {profileMetrics && (
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: "1rem",
-              color: "#94a3b8",
-              fontSize: "0.9rem",
-            }}
-          >
-            <div>Markets Traded: {profileMetrics.num_markets_traded}</div>
-            <div>Volume: {profileMetrics.volume.toLocaleString()}</div>
-            <div>Open Interest: ${profileMetrics.open_interest}</div>
+          <div className={styles["profile-metrics"]}>
+            <div className={styles["metric"]}>
+              <span className={styles["metric-label"]}>Markets Traded</span>
+              <span className={styles["metric-value"]}>
+                {profileMetrics.num_markets_traded}
+              </span>
+            </div>
+            <div className={styles["metric"]}>
+              <span className={styles["metric-label"]}>Volume</span>
+              <span className={styles["metric-value"]}>
+                {profileMetrics.volume?.toLocaleString()}
+              </span>
+            </div>
+            <div className={styles["metric"]}>
+              <span className={styles["metric-label"]}>Open Interest</span>
+              <span className={styles["metric-value"]}>
+                ${profileMetrics.open_interest}
+              </span>
+            </div>
           </div>
         )}
       </div>
@@ -119,7 +119,7 @@ const KalshiPositions = ({ id }) => {
         <Grid container spacing={3} className={styles["positions-grid"]}>
           {positions.length === 0 ? <p>No open positions.</p> : null}
           {positions.map((position) => (
-            <Grid item key={position.id}>
+            <Grid key={position.id}>
               <div className={styles["position-card"]}>
                 <div className={styles["card-header"]}>
                   <span className={styles["category-badge"]}>
@@ -175,13 +175,7 @@ const KalshiPositions = ({ id }) => {
 
                   <div className={styles["detail-row"]}>
                     <span className={styles["detail-label"]}>P&L:</span>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-end",
-                      }}
-                    >
+                    <div className={styles["pnl-cell"]}>
                       <span
                         className={`${styles["detail-value"]} ${
                           position.pnl > 0
@@ -217,9 +211,10 @@ const KalshiPositions = ({ id }) => {
           ))}
         </Grid>
       </Box>
-      <p style={{
-        textAlign: "center"
-      }}>Discrepancies between Kalshi PNL and PNL above are due to group portfolios.</p>
+      <p className={styles["disclaimer"]}>
+        Discrepancies between Kalshi PNL and PNL above are due to group
+        portfolios.
+      </p>
 
       <Link
         href="https://kalshi.com/ideas/profiles/Turtlecap"
