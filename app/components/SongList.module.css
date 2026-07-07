@@ -1,119 +1,110 @@
 /* SongList.module.css */
 
-.song-list {
+.songList {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
-  padding: 1rem;
+  gap: var(--space-lg);
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.song-list p {
-  max-width: 100%;
-}
-
-.song-item {
+/* Deliberately not composed with the global .glass-card: ten tiles animating
+   translateY while each recomputes a 12px backdrop blur is a scroll-jank
+   hazard, so the card surface is declared here without backdrop-filter. */
+.songItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.5rem;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  flex: 1 1 132px;
+  min-width: 112px;
+  max-width: 168px;
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   opacity: 0;
   transform: translateY(20px);
+  transition: opacity var(--transition-base), transform var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.song-item.show {
+.songItem.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-.song-cover {
-  width: 100px;
-  height: 100px;
+@media (hover: hover) {
+  .songItem.show:hover {
+    transform: translateY(-2px);
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.songCover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
-.song-info {
+.songInfo {
+  width: 100%;
+  min-width: 0;
+  margin-top: var(--space-sm);
   text-align: center;
-  width: 100%;
-  margin-top: 0.5rem;
 }
 
-.song-name {
+.songName {
   font-size: 1rem;
-  margin: 0.5rem 0 0.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 0 0 var(--space-xs);
   color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
 }
 
-.artist-name {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+.artistName {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: var(--text-secondary);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
 }
 
-/* Mobile specific styles */
-@media (max-width: 767px) {
-  .song-list {
-    padding: 0 8px;
-    gap: 0.5rem;
-    justify-content: center;
+@media (max-width: 640px) {
+  .songList {
+    gap: var(--space-md);
   }
 
-  .song-item {
-    max-width: 100%; /* Allow full width on mobile */
-    padding: 0.5rem;
-    text-align: center;
+  .songItem {
+    flex-basis: 124px;
+    min-width: 104px;
   }
+}
 
-  .song-item.mobile {
+@media (prefers-reduced-motion: reduce) {
+  .songItem {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    transition: background-color var(--transition-base),
+      border-color var(--transition-base), box-shadow var(--transition-base);
   }
 
-  .song-info {
-    text-align: center;
-  }
-
-  .song-name {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  .artist-name {
-    font-size: 0.8rem;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .song-list {
-    padding: 0 4px;
-    gap: 0.4rem;
-  }
-
-  .song-item {
-    padding: 0.4rem;
-  }
-
-  .song-cover {
-    width: 80px;
-    height: 80px;
-  }
-
-  .song-name {
-    font-size: 0.85rem;
-  }
-
-  .artist-name {
-    font-size: 0.75rem;
+  .songItem.show:hover {
+    transform: none;
   }
 }
