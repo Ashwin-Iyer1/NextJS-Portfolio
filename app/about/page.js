@@ -42,9 +42,7 @@ export default function About() {
             <div className={`glass-card ${styles.card}`}>
               <h3>Interests</h3>
               <p>
-                Beyond coding, I enjoy working out and listening to music, with
-                the occasional game of Clash of Clans. My top tracks and health
-                stats are just below.
+                Beyond coding, I enjoy working out, listening to music, and reading about financial markets. My top tracks and health stats are just below.
               </p>
             </div>
           </div>
