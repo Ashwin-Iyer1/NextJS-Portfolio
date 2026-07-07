@@ -1,3 +1,354 @@
+/*
+ * Pre-existing global rule. Load-bearing outside this widget (e.g. the splash
+ * logo sizing depends on it), so it stays unscoped and unchanged.
+ */
 svg {
     height: 100% !important;
+}
+
+/* ============================================================
+   Oura health dashboard
+   Themed entirely via the global design tokens so the widget
+   follows [data-theme] automatically. No component-local theme.
+   ============================================================ */
+
+/* ---------- Shell ---------- */
+
+.oura-dashboard {
+  width: 100%;
+  min-height: 100%;
+  padding: var(--space-lg);
+}
+
+.oura-dashboard--compact {
+  padding: var(--space-md);
+}
+
+.oura-dashboard :focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
+
+.oura-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.oura-header-title {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.oura-header-range {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--bg-card);
+}
+
+/* ---------- Loading / error states ---------- */
+
+.oura-status {
+  padding: var(--space-lg);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.oura-status--error {
+  text-transform: none;
+  font-size: 1rem;
+  color: var(--danger, #f87171);
+}
+
+/* ---------- Tiles (canonical card) ---------- */
+
+.oura-tile {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  transition: transform var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+
+.oura-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- Chart frame ---------- */
+
+.oura-chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.oura-chart-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ---------- SVG ink (overrides visx presentation attributes) ---------- */
+
+.oura-chart text {
+  font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo,
+    Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  fill: var(--text-secondary);
+}
+
+.oura-chart .visx-rows .visx-line,
+.oura-chart .visx-columns .visx-line {
+  stroke: var(--border-color);
+}
+
+.oura-chart .visx-axis-line,
+.oura-chart .visx-axis-tick .visx-line {
+  stroke: var(--border-hover);
+}
+
+/* Area gradients fade a single gray; opacity comes from the stop attributes. */
+.oura-chart stop {
+  stop-color: var(--text-secondary);
+}
+
+/* ---------- Marks ---------- */
+
+.oura-line {
+  fill: none;
+  stroke: var(--text-secondary);
+}
+
+/* The one brass accent in this widget: the live heart-rate trace. */
+.oura-line--accent {
+  stroke: var(--accent-brand, #d4a24e);
+}
+
+.oura-line--danger {
+  stroke: var(--danger, #f87171);
+}
+
+.oura-dot {
+  fill: var(--bg-primary);
+  stroke: var(--text-secondary);
+}
+
+.oura-bar {
+  fill: var(--text-secondary);
+  background-color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.oura-fill-danger {
+  fill: var(--danger, #f87171);
+  background-color: var(--danger, #f87171);
+  opacity: 0.65;
+}
+
+/* Monochrome series ramp: identity by lightness step, in fixed order.
+   Works on both themes because it derives from --text-primary. */
+.oura-seq-1,
+.oura-seq-2,
+.oura-seq-3,
+.oura-seq-4,
+.oura-seq-5,
+.oura-seq-6,
+.oura-seq-7 {
+  fill: var(--text-primary);
+  background-color: var(--text-primary);
+}
+
+.oura-seq-1 { opacity: 0.95; }
+.oura-seq-2 { opacity: 0.83; }
+.oura-seq-3 { opacity: 0.71; }
+.oura-seq-4 { opacity: 0.59; }
+.oura-seq-5 { opacity: 0.47; }
+.oura-seq-6 { opacity: 0.35; }
+.oura-seq-7 { opacity: 0.25; }
+
+/* ---------- Legends ---------- */
+
+.oura-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  padding: 0 var(--space-sm);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.oura-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.oura-legend-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.oura-swatch-ink {
+  background-color: var(--text-secondary);
+}
+
+.oura-swatch-danger {
+  background-color: var(--danger, #f87171);
+}
+
+/* ---------- Info cards ---------- */
+
+.oura-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+.oura-info-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.oura-info-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  font-size: 1rem;
+}
+
+.oura-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.oura-info-row:last-child {
+  border-bottom: none;
+}
+
+.oura-info-label {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.oura-info-value {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.oura-info-block {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.oura-info-block:last-child {
+  border-bottom: none;
+}
+
+/* ---------- Empty state ---------- */
+
+.oura-empty {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.oura-empty-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.oura-empty-note {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .oura-dashboard {
+    padding: var(--space-md);
+  }
+
+  .oura-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .oura-tile {
+    transition: none;
+  }
+
+  .oura-tile:hover {
+    transform: none;
+  }
 }
