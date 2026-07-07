@@ -1,104 +1,96 @@
 /* Skills Component Styles */
 
 .Skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  max-width: 960px;
+  margin: 0 auto;
   padding: var(--space-md) 0;
 }
 
 .Skill {
-  margin-left: 0px !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: var(--space-lg);
+  min-width: 0;
+  gap: var(--space-sm);
+  padding: var(--space-md);
   background: var(--bg-card);
-  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  transition: all var(--transition-slow);
-  min-width: 140px;
-  max-width: 180px;
+  border-radius: var(--radius-lg);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .Skill:hover {
+  transform: translateY(-2px);
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
-}
-
-.Skill h3 {
-  color: var(--text-primary);
-  font-size: 1rem;
-  margin-bottom: 12px;
-  font-weight: 600;
+  box-shadow: var(--shadow-md);
 }
 
 .Skill svg {
-  width: 48px;
-  height: 48px;
-  margin: 8px 0;
+  width: 40px;
+  height: 40px;
+  margin-top: var(--space-xs);
+  color: var(--text-primary);
   opacity: 0.85;
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--transition-base);
 }
 
 .Skill:hover svg {
   opacity: 1;
 }
 
+.Skill h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
 .Skill p {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  margin-top: 8px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
   font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 640px) {
   .Skills {
-    gap: 12px;
-    padding: var(--space-md) var(--space-sm);
-    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .Skill {
-    min-width: 110px;
-    max-width: 130px;
-    padding: 14px;
-  }
-
-  .Skill h3 {
-    font-size: 0.9rem;
-  }
-
-  .Skill svg {
-    width: 40px;
-    height: 40px;
+    padding: var(--space-lg);
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 1024px) {
   .Skills {
-    gap: 10px;
-    padding: 12px 4px;
+    grid-template-columns: repeat(5, 1fr);
   }
+}
 
-  .Skill {
-    min-width: 100px;
-    max-width: 120px;
-    padding: 12px;
-  }
-
-  .Skill h3 {
-    font-size: 0.85rem;
-  }
-
+@media (prefers-reduced-motion: reduce) {
+  .Skill,
   .Skill svg {
-    width: 36px;
-    height: 36px;
+    transition: none;
   }
 
-  .Skill p {
-    font-size: 0.75rem;
+  .Skill:hover {
+    transform: none;
   }
 }
