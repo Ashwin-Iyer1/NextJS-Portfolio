@@ -120,6 +120,15 @@ main {
   padding: 0;
 }
 
+/* The route template wraps every page in a bare <div>. As a centered flex
+   item it would shrink-wrap to its content's intrinsic width, making page
+   width depend on what has loaded (narrow while skeletons show, wider once
+   charts/cards mount) and differ between routes. Pin it to the full main
+   box so every page gets the same stable width. */
+main > div {
+  width: 100%;
+}
+
 @media (max-width: 1024px) {
   main {
     padding: 0 var(--space-lg);
