@@ -174,26 +174,27 @@ svg {
   opacity: 0.65;
 }
 
-/* Monochrome series ramp: identity by lightness step, in fixed order.
-   Works on both themes because it derives from --text-primary. */
-.oura-seq-1,
-.oura-seq-2,
-.oura-seq-3,
-.oura-seq-4,
-.oura-seq-5,
-.oura-seq-6,
-.oura-seq-7 {
-  fill: var(--text-primary);
-  background-color: var(--text-primary);
-}
+/* Categorical series palette: identity by hue, in fixed slot order (never
+   cycled). Each theme gets its own steps for that theme's surface — both
+   sets validated for adjacent-pair CVD separation and contrast (dark clears
+   3:1 on #131313; the light set leans on the labeled legend + bar gaps for
+   its lighter slots). Legend swatches share these classes, hence the
+   background-color alongside the SVG fill. */
+.oura-seq-1 { fill: #3987e5; background-color: #3987e5; }
+.oura-seq-2 { fill: #199e70; background-color: #199e70; }
+.oura-seq-3 { fill: #c98500; background-color: #c98500; }
+.oura-seq-4 { fill: #008300; background-color: #008300; }
+.oura-seq-5 { fill: #9085e9; background-color: #9085e9; }
+.oura-seq-6 { fill: #e66767; background-color: #e66767; }
+.oura-seq-7 { fill: #d55181; background-color: #d55181; }
 
-.oura-seq-1 { opacity: 0.95; }
-.oura-seq-2 { opacity: 0.83; }
-.oura-seq-3 { opacity: 0.71; }
-.oura-seq-4 { opacity: 0.59; }
-.oura-seq-5 { opacity: 0.47; }
-.oura-seq-6 { opacity: 0.35; }
-.oura-seq-7 { opacity: 0.25; }
+[data-theme="light"] .oura-seq-1 { fill: #2a78d6; background-color: #2a78d6; }
+[data-theme="light"] .oura-seq-2 { fill: #1baf7a; background-color: #1baf7a; }
+[data-theme="light"] .oura-seq-3 { fill: #eda100; background-color: #eda100; }
+[data-theme="light"] .oura-seq-4 { fill: #008300; background-color: #008300; }
+[data-theme="light"] .oura-seq-5 { fill: #4a3aa7; background-color: #4a3aa7; }
+[data-theme="light"] .oura-seq-6 { fill: #e34948; background-color: #e34948; }
+[data-theme="light"] .oura-seq-7 { fill: #e87ba4; background-color: #e87ba4; }
 
 /* ---------- Legends ---------- */
 
