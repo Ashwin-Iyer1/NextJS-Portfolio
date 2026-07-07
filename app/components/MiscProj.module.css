@@ -1,172 +1,232 @@
+/* Miscellaneous projects carousel */
+
 .carouselContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  max-width: 100%;
+  gap: var(--space-lg);
   width: 100%;
-  padding: 20px;
-  overflow: hidden;
+  /* breathing room so hover lift + shadow aren't clipped by ancestor overflow:hidden */
+  padding: var(--space-md);
 }
 
 .carousel {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: var(--space-md);
   width: 100%;
-  max-width: 1400px;
+}
+
+/* Featured video — canonical card */
+.videoCard {
+  flex: 1 1 560px;
+  min-width: 0;
+  max-width: 608px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.videoCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+/* Media frame — consistent 16:9 aspect, rounded corners */
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
-.videoWrapper {
-  flex: 0 0 auto;
+.media iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.mainIframe {
+  transition: opacity var(--transition-base);
+}
+
+.previewIframe {
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+/* Caption below the featured video */
+.caption {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  position: relative;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  text-align: left;
 }
 
-.videoWrapper iframe {
-  width: 640px;
-  height: 360px;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+.captionMeta {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
+.captionTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+/* Side previews */
 .sideVideo {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  flex: 1 1 180px;
+  min-width: 0;
+  max-width: 200px;
   position: relative;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-  transform: scale(0.75);
+  cursor: pointer;
+  opacity: 0.55;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .sideVideo:hover {
-  opacity: 0.8;
-  transform: scale(0.8);
+  opacity: 0.9;
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
 }
 
-.sideVideo iframe {
-  width: 480px;
-  height: 270px;
-  border-radius: 8px;
-  pointer-events: none;
+.sideVideo .media {
+  border-radius: 0;
 }
 
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 
+/* Prev / next controls */
 .carouselButton {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
-  font-size: 36px;
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  width: 52px;
-  height: 52px;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
   user-select: none;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
 }
 
-.carouselButton:hover {
-  background: rgba(255, 255, 255, 0.1);
+.carouselButton:hover:not(:disabled) {
+  background: var(--bg-card-hover);
   border-color: var(--border-hover);
   color: var(--text-primary);
-  transform: scale(1.05);
 }
 
-.carouselButton:active {
-  transform: scale(0.95);
+.carouselButton:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
+.carouselButton:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+/* Position indicators */
 .indicators {
   display: flex;
-  gap: 10px;
+  gap: var(--space-sm);
   justify-content: center;
-  margin-top: 20px;
 }
 
 .indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  width: 8px;
+  height: 8px;
+  padding: 0;
   border: none;
+  border-radius: 999px;
+  background: var(--border-hover);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition:
+    background-color var(--transition-base),
+    width var(--transition-base);
 }
 
-.indicator:hover {
-  background: rgba(255, 255, 255, 0.4);
-  transform: scale(1.2);
+.indicator:hover:not(:disabled) {
+  background: var(--text-secondary);
 }
 
 .indicator.active {
-  background: var(--text-primary);
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  background: var(--accent-brand, #d4a24e);
 }
 
-/* Skeleton Loader Styles */
+.indicator:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+/* Skeleton loader (shimmer aligned to theme tokens) */
 .skeleton {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-card-hover) 50%, var(--bg-secondary) 75%);
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-card);
+  background-image: linear-gradient(
+    90deg,
+    transparent 25%,
+    var(--border-color) 50%,
+    transparent 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.skeletonMain {
-  width: 640px;
-  height: 360px;
-}
-
-.skeletonSide {
-  width: 480px;
-  height: 270px;
-  transform: scale(0.75);
-}
-
-.skeletonContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .skeletonPlayButton {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-hover);
+  background: var(--bg-card);
   position: relative;
 }
 
@@ -178,9 +238,9 @@
   transform: translate(-40%, -50%);
   width: 0;
   height: 0;
-  border-left: 25px solid rgba(0, 0, 0, 0.15);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
+  border-left: 18px solid var(--border-hover);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
 }
 
 @keyframes shimmer {
@@ -192,138 +252,56 @@
   }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1024px) {
   .sideVideo {
-    transform: scale(0.65);
-  }
-
-  .sideVideo:hover {
-    transform: scale(0.7);
-  }
-
-  .sideVideo iframe {
-    width: 400px;
-    height: 225px;
-  }
-
-  .videoWrapper iframe {
-    width: 560px;
-    height: 315px;
-  }
-
-  .skeletonMain {
-    width: 560px;
-    height: 315px;
-  }
-
-  .skeletonSide {
-    width: 400px;
-    height: 225px;
-    transform: scale(0.65);
-  }
-}
-
-@media (max-width: 1080px) {
-  .carousel {
-    gap: 10px;
-    padding: 0 8px;
-  }
-
-  .sideVideo {
-    display: none;
-  }
-
-  .videoWrapper iframe {
-    width: calc(100vw - 120px);
-    max-width: 560px;
-    height: calc((100vw - 120px) * 9 / 16);
-    max-height: 315px;
-  }
-
-  .carouselButton {
-    font-size: 36px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .skeletonMain {
-    width: calc(100vw - 120px);
-    max-width: 560px;
-    height: calc((100vw - 120px) * 9 / 16);
-    max-height: 315px;
-  }
-
-  .skeletonSide {
     display: none;
   }
 }
 
-@media (max-width: 767px) {
-  .carouselContainer {
-    padding: 16px 8px;
-  }
-
+@media (max-width: 640px) {
   .carousel {
-    gap: 8px;
-    padding: 0;
+    gap: var(--space-sm);
   }
 
-  .videoWrapper iframe {
-    width: calc(100vw - 120px);
-    max-width: calc(100vw - 120px);
-    height: calc((100vw - 120px) * 9 / 16);
+  .videoCard {
+    padding: var(--space-md);
   }
 
   .carouselButton {
-    font-size: 24px;
+    flex-basis: 36px;
     width: 36px;
     height: 36px;
-    padding: 4px 8px;
-  }
-
-  .indicators {
-    gap: 6px;
-    margin-top: 16px;
-  }
-
-  .skeletonMain {
-    width: calc(100vw - 120px);
-    max-width: calc(100vw - 120px);
-    height: calc((100vw - 120px) * 9 / 16);
+    font-size: 1.25rem;
   }
 
   .skeletonPlayButton {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
   }
 
   .skeletonPlayButton::after {
-    border-left: 20px solid rgba(0, 0, 0, 0.15);
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  .indicator.active {
-    width: 10px;
-    height: 10px;
+    border-left: 14px solid var(--border-hover);
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
   }
 }
 
-@media (max-width: 480px) {
-  .videoWrapper iframe {
-    width: calc(100vw - 100px);
-    max-width: calc(100vw - 100px);
-    height: calc((100vw - 100px) * 9 / 16);
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
   }
 
-  .carouselButton {
-    font-size: 20px;
-    width: 32px;
-    height: 32px;
+  .videoCard,
+  .sideVideo,
+  .carouselButton,
+  .indicator,
+  .mainIframe,
+  .previewIframe {
+    transition: none;
+  }
+
+  .videoCard:hover,
+  .sideVideo:hover {
+    transform: none;
   }
 }
