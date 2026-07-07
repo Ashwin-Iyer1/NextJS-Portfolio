@@ -1,84 +1,132 @@
-/* GetTime Component Styles */
+/* Current coding time widget */
 
-.Time {
+.timeCard {
   width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all var(--transition-slow);
-  position: relative;
+  padding: var(--space-lg);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base);
 }
 
-.Time::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--border-hover);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-.Time:hover {
+.timeCard:hover {
+  transform: translateY(-2px);
   border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
 }
 
-.Working {
-  padding: var(--space-lg) var(--space-lg);
-  text-align: center;
-}
-
-.Working h2 {
+/* Widget label with live indicator */
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-md);
   color: var(--text-secondary);
-  font-size: 0.85rem;
-  margin-bottom: 8px;
+  font-size: 0.8125rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 
-.Working p {
+.label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-brand, #d4a24e);
+  flex-shrink: 0;
+}
+
+/* Stat rows */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.statRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.statValue {
   color: var(--text-primary);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 767px) {
-  .Working {
-    padding: 12px var(--space-md);
-  }
+/* Source attribution */
+.meta {
+  margin: var(--space-md) 0 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
 
-  .Working h2 {
-    font-size: 0.8rem;
-  }
+.meta a {
+  color: var(--accent-primary);
+  transition: color var(--transition-base);
+}
 
-  .Working p {
-    font-size: 0.9rem;
-  }
+.meta a:hover {
+  color: var(--accent-secondary);
+}
 
-  .Time {
+.meta a:focus-visible {
+  outline: 2px solid var(--accent-brand, #d4a24e);
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.loadingStats .statValue {
+  color: var(--text-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 1024px) {
+  .timeCard {
+    max-width: 320px;
     margin: 0 auto;
-    max-width: 300px;
-    width: 100%;
   }
 }
 
-@media (max-width: 480px) {
-  .Working {
-    padding: 10px 12px;
+@media (prefers-reduced-motion: reduce) {
+  .timeCard {
+    transition: none;
   }
 
-  .Working h2 {
-    font-size: 0.75rem;
+  .timeCard:hover {
+    transform: none;
   }
 
-  .Working p {
-    font-size: 0.85rem;
-  }
-
-  .Time {
-    max-width: 280px;
+  .loadingStats .statValue {
+    animation: none;
   }
 }

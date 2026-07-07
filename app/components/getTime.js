@@ -1,7 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react"; // Import useEffect and useState
+import React, { useEffect, useState } from "react";
+import styles from "./GetTime.module.css";
 
-export default function getTime() {
+const WAKATIME_PROFILE =
+  "https://wakatime.com/@bc413433-56e4-4dee-b14c-d8c669a8be79";
+
+// Coerce first: the API may return numeric columns as strings
+const formatHours = (seconds) => {
+  const n = Number(seconds);
+  return seconds != null && Number.isFinite(n)
+    ? `${(n / 3600).toFixed(1)} hrs`
+    : "N/A";
+};
+
+export default function GetTime() {
   const [wakatime, setWakatime] = useState([]); // State for Wakatime data
   const [loading, setLoading] = useState(true); // State for loading
 
@@ -14,9 +26,9 @@ export default function getTime() {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        console.log(res);
+
         // Await the JSON response to get the Wakatime data
-        const data = await res.json(); // Make sure to await this
+        const data = await res.json();
         setWakatime(data); // Set the fetched data
       } catch (error) {
         console.error(
@@ -34,60 +46,25 @@ export default function getTime() {
     fetchWakatime(); // Call the fetch function
   }, []); // Empty dependency array to run once on mount
 
-  // Loading skeleton placeholder
-  if (loading) {
-    return (
-      <div className="wakatime skeleton"       style={{
-        color: "var(--text-primary)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "8px",
-      }}
->
-        <p style={{ fontSize: "1em" }}>Total: N/A Hours</p>
-        <p style={{ fontSize: "1em" }}>Daily Average: N/A Hours</p>
-        <p style={{ fontSize: ".8em" }}>
-          Tracked with{" "}
-          <a
-            href="https://wakatime.com/@bc413433-56e4-4dee-b14c-d8c669a8be79"
-            target="_blank"
-            style={{
-              color: "var(--accent-primary)",
-            }}
-          >
-            Wakatime
-          </a>
-        </p>
-      </div>
-    ); // Return loading skeleton
-  }
+  const stats = Array.isArray(wakatime) ? wakatime[0] : undefined;
+
   return (
-    <div
-      className="wakatime"
-      style={{
-        color: "var(--text-primary)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "8px",
-      }}
-    >
-      <p style={{ fontSize: "1em" }}>
-        Total: {(wakatime[0]?.total_seconds / 60 / 60).toFixed(1)} Hours
+    <div className={`${styles.stats} ${loading ? styles.loadingStats : ""}`}>
+      <p className={styles.statRow}>
+        <span className={styles.statLabel}>Total</span>
+        <span className={styles.statValue}>
+          {loading ? "—" : formatHours(stats?.total_seconds)}
+        </span>
       </p>
-      <p style={{ fontSize: "1em" }}>
-        Daily Average: {(wakatime[0]?.daily_average / 60 / 60).toFixed(1)} Hours
+      <p className={styles.statRow}>
+        <span className={styles.statLabel}>Daily average</span>
+        <span className={styles.statValue}>
+          {loading ? "—" : formatHours(stats?.daily_average)}
+        </span>
       </p>
-      <p style={{ fontSize: ".8em" }}>
+      <p className={styles.meta}>
         Tracked with{" "}
-        <a
-          href="https://wakatime.com/@bc413433-56e4-4dee-b14c-d8c669a8be79"
-          target="_blank"
-          style={{
-            color: "var(--accent-primary)",
-          }}
-        >
+        <a href={WAKATIME_PROFILE} target="_blank" rel="noopener noreferrer">
           Wakatime
         </a>
       </p>
