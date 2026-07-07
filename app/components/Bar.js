@@ -15,7 +15,7 @@ export default function Bar() {
   ];
 
   return (
-    <nav className="Bar">
+    <nav className="Bar" aria-label="Primary">
       <Link href="/" className="logo">
         Ashwin Iyer
       </Link>
@@ -24,6 +24,7 @@ export default function Bar() {
           <Link
             key={href}
             href={href}
+            aria-current={pathname === href ? "page" : undefined}
             className={`nav-link ${pathname === href ? "nav-link-active" : ""}`}
           >
             {label}
