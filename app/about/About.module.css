@@ -167,7 +167,9 @@
   .mainContent {
     gap: var(--space-3xl);
     margin-top: var(--space-md);
-    padding: 0 12px var(--space-2xl);
+    /* --space-md matches the home page's mobile gutter (the site-wide
+       source of truth) so /about is exactly as wide as / on phones */
+    padding: 0 var(--space-md) var(--space-2xl);
   }
 
   .card,
