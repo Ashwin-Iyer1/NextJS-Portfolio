@@ -46,7 +46,7 @@
 }
 
 .nav-link {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* font-family inherits from body (self-hosted Inter via next/font) */
   color: var(--text-secondary);
   font-size: 0.9375rem;
   font-weight: 500;
