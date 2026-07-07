@@ -1,65 +1,137 @@
-.container {
-  display: flex;
-  flex-direction: column; /* Change to 'row' if you want everything in a single row */
-  align-items: center; /* Center items horizontally */
-  text-align: center; /* Center text within each item */
-  padding: 20px; /* Add some padding */
-  padding-bottom: 0px;
-  overflow-x: hidden;
+/* COC.module.css */
+
+.coc {
   width: 100%;
 }
 
-.container h2 {
-  margin-bottom: 10px; /* Space between heading and first paragraph */
-  text-align: center;
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg);
 }
 
-.container p {
-  margin: 5px 0; /* Space between paragraphs */
-  max-width: 100%;
-  text-align: center;
+/* Scoped as .coc .card so the explicit transition list reliably wins
+   over the global .glass-card { transition: all } at equal specificity. */
+.coc .card {
+  transition: transform var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.container img {
-  margin-top: 10px; /* Space above the image */
-  width: 50px; /* Set a fixed width for the image */
-  height: auto; /* Maintain aspect ratio */
-}
-
-@media (max-width: 767px) {
-  .container {
-    padding: 16px 12px;
-    padding-bottom: 0;
-  }
-
-  .container h2 {
-    font-size: 1.3rem;
-  }
-
-  .container p {
-    font-size: 0.9rem;
-  }
-
-  .container img {
-    width: 40px;
+/* background/border hover come from the composed global .glass-card */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 }
 
-@media (max-width: 480px) {
-  .container {
-    padding: 12px 8px;
-    padding-bottom: 0;
+.townHall {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.townHallImage {
+  width: 160px;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.townHallCaption,
+.statLabel,
+.playerMeta {
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.details {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.playerName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.playerMeta {
+  margin: var(--space-xs) 0 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md) var(--space-lg);
+  margin: var(--space-lg) 0 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.statValue {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.trophies {
+  font-weight: 600;
+  color: var(--accent-brand, #d4a24e);
+}
+
+.leagueIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .card {
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 
-  .container h2 {
-    font-size: 1.2rem;
+  .townHallImage {
+    width: 132px;
   }
 
-  .container p {
-    font-size: 0.85rem;
+  .details {
+    width: 100%;
+    text-align: center;
   }
 
-  .container img {
-    width: 35px;
+  .stat {
+    align-items: center;
+  }
+
+  .statValue {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coc .card {
+    transition: background-color var(--transition-base),
+      border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .card:hover {
+    transform: none;
   }
 }
