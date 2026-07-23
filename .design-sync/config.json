@@ -1,0 +1,147 @@
+{
+  "projectId": "d2b6bf69-e550-414e-8a18-697a17e743a4",
+  "pkg": "newportfolio",
+  "globalName": "PortfolioDS",
+  "shape": "package",
+  "buildCmd": "node .design-sync/build-ds.mjs",
+  "entry": ".design-sync/.cache/dist/index.js",
+  "cssEntry": ".design-sync/.cache/dist/index.css",
+  "srcDir": "app/components",
+  "docsDir": ".design-sync/docs",
+  "readmeHeader": ".design-sync/conventions.md",
+  "provider": {
+    "component": "PageSurface",
+    "props": {}
+  },
+  "dtsPropsFor": {
+    "Bar": "  // No props \u2014 the active link is derived from the current route.",
+    "BlogList": "  // No props \u2014 the post list is defined inside the component.",
+    "ClashOfClans": "  // No props \u2014 stats are read from app/data/COC.json at build time.",
+    "CensoredImage": "  /** Image to blur until the viewer opts in. Static import or URL. */\n  src: string;\n  /** Alternative text, read out whether or not the image is revealed. */\n  alt: string;\n  /** Caption rendered under the image. */\n  caption?: string;",
+    "Contact": "  // No props \u2014 the contact links are defined inside the component.",
+    "GetTime": "  // No props \u2014 coding time is fetched from /api/wakatime.",
+    "GetTimeWrapper": "  // No props \u2014 wraps GetTime with its card styling.",
+    "KalshiPositions": "  /** DOM id applied to the root element, for deep-linking to the section. */\n  id?: string;",
+    "Links": "  // No props \u2014 the social links are defined inside the component.",
+    "MiscProj": "  // No props \u2014 the video list is defined inside the component.",
+    "NameAnim": "  // No props \u2014 plays the signature stroke animation once on mount.",
+    "OuraDashboard": "  /**\n   * Metric families to render. Must be an ARRAY \u2014 a bare string is ignored\n   * and every family is fetched. `null` (the default) also renders all.\n   */\n  subset?: Array<'activity' | 'readiness' | 'sleep' | 'sleep_detail' | 'stress' | 'spo2' | 'resilience' | 'heart_rate' | 'sleep_time' | 'sessions' | 'workout' | 'personal_info' | 'vo2_max' | 'cardio_age'> | null;\n  /**\n   * Masonry columns \u2014 a fixed count, or one per breakpoint.\n   * Default `{ xs: 1, sm: 2, lg: 3 }`.\n   */\n  columns?: number | { xs?: number; sm?: number; md?: number; lg?: number; xl?: number };\n  /** CSS height applied to each chart tile. Default `'280px'`. */\n  chartHeight?: string;\n  /** CSS width applied to each chart tile. Default `'100%'`. */\n  chartWidth?: string;\n  /** Show the dashboard heading. Default `true`. */\n  showHeader?: boolean;\n  /** Tighten tile padding for dense layouts. Default `false`. */\n  compact?: boolean;",
+    "ProjectList": "  // No props \u2014 repositories come from app/data/repos.json.",
+    "Skills": "  // No props \u2014 the skill groups are defined inside the component.",
+    "SongList": "  // No props \u2014 songs are fetched from /api/songs, falling back to app/data/songs.json.",
+    "ThemeToggle": "  // No props \u2014 reads and writes the `theme` key in localStorage.",
+    "WorkExperience": "  // No props \u2014 the roles are defined inside the component.",
+    "ActivityChart": "  /** One entry per day. Renders an empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Step count for that day. */\n    steps: number;\n  }>;",
+    "ReadinessChart": "  /** One entry per day. Renders an empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Readiness score. The y-axis is fixed to the 40\u2013100 range. */\n    score: number;\n  }>;",
+    "SleepChart": "  /** One entry per day. Renders an empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Per-contributor sleep scores, each 1\u2013100. */\n    contributors?: {\n      deep_sleep?: number;\n      rem_sleep?: number;\n      efficiency?: number;\n      latency?: number;\n      restfulness?: number;\n      timing?: number;\n      total_sleep?: number;\n    };\n  }>;",
+    "StressChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Seconds spent in high stress that day. */\n    stress_high?: number;\n    /** Seconds spent in recovery that day. Stacked under stress_high. */\n    recovery_high?: number;\n  }>;",
+    "SpO2Chart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Blood-oxygen readings. Only `average` is plotted. */\n    spo2_percentage?: { average?: number };\n  }>;",
+    "WorkoutChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Calories burned in that day's workouts. */\n    calories?: number;\n  }>;",
+    "ResilienceChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Two plotted lines, each 0-100. */\n    contributors?: { sleep_recovery?: number; stress?: number };\n  }>;",
+    "CardioAgeChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Estimated vascular age in years. */\n    vascular_age?: number;\n  }>;",
+    "VO2MaxChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Estimated VO2 max, ml/kg/min. */\n    vo2_max?: number;\n  }>;",
+    "SleepDetailChart": "  /** One entry per day. Renders a labelled empty state when omitted or empty. */\n  data?: Array<{\n    /** ISO date, e.g. `'2026-07-21'`. */\n    day: string;\n    /** Durations in SECONDS, not minutes. */\n    total_sleep_duration?: number;\n    deep_sleep_duration?: number;\n    light_sleep_duration?: number;\n    rem_sleep_duration?: number;\n    awake_time?: number;\n  }>;",
+    "HeartRateChart": "  /** Individual readings, not daily aggregates. Empty state when omitted. */\n  data?: Array<{\n    /** ISO timestamp of the reading. */\n    timestamp: string;\n    /** Beats per minute. */\n    bpm: number;\n  }>;\n  /** Explicit [start, end] time domain. Derived from the data when omitted. */\n  xDomain?: [Date | number, Date | number];",
+    "PersonalInfoCard": "  /** Singleton payload; an array is accepted and its first entry used. */\n  data?: {\n    age?: number;\n    /** Kilograms \u2014 the unit is appended for you. */\n    weight?: number;\n    /** Metres \u2014 the unit is appended for you. */\n    height?: number;\n    biological_sex?: string;\n    email?: string;\n  } | Array<{ age?: number; weight?: number; height?: number; biological_sex?: string; email?: string }> | null;",
+    "SleepTimeCard": "  /** REQUIRED \u2014 this card maps over `data` with no guard and throws if it is\n   *  omitted. Pass `[]` for the empty state. */\n  data: Array<{\n    day?: string;\n    status?: string;\n    /** Offsets in SECONDS; rendered as whole hours. */\n    optimal_bedtime?: { start_offset?: number; end_offset?: number };\n    recommendation?: string;\n  }>;",
+    "RestModeCard": "  /** REQUIRED \u2014 mapped with no guard; pass `[]` for the empty state. */\n  data: Array<{\n    start_day?: string;\n    /** Omit or null to render as \"Ongoing\". */\n    end_day?: string | null;\n    /** REQUIRED per entry \u2014 mapped with no guard. */\n    episodes: Array<{ tags: string[] }>;\n  }>;",
+    "SimpleListCard": "  /** REQUIRED \u2014 mapped with no guard; pass `[]` for the empty state. */\n  data: unknown[];\n  /** Heading shown at the top of the card. */\n  title?: string;\n  /** Renders one entry. Called for every item in `data`. */\n  renderItem: (item: unknown) => React.ReactNode;"
+  },
+  "componentSrcMap": {
+    "Bar": "app/components/Bar.js",
+    "BlogList": "app/components/BlogList.js",
+    "ClashOfClans": "app/components/COC.js",
+    "CensoredImage": "app/components/CensoredImage.js",
+    "Contact": "app/components/Contact.js",
+    "GetTime": "app/components/getTime.js",
+    "GetTimeWrapper": "app/components/GetTimeWrapper.js",
+    "KalshiPositions": "app/components/KalshiPositions.js",
+    "Links": "app/components/Links.js",
+    "MiscProj": "app/components/MiscProj.js",
+    "NameAnim": "app/components/NameAnim.js",
+    "OuraDashboard": "app/components/OuraDashboard.js",
+    "ProjectList": "app/components/ProjectList.js",
+    "Skills": "app/components/Skills.js",
+    "SongList": "app/components/SongList.js",
+    "ThemeToggle": "app/components/ThemeToggle.js",
+    "WorkExperience": "app/components/WorkExperience.js",
+    "ActivityChart": "app/components/OuraCharts.js",
+    "ReadinessChart": "app/components/OuraCharts.js",
+    "SleepChart": "app/components/OuraCharts.js",
+    "StressChart": "app/components/OuraCharts.js",
+    "SpO2Chart": "app/components/OuraCharts.js",
+    "HeartRateChart": "app/components/OuraCharts.js",
+    "WorkoutChart": "app/components/OuraCharts.js",
+    "ResilienceChart": "app/components/OuraCharts.js",
+    "CardioAgeChart": "app/components/OuraCharts.js",
+    "VO2MaxChart": "app/components/OuraCharts.js",
+    "SleepDetailChart": "app/components/OuraCharts.js",
+    "PersonalInfoCard": "app/components/OuraCharts.js",
+    "SleepTimeCard": "app/components/OuraCharts.js",
+    "RestModeCard": "app/components/OuraCharts.js",
+    "SimpleListCard": "app/components/OuraCharts.js"
+  },
+  "overrides": {
+    "ActivityChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "CensoredImage": {
+      "cardMode": "column"
+    },
+    "NameAnim": {
+      "cardMode": "single",
+      "primaryStory": "Splash"
+    },
+    "ReadinessChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "SleepChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "Skills": {
+      "cardMode": "column"
+    },
+    "Bar": {
+      "cardMode": "column"
+    },
+    "StressChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "SpO2Chart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "HeartRateChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "WorkoutChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "ResilienceChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "CardioAgeChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "VO2MaxChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "SleepDetailChart": {
+      "cardMode": "single",
+      "primaryStory": "Default"
+    },
+    "OuraDashboard": {
+      "cardMode": "single",
+      "primaryStory": "AsUsedOnTheSite"
+    }
+  }
+}

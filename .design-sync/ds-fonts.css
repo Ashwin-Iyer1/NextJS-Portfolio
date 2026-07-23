@@ -1,0 +1,10 @@
+/* Inter is self-hosted by next/font/google in app/layout.js, which only exists
+   inside the Next build — the downloaded woff2 files live in .next/ and are not
+   committed. Designs rendered from this bundle load the same family from the
+   same origin globals.css already uses for Caveat, so --font-inter resolves to
+   real Inter rather than the -apple-system fallback. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+:root {
+  --font-inter: "Inter";
+}
