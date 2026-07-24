@@ -141,7 +141,7 @@ def get_github_repos() -> List[Tuple[str, str, str]]:
     Fetch GitHub repositories for user 'Ashwin-Iyer1' and add manual entries.
     Returns a list of tuples: (name, description, html_url)
     """
-    url = 'https://api.github.com/users/Ashwin-Iyer1/repos'
+    url = 'https://api.github.com/users/Ashwin-Iyer1/repos?per_page=100'
     
     # Manual entries
     manual_repos = [
