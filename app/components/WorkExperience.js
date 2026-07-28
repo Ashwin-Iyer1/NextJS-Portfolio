@@ -8,7 +8,6 @@ const EXPERIENCES = [
     date: "Incoming Summer 2027 Analyst",
     logo: "/Images/blackrock_logo.png",
     logoAlt: "BlackRock Logo",
-    hidden: true,
   },
   {
     company: "Wellington Management",
