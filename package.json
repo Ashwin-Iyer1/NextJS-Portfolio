@@ -23,6 +23,8 @@
     "@next/third-parties": "16.0.7",
     "@octokit/auth-token": "^5.1.1",
     "@types/mdx": "^2.0.13",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "@visx/visx": "^3.12.0",
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
