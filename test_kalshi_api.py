@@ -5,7 +5,7 @@ Quick test script to verify Kalshi API authentication and data fetching
 
 import os
 from dotenv import load_dotenv
-from kalshi import get_user_holdings, process_holdings_with_series_info
+from kalshi import get_user_holdings, process_holdings_with_series_info, get_kalshi_credentials
 
 # load_dotenv()
 
@@ -15,16 +15,15 @@ def test_api_credentials():
     print("TESTING KALSHI API CREDENTIALS")
     print("="*80 + "\n")
     
-    access_key = os.getenv("KALSHI-ACCESS-KEY")
-    access_signature = os.getenv("KALSHI-ACCESS-SIGNATURE")
-    
-    print(f"KALSHI-ACCESS-KEY set: {'✓ Yes' if access_key else '✗ No'}")
-    print(f"KALSHI-ACCESS-SIGNATURE set: {'✓ Yes' if access_signature else '✗ No'}")
-    
+    access_key, access_signature = get_kalshi_credentials()
+
+    print(f"KALSHI_ACCESS_KEY (or KALSHI-ACCESS-KEY) set: {'✓ Yes' if access_key else '✗ No'}")
+    print(f"KALSHI_ACCESS_SIGNATURE (or KALSHI-ACCESS-SIGNATURE) set: {'✓ Yes' if access_signature else '✗ No'}")
+
     if not access_key or not access_signature:
         print("\n⚠️  Please set your Kalshi API credentials in .env file:")
-        print("   KALSHI-ACCESS-KEY=your_key_here")
-        print("   KALSHI-ACCESS-SIGNATURE=your_signature_here")
+        print("   KALSHI_ACCESS_KEY=your_key_here")
+        print("   KALSHI_ACCESS_SIGNATURE=your_signature_here")
         print("\n   Get credentials at: https://kalshi.com/settings/api")
         return False
     

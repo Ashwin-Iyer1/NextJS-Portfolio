@@ -61,7 +61,7 @@ def main():
         holdings_data = get_user_holdings()
         if not holdings_data:
             print("\n✗ Failed to fetch holdings data from API.")
-            print("Check your KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE in .env file.")
+            print("Check your KALSHI_ACCESS_KEY and KALSHI_ACCESS_SIGNATURE (or legacy KALSHI-ACCESS-KEY/KALSHI-ACCESS-SIGNATURE) env vars.")
             print("Get your credentials at: https://kalshi.com/settings/api")
             return
         

@@ -1,0 +1,53 @@
+# Daily content refresh: GitHub repo list -> "repos" table; Last.fm top-10
+# weekly tracks + cover art (Spotify, SerpApi fallback) -> "Songs" table
+# (runs final.py, the former Heroku Procfile worker).
+#
+# NOTE: On public repos, GitHub auto-disables scheduled workflows after 60 days
+# without repository activity. workflow_dispatch below is the manual escape hatch
+# (Actions tab -> this workflow -> "Run workflow") and re-enables the schedule.
+#
+# Daily (not hourly) on purpose: sources are a weekly Last.fm chart, a
+# slow-moving GitHub repo list, and quota-limited SerpApi fallback.
+# The code reads lowercase env names (spotifyClient, google_key, ...);
+# GitHub secret names are case-insensitive, so store them as the underscore
+# names below and map them to the exact names the code reads in env:.
+
+name: Daily repos + songs refresh
+
+on:
+  schedule:
+    # GH Actions cron is UTC and best-effort (may be delayed).
+    # 06:41 UTC daily, offset from :00 to avoid the top-of-hour congestion window.
+    - cron: "41 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-final
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run final.py
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          spotifyClient: ${{ secrets.SPOTIFY_CLIENT }}
+          spotifySecret: ${{ secrets.SPOTIFY_SECRET }}
+          google_key: ${{ secrets.GOOGLE_KEY }}
+          last_fm_key: ${{ secrets.LAST_FM_KEY }}
+        run: python final.py
