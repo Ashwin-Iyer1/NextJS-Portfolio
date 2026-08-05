@@ -14,20 +14,15 @@ import os
 
 
 # Database connection parameters from environment variables
-from urllib.parse import urlparse
 
 def get_db_params():
     """Parsing database params from DATABASE_URL or individual env vars."""
     database_url = os.getenv('DATABASE_URL')
     if database_url:
-        result = urlparse(database_url)
-        return {
-            'dbname': result.path[1:],
-            'user': result.username,
-            'password': result.password,
-            'host': result.hostname,
-            'port': result.port
-        }
+        # Pass the URL straight through as a libpq DSN so query parameters
+        # (e.g. Neon's sslmode=require / channel_binding) are preserved.
+        # psycopg2.connect accepts it via the `dsn` keyword.
+        return {'dsn': database_url}
     else:
         return {
             'dbname': os.getenv('dbname'),

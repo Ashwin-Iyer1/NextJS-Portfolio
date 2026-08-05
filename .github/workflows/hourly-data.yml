@@ -1,0 +1,50 @@
+# Hourly data sync: WakaTime coding-time totals + full Oura health-data sync
+# (runs hourly.py, which updates the "wakatime" table and calls oura_fetcher.main()).
+#
+# NOTE: On public repos, GitHub auto-disables scheduled workflows after 60 days
+# without repository activity. workflow_dispatch below is the manual escape hatch
+# (Actions tab -> this workflow -> "Run workflow") and re-enables the schedule.
+#
+# Replaces the Heroku Scheduler job for hourly.py.
+# WakaTime/Oura OAuth refresh tokens live in the "api_tokens" Postgres table
+# (token_manager.py), so only DB access + client credentials are needed here.
+
+name: Hourly WakaTime + Oura sync
+
+on:
+  schedule:
+    # GH Actions cron is UTC and best-effort (may be delayed).
+    # Offset from :00 to avoid the top-of-hour congestion window.
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hourly-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run hourly.py
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          WAKA_CLIENT_ID: ${{ secrets.WAKA_CLIENT_ID }}
+          WAKA_CLIENT_SECRET: ${{ secrets.WAKA_CLIENT_SECRET }}
+          OURA_CLIENT_ID: ${{ secrets.OURA_CLIENT_ID }}
+          OURA_CLIENT_SECRET: ${{ secrets.OURA_CLIENT_SECRET }}
+        run: python hourly.py

@@ -10,6 +10,23 @@ from cryptography.hazmat.backends import default_backend
 # from dotenv import load_dotenv
 # load_dotenv()
 
+def get_kalshi_credentials():
+    """
+    Read Kalshi API credentials from the environment.
+
+    Prefers KALSHI_ACCESS_KEY / KALSHI_ACCESS_SIGNATURE (GitHub Actions and
+    Vercel disallow hyphens in env var names) and falls back to the legacy
+    hyphenated KALSHI-ACCESS-KEY / KALSHI-ACCESS-SIGNATURE names still set
+    on Heroku.
+
+    Returns:
+        Tuple of (access_key, private_key); either may be None if unset.
+    """
+    access_key = os.getenv("KALSHI_ACCESS_KEY") or os.getenv("KALSHI-ACCESS-KEY")
+    private_key = os.getenv("KALSHI_ACCESS_SIGNATURE") or os.getenv("KALSHI-ACCESS-SIGNATURE")
+    return access_key, private_key
+
+
 def get_series_info(series_ticker: str) -> Optional[Dict]:
     """
     Fetch series information from Kalshi API.
@@ -72,16 +89,15 @@ def get_user_trades(ticker: Optional[str] = None, limit: int = 100) -> Optional[
         params["ticker"] = ticker
     
     # Get credentials from environment
-    access_key = os.getenv("KALSHI-ACCESS-KEY")
-    private_key = os.getenv("KALSHI-ACCESS-SIGNATURE")
-    
+    access_key, private_key = get_kalshi_credentials()
+
     if not access_key or not private_key:
-        print("Error: KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE must be set in .env file")
+        print("Error: KALSHI_ACCESS_KEY and KALSHI_ACCESS_SIGNATURE (or legacy KALSHI-ACCESS-KEY/KALSHI-ACCESS-SIGNATURE) must be set")
         return None
-    
+
     # Generate timestamp in milliseconds
     timestamp = str(int(time.time() * 1000))
-    
+
     # Generate signature (path without query params)
     try:
         signature = sign_request(timestamp, "GET", api_path, private_key)
@@ -171,16 +187,15 @@ def get_event_positions() -> Optional[Dict]:
     api_url = f"https://api.elections.kalshi.com{api_path}"
     
     # Get credentials from environment
-    access_key = os.getenv("KALSHI-ACCESS-KEY")
-    private_key = os.getenv("KALSHI-ACCESS-SIGNATURE")
-    
+    access_key, private_key = get_kalshi_credentials()
+
     if not access_key or not private_key:
-        print("Error: KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE must be set in .env file")
+        print("Error: KALSHI_ACCESS_KEY and KALSHI_ACCESS_SIGNATURE (or legacy KALSHI-ACCESS-KEY/KALSHI-ACCESS-SIGNATURE) must be set")
         return None
-    
+
     # Generate timestamp in milliseconds
     timestamp = str(int(time.time() * 1000))
-    
+
     # Generate signature (include query params in path)
     try:
         signature = sign_request(timestamp, "GET", f"{api_path}?position_status=open", private_key)
@@ -219,11 +234,10 @@ def get_user_holdings() -> Optional[Dict]:
     api_url = f"https://api.elections.kalshi.com{api_path}"
     
     # Get credentials from environment
-    access_key = os.getenv("KALSHI-ACCESS-KEY")
-    private_key = os.getenv("KALSHI-ACCESS-SIGNATURE")  # This is actually your private key
-    
+    access_key, private_key = get_kalshi_credentials()  # private_key is actually your private key
+
     if not access_key or not private_key:
-        print("Error: KALSHI-ACCESS-KEY and KALSHI-ACCESS-SIGNATURE must be set in .env file")
+        print("Error: KALSHI_ACCESS_KEY and KALSHI_ACCESS_SIGNATURE (or legacy KALSHI-ACCESS-KEY/KALSHI-ACCESS-SIGNATURE) must be set")
         return None
     
     # Generate timestamp in milliseconds

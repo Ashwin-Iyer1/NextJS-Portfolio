@@ -45,3 +45,6 @@ vars.env
 test.py
 test2.py
 wakatime_tokens.json
+
+# database dumps (Heroku pg:backups / pg_dump artifacts)
+*.dump
