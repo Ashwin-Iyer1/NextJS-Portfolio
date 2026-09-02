@@ -45,6 +45,43 @@ class LastFmTopTracksTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'Last.fm API error 26'):
             get_lastfm_top_tracks()
 
+    @patch.dict(os.environ, {'LAST_FM_KEY': 'test-key'}, clear=True)
+    @patch('api_helpers.time.time', return_value=2_000_000_000)
+    @patch('api_helpers.requests.get')
+    def test_aggregates_recent_scrobbles_when_chart_is_empty(
+        self, mock_get, mock_time
+    ):
+        empty_chart = Mock(status_code=200)
+        empty_chart.json.return_value = {'toptracks': {'track': []}}
+        recent_page = Mock(status_code=200)
+        recent_page.json.return_value = {
+            'recenttracks': {
+                'track': [
+                    {'name': 'Song B', 'artist': {'#text': 'Artist B'}},
+                    {'name': 'Song A', 'artist': {'#text': 'Artist A'}},
+                    {'name': 'Song B', 'artist': {'#text': 'Artist B'}},
+                    {
+                        'name': 'Still Playing',
+                        'artist': {'#text': 'Artist C'},
+                        '@attr': {'nowplaying': 'true'},
+                    },
+                ],
+                '@attr': {'totalPages': '1'},
+            }
+        }
+        mock_get.side_effect = [empty_chart, recent_page]
+
+        songs = get_lastfm_top_tracks(2)
+
+        self.assertEqual(
+            songs,
+            [['Song B', 'Artist B'], ['Song A', 'Artist A']],
+        )
+        recent_params = mock_get.call_args_list[1].kwargs['params']
+        self.assertEqual(recent_params['method'], 'user.getrecenttracks')
+        self.assertEqual(recent_params['from'], 2_000_000_000 - 604_800)
+        self.assertEqual(mock_time.call_count, 1)
+
     @patch.dict(os.environ, {}, clear=True)
     def test_raises_when_api_key_is_missing(self):
         with self.assertRaisesRegex(RuntimeError, 'LAST_FM_KEY'):
