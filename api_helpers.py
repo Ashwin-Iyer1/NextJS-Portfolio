@@ -4,6 +4,7 @@ import base64
 import json
 import time
 from collections import Counter
+from datetime import datetime, timezone
 from typing import List, Dict, Optional, Tuple
 
 # from dotenv import load_dotenv
@@ -186,6 +187,8 @@ def get_github_repos() -> List[Tuple[str, str, str]]:
 def get_lastfm_top_tracks(num_songs: int = 10) -> List[List[str]]:
     """
     Fetch the rolling seven-day top tracks from Last.fm for user 'turtlecap'.
+    If there are no recent scrobbles, use the latest non-empty completed week
+    so the portfolio is not left with a stale or empty songs section.
     Returns a list of [song_name, artist_name].
 
     Raises RuntimeError when Last.fm rejects the request or returns an
@@ -267,14 +270,62 @@ def get_lastfm_top_tracks(num_songs: int = 10) -> List[List[str]]:
                 total_pages = 1
             recent_params['page'] += 1
 
-        if not track_counts:
-            raise RuntimeError("Last.fm returned no scrobbles from the last seven days.")
+        if track_counts:
+            songs_list = []
+            for (name, artist), play_count in track_counts.most_common(num_songs):
+                print(f"{name} by {artist} ({play_count} plays)")
+                songs_list.append([name, artist])
+            return songs_list
 
-        songs_list = []
-        for (name, artist), play_count in track_counts.most_common(num_songs):
-            print(f"{name} by {artist} ({play_count} plays)")
-            songs_list.append([name, artist])
-        return songs_list
+        print("No scrobbles in the last seven days; finding the latest active week...")
+        chart_list = request_lastfm({
+            'method': 'user.getweeklychartlist',
+            'user': 'turtlecap',
+            'api_key': api_key,
+            'format': 'json',
+        }).get('weeklychartlist', {}).get('chart', [])
+        if not isinstance(chart_list, list):
+            chart_list = [chart_list] if chart_list else []
+
+        def chart_start(chart: Dict) -> int:
+            try:
+                return int(chart.get('from', 0))
+            except (TypeError, ValueError):
+                return 0
+
+        for chart in sorted(chart_list, key=chart_start, reverse=True)[:52]:
+            start = chart.get('from')
+            end = chart.get('to')
+            if not start or not end:
+                continue
+            weekly_data = request_lastfm({
+                'method': 'user.getweeklytrackchart',
+                'user': 'turtlecap',
+                'api_key': api_key,
+                'format': 'json',
+                'from': start,
+                'to': end,
+            })
+            weekly_tracks = weekly_data.get('weeklytrackchart', {}).get('track', [])
+            if not isinstance(weekly_tracks, list):
+                weekly_tracks = [weekly_tracks] if weekly_tracks else []
+
+            songs_list = []
+            for track in weekly_tracks[:num_songs]:
+                name = track.get('name')
+                artist_data = track.get('artist', {})
+                artist = artist_data.get('#text') or artist_data.get('name')
+                if name and artist:
+                    songs_list.append([name, artist])
+            if songs_list:
+                start_date = datetime.fromtimestamp(int(start), timezone.utc).date()
+                end_date = datetime.fromtimestamp(int(end), timezone.utc).date()
+                print(f"Using Last.fm chart for {start_date} through {end_date}.")
+                for name, artist in songs_list:
+                    print(f"{name} by {artist}")
+                return songs_list
+
+        raise RuntimeError("Last.fm has no non-empty weekly track chart in the past year.")
 
     songs_list = []
     for track in tracks[:num_songs]:

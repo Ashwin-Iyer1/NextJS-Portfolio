@@ -82,6 +82,57 @@ class LastFmTopTracksTests(unittest.TestCase):
         self.assertEqual(recent_params['from'], 2_000_000_000 - 604_800)
         self.assertEqual(mock_time.call_count, 1)
 
+    @patch.dict(os.environ, {'LAST_FM_KEY': 'test-key'}, clear=True)
+    @patch('api_helpers.requests.get')
+    def test_uses_latest_nonempty_week_when_recent_history_is_empty(
+        self, mock_get
+    ):
+        payloads = [
+            {'toptracks': {'track': []}},
+            {'recenttracks': {'track': [], '@attr': {'totalPages': '1'}}},
+            {
+                'weeklychartlist': {
+                    'chart': [
+                        {'from': '100', 'to': '199'},
+                        {'from': '200', 'to': '299'},
+                    ]
+                }
+            },
+            {'weeklytrackchart': {'track': []}},
+            {
+                'weeklytrackchart': {
+                    'track': [
+                        {'name': 'Older Song', 'artist': {'#text': 'Older Artist'}}
+                    ]
+                }
+            },
+        ]
+        responses = []
+        for payload in payloads:
+            response = Mock(status_code=200)
+            response.json.return_value = payload
+            responses.append(response)
+        mock_get.side_effect = responses
+
+        songs = get_lastfm_top_tracks(10)
+
+        self.assertEqual(songs, [['Older Song', 'Older Artist']])
+        requested_methods = [
+            call.kwargs['params']['method'] for call in mock_get.call_args_list
+        ]
+        self.assertEqual(
+            requested_methods,
+            [
+                'user.gettoptracks',
+                'user.getrecenttracks',
+                'user.getweeklychartlist',
+                'user.getweeklytrackchart',
+                'user.getweeklytrackchart',
+            ],
+        )
+        self.assertEqual(mock_get.call_args_list[3].kwargs['params']['from'], '200')
+        self.assertEqual(mock_get.call_args_list[4].kwargs['params']['from'], '100')
+
     @patch.dict(os.environ, {}, clear=True)
     def test_raises_when_api_key_is_missing(self):
         with self.assertRaisesRegex(RuntimeError, 'LAST_FM_KEY'):
