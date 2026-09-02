@@ -20,23 +20,21 @@ def main():
     # 2. Update Top Songs
     print("\nUpdating Top Songs...")
     songs = get_lastfm_top_tracks(10)
-    
-    if songs:
-        print("Fetching cover art...")
-        bearer = get_spotify_bearer()
-        
-        songs_with_covers = []
-        for song in songs:
-            # song is [name, artist]
-            cover_url = get_cover_image(song, bearer)
-            # Append cover to the list: [name, artist, cover_url]
-            song_entry = song + [cover_url]
-            songs_with_covers.append(song_entry)
-            print(f"Processed: {song[0]}")
-            
-        update_songs(songs_with_covers)
-    else:
-        print("No songs found or error occurred.")
+
+    print("Fetching cover art...")
+    bearer = get_spotify_bearer()
+
+    songs_with_covers = []
+    for song in songs:
+        # song is [name, artist]
+        cover_url = get_cover_image(song, bearer)
+        # Append cover to the list: [name, artist, cover_url]
+        song_entry = song + [cover_url]
+        songs_with_covers.append(song_entry)
+        print(f"Processed: {song[0]}")
+
+    if not update_songs(songs_with_covers):
+        raise RuntimeError("Failed to update the Songs table.")
         
     print("\n--- Update Complete ---")
 

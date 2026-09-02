@@ -8,7 +8,7 @@
 #
 # Daily (not hourly) on purpose: sources are a weekly Last.fm chart, a
 # slow-moving GitHub repo list, and quota-limited SerpApi fallback.
-# The code reads lowercase env names (spotifyClient, google_key, ...);
+# Some legacy helpers read lowercase env names (spotifyClient, google_key);
 # GitHub secret names are case-insensitive, so store them as the underscore
 # names below and map them to the exact names the code reads in env:.
 
@@ -33,9 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -43,11 +43,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+
       - name: Run final.py
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           spotifyClient: ${{ secrets.SPOTIFY_CLIENT }}
           spotifySecret: ${{ secrets.SPOTIFY_SECRET }}
           google_key: ${{ secrets.GOOGLE_KEY }}
-          last_fm_key: ${{ secrets.LAST_FM_KEY }}
+          LAST_FM_KEY: ${{ secrets.LAST_FM_KEY }}
         run: python final.py

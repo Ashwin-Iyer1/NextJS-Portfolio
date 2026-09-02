@@ -183,39 +183,55 @@ def get_github_repos() -> List[Tuple[str, str, str]]:
 
 def get_lastfm_top_tracks(num_songs: int = 10) -> List[List[str]]:
     """
-    Fetch top weekly tracks from Last.fm for user 'turtlecap'.
+    Fetch the rolling seven-day top tracks from Last.fm for user 'turtlecap'.
     Returns a list of [song_name, artist_name].
+
+    Raises RuntimeError when Last.fm rejects the request or returns an
+    unexpected response. This prevents the scheduled workflow from appearing
+    successful when the songs were not refreshed.
     """
-    api_key = os.getenv('last_fm_key')
+    api_key = os.getenv('LAST_FM_KEY') or os.getenv('last_fm_key')
     if not api_key:
-        print("Error: Last.fm API key not found.")
-        return []
-        
-    url = f'https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=turtlecap&api_key={api_key}&format=json'
-    
-    songs_list = []
-    
+        raise RuntimeError("Last.fm API key not found (expected LAST_FM_KEY).")
+
+    url = 'https://ws.audioscrobbler.com/2.0/'
+    params = {
+        'method': 'user.gettoptracks',
+        'user': 'turtlecap',
+        'api_key': api_key,
+        'format': 'json',
+        'period': '7day',
+        'limit': num_songs,
+    }
+
     try:
-        r = requests.get(url)
-        if r.status_code == 200:
-            data = r.json()
-            tracks = data.get('weeklytrackchart', {}).get('track', [])
-            
-            # Ensure we don't exceed available tracks
-            limit = min(len(tracks), num_songs)
-            
-            for i in range(limit):
-                track = tracks[i]
-                name = track.get('name')
-                artist = track.get('artist', {}).get('#text')
-                print(f"{name} by {artist}")
-                songs_list.append([name, artist])
-        else:
-            print(f"Failed to fetch Last.fm data: {r.status_code}")
-            
-    except Exception as e:
-        print(f"Error fetching Last.fm data: {e}")
-        
+        r = requests.get(url, params=params, timeout=20)
+        data = r.json()
+    except (requests.RequestException, ValueError) as e:
+        raise RuntimeError(f"Unable to fetch Last.fm data: {e}") from e
+
+    if r.status_code != 200 or 'error' in data:
+        error_code = data.get('error', r.status_code)
+        message = data.get('message', 'Unknown Last.fm error')
+        raise RuntimeError(f"Last.fm API error {error_code}: {message}")
+
+    tracks = data.get('toptracks', {}).get('track', [])
+    if not isinstance(tracks, list) or not tracks:
+        raise RuntimeError("Last.fm returned no tracks for the last seven days.")
+
+    songs_list = []
+    for track in tracks[:num_songs]:
+        name = track.get('name')
+        artist_data = track.get('artist', {})
+        artist = artist_data.get('name') or artist_data.get('#text')
+        if not name or not artist:
+            continue
+        print(f"{name} by {artist}")
+        songs_list.append([name, artist])
+
+    if not songs_list:
+        raise RuntimeError("Last.fm returned tracks without names or artists.")
+
     return songs_list
 
 
