@@ -231,7 +231,7 @@
 }
 
 .skeletonPlayButton::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -303,5 +303,104 @@
   .videoCard:hover,
   .sideVideo:hover {
     transform: none;
+  }
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.playPreview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: var(--bg-secondary);
+  cursor: pointer;
+}
+.playPreview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+.playPreview:focus-visible {
+  outline-offset: -4px;
+}
+.playIcon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  padding-left: 3px;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+}
+.playPreview:hover .playIcon {
+  background: #0a0a0a;
+  border-color: var(--accent-brand);
+}
+.sideVideo {
+  padding: 0;
+  background: var(--bg-secondary);
+}
+.watchLink {
+  font-size: 0.8125rem;
+  margin-top: 6px;
+}
+.indicator {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+}
+.indicator::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border-hover);
+}
+.indicator.active {
+  width: 28px;
+  background: transparent;
+}
+.indicator.active::after {
+  left: 2px;
+  width: 24px;
+  background: var(--accent-brand);
+}
+.indicator:hover:not(:disabled) {
+  background: transparent;
+}
+.indicator:hover::after {
+  background: var(--text-secondary);
+}
+@media (max-width: 640px) {
+  .carouselContainer {
+    padding: 0;
+  }
+  .carousel {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .videoCard {
+    order: -1;
+    flex-basis: 100%;
   }
 }

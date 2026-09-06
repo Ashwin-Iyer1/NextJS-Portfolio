@@ -37,6 +37,13 @@ const compactTick = (v) => (v >= 1000 ? `${Math.round(v / 1000)}k` : `${v}`);
 const dayTickISO = (d) => format(parseISO(d), 'dd');
 const dayTick = (d) => format(d, 'dd');
 
+// Keep date labels legible as the range grows or the widget narrows.
+const bandTicks = (scale, width) => {
+  const domain = scale.domain();
+  const step = Math.max(1, Math.ceil(domain.length / Math.max(2, Math.floor(width / 32))));
+  return domain.filter((_, index) => index % step === 0);
+};
+
 // Helper to check if data is valid for charting
 const hasValidData = (data) => Array.isArray(data) && data.length > 0;
 
@@ -110,6 +117,7 @@ export const ActivityChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
+                  tickValues={bandTicks(xScale, xMax)}
                   tickFormat={dayTickISO}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -183,7 +191,7 @@ export const ReadinessChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={5}
+                  numTicks={Math.max(2, Math.floor(xMax / 52))}
                   tickFormat={dayTick}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -292,7 +300,8 @@ export const SleepChart = ({ data }) => {
                   <AxisBottom
                     top={yMax}
                     scale={xScale}
-                    tickFormat={dayTickISO}
+                    tickValues={bandTicks(xScale, xMax)}
+                  tickFormat={dayTickISO}
                     tickLabelProps={bottomTickLabelProps}
                   />
 
@@ -392,7 +401,8 @@ export const StressChart = ({ data }) => {
                   <AxisBottom
                     top={yMax}
                     scale={xScale}
-                    tickFormat={dayTickISO}
+                    tickValues={bandTicks(xScale, xMax)}
+                  tickFormat={dayTickISO}
                     tickLabelProps={bottomTickLabelProps}
                   />
                   <AxisLeft
@@ -485,7 +495,7 @@ export const SpO2Chart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={5}
+                  numTicks={Math.max(2, Math.floor(xMax / 52))}
                   tickFormat={dayTick}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -574,7 +584,7 @@ export const HeartRateChart = ({ data, xDomain }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={8}
+                  numTicks={Math.max(2, Math.floor(xMax / 52))}
                   tickFormat={(d) => format(d, 'HH:mm')}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -640,6 +650,7 @@ export const WorkoutChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
+                  tickValues={bandTicks(xScale, xMax)}
                   tickFormat={dayTickISO}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -719,7 +730,7 @@ export const ResilienceChart = ({ data }) => {
                   <AxisBottom
                     top={yMax}
                     scale={xScale}
-                    numTicks={5}
+                    numTicks={Math.max(2, Math.floor(xMax / 52))}
                     tickFormat={dayTick}
                     tickLabelProps={bottomTickLabelProps}
                   />
@@ -796,7 +807,7 @@ export const CardioAgeChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={5}
+                  numTicks={Math.max(2, Math.floor(xMax / 52))}
                   tickFormat={dayTick}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -873,7 +884,7 @@ export const VO2MaxChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
-                  numTicks={5}
+                  numTicks={Math.max(2, Math.floor(xMax / 52))}
                   tickFormat={dayTick}
                   tickLabelProps={bottomTickLabelProps}
                 />
@@ -962,6 +973,7 @@ export const SleepDetailChart = ({ data }) => {
                 <AxisBottom
                   top={yMax}
                   scale={xScale}
+                  tickValues={bandTicks(xScale, xMax)}
                   tickFormat={dayTickISO}
                   tickLabelProps={bottomTickLabelProps}
                 />

@@ -3,7 +3,7 @@
  * logo sizing depends on it), so it stays unscoped and unchanged.
  */
 svg {
-    height: 100% !important;
+  height: 100% !important;
 }
 
 /* ============================================================
@@ -21,7 +21,7 @@ svg {
 }
 
 .oura-dashboard--compact {
-  padding: var(--space-md);
+  padding: 0;
 }
 
 .oura-dashboard :focus-visible {
@@ -85,9 +85,10 @@ svg {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
-  transition: transform var(--transition-base),
-              border-color var(--transition-base),
-              box-shadow var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .oura-tile:hover {
@@ -128,8 +129,9 @@ svg {
 /* ---------- SVG ink (overrides visx presentation attributes) ---------- */
 
 .oura-chart text {
-  font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo,
-    Consolas, monospace;
+  font-family:
+    ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas,
+    monospace;
   font-variant-numeric: tabular-nums;
   fill: var(--text-secondary);
 }
@@ -188,21 +190,63 @@ svg {
    3:1 on #131313; the light set leans on the labeled legend + bar gaps for
    its lighter slots). Legend swatches share these classes, hence the
    background-color alongside the SVG fill. */
-.oura-seq-1 { fill: #3987e5; background-color: #3987e5; }
-.oura-seq-2 { fill: #199e70; background-color: #199e70; }
-.oura-seq-3 { fill: #c98500; background-color: #c98500; }
-.oura-seq-4 { fill: #008300; background-color: #008300; }
-.oura-seq-5 { fill: #9085e9; background-color: #9085e9; }
-.oura-seq-6 { fill: #e66767; background-color: #e66767; }
-.oura-seq-7 { fill: #d55181; background-color: #d55181; }
+.oura-seq-1 {
+  fill: #3987e5;
+  background-color: #3987e5;
+}
+.oura-seq-2 {
+  fill: #199e70;
+  background-color: #199e70;
+}
+.oura-seq-3 {
+  fill: #c98500;
+  background-color: #c98500;
+}
+.oura-seq-4 {
+  fill: #008300;
+  background-color: #008300;
+}
+.oura-seq-5 {
+  fill: #9085e9;
+  background-color: #9085e9;
+}
+.oura-seq-6 {
+  fill: #e66767;
+  background-color: #e66767;
+}
+.oura-seq-7 {
+  fill: #d55181;
+  background-color: #d55181;
+}
 
-[data-theme="light"] .oura-seq-1 { fill: #2a78d6; background-color: #2a78d6; }
-[data-theme="light"] .oura-seq-2 { fill: #1baf7a; background-color: #1baf7a; }
-[data-theme="light"] .oura-seq-3 { fill: #eda100; background-color: #eda100; }
-[data-theme="light"] .oura-seq-4 { fill: #008300; background-color: #008300; }
-[data-theme="light"] .oura-seq-5 { fill: #4a3aa7; background-color: #4a3aa7; }
-[data-theme="light"] .oura-seq-6 { fill: #e34948; background-color: #e34948; }
-[data-theme="light"] .oura-seq-7 { fill: #e87ba4; background-color: #e87ba4; }
+[data-theme="light"] .oura-seq-1 {
+  fill: #2a78d6;
+  background-color: #2a78d6;
+}
+[data-theme="light"] .oura-seq-2 {
+  fill: #1baf7a;
+  background-color: #1baf7a;
+}
+[data-theme="light"] .oura-seq-3 {
+  fill: #eda100;
+  background-color: #eda100;
+}
+[data-theme="light"] .oura-seq-4 {
+  fill: #008300;
+  background-color: #008300;
+}
+[data-theme="light"] .oura-seq-5 {
+  fill: #4a3aa7;
+  background-color: #4a3aa7;
+}
+[data-theme="light"] .oura-seq-6 {
+  fill: #e34948;
+  background-color: #e34948;
+}
+[data-theme="light"] .oura-seq-7 {
+  fill: #e87ba4;
+  background-color: #e87ba4;
+}
 
 /* ---------- Legends ---------- */
 
@@ -360,4 +404,63 @@ svg {
   .oura-tile:hover {
     transform: none;
   }
+}
+
+.oura-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0 8px;
+}
+.oura-controls > div {
+  display: flex;
+  gap: 4px;
+}
+.oura-controls button {
+  padding: 8px 10px;
+  min-height: 36px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.oura-controls button[aria-pressed="true"] {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-brand);
+  color: var(--accent-brand);
+}
+.oura-controls button:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+.oura-controls button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.oura-data-note {
+  font-size: 0.75rem;
+  margin-bottom: 20px;
+}
+.oura-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.oura-empty h3 {
+  font-size: 0.875rem;
+  text-transform: capitalize;
+}
+.oura-empty p {
+  font-size: 0.8125rem;
+}
+.oura-status--error .button-secondary {
+  margin-top: 16px;
 }

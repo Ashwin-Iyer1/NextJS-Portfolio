@@ -5,15 +5,14 @@ import DownloadButton from "./DownloadButton";
 
 export const metadata = {
   title: "Resume | Ashwin Iyer",
-  description:
-    "Ashwin Iyer's resume — view it online or download the PDF.",
+  description: "Ashwin Iyer's resume — view it online or download the PDF.",
 };
 
 export default function Resume() {
   return (
     <div className="resume">
       <Bar />
-      <header className="resume-header">
+      <header className="resume-header" id="page-content" tabIndex={-1}>
         <div>
           <p className="resume-eyebrow">Curriculum Vitae</p>
           <h1 className="resume-title">Resume</h1>
@@ -28,7 +27,11 @@ export default function Resume() {
         />
       </div>
       <p className="resume-fallback">
-        PDF not displaying? <a href="https://ashwin-iyer1.github.io/resume/Ashwin_Iyer_CV.pdf">Open it directly</a>.
+        PDF not displaying?{" "}
+        <a href="https://ashwin-iyer1.github.io/resume/Ashwin_Iyer_CV.pdf">
+          Open it directly
+        </a>
+        .
       </p>
     </div>
   );

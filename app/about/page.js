@@ -11,7 +11,7 @@ export default function About() {
   return (
     <div className={styles.About}>
       <Bar />
-      <div className={styles.mainContent}>
+      <div className={styles.mainContent} id="page-content" tabIndex={-1}>
         <section>
           <h2 className="section-title">About Me</h2>
           <div className={styles.cardGrid}>
@@ -40,7 +40,9 @@ export default function About() {
             <div className={`glass-card ${styles.card}`}>
               <h3>Interests</h3>
               <p>
-                Beyond coding, I enjoy working out, listening to music, and reading about financial markets. My top tracks and health stats are just below.
+                Beyond coding, I enjoy working out, listening to music, and
+                reading about financial markets. My top tracks and health stats
+                are just below.
               </p>
             </div>
           </div>

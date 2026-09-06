@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import "./BlogList.css";
 
 const blogs = [
@@ -55,36 +56,51 @@ const blogs = [
   },
 ];
 
-export default function BlogList() {
+export default function BlogList({ initialLimit = blogs.length }) {
+  const [expanded, setExpanded] = useState(false);
+  const visibleBlogs = expanded ? blogs : blogs.slice(0, initialLimit);
   return (
-    <div className="blogGrid">
-      {blogs.map((blog) => {
-        const isExternal = blog.slug.startsWith("http");
-        const href = isExternal ? blog.slug : `/blog/${blog.slug}`;
+    <>
+      <div className="blogGrid" id="writing-list">
+        {visibleBlogs.map((blog) => {
+          const isExternal = blog.slug.startsWith("http");
+          const href = isExternal ? blog.slug : `/blog/${blog.slug}`;
 
-        return (
-          <a
-            key={blog.slug}
-            href={href}
-            target={isExternal ? "_blank" : "_self"}
-            rel={isExternal ? "noopener noreferrer" : undefined}
-            className="blogCard"
-          >
-            <h2 className="blogCardTitle">
-              {blog.title}
-              {isExternal && <span className="externalIcon">&#8599;</span>}
-            </h2>
-            <div className="blogCardDivider" />
-            <p className="blogCardDescription">{blog.description}</p>
-            <span className="blogCardMeta">
-              {isExternal ? "Opens in a new tab" : "Read post"}
-              <span aria-hidden="true" className="blogCardMetaArrow">
-                &#8594;
+          return (
+            <a
+              key={blog.slug}
+              href={href}
+              target={isExternal ? "_blank" : "_self"}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              className="blogCard"
+            >
+              <h3 className="blogCardTitle">
+                {blog.title}
+                {isExternal && <span className="externalIcon">&#8599;</span>}
+              </h3>
+              <div className="blogCardDivider" />
+              <p className="blogCardDescription">{blog.description}</p>
+              <span className="blogCardMeta">
+                {isExternal ? "Opens in a new tab" : "Read post"}
+                <span aria-hidden="true" className="blogCardMetaArrow">
+                  &#8594;
+                </span>
               </span>
-            </span>
-          </a>
-        );
-      })}
-    </div>
+            </a>
+          );
+        })}
+      </div>
+      {initialLimit < blogs.length && (
+        <button
+          type="button"
+          className="button-secondary blogShowMore"
+          aria-expanded={expanded}
+          aria-controls="writing-list"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? "Show fewer posts" : `Show all ${blogs.length} posts`}
+        </button>
+      )}
+    </>
   );
 }

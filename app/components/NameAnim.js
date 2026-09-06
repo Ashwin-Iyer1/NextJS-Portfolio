@@ -1,24 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./NameAnim.module.css"; // Import module CSS if necessary
 
 const NameAnim = () => {
+  const container = useRef(null);
   useEffect(() => {
-    const paths = document.querySelectorAll(".path");
-    paths.forEach((path, index) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const paths = container.current.querySelectorAll(".path");
+    const timers = Array.from(paths, (path, index) => {
       path.style.strokeDasharray = path.getTotalLength();
       path.style.strokeDashoffset = path.getTotalLength();
 
       path.style.strokeWidth = "8px"; // Set your desired stroke width
 
       // Animate path drawing
-      setTimeout(() => {
+      return setTimeout(() => {
         path.style.transition = "stroke-dashoffset 0.5s ease-in-out";
         path.style.strokeDashoffset = 0;
       }, index * 120); // Adjust delay for each path
     });
+    return () => timers.forEach(clearTimeout);
   }, []);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={container}>
       <svg
         className={styles.logo}
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +32,7 @@ const NameAnim = () => {
           fill="none"
           stroke="currentColor"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         >
           <path
             className="cPath path"

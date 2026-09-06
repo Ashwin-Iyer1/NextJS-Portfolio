@@ -1,310 +1,319 @@
-/* Home Page Styles */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--splash-bg);
+  overflow: hidden;
+}
 
 .Home {
   text-align: left;
   max-width: 1200px;
   width: 100%;
-  /* `clip` (not `hidden`) so the sticky nav keeps working — an overflow-x:
-     hidden ancestor would turn this wrapper into a scroll container. */
   overflow-x: clip;
 }
-
-/* Page gutter lives below the nav so the Bar spans the full row. */
 .content {
   padding: 0 var(--space-lg);
 }
-
-/* ---------------------------------------------------------------------------
-   Section rhythm: 96px between sections on desktop, 64px below 640px.
-   Title-to-content spacing comes from the global .section-title utility.
---------------------------------------------------------------------------- */
 .section {
-  margin-top: var(--space-4xl);
+  margin-top: 80px;
   width: 100%;
 }
-
-/* ---------------------------------------------------------------------------
-   Hero
---------------------------------------------------------------------------- */
-.hero {
-  margin-top: var(--space-3xl);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-md);
+.section :global(.section-title) {
+  text-align: left;
+  font-size: 1.5rem;
 }
-
+.section :global(.section-title)::after {
+  margin-left: 0;
+  width: 28px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: center;
+  gap: 64px;
+  padding: 64px 0 44px;
+}
+.heroCopy {
+  min-width: 0;
+}
 .heroEyebrow {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 18px;
+}
+.heroTitle {
+  font-size: clamp(3rem, 5.5vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+  margin-bottom: 22px;
+}
+.heroLede {
+  max-width: 52ch;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+.heroActions {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 28px;
 }
-
-.heroEyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 16px;
-  height: 1px;
-  background: var(--accent-brand, #d4a24e);
-}
-
-.heroTitle {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-.heroLede {
-  margin: 0;
-  max-width: 65ch;
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
 .heroLink {
-  color: var(--text-primary);
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: var(--border-hover);
-  text-underline-offset: 3px;
-  transition: color var(--transition-fast),
-    text-decoration-color var(--transition-fast);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-underline-offset: 5px;
 }
-
 .heroLink:hover {
-  color: var(--text-primary);
-  text-decoration-color: var(--accent-brand, #d4a24e);
+  color: var(--accent-brand);
+  text-decoration: underline;
 }
-
-/* Shared brass focus ring for interactive elements on this page */
-.heroLink:focus-visible,
-a.researchLink:focus-visible,
-.contactEmail a:focus-visible {
-  outline: 2px solid var(--accent-brand, #d4a24e);
-  outline-offset: 2px;
-}
-
-.heroLink:focus-visible,
-.contactEmail a:focus-visible {
-  border-radius: var(--radius-sm);
-}
-
 .heroSocial {
-  margin-top: var(--space-md);
-  width: 100%;
-  max-width: 360px;
+  margin-top: 24px;
+  width: fit-content;
 }
-
-/* ---------------------------------------------------------------------------
-   Work Experience
---------------------------------------------------------------------------- */
+.heroSocial :global(section) {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.heroSocial :global(section > div) {
+  padding: 0;
+  gap: 10px;
+}
+.heroSocial :global(section a) {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border-color: transparent;
+}
+.heroSocial :global(section a img) {
+  height: 20px;
+}
+.sectionNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  padding: 18px 0;
+  border-block: 1px solid var(--border-color);
+  font-size: 0.8125rem;
+}
+.sectionNav span {
+  color: var(--text-muted);
+  margin-right: auto;
+}
+.sectionNav a {
+  padding: 4px 0;
+}
+.sectionHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.sectionHeading > a {
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
 .workRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-lg);
-  /* stretch: at desktop the experience card must equal the full height of
-     the aside column (coding-time card + NEU card) so the row bottoms align */
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
   align-items: stretch;
 }
-
 .workCard {
-  padding: var(--space-lg);
-  height: 100%;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
+.workCard:hover,
+.nowCard:hover,
+.college:hover {
+  transform: none;
+  box-shadow: none;
+}
 .workAside {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-lg);
+  gap: 20px;
 }
-
 .college {
-  padding: var(--space-md);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+  padding: 20px;
 }
-
 .college img {
-  max-height: 140px;
-  width: auto;
-  border-radius: var(--radius-sm);
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
-
-/* ---------------------------------------------------------------------------
-   Research
---------------------------------------------------------------------------- */
+.college h3 {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.college p,
+.college a {
+  font-size: 0.75rem;
+}
+.college p {
+  margin: 4px 0;
+}
+.college a {
+  color: var(--accent-brand);
+}
 .researchRow {
-  display: flex;
-  justify-content: center;
+  width: 100%;
 }
-
-/* `a.` prefix keeps these declarations ahead of the composed .glass-card
-   utility (which sets `transition: all`) regardless of stylesheet order. */
 a.researchLink {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-md) var(--space-lg);
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 30px;
   color: var(--text-primary);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  text-align: center;
-  transition: transform var(--transition-base),
-    border-color var(--transition-base), box-shadow var(--transition-base),
-    background var(--transition-base);
 }
-
-a.researchLink:hover {
-  color: var(--text-primary);
-  transform: translateY(-2px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
+.researchLink h3 {
+  font-size: 1.25rem;
+  margin: 8px 0;
 }
-
-/* ---------------------------------------------------------------------------
-   Miscellaneous Projects
---------------------------------------------------------------------------- */
+.researchLink p {
+  font-size: 0.875rem;
+}
+.researchMeta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+.researchBadge {
+  color: var(--accent-brand);
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
 .miscProjContainer {
   width: 100%;
-  min-height: 400px;
-  overflow: hidden;
+  min-height: 360px;
 }
-
-/* ---------------------------------------------------------------------------
-   Now — live widgets
---------------------------------------------------------------------------- */
 .nowNote {
-  max-width: 65ch;
-  margin: 0 auto var(--space-xl);
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
+  max-width: 70ch;
+  margin: -8px 0 28px;
+  font-size: 0.9375rem;
 }
-
 .nowGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-lg);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
   align-items: start;
 }
-
-/* Layout-only: card visuals come from the global .glass-card utility */
 .nowCard {
   overflow: hidden;
   min-width: 0;
 }
-
 .nowCol {
   min-width: 0;
 }
-
-/* ---------------------------------------------------------------------------
-   Contact
---------------------------------------------------------------------------- */
-.contactEmail {
-  margin: var(--space-md) 0 0;
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 1rem;
+.contactIntro {
+  max-width: 56ch;
 }
-
+.contactEmail {
+  margin-top: 12px;
+  font-size: 1.125rem;
+  overflow-wrap: anywhere;
+}
 .contactEmail a {
   color: var(--text-primary);
-  font-weight: 500;
-  transition: color var(--transition-fast);
 }
-
-.contactEmail a:hover {
-  color: var(--accent-secondary);
+.contactActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 24px;
 }
-
-.contactEmail a:focus-visible {
-  outline: 2px solid var(--accent-brand, #d4a24e);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+.section:has(.contactIntro) {
+  border-top: 1px solid var(--border-color);
+  padding-top: 48px;
 }
-
-/* ---------------------------------------------------------------------------
-   Responsive — breakpoints: 640px and 1024px only
---------------------------------------------------------------------------- */
-@media (min-width: 640px) {
-  /* Side-by-side aside cards on tablet widths */
-  .workAside {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.section:has(.contactIntro) > div:first-of-type {
+  justify-content: flex-start;
+  padding-bottom: 8px;
+}
+.backToTop {
+  display: block;
+  width: fit-content;
+  margin: 56px 0 0 auto;
+  font-size: 0.8125rem;
+}
+@media (max-width: 1023px) {
+  .hero {
+    gap: 32px;
+    grid-template-columns: minmax(0, 1fr) 270px;
   }
-}
-
-@media (min-width: 1024px) {
   .workRow {
-    grid-template-columns: minmax(0, 1fr) 280px;
-  }
-
-  .workAside {
     grid-template-columns: minmax(0, 1fr);
-    /* coding-time card keeps its natural height; the NEU card absorbs the
-       rest so the aside column exactly fills the stretched row */
-    grid-template-rows: auto 1fr;
   }
-
-  .nowGrid {
+  .workAside {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .nowGrid {
+    grid-template-columns: 1fr;
+  }
 }
-
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 32px;
+  }
+  .hero > aside {
+    max-width: 100%;
+  }
+}
 @media (max-width: 640px) {
   .content {
-    padding: 0 var(--space-md);
+    padding: 0;
   }
-
   .section {
-    margin-top: var(--space-3xl);
+    margin-top: 56px;
   }
-
-  .hero {
-    margin-top: var(--space-2xl);
-  }
-
   .heroTitle {
-    font-size: 2rem;
+    font-size: 3.25rem;
   }
-
   .heroLede {
     font-size: 1rem;
   }
-
+  .workAside {
+    grid-template-columns: 1fr;
+  }
   .workCard {
-    padding: var(--space-lg) var(--space-md);
+    padding: 24px 16px;
   }
-
+  .sectionNav {
+    gap: 8px 18px;
+  }
+  .sectionNav span {
+    flex-basis: 100%;
+  }
+  .sectionHeading {
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  .sectionHeading :global(.section-title) {
+    margin-bottom: 16px;
+  }
   a.researchLink {
-    width: 100%;
-    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
   }
-
   .miscProjContainer {
     min-height: 0;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  a.researchLink,
-  a.researchLink:hover {
-    transition: none;
-    transform: none;
+  .nowCard {
+    padding: 16px;
   }
 }

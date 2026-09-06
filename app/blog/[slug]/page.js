@@ -15,7 +15,7 @@ export default async function Page(props) {
     return (
       <div className="full-width-wrapper">
         <Bar />
-        <article className="half-width-wrapper">
+        <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
           <Post />
         </article>
       </div>
@@ -25,7 +25,7 @@ export default async function Page(props) {
     return (
       <div className="full-width-wrapper">
         <Bar />
-        <article className="half-width-wrapper">
+        <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
           <p>Post not found.</p>
         </article>
       </div>

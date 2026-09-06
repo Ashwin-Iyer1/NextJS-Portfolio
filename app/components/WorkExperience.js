@@ -115,7 +115,6 @@ const dateSx = {
   fontSize: "0.8125rem",
   fontWeight: 500,
   letterSpacing: "0.02em",
-  textTransform: "uppercase",
   lineHeight: 1.6,
   color: "var(--text-secondary)",
   "&::before": {

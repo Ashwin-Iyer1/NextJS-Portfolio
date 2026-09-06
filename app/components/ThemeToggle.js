@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 
 const iconProps = {
   width: "18",
@@ -12,20 +12,32 @@ const iconProps = {
   strokeLinejoin: "round",
 };
 
-export default function ThemeToggle() {
-  const [theme, setTheme] = useState("dark");
+function subscribeToTheme(callback) {
+  const observer = new MutationObserver(callback);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme") || "dark";
-    setTheme(stored);
-    document.documentElement.setAttribute("data-theme", stored);
-  }, []);
+function getTheme() {
+  return document.documentElement.getAttribute("data-theme") === "light"
+    ? "light"
+    : "dark";
+}
+
+export default function ThemeToggle() {
+  const theme = useSyncExternalStore(subscribeToTheme, getTheme, () => "dark");
 
   const toggle = () => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* The toggle still works when storage is unavailable. */
+    }
   };
 
   const isDark = theme === "dark";

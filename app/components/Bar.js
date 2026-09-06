@@ -12,6 +12,7 @@ export default function Bar() {
     { href: "/", label: "Home" },
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
+    { href: "/resume", label: "Résumé" },
   ];
 
   return (

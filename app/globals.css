@@ -94,7 +94,10 @@ body {
   background-color: var(--bg-primary);
   display: flex;
   justify-content: center;
-  font-family: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont,
+  font-family:
+    var(--font-inter, "Inter"),
+    -apple-system,
+    BlinkMacSystemFont,
     sans-serif;
   font-size: 1rem;
   color: var(--text-primary);
@@ -142,21 +145,38 @@ main > div {
 }
 
 /* Global Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-primary);
-  font-family: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont,
+  font-family:
+    var(--font-inter, "Inter"),
+    -apple-system,
+    BlinkMacSystemFont,
     sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.25rem; }
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
 
 p {
-  font-family: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont,
+  font-family:
+    var(--font-inter, "Inter"),
+    -apple-system,
+    BlinkMacSystemFont,
     sans-serif;
   font-weight: 400;
   color: var(--text-secondary);
@@ -275,4 +295,85 @@ a:hover {
     animation: none;
     opacity: 1;
   }
+}
+
+/* Shared, keyboard-accessible actions. */
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+[id] {
+  scroll-margin-top: 110px;
+}
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+.button-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+.button-primary:hover {
+  color: var(--bg-primary);
+  background: var(--accent-brand);
+  border-color: var(--accent-brand);
+}
+.button-secondary {
+  background: transparent;
+  color: var(--text-primary);
+}
+.button-secondary:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  border-color: var(--accent-brand);
+}
+.copy-email {
+  position: relative;
+}
+.copy-status {
+  display: block;
+  max-width: 260px;
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+}
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 8px;
+  left: 16px;
+  padding: 12px 20px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 6px;
+  transform: translateY(-160%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+::selection {
+  background: var(--accent-brand);
+  color: var(--bg-primary);
 }

@@ -130,3 +130,37 @@
     animation: none;
   }
 }
+.label {
+  text-transform: none;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+}
+.meta button {
+  margin-left: auto;
+  background: transparent;
+  border: 0;
+  color: var(--text-secondary);
+  padding: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.meta button:hover {
+  color: var(--accent-brand);
+}
+.meta button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.notice {
+  font-size: 0.8125rem;
+}
+@media (max-width: 1024px) {
+  .timeCard {
+    max-width: none;
+    margin: 0;
+  }
+}

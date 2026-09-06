@@ -1,190 +1,162 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import styles from "./MiscProj.module.css";
 
 const videos = [
   {
     src: "https://www.youtube.com/embed/kebgQLcctb4",
-    title: "Financial Derivatives in Alternative Markets (Polymarket)"
+    title: "Financial Derivatives in Alternative Markets (Polymarket)",
   },
   {
     src: "https://www.youtube.com/embed/PjFANvMtrqM",
-    title: "7110A | VEX Over Under | Short Reveal"
+    title: "7110A | VEX Over Under | Short Reveal",
   },
   {
     src: "https://www.youtube.com/embed/_XEaRUrlE2c",
-    title: "The Wolf of Skyblock"
+    title: "The Wolf of Skyblock",
   },
   {
     src: "https://www.youtube.com/embed/NANJDR9GeSE",
-    title: "White Mountain National Forest Vlog"
+    title: "White Mountain National Forest Vlog",
   },
   {
     src: "https://www.youtube.com/embed/HEUlochQ9fc",
-    title: "Puerto Rico Vlog"
-  }
+    title: "Puerto Rico Vlog",
+  },
 ];
 
-const pad = (n) => String(n).padStart(2, "0");
-
-// Shimmer skeleton shown while an iframe loads
-const VideoSkeleton = () => (
-  <div className={styles.skeleton}>
-    <div className={styles.skeletonPlayButton}></div>
-  </div>
-);
-
-const Caption = ({ index }) => (
-  <div className={styles.caption}>
-    <p className={styles.captionMeta}>
-      {pad(index + 1)} / {pad(videos.length)}
-    </p>
-    <h3 className={styles.captionTitle}>{videos[index].title}</h3>
-  </div>
-);
+const thumbnail = (video) =>
+  `https://i.ytimg.com/vi/${video.src.split("/").pop()}/hqdefault.jpg`;
 
 export default function MiscProj() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isClient, setIsClient] = useState(false);
-  const [loadedVideos, setLoadedVideos] = useState({});
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleIframeLoad = (index) => {
-    setLoadedVideos(prev => ({ ...prev, [index]: true }));
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === videos.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? videos.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToSlide = (index) => {
+  const [playing, setPlaying] = useState(false);
+  const current = videos[currentIndex];
+  const previous = (currentIndex + videos.length - 1) % videos.length;
+  const next = (currentIndex + 1) % videos.length;
+  function goTo(index) {
+    setPlaying(false);
     setCurrentIndex(index);
-  };
-
-  const prevIndex = currentIndex === 0 ? videos.length - 1 : currentIndex - 1;
-  const nextIndex = currentIndex === videos.length - 1 ? 0 : currentIndex + 1;
-
-  // Prevent hydration mismatch by only rendering interactive elements on client
-  if (!isClient) {
-    return (
-      <div className={styles.carouselContainer}>
-        <div className={styles.carousel}>
-          <button className={styles.carouselButton} aria-label="Previous video" disabled>
-            ‹
-          </button>
-
-          <div className={styles.videoCard}>
-            <div className={styles.media}>
-              <VideoSkeleton />
-            </div>
-            <Caption index={0} />
-          </div>
-
-          <button className={styles.carouselButton} aria-label="Next video" disabled>
-            ›
-          </button>
-        </div>
-
-        <div className={styles.indicators}>
-          {videos.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${index === 0 ? styles.active : ''}`}
-              aria-label={`Go to video ${index + 1}`}
-              disabled
-            />
-          ))}
-        </div>
-      </div>
-    );
   }
 
   return (
-    <div className={styles.carouselContainer}>
+    <div
+      className={styles.carouselContainer}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Projects and explorations"
+    >
       <div className={styles.carousel}>
-        <button className={styles.carouselButton} onClick={prevSlide} aria-label="Previous video">
+        <button
+          type="button"
+          className={styles.carouselButton}
+          onClick={() => goTo(previous)}
+          aria-label="Previous video"
+        >
           ‹
         </button>
-
-        <div className={styles.sideVideo} onClick={prevSlide}>
+        <button
+          type="button"
+          className={styles.sideVideo}
+          onClick={() => goTo(previous)}
+          aria-label={`Previous: ${videos[previous].title}`}
+        >
           <div className={styles.media}>
-            {!loadedVideos[prevIndex] && <VideoSkeleton />}
-            <iframe
-              src={videos[prevIndex].src}
-              title={videos[prevIndex].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen={false}
-              className={styles.previewIframe}
-              onLoad={() => handleIframeLoad(prevIndex)}
-              style={{ opacity: loadedVideos[prevIndex] ? 1 : 0 }}
-            ></iframe>
-            <div className={styles.overlay}></div>
+            <Image
+              src={thumbnail(videos[previous])}
+              alt=""
+              width={480}
+              height={360}
+              unoptimized
+              sizes="200px"
+            />
           </div>
-        </div>
-
+        </button>
         <div className={styles.videoCard}>
           <div className={styles.media}>
-            {!loadedVideos[currentIndex] && <VideoSkeleton />}
-            <iframe
-              key={currentIndex}
-              src={videos[currentIndex].src}
-              title={videos[currentIndex].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className={styles.mainIframe}
-              onLoad={() => handleIframeLoad(currentIndex)}
-              style={{ opacity: loadedVideos[currentIndex] ? 1 : 0 }}
-            ></iframe>
+            {playing ? (
+              <iframe
+                key={currentIndex}
+                src={`${current.src}?autoplay=1`}
+                title={current.title}
+                allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <button
+                type="button"
+                className={styles.playPreview}
+                onClick={() => setPlaying(true)}
+                aria-label={`Play ${current.title}`}
+              >
+                <Image
+                  src={thumbnail(current)}
+                  alt=""
+                  width={480}
+                  height={360}
+                  unoptimized
+                  sizes="600px"
+                />
+                <span className={styles.playIcon} aria-hidden="true">
+                  ▶
+                </span>
+              </button>
+            )}
           </div>
-          <Caption index={currentIndex} />
+          <div className={styles.caption} aria-live="polite" aria-atomic="true">
+            <p className={styles.captionMeta}>
+              {String(currentIndex + 1).padStart(2, "0")} /{" "}
+              {String(videos.length).padStart(2, "0")}
+            </p>
+            <h3 className={styles.captionTitle}>{current.title}</h3>
+            <a
+              className={styles.watchLink}
+              href={current.src.replace("/embed/", "/watch?v=")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Watch on YouTube ↗
+            </a>
+          </div>
         </div>
-
-        <div className={styles.sideVideo} onClick={nextSlide}>
+        <button
+          type="button"
+          className={styles.sideVideo}
+          onClick={() => goTo(next)}
+          aria-label={`Next: ${videos[next].title}`}
+        >
           <div className={styles.media}>
-            {!loadedVideos[nextIndex] && <VideoSkeleton />}
-            <iframe
-              src={videos[nextIndex].src}
-              title={videos[nextIndex].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen={false}
-              className={styles.previewIframe}
-              onLoad={() => handleIframeLoad(nextIndex)}
-              style={{ opacity: loadedVideos[nextIndex] ? 1 : 0 }}
-            ></iframe>
-            <div className={styles.overlay}></div>
+            <Image
+              src={thumbnail(videos[next])}
+              alt=""
+              width={480}
+              height={360}
+              unoptimized
+              sizes="200px"
+            />
           </div>
-        </div>
-
-        <button className={styles.carouselButton} onClick={nextSlide} aria-label="Next video">
+        </button>
+        <button
+          type="button"
+          className={styles.carouselButton}
+          onClick={() => goTo(next)}
+          aria-label="Next video"
+        >
           ›
         </button>
       </div>
-
-      <div className={styles.indicators}>
-        {videos.map((_, index) => (
+      <div className={styles.indicators} aria-label="Choose a video">
+        {videos.map((video, index) => (
           <button
-            key={index}
-            className={`${styles.indicator} ${index === currentIndex ? styles.active : ''}`}
-            onClick={() => goToSlide(index)}
+            type="button"
+            key={video.src}
+            className={`${styles.indicator} ${index === currentIndex ? styles.active : ""}`}
+            onClick={() => goTo(index)}
             aria-label={`Go to video ${index + 1}`}
+            aria-pressed={index === currentIndex}
           />
         ))}
       </div>

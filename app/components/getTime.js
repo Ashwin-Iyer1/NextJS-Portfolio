@@ -1,55 +1,52 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./GetTime.module.css";
 
 const WAKATIME_PROFILE =
   "https://wakatime.com/@bc413433-56e4-4dee-b14c-d8c669a8be79";
-
-// Coerce first: the API may return numeric columns as strings
-const formatHours = (seconds) => {
-  const n = Number(seconds);
-  return seconds != null && Number.isFinite(n)
-    ? `${(n / 3600).toFixed(1)} hrs`
-    : "N/A";
-};
+const formatHours = (seconds) =>
+  seconds != null && Number.isFinite(Number(seconds))
+    ? `${(Number(seconds) / 3600).toFixed(1)} hrs`
+    : "—";
 
 export default function GetTime() {
-  const [wakatime, setWakatime] = useState([]); // State for Wakatime data
-  const [loading, setLoading] = useState(true); // State for loading
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    const fetchWakatime = async () => {
+    const controller = new AbortController();
+    let active = true;
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    async function load() {
+      setLoading(true);
+      setError(false);
       try {
-        // Attempt to fetch the data from the external API
-        const res = await fetch(`/api/wakatime`);
-
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        // Await the JSON response to get the Wakatime data
+        const res = await fetch("/api/wakatime", { signal: controller.signal });
+        if (!res.ok) throw new Error("Unavailable");
         const data = await res.json();
-        setWakatime(data); // Set the fetched data
-      } catch (error) {
-        console.error(
-          "Failed to fetch from API, falling back to local data:",
-          error
-        );
-
-        // If the fetch fails, just set fallback data
-        setWakatime("Too long!");
+        if (active) setStats(Array.isArray(data) ? data[0] || null : null);
+      } catch {
+        if (active) setError(true);
       } finally {
-        setLoading(false); // Set loading to false when done
+        clearTimeout(timeout);
+        if (active) setLoading(false);
       }
+    }
+    load();
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+      controller.abort();
     };
-
-    fetchWakatime(); // Call the fetch function
-  }, []); // Empty dependency array to run once on mount
-
-  const stats = Array.isArray(wakatime) ? wakatime[0] : undefined;
+  }, [attempt]);
 
   return (
-    <div className={`${styles.stats} ${loading ? styles.loadingStats : ""}`}>
+    <div
+      className={`${styles.stats} ${loading ? styles.loadingStats : ""}`}
+      aria-busy={loading}
+    >
       <p className={styles.statRow}>
         <span className={styles.statLabel}>Total</span>
         <span className={styles.statValue}>
@@ -62,12 +59,27 @@ export default function GetTime() {
           {loading ? "—" : formatHours(stats?.daily_average)}
         </span>
       </p>
-      <p className={styles.meta}>
+      {!loading && (error || !stats) && (
+        <p className={styles.notice} role="status">
+          {error
+            ? "Coding stats are temporarily unavailable."
+            : "No coding activity available yet."}
+        </p>
+      )}
+      <div className={styles.meta}>
         Tracked with{" "}
         <a href={WAKATIME_PROFILE} target="_blank" rel="noopener noreferrer">
-          Wakatime
+          WakaTime
         </a>
-      </p>
+        <button
+          type="button"
+          onClick={() => setAttempt((n) => n + 1)}
+          disabled={loading}
+          aria-label="Refresh coding stats"
+        >
+          {loading ? "Loading…" : "Refresh"}
+        </button>
+      </div>
     </div>
   );
 }

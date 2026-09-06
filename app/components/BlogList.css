@@ -2,9 +2,9 @@
 
 .blogGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-xl);
-  padding: 0 var(--space-md);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+  padding: 0;
   width: 100%;
 }
 
@@ -17,8 +17,10 @@
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   text-decoration: none;
-  transition: transform var(--transition-base),
-    border-color var(--transition-base), background var(--transition-base),
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    background var(--transition-base),
     box-shadow var(--transition-base);
 }
 
@@ -88,7 +90,7 @@
   .blogGrid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
-    padding: 0 var(--space-sm);
+    padding: 0;
   }
 
   .blogCard {
@@ -104,4 +106,8 @@
   .blogCard:hover {
     transform: none;
   }
+}
+
+.blogShowMore {
+  margin-top: 24px;
 }
