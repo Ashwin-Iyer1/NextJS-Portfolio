@@ -1,15 +1,15 @@
+from typing import Any, Dict, Optional
+
 import requests
-import os
-import json
-from typing import Dict, Any, Optional
 
 from token_manager import TokenManager
 
 class WakaTimeClient:
     """Client for WakaTime API with automated token management."""
     
-    BASE_URL = "https://wakatime.com/api/v1"
+    BASE_URL = "https://api.wakatime.com/api/v1"
     TOKEN_URL = "https://wakatime.com/oauth/token"
+    REQUEST_TIMEOUT = 20
 
     def __init__(self, client_id: str, client_secret: str):
         self.client_id = client_id
@@ -17,6 +17,7 @@ class WakaTimeClient:
         self.token_manager = TokenManager("wakatime")
         self.session = requests.Session()
         self.tokens = {}
+        self.last_error = None
         self._load_tokens()
 
     def _load_tokens(self):
@@ -31,7 +32,8 @@ class WakaTimeClient:
     def _save_tokens(self, tokens: Dict[str, Any]):
         """Save tokens using TokenManager."""
         self.tokens = tokens
-        self.token_manager.save_tokens(tokens)
+        if not self.token_manager.save_tokens(tokens):
+            print("⚠️ WakaTime tokens were refreshed but could not be persisted.")
         
         self.session.headers.update({
             "Authorization": f"Bearer {self.tokens.get('access_token')}"
@@ -55,7 +57,12 @@ class WakaTimeClient:
             "redirect_uri": "http://localhost:8000/callback" # Must match original redirect_uri
         }
         
-        response = requests.post(self.TOKEN_URL, data=data)
+        response = requests.post(
+            self.TOKEN_URL,
+            data=data,
+            headers={"Accept": "application/json"},
+            timeout=self.REQUEST_TIMEOUT,
+        )
         
         if response.status_code == 200:
             new_tokens = response.json()
@@ -84,7 +91,7 @@ class WakaTimeClient:
                return None
 
         try:
-            response = self.session.get(url)
+            response = self.session.get(url, timeout=self.REQUEST_TIMEOUT)
             
             if response.status_code == 401 and retry:
                 print("⚠️ WakaTime 401 Unauthorized. Attempting refresh...")
@@ -99,9 +106,17 @@ class WakaTimeClient:
                     
             if response.status_code == 200:
                 return response.json()
-            else:
-                print(f"❌ WakaTime Request failed: {response.status_code} - {response.text}")
+
+            if response.status_code == 403 and "read_stats" in response.text.lower():
+                self.last_error = (
+                    "WakaTime token is missing the required 'read_stats' scope. "
+                    "Run `python3 wakatime_setup.py` once to reauthorize it."
+                )
+                print(f"❌ {self.last_error}")
                 return None
+
+            print(f"❌ WakaTime request failed: HTTP {response.status_code}.")
+            return None
                 
         except Exception as e:
             print(f"❌ Error fetching WakaTime data: {e}")

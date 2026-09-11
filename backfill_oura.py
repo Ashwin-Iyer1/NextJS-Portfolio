@@ -1,28 +1,62 @@
-from oura_fetcher import OuraClient, OURA_CLIENT_ID, OURA_CLIENT_SECRET, upsert_oura_data
+import argparse
 from datetime import date, timedelta
+
 import oura_db
+from oura_fetcher import OURA_CLIENT_ID, OURA_CLIENT_SECRET, OuraClient, upsert_oura_data
+
+
+def iso_date(value):
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("expected a date in YYYY-MM-DD format") from exc
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Backfill Oura data into PostgreSQL.")
+    parser.add_argument(
+        "--start-date",
+        type=iso_date,
+        help="First date to fetch (YYYY-MM-DD); defaults to 90 days ago.",
+    )
+    parser.add_argument(
+        "--end-date",
+        type=iso_date,
+        help="Last date to fetch (YYYY-MM-DD); defaults to today.",
+    )
+    parser.add_argument(
+        "--core-only",
+        action="store_true",
+        help="Fetch only the data types used by the hourly portfolio sync.",
+    )
+    return parser.parse_args()
 
 def main():
+    args = parse_args()
     print("--- Oura Historical Backfill ---")
     
     if not OURA_CLIENT_ID or not OURA_CLIENT_SECRET:
         print("❌ Error: OURA_CLIENT_ID or OURA_CLIENT_SECRET not found.")
-        return
+        return 1
 
-    # Default to last 90 days. User can change this source code if they want more.
-    # Or we can make it interactive? Let's hardcode a good default for now.
     today = date.today()
-    start_backfill = today - timedelta(days=90) # 3 Months
+    start_backfill = args.start_date or today - timedelta(days=90)
+    final_end = args.end_date or today
+
+    if start_backfill > final_end:
+        print("❌ Error: --start-date must be on or before --end-date.")
+        return 1
     
     start_date = start_backfill.isoformat()
-    end_date = today.isoformat()
+    end_date = final_end.isoformat()
     
     print(f"Time Range: {start_date} to {end_date}")
     
     client = OuraClient(OURA_CLIENT_ID, OURA_CLIENT_SECRET)
     
     # Initialize DB (just in case)
-    oura_db.create_oura_table()
+    if not oura_db.create_oura_table():
+        return 1
 
     def print_result(name, data, data_type_key=None):
         if data and 'data' in data:
@@ -60,13 +94,11 @@ def main():
     print("Heart Rate (fetching in chunks)...")
     
     current_start = start_backfill
-    final_end = today
-    
     all_hr_data = []
     
-    while current_start < final_end:
-        # Define chunk end (25 days to be safe)
-        chunk_end = current_start + timedelta(days=25)
+    while current_start <= final_end:
+        # Oura limits heart-rate queries to less than 30 days.
+        chunk_end = current_start + timedelta(days=24)
         if chunk_end > final_end:
             chunk_end = final_end
             
@@ -99,23 +131,29 @@ def main():
     print_result("Sleep Detailed", client.get_sleep_documents(start_date, end_date), "sleep_detailed")
     print_result("Sleep Time", client.get_sleep_time(start_date, end_date), "sleep_time")
     print_result("Workouts", client.get_workouts(start_date, end_date), "workout")
-    print_result("Sessions", client.get_sessions(start_date, end_date), "session")
-    print_result("Tags", client.get_tags(start_date, end_date), "tag")
-    print_result("Enhanced Tags", client.get_enhanced_tags(start_date, end_date), "enhanced_tag")
-    print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
-    # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
-    print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
+    if not args.core_only:
+        print_result("Sessions", client.get_sessions(start_date, end_date), "session")
+        print_result("Tags", client.get_tags(start_date, end_date), "tag")
+        print_result("Enhanced Tags", client.get_enhanced_tags(start_date, end_date), "enhanced_tag")
+        print_result("Rest Mode", client.get_rest_mode_periods(start_date, end_date), "rest_mode_period")
+        # print_result("Ring Config", client.get_ring_configuration(start_date, end_date), "ring_configuration")
+        print_result("VO2 Max", client.get_vo2_max(start_date, end_date), "vo2_max")
 
     # Fetch Personal Info (Singleton) - Backfilling this basically just grabs the current state
     p_info = client.get_personal_info()
     if p_info:
         # Use latest date for backfill
-        upsert_oura_data("personal_info", today.isoformat(), p_info)
+        upsert_oura_data("personal_info", final_end.isoformat(), p_info)
         print("✅ Personal Info: Fetched and saved.")
     else:
         print("⚠️ Personal Info: No data.")
 
+    if client.auth_error or client.scope_errors:
+        print("\n❌ Backfill incomplete due to Oura authorization errors.")
+        return 1
+
     print("\n🎉 Backfill Complete!")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

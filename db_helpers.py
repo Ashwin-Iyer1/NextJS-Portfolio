@@ -2,15 +2,22 @@
 Database Helper Functions
 Provides database connection and query utilities
 """
-from dotenv import load_dotenv
-# load_dotenv()
-
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import RealDictCursor
 from contextlib import contextmanager
 from typing import List, Dict, Any, Optional
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+# Match Next.js's local environment precedence without overwriting real process
+# variables supplied by GitHub Actions or another deployment environment.
+PROJECT_ROOT = Path(__file__).resolve().parent
+load_dotenv(PROJECT_ROOT / ".env.local", override=False)
+load_dotenv(PROJECT_ROOT / ".env", override=False)
 
 
 # Database connection parameters from environment variables

@@ -1,45 +1,52 @@
 import os
+import secrets
 import webbrowser
-import json
-import requests
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs
-from token_manager import TokenManager
-from dotenv import load_dotenv
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs, urlencode, urlparse
 
-# Load environment variables
-# load_dotenv()
+import requests
+
+from token_manager import TokenManager
 
 CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
-token_manager = TokenManager("oura")
+OAUTH_STATE = secrets.token_urlsafe(32)
 
-if not CLIENT_ID or not CLIENT_SECRET:
-    print("❌ Error: OURA_CLIENT_ID or OURA_CLIENT_SECRET not found in .env file.")
-    print("Please add them to your .env file and run this script again.")
-    exit(1)
 
 class OAuthHandler(BaseHTTPRequestHandler):
+    def _respond(self, status, body):
+        self.send_response(status)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(body.encode("utf-8"))
+
     def do_GET(self):
         parsed_path = urlparse(self.path)
         if parsed_path.path == "/callback":
             query_params = parse_qs(parsed_path.query)
-            if "code" in query_params:
+            if query_params.get("state", [None])[0] != OAUTH_STATE:
+                self._respond(400, "<h1>Authorization Failed</h1><p>Invalid OAuth state.</p>")
+            elif "code" in query_params:
                 code = query_params["code"][0]
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
-                self.wfile.write(b"<h1>Authorization Successful!</h1><p>You can close this window and check your terminal.</p>")
-                
-                # Exchange code for token
-                exchange_code_for_token(code)
+                if exchange_code_for_token(code):
+                    self.server.authorization_succeeded = True
+                    self._respond(
+                        200,
+                        "<h1>Authorization Successful!</h1>"
+                        "<p>You can close this window.</p>",
+                    )
+                else:
+                    self._respond(
+                        500,
+                        "<h1>Authorization Failed</h1>"
+                        "<p>Check the setup command output for details.</p>",
+                    )
             else:
-                self.send_response(400)
-                self.wfile.write(b"<h1>Authorization Failed!</h1><p>No code found.</p>")
+                self._respond(400, "<h1>Authorization Failed</h1><p>No code found.</p>")
         else:
-            self.send_response(404)
-            self.wfile.write(b"Not Found")
+            self._respond(404, "Not Found")
+
 
 def exchange_code_for_token(code):
     print("\n🔄 Exchanging authorization code for access tokens...")
@@ -52,46 +59,59 @@ def exchange_code_for_token(code):
         "client_secret": CLIENT_SECRET
     }
     
-    response = requests.post(url, data=data)
-    
-    if response.status_code == 200:
+    try:
+        response = requests.post(
+            url,
+            data=data,
+            headers={"Accept": "application/json"},
+            timeout=20,
+        )
+        response.raise_for_status()
         tokens = response.json()
-        print("✅ Tokens received!")
-        save_tokens(tokens)
-        print("✅ Tokens saved via TokenManager (Database)")
-        print("\n🎉 Setup complete! You can now run the fetcher.")
-        # Stop the server
-        os._exit(0)
-    else:
-        print(f"❌ Failed to exchange token: {response.text}")
-        os._exit(1)
+    except (requests.RequestException, ValueError) as exc:
+        print(f"❌ Oura token exchange failed: {exc}")
+        return False
+
+    print("✅ Tokens received!")
+    if not save_tokens(tokens):
+        print("❌ Tokens were received but could not be saved to the database.")
+        return False
+
+    print("✅ Tokens saved via TokenManager (Database)")
+    print("\n🎉 Setup complete! You can now run the fetcher.")
+    return True
 
 def save_tokens(tokens):
     """Save tokens using TokenManager."""
-    token_manager.save_tokens(tokens)
+    return TokenManager("oura").save_tokens(tokens)
 
 def main():
     print("--- Oura OAuth2 Setup ---")
-    
-    # Construct Authorization URL
-    # Scopes: email personal daily heartrate workout tag session spo2 stress heart_health
-    scopes = "email personal daily heartrate workout tag session spo2 stress heart_health ring_configuration"
-    auth_url = (
-        f"https://cloud.ouraring.com/oauth/authorize?"
-        f"response_type=code&client_id={CLIENT_ID}&"
-        f"redirect_uri={REDIRECT_URI}&scope={scopes}&state=setup"
-    )
+
+    if not CLIENT_ID or not CLIENT_SECRET:
+        print("❌ Error: OURA_CLIENT_ID and OURA_CLIENT_SECRET are required.")
+        return 1
+
+    auth_url = "https://cloud.ouraring.com/oauth/authorize?" + urlencode({
+        "response_type": "code",
+        "client_id": CLIENT_ID,
+        "redirect_uri": REDIRECT_URI,
+        "scope": (
+            "email personal daily heartrate workout tag session spo2 "
+            "stress heart_health"
+        ),
+        "state": OAUTH_STATE,
+    })
     
     print(f"\n1. Opening browser to: {auth_url}")
     webbrowser.open(auth_url)
     
     print("\n2. Waiting for callback on http://localhost:8000/callback ...")
-    server_address = ('', 8000)
+    server_address = ('127.0.0.1', 8000)
     httpd = HTTPServer(server_address, OAuthHandler)
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
+    httpd.authorization_succeeded = False
+    httpd.handle_request()
+    return 0 if httpd.authorization_succeeded else 1
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

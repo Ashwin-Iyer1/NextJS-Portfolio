@@ -1,6 +1,8 @@
 import json
-from typing import Dict, Any, Optional
+from typing import Any, Dict
+
 from db_helpers import execute_query
+
 
 class TokenManager:
     """Manages API tokens with persistence in Database."""
@@ -42,10 +44,10 @@ class TokenManager:
         print(f"⚠️ [{self.service_name}] No tokens found in DB.")
         return {}
 
-    def save_tokens(self, tokens: Dict[str, Any]):
-        """Save tokens to the database."""
+    def save_tokens(self, tokens: Dict[str, Any]) -> bool:
+        """Save tokens to the database and report whether persistence succeeded."""
         if not tokens:
-            return
+            return False
 
         query = f"""
         INSERT INTO {TokenManager.TABLE_NAME} (service_name, tokens, updated_at)
@@ -58,5 +60,7 @@ class TokenManager:
         try:
             execute_query(query, (self.service_name, json.dumps(tokens)))
             print(f"💾 [{self.service_name}] Saved tokens to Database.")
+            return True
         except Exception as e:
             print(f"❌ [{self.service_name}] Error saving tokens to DB: {e}")
+            return False

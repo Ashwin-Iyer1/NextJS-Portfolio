@@ -1,39 +1,52 @@
 import os
+import secrets
 import webbrowser
-import json
-import requests
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs
-from token_manager import TokenManager
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs, urlencode, urlparse
 
-# Load environment variables
+import requests
+
+from token_manager import TokenManager
 
 CLIENT_ID = os.getenv("WAKA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("WAKA_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
+OAUTH_STATE = secrets.token_urlsafe(32)
 
-token_manager = TokenManager("wakatime")
 
 class OAuthHandler(BaseHTTPRequestHandler):
+    def _respond(self, status, body):
+        self.send_response(status)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(body.encode("utf-8"))
+
     def do_GET(self):
         parsed_path = urlparse(self.path)
         if parsed_path.path == "/callback":
             query_params = parse_qs(parsed_path.query)
-            if "code" in query_params:
+            if query_params.get("state", [None])[0] != OAUTH_STATE:
+                self._respond(400, "<h1>Authorization Failed</h1><p>Invalid OAuth state.</p>")
+            elif "code" in query_params:
                 code = query_params["code"][0]
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
-                self.wfile.write(b"<h1>Authorization Successful!</h1><p>You can close this window and check your terminal.</p>")
-                
-                # Exchange code for token
-                exchange_code_for_token(code)
+                if exchange_code_for_token(code):
+                    self.server.authorization_succeeded = True
+                    self._respond(
+                        200,
+                        "<h1>Authorization Successful!</h1>"
+                        "<p>You can close this window.</p>",
+                    )
+                else:
+                    self._respond(
+                        500,
+                        "<h1>Authorization Failed</h1>"
+                        "<p>Check the setup command output for details.</p>",
+                    )
             else:
-                self.send_response(400)
-                self.wfile.write(b"<h1>Authorization Failed!</h1><p>No code found.</p>")
+                self._respond(400, "<h1>Authorization Failed</h1><p>No code found.</p>")
         else:
-            self.send_response(404)
-            self.wfile.write(b"Not Found")
+            self._respond(404, "Not Found")
+
 
 def exchange_code_for_token(code):
     print("\n🔄 Exchanging authorization code for access tokens...")
@@ -53,63 +66,51 @@ def exchange_code_for_token(code):
     }
     
     try:
-        response = requests.post(url, data=data, headers=headers)
-        
-        # Always print text if not 200 to debug
-        if response.status_code != 200:
-            print(f"❌ Failed to exchange token: {response.status_code} - {response.text}")
-            os._exit(1)
+        response = requests.post(url, data=data, headers=headers, timeout=20)
+        response.raise_for_status()
+        tokens = response.json()
+    except (requests.RequestException, ValueError) as exc:
+        print(f"❌ WakaTime token exchange failed: {exc}")
+        return False
 
-        try:
-            tokens = response.json()
-            print("✅ Tokens received!")
-            save_tokens(tokens)
-            print("✅ Tokens saved to Database")
-            
-            # Print the tokens compactly so user can copy to env if needed
-            print(f"\n[OPTIONAL] You can set this as WAKA_TOKENS_JSON in your env:\n{json.dumps(tokens)}")
-            
-            print("\n🎉 Setup complete! You can now run the fetcher.")
-            os._exit(0)
-        except Exception as json_err:
-            print(f"❌ Error parsing JSON: {json_err}")
-            print(f"RAW RESPONSE: {response.text}")
-            os._exit(1)
-    except Exception as e:
-        print(f"❌ Error during token exchange: {e}")
-        os._exit(1)
+    print("✅ Tokens received!")
+    if not save_tokens(tokens):
+        print("❌ Tokens were received but could not be saved to the database.")
+        return False
+
+    print("✅ Tokens saved to Database")
+    print("\n🎉 Setup complete! You can now run the fetcher.")
+    return True
 
 def save_tokens(tokens):
-    token_manager.save_tokens(tokens)
+    return TokenManager("wakatime").save_tokens(tokens)
 
 def main():
     print("--- WakaTime OAuth2 Setup ---")
     
     if not CLIENT_ID or not CLIENT_SECRET:
-        print("❌ Error: WAKA_CLIENT_ID or WAKA_CLIENT_SECRET not found in .env file.")
-        print("Please add them to your .env file and run this script again.")
-        return
+        print("❌ Error: WAKA_CLIENT_ID and WAKA_CLIENT_SECRET are required.")
+        return 1
 
-    # Construct Authorization URL
-    # https://wakatime.com/oauth/authorize?client_id={client_id}&response_type=code&redirect_uri={redirect_uri}&scope={scope}
-    # Scopes: email, read_logged_time, read_stats
-    scopes = "email,read_logged_time,read_stats"
-    auth_url = (
-        f"https://wakatime.com/oauth/authorize?"
-        f"response_type=code&client_id={CLIENT_ID}&"
-        f"redirect_uri={REDIRECT_URI}&scope={scopes}&state=setup"
-    )
+    auth_url = "https://wakatime.com/oauth/authorize?" + urlencode({
+        "response_type": "code",
+        "client_id": CLIENT_ID,
+        "redirect_uri": REDIRECT_URI,
+        "scope": "read_stats",
+        "state": OAUTH_STATE,
+        # Existing grants need to show the approval screen again to add a scope.
+        "force_approve": "true",
+    })
     
     print(f"\n1. Opening browser to: {auth_url}")
     webbrowser.open(auth_url)
     
     print("\n2. Waiting for callback on http://localhost:8000/callback ...")
-    server_address = ('', 8000)
+    server_address = ('127.0.0.1', 8000)
     httpd = HTTPServer(server_address, OAuthHandler)
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
+    httpd.authorization_succeeded = False
+    httpd.handle_request()
+    return 0 if httpd.authorization_succeeded else 1
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -1,13 +1,13 @@
-from wakatime_client import WakaTimeClient
-from portfolio_operations import get_wakatime_db_data, update_wakatime_data
 import os
-import oura_fetcher
-from dotenv import load_dotenv
 
-# load_dotenv()
+import oura_fetcher
+from portfolio_operations import get_wakatime_db_data, update_wakatime_data
+from wakatime_client import WakaTimeClient
+
 
 def main():
     print("--- Starting Hourly Update ---")
+    succeeded = True
     
     # --- WakaTime ---
     print("\n[WakaTime] Fetching data...")
@@ -16,13 +16,16 @@ def main():
     client_secret = os.getenv("WAKA_CLIENT_SECRET")
     
     if not client_id or not client_secret:
-        print("❌ Error: WAKA_CLIENT_ID and WAKA_CLIENT_SECRET not found in .env")
+        print("❌ Error: WAKA_CLIENT_ID and WAKA_CLIENT_SECRET are required.")
+        succeeded = False
     else:
         client = WakaTimeClient(client_id, client_secret)
         data = client.get_stats()
         
         if not data or 'data' not in data:
-            print("Failed to fetch WakaTime data.")
+            if not client.last_error:
+                print("Failed to fetch WakaTime data.")
+            succeeded = False
         else:
             current_total_seconds = data['data']['total_seconds']
             daily_average = data['data']['daily_average']
@@ -46,14 +49,19 @@ def main():
                     
             if should_update:
                 print("New Data detected! Updating database...")
-                update_wakatime_data(current_total_seconds, daily_average)
+                if not update_wakatime_data(current_total_seconds, daily_average):
+                    succeeded = False
 
     # --- Oura ---
     print("\n[Oura] Fetching data...")
     try:
-        oura_fetcher.main()
+        if not oura_fetcher.main():
+            succeeded = False
     except Exception as e:
         print(f"❌ Error running Oura fetcher: {e}")
+        succeeded = False
+
+    return 0 if succeeded else 1
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

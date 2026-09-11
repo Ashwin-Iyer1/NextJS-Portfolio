@@ -1,24 +1,33 @@
-import requests
-from datetime import datetime
-from typing import Dict, Any, Optional
 import os
-import json
-from token_manager import TokenManager
+from typing import Any, Dict, Optional
+
+import requests
 from oura_db import create_oura_table, upsert_oura_data, get_oura_data
+from token_manager import TokenManager
 
 OURA_CLIENT_ID = os.getenv("OURA_CLIENT_ID")
 OURA_CLIENT_SECRET = os.getenv("OURA_CLIENT_SECRET")
+
+
+class OuraAuthenticationError(RuntimeError):
+    """Raised when Oura credentials must be reauthorized."""
+
 
 class OuraClient:
     """Client for Oura V2 API with automated token management."""
     
     BASE_URL = "https://api.ouraring.com/v2"
+    TOKEN_URL = "https://api.ouraring.com/oauth/token"
+    REQUEST_TIMEOUT = 20
 
     def __init__(self, client_id: str, client_secret: str):
         self.client_id = client_id
         self.client_secret = client_secret
         self.token_manager = TokenManager("oura")
         self.session = requests.Session()
+        self.tokens = {}
+        self.auth_error: Optional[str] = None
+        self.scope_errors: Dict[str, str] = {}
         self._load_tokens()
 
     def _load_tokens(self):
@@ -31,8 +40,15 @@ class OuraClient:
 
     def _save_tokens(self, tokens: Dict[str, Any]):
         """Save tokens using TokenManager."""
-        self.tokens = tokens
-        self.token_manager.save_tokens(tokens)
+        merged_tokens = self.tokens.copy()
+        merged_tokens.update(tokens)
+        self.tokens = merged_tokens
+
+        if not self.token_manager.save_tokens(merged_tokens):
+            print(
+                "⚠️ Oura issued rotated tokens, but they could not be saved. "
+                "The next run may require reauthorization."
+            )
         
         self.session.headers.update({
             "Authorization": f"Bearer {self.tokens.get('access_token')}"
@@ -42,49 +58,159 @@ class OuraClient:
         """Refresh the access token."""
         print("🔄 Refreshing access token...")
         if not self.tokens.get("refresh_token"):
-            print("❌ No refresh token available.")
-            raise Exception("No refresh token available.")
+            self.auth_error = (
+                "No Oura refresh token is available. "
+                "Run `python3 oura_setup.py` once to reauthorize."
+            )
+            print(f"❌ {self.auth_error}")
+            raise OuraAuthenticationError(self.auth_error)
 
-        url = "https://api.ouraring.com/oauth/token"
+        attempted_refresh_token = self.tokens.get("refresh_token")
         data = {
             "grant_type": "refresh_token",
-            "refresh_token": self.tokens.get("refresh_token"),
+            "refresh_token": attempted_refresh_token,
             "client_id": self.client_id,
             "client_secret": self.client_secret
         }
-        
-        response = requests.post(url, data=data)
+
+        try:
+            response = requests.post(
+                self.TOKEN_URL,
+                data=data,
+                headers={"Accept": "application/json"},
+                timeout=self.REQUEST_TIMEOUT,
+            )
+        except requests.RequestException:
+            self.auth_error = "Oura's token endpoint could not be reached; stopping this run."
+            print(f"❌ {self.auth_error}")
+            raise
         if response.status_code != 200:
-            print(f"❌ Token refresh response ({response.status_code}): {response.text}")
-        response.raise_for_status()
-        
+            # Another hourly process may have used this single-use refresh token
+            # and persisted its replacement while this request was in flight.
+            latest_tokens = self.token_manager.load_tokens()
+            if (
+                latest_tokens.get("access_token")
+                and latest_tokens.get("refresh_token")
+                and latest_tokens.get("refresh_token") != attempted_refresh_token
+            ):
+                self.tokens = latest_tokens
+                self.session.headers.update({
+                    "Authorization": f"Bearer {latest_tokens['access_token']}"
+                })
+                print("✅ Loaded Oura tokens refreshed by another process.")
+                return
+
+            self.auth_error = (
+                "Oura could not refresh the stored credentials. Refresh tokens are "
+                "single-use; run `python3 oura_setup.py` once to reauthorize."
+            )
+            print(f"❌ {self.auth_error} (HTTP {response.status_code})")
+            raise OuraAuthenticationError(self.auth_error)
+
         new_tokens = response.json()
+        if not new_tokens.get("access_token") or not new_tokens.get("refresh_token"):
+            self.auth_error = "Oura returned an incomplete token response."
+            raise OuraAuthenticationError(self.auth_error)
+
         self._save_tokens(new_tokens)
         print("✅ Token refreshed successfully.")
 
+    @staticmethod
+    def _scope_error(response) -> Optional[str]:
+        """Return Oura's missing-scope detail without treating it as token expiry."""
+        try:
+            payload = response.json()
+        except ValueError:
+            return None
+
+        if not isinstance(payload, dict):
+            return None
+
+        detail = payload.get("detail") or payload.get("error_description")
+        if not isinstance(detail, str):
+            return None
+
+        normalized_detail = detail.lower()
+        if "not authorized" in normalized_detail and "scope" in normalized_detail:
+            return detail
+        return None
+
     def _get(self, endpoint: str, params: Optional[Dict[str, Any]] = None, retry: bool = True) -> Dict[str, Any]:
-        if not self.tokens:
-               print("❌ No tokens loaded. Cannot make request.")
-               return {}
+        if self.auth_error:
+            return {}
+
+        if not self.tokens.get("access_token"):
+            self.auth_error = "No Oura access token is available."
+            print("❌ No Oura tokens loaded. Run `python3 oura_setup.py` once.")
+            return {}
 
         url = f"{self.BASE_URL}{endpoint}"
-        response = self.session.get(url, params=params)
-        
+        try:
+            response = self.session.get(
+                url,
+                params=params,
+                timeout=self.REQUEST_TIMEOUT,
+            )
+        except requests.RequestException as exc:
+            print(f"❌ Oura request failed: {exc}")
+            return {}
+
+        scope_error = self._scope_error(response)
+        if response.status_code in (401, 403) and scope_error:
+            self.scope_errors[endpoint] = scope_error
+            print(f"⚠️ Oura endpoint {endpoint} skipped: {scope_error}")
+            return {}
+
         if response.status_code == 401 and retry:
             try:
                 self._refresh_token()
                 # Retry request with new token
                 return self._get(endpoint, params, retry=False)
-            except Exception as e:
-                print(f"❌ Failed to refresh token: {e}")
-                # Don't raise here, just return empty/error to allow script to continue or fail gracefully
+            except (OuraAuthenticationError, requests.RequestException):
                 return {}
-                
+
+        if response.status_code == 401:
+            self.auth_error = (
+                "Oura rejected the refreshed access token. "
+                "Run `python3 oura_setup.py` once to reauthorize."
+            )
+            print(f"❌ {self.auth_error}")
+            return {}
+
         if response.status_code != 200:
-             print(f"❌ Request failed: {response.status_code} - {response.text}")
-             return {}
+            print(f"❌ Oura request failed: HTTP {response.status_code}.")
+            return {}
 
         return response.json()
+
+    def _get_paginated(
+        self,
+        endpoint: str,
+        params: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Fetch every page from an Oura collection endpoint."""
+        records = []
+        next_token = None
+        seen_tokens = set()
+
+        while True:
+            page_params = dict(params or {})
+            if next_token:
+                page_params["next_token"] = next_token
+
+            page = self._get(endpoint, params=page_params)
+            if not page or "data" not in page:
+                return {}
+
+            records.extend(page["data"])
+            next_token = page.get("next_token")
+            if not next_token:
+                return {"data": records}
+
+            if next_token in seen_tokens:
+                print(f"❌ Oura pagination repeated a token for {endpoint}; stopping.")
+                return {}
+            seen_tokens.add(next_token)
 
     def get_personal_info(self) -> Dict[str, Any]:
         """Get personal info."""
@@ -141,7 +267,7 @@ class OuraClient:
 
     def get_heart_rate(self, start_datetime: str, end_datetime: str) -> Dict[str, Any]:
         """Get heart rate data."""
-        return self._get("/usercollection/heartrate", params={
+        return self._get_paginated("/usercollection/heartrate", params={
             "start_datetime": start_datetime,
             "end_datetime": end_datetime
         })
@@ -227,7 +353,9 @@ def main():
     end_date = tomorrow.isoformat()
 
     # Initialize DB Table
-    create_oura_table()
+    if not create_oura_table():
+        print("❌ Oura data update stopped because its database table is unavailable.")
+        return False
 
     print(f"Fetching Oura data from {start_date} to {end_date}...")
     
@@ -265,6 +393,10 @@ def main():
 
     # Fetch Activity
     print_result("Activity", client.get_daily_activity(start_date, end_date), "activity")
+    if client.auth_error:
+        print("⛔ Stopping Oura fetch because authentication could not be established.")
+        print("\n❌ Oura data update incomplete.")
+        return False
 
     # Fetch Sleep (Daily)
     print_result("Sleep Daily", client.get_daily_sleep(start_date, end_date), "sleep_daily")
@@ -391,7 +523,15 @@ def main():
     else:
         print("⚠️ Personal Info: No data.")
 
+    if client.scope_errors:
+        print(
+            "\n❌ Oura data update incomplete: "
+            f"{len(client.scope_errors)} endpoint(s) need additional OAuth scopes."
+        )
+        return False
+
     print("\n✅ Oura data update complete.")
+    return True
 
 if __name__ == "__main__":
     main()
