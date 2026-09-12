@@ -3,12 +3,30 @@ import time
 import requests
 import hashlib
 import base64
+from decimal import Decimal, InvalidOperation
 from typing import Dict, List, Optional
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
 # from dotenv import load_dotenv
 # load_dotenv()
+
+
+def _as_decimal(value, default: str = "0") -> Decimal:
+    """Parse Kalshi's fixed-point string values without float rounding."""
+    if value is None or value == "":
+        return Decimal(default)
+
+    try:
+        return Decimal(str(value))
+    except (InvalidOperation, TypeError, ValueError):
+        return Decimal(default)
+
+
+def _dollars_to_cents(value) -> Decimal:
+    """Convert a Kalshi ``*_dollars`` fixed-point value to cents."""
+    return _as_decimal(value) * Decimal("100")
+
 
 def get_kalshi_credentials():
     """
@@ -37,7 +55,7 @@ def get_series_info(series_ticker: str) -> Optional[Dict]:
     Returns:
         Dictionary containing series information or None if request fails
     """
-    url = f"https://api.elections.kalshi.com/trade-api/v2/series/{series_ticker}"
+    url = f"https://external-api.kalshi.com/trade-api/v2/series/{series_ticker}"
     
     try:
         response = requests.get(url)
@@ -58,7 +76,7 @@ def get_market_info(market_ticker: str) -> Optional[Dict]:
     Returns:
         Dictionary containing market information or None if request fails
     """
-    url = f"https://api.elections.kalshi.com/trade-api/v2/markets/{market_ticker}"
+    url = f"https://external-api.kalshi.com/trade-api/v2/markets/{market_ticker}"
     
     try:
         response = requests.get(url)
@@ -347,7 +365,10 @@ def calculate_pnl_from_trades(ticker: str) -> Dict:
 def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
     """
     Process portfolio positions data and enrich it with series and market information.
-    Uses the event_positions endpoint to get accurate position_cost for P&L calculations.
+
+    Kalshi's current API returns contract counts in ``position_fp`` and monetary
+    values in ``*_dollars`` fixed-point strings. Legacy integer fields remain as
+    fallbacks so older captured payloads can still be processed.
     
     Args:
         holdings_data: Raw portfolio positions data from API (v2 endpoint)
@@ -357,37 +378,12 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
     """
     enriched_holdings = []
     
-    # Get event positions with accurate position_cost data
-    event_positions_data = get_event_positions()
-    
-    # Create a map of event_ticker to position data for quick lookup
-    # We'll use event_ticker since v2 API doesn't return market_id
-    position_cost_map = {}
-    if event_positions_data and 'event_positions' in event_positions_data:
-        for event_pos in event_positions_data['event_positions']:
-            event_ticker = event_pos.get('event_ticker', '')
-            for market_pos in event_pos.get('market_positions', []):
-                market_id = market_pos.get('market_id')
-                position_cost = market_pos.get('position_cost', 0)
-                realized_pnl = market_pos.get('realized_pnl', 0)
-                fees_paid = market_pos.get('fees_paid', 0)
-                # Store by both market_id and event_ticker for matching
-                position_cost_map[market_id] = {
-                    'position_cost': position_cost,
-                    'realized_pnl': realized_pnl,
-                    'fees_paid': fees_paid
-                }
-                position_cost_map[event_ticker] = {
-                    'position_cost': position_cost,
-                    'realized_pnl': realized_pnl,
-                    'fees_paid': fees_paid
-                }
-    
     # Process market positions
     for market_pos in holdings_data.get('market_positions', []):
         ticker = market_pos.get('ticker', '')
-        position = market_pos.get('position', 0)
-        market_id = market_pos.get('market_id', '')
+        position = _as_decimal(
+            market_pos.get('position_fp', market_pos.get('position', 0))
+        )
         
         # Skip closed positions (only show active positions with open contracts)
         if position == 0:
@@ -405,25 +401,42 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
         # Fetch market information to get position details
         market_info = get_market_info(ticker)
         
-        # Extract event ticker (format: SERIESNAME-DATE)
+        # Prefer the API relationship; retain ticker parsing as a fallback.
         parts = ticker.split('-')
-        event_ticker = '-'.join(parts[:2]) if len(parts) >= 2 else ticker
+        parsed_event_ticker = '-'.join(parts[:2]) if len(parts) >= 2 else ticker
         
         # Determine position side (YES for positive, NO for negative)
         position_side = "YES" if position > 0 else "NO"
         
         # Get market details
         market_data = market_info.get('market', {}) if market_info else {}
+        event_ticker = market_data.get('event_ticker') or parsed_event_ticker
         
         # Get current market price (in cents)
-        current_price = market_data.get('last_price', 0)
+        if 'last_price_dollars' in market_data:
+            current_price = _dollars_to_cents(market_data['last_price_dollars'])
+        else:
+            current_price = _as_decimal(market_data.get('last_price', 0))
         
-        # Get position cost, realized P&L, and fees from event positions endpoint
-        # Try to match by event_ticker since v2 API doesn't provide market_id
-        position_data = position_cost_map.get(event_ticker, {})
-        position_cost = position_data.get('position_cost', 0)
-        realized_pnl = position_data.get('realized_pnl', 0)
-        fees_paid = position_data.get('fees_paid', 0)
+        # The current positions response contains the cost basis and P&L values.
+        if 'market_exposure_dollars' in market_pos:
+            position_cost = abs(
+                _dollars_to_cents(market_pos['market_exposure_dollars'])
+            )
+        else:
+            position_cost = abs(_as_decimal(market_pos.get('market_exposure', 0)))
+
+        if 'realized_pnl_dollars' in market_pos:
+            realized_pnl = _dollars_to_cents(
+                market_pos['realized_pnl_dollars']
+            )
+        else:
+            realized_pnl = _as_decimal(market_pos.get('realized_pnl', 0))
+
+        if 'fees_paid_dollars' in market_pos:
+            fees_paid = _dollars_to_cents(market_pos['fees_paid_dollars'])
+        else:
+            fees_paid = _as_decimal(market_pos.get('fees_paid', 0))
         
         # Calculate current market value based on current price and position
         # For YES positions: value = position * current_price
@@ -433,7 +446,9 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
             current_market_value = abs(position) * current_price
         else:
             # NO position (short on YES = long on NO)
-            current_market_value = abs(position) * (100 - current_price)
+            current_market_value = abs(position) * (
+                Decimal("100") - current_price
+            )
         
         # Calculate total P&L including unrealized gains/losses:
         # Total P&L = (Current Market Value) - (Position Cost) + (Realized P&L) - (Fees)
@@ -441,7 +456,13 @@ def process_holdings_with_series_info(holdings_data: Dict) -> List[Dict]:
         total_pnl = current_market_value - position_cost + realized_pnl - fees_paid
         
         # Calculate average purchase price (cost per contract in cents)
-        purchase_price = int(position_cost / abs(position)) if position != 0 else 0
+        side_purchase_price = position_cost / abs(position)
+        # The UI stores/displays YES-equivalent prices and flips them for NO.
+        purchase_price = (
+            side_purchase_price
+            if position > 0
+            else Decimal("100") - side_purchase_price
+        )
         
         enriched_holding = {
             'event_ticker': event_ticker,

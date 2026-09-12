@@ -6,7 +6,7 @@
 .pnp.js
 .yarn/install-state.gz
 
-/__pycache__
+__pycache__/
 
 /.idea/
 /.claude/worktrees/

@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 from kalshi_tracker import (
     create_kalshi_positions_table,
+    ensure_kalshi_positions_fixed_point_schema,
     create_kalshi_profile_table,
     table_exists,
     refresh_positions,
@@ -40,6 +41,10 @@ def main():
         if not create_kalshi_positions_table():
             print("ERROR: Failed to create table. Exiting.")
             return
+
+    if not ensure_kalshi_positions_fixed_point_schema():
+        print("ERROR: Failed to prepare Kalshi positions table. Exiting.")
+        return
     
     if not table_exists("kalshi_profile"):
         print("Profile table doesn't exist. Creating kalshi_profile table...")
@@ -74,7 +79,7 @@ def main():
         
         if not enriched_positions:
             print("\n⚠️  No active positions found (all positions may be closed).")
-            print("   Skipping position table update but will still update profile metrics.")
+            print("   The position table will be cleared to match the API snapshot.")
         
         print(f"✓ Processed {len(enriched_positions)} positions with series info")
         

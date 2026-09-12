@@ -153,7 +153,7 @@ def create_kalshi_positions_table() -> bool:
         "series_ticker": "VARCHAR(255)",
         "series_title": "TEXT",
         "series_category": "VARCHAR(255)",
-        "total_absolute_position": "INTEGER",
+        "total_absolute_position": "NUMERIC(20, 2)",
         "market_id": "VARCHAR(255) UNIQUE",
         "market_ticker": "VARCHAR(255)",
         "market_title": "TEXT",
@@ -161,15 +161,59 @@ def create_kalshi_positions_table() -> bool:
         "yes_sub_title": "TEXT",
         "no_sub_title": "TEXT",
         "position_side": "VARCHAR(10)",
-        "signed_open_position": "INTEGER",
-        "current_price": "INTEGER",
-        "purchase_price": "INTEGER",
-        "pnl": "INTEGER",
-        "fees_paid": "INTEGER",
+        "signed_open_position": "NUMERIC(20, 2)",
+        "current_price": "NUMERIC(20, 6)",
+        "purchase_price": "NUMERIC(20, 6)",
+        "pnl": "NUMERIC(20, 6)",
+        "fees_paid": "NUMERIC(20, 6)",
         "last_updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
     }
     
     return create_table("kalshi_positions", schema)
+
+
+def ensure_kalshi_positions_fixed_point_schema() -> bool:
+    """Widen legacy integer columns for Kalshi fixed-point API values."""
+    columns = {
+        "total_absolute_position": "NUMERIC(20, 2)",
+        "signed_open_position": "NUMERIC(20, 2)",
+        "current_price": "NUMERIC(20, 6)",
+        "purchase_price": "NUMERIC(20, 6)",
+        "pnl": "NUMERIC(20, 6)",
+        "fees_paid": "NUMERIC(20, 6)",
+    }
+
+    try:
+        existing = execute_query(
+            """
+            SELECT column_name, data_type
+            FROM information_schema.columns
+            WHERE table_name = 'kalshi_positions'
+              AND column_name = ANY(%s);
+            """,
+            (list(columns),),
+            fetch=True,
+            use_dict=True,
+        )
+        columns_to_widen = [
+            row["column_name"]
+            for row in existing
+            if row["data_type"] != "numeric"
+        ]
+
+        if not columns_to_widen:
+            return True
+
+        alterations = ", ".join(
+            f"ALTER COLUMN {column} TYPE {columns[column]} USING {column}::numeric"
+            for column in columns_to_widen
+        )
+        execute_query(f"ALTER TABLE kalshi_positions {alterations};")
+        print("Kalshi position columns migrated for fixed-point values.")
+        return True
+    except Exception as error:
+        print("Error migrating Kalshi position columns:", error)
+        return False
 
 
 def insert_position(position_data: Dict) -> bool:
@@ -201,8 +245,8 @@ def insert_positions_bulk(positions: List[Dict]) -> bool:
         True if successful, False otherwise
     """
     if not positions:
-        print("No positions to insert")
-        return False
+        print("No positions to insert; the current snapshot is empty.")
+        return True
     
     return insert_many("kalshi_positions", positions)
 
@@ -302,10 +346,6 @@ def refresh_positions() -> bool:
         
         # Process and enrich with series info
         enriched_positions = process_holdings_with_series_info(holdings_data)
-        
-        if not enriched_positions:
-            print("No positions to update")
-            return False
         
         # Clear existing data
         truncate_table("kalshi_positions")

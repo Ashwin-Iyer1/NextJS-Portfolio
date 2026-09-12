@@ -53,6 +53,9 @@ const KalshiPositions = ({ id }) => {
     return `${sign}$${dollars}`;
   };
 
+  const formatNumber = (value, maximumFractionDigits = 2) =>
+    Number(value).toLocaleString(undefined, { maximumFractionDigits });
+
   if (loading) {
     return (
       <div className={styles["loading-container"]} id={id}>
@@ -146,7 +149,7 @@ const KalshiPositions = ({ id }) => {
                   <div className={styles["detail-row"]}>
                     <span className={styles["detail-label"]}>Contracts:</span>
                     <span className={styles["detail-value"]}>
-                      {position.total_absolute_position}
+                      {formatNumber(position.total_absolute_position)}
                     </span>
                   </div>
 
@@ -155,9 +158,11 @@ const KalshiPositions = ({ id }) => {
                       Current Price:
                     </span>
                     <span className={styles["detail-value"]}>
-                      {position.position_side === "NO"
-                        ? 100 - position.current_price
-                        : position.current_price}
+                      {formatNumber(
+                        position.position_side === "NO"
+                          ? 100 - Number(position.current_price)
+                          : position.current_price
+                      )}
                       ¢
                     </span>
                   </div>
@@ -166,9 +171,11 @@ const KalshiPositions = ({ id }) => {
                       Purchase Price:
                     </span>
                     <span className={styles["detail-value"]}>
-                      {position.position_side === "NO"
-                        ? 100 - position.purchase_price
-                        : position.purchase_price}
+                      {formatNumber(
+                        position.position_side === "NO"
+                          ? 100 - Number(position.purchase_price)
+                          : position.purchase_price
+                      )}
                       ¢
                     </span>
                   </div>
@@ -190,7 +197,7 @@ const KalshiPositions = ({ id }) => {
                       <div>
                         <span className={styles["detail-label"]}>Fees: </span>
                         <span className={styles["detail-label"]}>
-                          ${position.fees_paid / 100}
+                          ${(Number(position.fees_paid) / 100).toFixed(2)}
                         </span>
                       </div>
                     </div>
