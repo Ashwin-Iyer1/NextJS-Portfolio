@@ -51,3 +51,4 @@ wakatime_tokens.json
 
 # database dumps (Heroku pg:backups / pg_dump artifacts)
 *.dump
+.env*

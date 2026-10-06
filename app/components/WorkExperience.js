@@ -11,15 +11,26 @@ const EXPERIENCES = [
     // hidden: true,
   },
   {
+    company: "Morgan Stanley",
+    role: "Institutional Equity Derivatives & Trading Co-op",
+    subRoleText: "Derivatives Sales Trading",
+    date: "Spring 2027 Co-op",
+    logo: "/Images/morgan_stanley_logo.png",
+    logoAlt: "Morgan Stanley Logo",
+    hidden: true,    
+  },
+  {
     company: "Wellington Management",
     role: "Global Risk and Analytics Co-op",
+    subRoleText: "Equity, Equity Alternatives, and Multi-Asset Portfolios",
     date: "Spring 2026 Co-op",
     logo: "/Images/wellington_management_logo.jpeg",
     logoAlt: "Wellington Management Logo",
   },
   {
     company: "Zeal IT Consultants",
-    role: "Frontend Developer Intern",
+    role: "Software Engineering Intern",
+    subRoleText: "Trinity Industries Asset Management System",
     date: "May 2025 - August 2025",
     logo: "/Images/zeal.png",
     logoAlt: "Zeal IT Consultants Logo",
@@ -79,7 +90,7 @@ const textSx = {
   display: "grid",
   gridTemplateColumns: "1fr",
   gridTemplateAreas: '"company" "role" "date"',
-  rowGap: "6px",
+  // rowGap: "2px",
   "@media (min-width: 640px)": {
     gridTemplateColumns: "1fr auto",
     gridTemplateAreas: '"company date" "role role"',
@@ -105,6 +116,16 @@ const roleSx = {
   fontWeight: 600,
   lineHeight: 1.5,
   color: "var(--text-secondary)",
+};
+
+const subRoleSx = {
+  gridArea: "subRole",
+  margin: 0,
+  fontSize: "0.75rem",
+  fontWeight: 500,
+  lineHeight: 1.5,
+  color: "var(--text-secondary)",
+  opacity: 0.66,
 };
 
 const dateSx = {
@@ -143,6 +164,11 @@ export default function WorkExperience() {
             </Box>
             <Box component="p" sx={roleSx}>
               {entry.role}
+              {entry.subRoleText && (
+                <Box component="p" sx={subRoleSx}>
+                  {entry.subRoleText}
+                </Box>
+              )}
             </Box>
             <Box component="span" sx={dateSx}>
               {entry.date}
