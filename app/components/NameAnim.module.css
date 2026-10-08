@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
-
 .NameAnim {
   display: flex;
   justify-content: center;
@@ -15,7 +12,10 @@
 }
 
 .NameAnim h1 {
-  font: 700 20vw "Caveat", cursive;
+  font:
+    700 20vw var(--font-signature),
+    "Caveat",
+    cursive;
   color: var(--splash-stroke, #e8e8e8);
   text-align: center;
   margin: 0;
@@ -38,7 +38,7 @@
 
 .logo {
   max-width: 100%; /* Make sure the SVG does not overflow */
-  
+
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -81,5 +81,4 @@
   .NameAnim h1 {
     font-size: 18vw;
   }
-
 }

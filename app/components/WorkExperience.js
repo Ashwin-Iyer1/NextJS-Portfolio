@@ -17,7 +17,7 @@ const EXPERIENCES = [
     date: "Spring 2027 Co-op",
     logo: "/Images/morgan_stanley_logo.png",
     logoAlt: "Morgan Stanley Logo",
-    hidden: true,    
+    hidden: true,
   },
   {
     company: "Wellington Management",
@@ -120,6 +120,7 @@ const roleSx = {
 
 const subRoleSx = {
   gridArea: "subRole",
+  display: "block",
   margin: 0,
   fontSize: "0.75rem",
   fontWeight: 500,
@@ -165,7 +166,7 @@ export default function WorkExperience() {
             <Box component="p" sx={roleSx}>
               {entry.role}
               {entry.subRoleText && (
-                <Box component="p" sx={subRoleSx}>
+                <Box component="span" sx={subRoleSx}>
                   {entry.subRoleText}
                 </Box>
               )}
