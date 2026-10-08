@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import styles from "./SectionNav.module.css";
 
 const sections = [
-  ["selected-projects", "Projects"],
   ["WorkingOn", "Experience"],
+  ["selected-projects", "Projects"],
   ["writing", "Writing"],
   ["now-title", "Now"],
   ["contact", "Contact"],

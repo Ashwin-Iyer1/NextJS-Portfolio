@@ -159,24 +159,6 @@ export default function Home() {
           </header>
           <SectionNav />
 
-          <section
-            className={`${styles.section} ${styles.selectedWork}`}
-            aria-labelledby="selected-projects"
-          >
-            <div className={styles.sectionHeading}>
-              <div>
-                <h2 className="section-title" id="selected-projects">
-                  Selected work
-                </h2>
-                <p>From understanding risk to building something useful.</p>
-              </div>
-              <Link href="/projects">
-                All projects <span aria-hidden="true">↗</span>
-              </Link>
-            </div>
-            <FeaturedProjects />
-          </section>
-
           {/* Work Experience */}
           <section className={styles.section}>
             <h2 className="section-title" id="WorkingOn">
@@ -204,6 +186,24 @@ export default function Home() {
                 </div>
               </aside>
             </div>
+          </section>
+
+          <section
+            className={`${styles.section} ${styles.selectedWork}`}
+            aria-labelledby="selected-projects"
+          >
+            <div className={styles.sectionHeading}>
+              <div>
+                <h2 className="section-title" id="selected-projects">
+                  Selected work
+                </h2>
+                <p>From understanding risk to building something useful.</p>
+              </div>
+              <Link href="/projects">
+                All projects <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+            <FeaturedProjects />
           </section>
 
           {/* Skills */}

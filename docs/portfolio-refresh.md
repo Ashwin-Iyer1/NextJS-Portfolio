@@ -1,6 +1,6 @@
 # Portfolio refresh
 
-Design notes for the October 8, 2026 refresh. The current direction combines oversized typography and large visual compositions with a practical reading order: projects, experience, writing, personal activity, and contact.
+Design notes for the October 8, 2026 refresh. The current direction combines oversized typography and large visual compositions with a practical reading order: experience, projects, writing, personal activity, and contact.
 
 ## References and evidence
 
