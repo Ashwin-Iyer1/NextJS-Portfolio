@@ -96,7 +96,7 @@ test("accent radios support keyboard selection and persist alongside the theme",
 }) => {
   await openReturningVisit(page);
   await expect(
-    page.getByRole("radio", { name: "Brass", exact: true }),
+    page.getByRole("radio", { name: "Glacier", exact: true }),
   ).toBeChecked();
   await page.getByRole("radio", { name: "Glacier", exact: true }).check();
   await expect(page.locator("html")).toHaveAttribute("data-accent", "glacier");
@@ -292,7 +292,7 @@ for (const width of [390, 1440]) {
     await expect(page).toHaveURL(/#contact$/);
     await expect(contact).toHaveAttribute("aria-current", "location");
     const heading = page.getByRole("heading", {
-      name: "Let’s make something interesting.",
+      name: "Let’s connect",
       exact: true,
     });
     await expect(heading).toBeInViewport();

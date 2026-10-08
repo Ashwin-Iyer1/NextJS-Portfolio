@@ -115,9 +115,8 @@ export default function Home() {
                   markets.
                 </p>
                 <p className={styles.heroDetail}>
-                  Studying computer science and business at Northeastern.
-                  Turning curiosity into tools, research, and the occasional
-                  side project.
+                  A computer science student in Boston, working across Python,
+                  Java, and TypeScript.
                 </p>
                 <div className={styles.heroActions}>
                   <a href="#selected-projects" className="button-primary">
@@ -286,7 +285,7 @@ export default function Home() {
               Good things start with a conversation.
             </p>
             <h2 className="section-title" id="contact">
-              Let’s make something interesting.
+              Let’s connect
             </h2>
             <p className={styles.contactIntro}>
               Have a project in mind, a question, or an interesting idea? I’d

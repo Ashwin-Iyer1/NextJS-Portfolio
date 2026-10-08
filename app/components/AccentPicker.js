@@ -19,11 +19,11 @@ function subscribe(callback) {
 }
 
 function getAccent() {
-  return document.documentElement.dataset.accent || "brass";
+  return document.documentElement.dataset.accent || "glacier";
 }
 
 export default function AccentPicker() {
-  const accent = useSyncExternalStore(subscribe, getAccent, () => "brass");
+  const accent = useSyncExternalStore(subscribe, getAccent, () => "glacier");
 
   function selectAccent(value) {
     document.documentElement.setAttribute("data-accent", value);

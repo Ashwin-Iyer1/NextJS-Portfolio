@@ -22,7 +22,7 @@ All three fonts are installed through npm and self-hosted with `next/font/local`
 
 ## Color
 
-The dark theme uses charcoal `#151b1d` with paper-colored text `#edf0e9`. The light theme uses paper `#f1f3ee` with ink `#1b2628`. Brass is the default accent; the appearance control also offers Glacier and Iris.
+The dark theme uses charcoal `#151b1d` with paper-colored text `#edf0e9`. The light theme uses paper `#f1f3ee` with ink `#1b2628`. Glacier blue is the default accent; the appearance control also offers Brass and Iris. Returning visitors retain their saved accent choice.
 
 | Accent  | Dark theme | Light theme on `#f1f3ee` |
 | ------- | ---------- | ------------------------ |

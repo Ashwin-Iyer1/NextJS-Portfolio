@@ -52,6 +52,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      data-accent="glacier"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${manrope.variable} ${bricolage.variable} ${caveat.variable}`}

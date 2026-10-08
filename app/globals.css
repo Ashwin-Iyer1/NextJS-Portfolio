@@ -9,7 +9,7 @@
   --bg-card-hover: rgba(255, 255, 255, 0.045);
   --accent-primary: #c6cdc9;
   --accent-secondary: #edf0e9;
-  --accent-brand: #ddbd80;
+  --accent-brand: #9cc9df;
   --accent-glow: rgba(180, 180, 180, 0.06);
   --success: #4ade80;
   --danger: #f87171;
@@ -55,7 +55,7 @@
   --bg-card-hover: rgba(0, 0, 0, 0.04);
   --accent-primary: #444444;
   --accent-secondary: #1a1a1a;
-  --accent-brand: #785719;
+  --accent-brand: #2c627b;
   --accent-glow: rgba(0, 0, 0, 0.04);
   --success: #15803d;
   --danger: #b91c1c;
@@ -378,6 +378,9 @@ select {
 }
 
 /* Each accent has a separately tuned light-mode value for readable links. */
+[data-accent="brass"] {
+  --accent-brand: #ddbd80;
+}
 [data-accent="glacier"] {
   --accent-brand: #9cc9df;
 }
@@ -386,6 +389,9 @@ select {
 }
 [data-theme="light"][data-accent="glacier"] {
   --accent-brand: #2c627b;
+}
+[data-theme="light"][data-accent="brass"] {
+  --accent-brand: #785719;
 }
 [data-theme="light"][data-accent="iris"] {
   --accent-brand: #685096;
