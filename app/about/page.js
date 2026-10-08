@@ -1,7 +1,6 @@
 import styles from "./About.module.css";
 import React from "react";
 import Links from "../components/Links";
-import Bar from "../components/Bar";
 import SongList from "../components/SongList";
 import Coc from "../components/COC";
 import Link from "next/link";
@@ -10,8 +9,11 @@ import OuraDashboard from "../components/OuraDashboard";
 export default function About() {
   return (
     <div className={styles.About}>
-      <Bar />
-      <div className={styles.mainContent} id="page-content" tabIndex={-1}>
+      <div
+        className={`page-shell ${styles.mainContent}`}
+        id="page-content"
+        tabIndex={-1}
+      >
         <section>
           <h2 className="section-title">About Me</h2>
           <div className={styles.cardGrid}>

@@ -2,11 +2,8 @@
    Cards compose the global .glass-card utility; only layout lives here.
    Section titles use the global .section-title utility. */
 
-/* No padding here: Bar sits at the top full-width (it is sticky, so no
-   overflow-x: hidden ancestors — clip does not create a scroll container).
-   Content padding lives on .mainContent below. */
+/* The persistent navigation and page-shell provide the shared page geometry. */
 .About {
-  max-width: 1200px;
   width: 100%;
   text-align: left;
   overflow-x: clip;
@@ -19,7 +16,7 @@
   gap: var(--space-4xl);
   width: 100%;
   margin-top: var(--space-xl);
-  padding: 0 var(--space-lg) var(--space-2xl);
+  padding-bottom: var(--space-2xl);
 }
 
 /* About cards — equal-weight grid */
@@ -56,7 +53,8 @@
   text-decoration: underline;
   text-decoration-color: var(--text-secondary);
   text-underline-offset: 3px;
-  transition: color var(--transition-fast),
+  transition:
+    color var(--transition-fast),
     text-decoration-color var(--transition-fast);
 }
 
@@ -99,8 +97,10 @@
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.01em;
-  transition: background-color var(--transition-base),
-    border-color var(--transition-base), transform var(--transition-base),
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base),
     box-shadow var(--transition-base);
 }
 
@@ -167,9 +167,6 @@
   .mainContent {
     gap: var(--space-3xl);
     margin-top: var(--space-md);
-    /* --space-md matches the home page's mobile gutter (the site-wide
-       source of truth) so /about is exactly as wide as / on phones */
-    padding: 0 var(--space-md) var(--space-2xl);
   }
 
   .card,

@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import Bar from "../../components/Bar";
 import "./page.css";
 
 export default async function Page(props) {
@@ -11,10 +10,8 @@ export default async function Page(props) {
     // Dynamically import the Markdown file
     const { default: Post } = await import(`@/content/${slug}.mdx`);
 
-    // Wrap the Post component with Bar
     return (
-      <div className="full-width-wrapper">
-        <Bar />
+      <div className="page-shell full-width-wrapper">
         <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
           <Post />
         </article>
@@ -23,8 +20,7 @@ export default async function Page(props) {
   } catch (error) {
     console.log(error);
     return (
-      <div className="full-width-wrapper">
-        <Bar />
+      <div className="page-shell full-width-wrapper">
         <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
           <p>Post not found.</p>
         </article>

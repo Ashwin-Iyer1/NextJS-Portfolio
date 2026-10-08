@@ -7,9 +7,7 @@ import Link from "next/link";
 import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
 import GetTimeWrapper from "./components/GetTimeWrapper.js";
-import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
-import "./landing.css";
 import styles from "./page.module.css";
 import WorkExperience from "./components/WorkExperience.js";
 import KalshiPositions from "./components/KalshiPositions.js";
@@ -20,13 +18,16 @@ import FeaturedProjects from "./components/FeaturedProjects";
 import AccentPicker from "./components/AccentPicker";
 import SectionNav from "./components/SectionNav";
 import HeroSurface from "./components/HeroSurface";
+import { useInitialDocumentEntry } from "./components/IntroSessionProvider";
 
 import MiscProj from "./components/MiscProj";
 
 export default function Home() {
-  // Render the same splash-first markup on the server and during hydration.
-  // The portfolio stays mounted underneath, so its data can load only once.
-  const [shouldLoad, setShouldLoad] = useState(true);
+  // Only the initial document render can start the intro automatically. The
+  // persistent layout provider makes internal Home mounts visible immediately.
+  const initialDocumentEntry = useInitialDocumentEntry();
+  const [shouldLoad, setShouldLoad] = useState(initialDocumentEntry);
+  const [animateReveal, setAnimateReveal] = useState(initialDocumentEntry);
   const [fadeOut, setFadeOut] = useState(false);
 
   const [introRun, setIntroRun] = useState(0);
@@ -66,6 +67,7 @@ export default function Home() {
 
   function replayIntro() {
     setFadeOut(false);
+    setAnimateReveal(true);
     setIntroRun((run) => run + 1);
     setShouldLoad(true);
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -74,7 +76,7 @@ export default function Home() {
   return (
     <>
       <noscript>
-        <style>{`[data-home-intro] { display: none !important; } [data-home-content] { display: block !important; opacity: 1 !important; }`}</style>
+        <style>{`[data-home-intro] { display: none !important; } [data-home-content] { display: block !important; opacity: 1 !important; } .Bar, .skip-link { visibility: visible !important; }`}</style>
       </noscript>
       {shouldLoad && (
         <div
@@ -84,23 +86,18 @@ export default function Home() {
           aria-label="Loading portfolio"
         >
           <NameAnim key={introRun} />
-          <button
-            type="button"
-            className={styles.skipIntro}
-            onClick={finishIntro}
-          >
-            Skip intro <span aria-hidden="true">↗</span>
-          </button>
         </div>
       )}
       <div
         data-home-content
-        className={`${styles.Home} ${shouldLoad ? "" : "fade-in"}`}
+        className={`${styles.Home} ${!shouldLoad && animateReveal ? "fade-in" : ""}`}
         style={{ display: shouldLoad ? "none" : undefined }}
       >
-        <Bar />
-
-        <div className={styles.content} id="page-content" tabIndex={-1}>
+        <div
+          className={`${styles.content} page-shell`}
+          id="page-content"
+          tabIndex={-1}
+        >
           <header className={styles.hero} id="top">
             <div className={styles.heroTopline}>
               <span>Computer science × financial markets</span>

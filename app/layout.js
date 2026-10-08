@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import Bar from "./components/Bar";
+import IntroSessionProvider from "./components/IntroSessionProvider";
+import "./landing.css";
 
 const manrope = localFont({
   src: "../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
@@ -61,15 +64,18 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <a href="#page-content" className="skip-link">
-          Skip to content
-        </a>
-        <main id="main-content" tabIndex={-1}>
-          {children}
-          <footer>
-            <span>&copy; {new Date().getFullYear()} Ashwin Iyer</span>
-          </footer>
-        </main>
+        <IntroSessionProvider>
+          <a href="#page-content" className="skip-link">
+            Skip to content
+          </a>
+          <Bar />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+            <footer>
+              <span>&copy; {new Date().getFullYear()} Ashwin Iyer</span>
+            </footer>
+          </main>
+        </IntroSessionProvider>
         <GoogleAnalytics gaId="G-DFDFQZ1B7Q" />
         <SpeedInsights />
         <Analytics />

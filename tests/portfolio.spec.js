@@ -59,12 +59,25 @@ test("fresh visits keep the signature visible while JavaScript loads, then revea
     await expect(intro(page)).toBeVisible();
     await expect(intro(page).locator("svg")).toBeVisible();
     await expect(title(page)).toBeHidden();
+    await expect(
+      page.getByRole("navigation", {
+        name: "Primary",
+        exact: true,
+        includeHidden: true,
+      }),
+    ).toBeHidden();
+    await expect(
+      page.getByText("Skip to content", { exact: true }),
+    ).toBeHidden();
   } finally {
     releaseScripts();
   }
 
   await expect(title(page)).toBeVisible({ timeout: 15_000 });
   await expect(intro(page)).toHaveCount(0);
+  await expect(
+    page.getByRole("navigation", { name: "Primary", exact: true }),
+  ).toBeVisible();
   await expect
     .poll(() => page.evaluate(() => sessionStorage.getItem("loaded")))
     .toBe("true");
@@ -81,7 +94,159 @@ test("reduced motion bypasses the first-visit splash", async ({ page }) => {
   await expect(intro(page)).toHaveCount(0);
 });
 
-test("visitors can replay and skip the signature without remounting data widgets", async ({
+for (const entry of ["home", "projects"]) {
+  test(`client navigation from ${entry} never inserts a returning Home splash`, async ({
+    page,
+  }) => {
+    if (entry === "home") {
+      await page.goto("/");
+      await expect(title(page)).toBeVisible({ timeout: 15_000 });
+      await page
+        .getByRole("navigation", { name: "Primary", exact: true })
+        .getByRole("link", { name: "Projects", exact: true })
+        .click();
+    } else {
+      await page.goto("/projects");
+    }
+    await expect(
+      page.getByRole("heading", { name: "Projects", exact: true }),
+    ).toBeVisible();
+
+    // Observe insertions, not only the final page: a timer can remove a splash
+    // before an ordinary visibility assertion sees the unwanted first frame.
+    await page.evaluate(() => {
+      window.__homeNavigationViolations = [];
+      const inspect = (element) => {
+        if (element.matches("[data-home-intro]")) {
+          window.__homeNavigationViolations.push("intro inserted");
+        }
+        if (
+          element.matches("[data-home-content]") &&
+          (element.hidden || element.style.display === "none")
+        ) {
+          window.__homeNavigationViolations.push("home content hidden");
+        }
+      };
+      window.__homeNavigationObserver = new MutationObserver((records) => {
+        for (const record of records) {
+          if (record.type === "attributes") inspect(record.target);
+          for (const node of record.addedNodes) {
+            if (!(node instanceof Element)) continue;
+            inspect(node);
+            node
+              .querySelectorAll("[data-home-intro], [data-home-content]")
+              .forEach(inspect);
+          }
+        }
+      });
+      window.__homeNavigationObserver.observe(document.body, {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ["style", "hidden"],
+      });
+    });
+
+    await page
+      .getByRole("navigation", { name: "Primary", exact: true })
+      .getByRole("link", { name: "Home", exact: true })
+      .click();
+    await expect(title(page)).toBeVisible();
+    await expect(intro(page)).toHaveCount(0);
+    expect(
+      await page.evaluate(() => {
+        window.__homeNavigationObserver.disconnect();
+        return window.__homeNavigationViolations;
+      }),
+      "Home stays visible from its first inserted DOM frame",
+    ).toEqual([]);
+  });
+}
+
+for (const width of [390, 1440]) {
+  test(`route navigation at ${width}px preserves the header and aligned page widths`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await openReturningVisit(page);
+    await page.evaluate(() => document.fonts.ready);
+    const navigation = page.getByRole("navigation", {
+      name: "Primary",
+      exact: true,
+    });
+    const initialHeader = await navigation.evaluate((element) => {
+      window.__persistentHeader = element;
+      const rect = (node) => {
+        const { x, y, width, height } = node.getBoundingClientRect();
+        return { x, y, width, height };
+      };
+      return [element, ...element.querySelectorAll("a, button")].map(rect);
+    });
+
+    for (const [label, path, heading] of [
+      ["Projects", "/projects", "Projects"],
+      ["About", "/about", "About Me"],
+      ["Résumé", "/resume", "Resume"],
+      ["Home", "/", "Ashwin Iyer."],
+    ]) {
+      await navigation.getByRole("link", { name: label, exact: true }).click();
+      await expect(page).toHaveURL(new RegExp(`${path}$`));
+      await expect(
+        page.getByRole("heading", { name: heading, exact: true }),
+      ).toBeVisible();
+      await expect(
+        navigation.getByRole("link", { name: label, exact: true }),
+      ).toHaveAttribute("aria-current", "page");
+      const geometry = await navigation.evaluate((element) => {
+        const rect = (node) => {
+          const { x, y, width, height } = node.getBoundingClientRect();
+          return { x, y, width, height };
+        };
+        const contentEdges = (node) => {
+          const box = node.getBoundingClientRect();
+          const css = getComputedStyle(node);
+          return {
+            left: box.left + parseFloat(css.paddingLeft),
+            right: box.right - parseFloat(css.paddingRight),
+          };
+        };
+        return {
+          sameHeader: element === window.__persistentHeader,
+          controls: [element, ...element.querySelectorAll("a, button")].map(
+            rect,
+          ),
+          headerEdges: contentEdges(element.querySelector(".page-shell")),
+          pageEdges: contentEdges(document.querySelector("main .page-shell")),
+          documentWidth: document.documentElement.scrollWidth,
+          viewportWidth: window.innerWidth,
+        };
+      });
+      expect(geometry.sameHeader, `${label} keeps the existing header`).toBe(
+        true,
+      );
+      expect(geometry.controls).toHaveLength(initialHeader.length);
+      geometry.controls.forEach((box, index) => {
+        for (const property of ["x", "y", "width", "height"]) {
+          expect(
+            Math.abs(box[property] - initialHeader[index][property]),
+            `${label} header control ${index} keeps its ${property}`,
+          ).toBeLessThanOrEqual(1);
+        }
+      });
+      for (const side of ["left", "right"]) {
+        expect(
+          Math.abs(geometry.headerEdges[side] - geometry.pageEdges[side]),
+          `${label} content shares the header's ${side} edge`,
+        ).toBeLessThanOrEqual(1);
+      }
+      expect(geometry.documentWidth).toBeLessThanOrEqual(
+        geometry.viewportWidth + 1,
+      );
+    }
+  });
+}
+
+test("visitors can replay the signature through automatic completion without remounting data widgets", async ({
   page,
 }) => {
   const requests = [];
@@ -103,9 +268,20 @@ test("visitors can replay and skip the signature without remounting data widgets
   await page.getByRole("button", { name: "Replay the intro" }).click();
   await expect(intro(page)).toBeVisible();
   await expect(title(page)).toBeHidden();
-  await page.getByRole("button", { name: "Skip intro" }).click();
-  await expect(title(page)).toBeVisible();
+  await expect(
+    page.getByRole("navigation", {
+      name: "Primary",
+      exact: true,
+      includeHidden: true,
+    }),
+  ).toBeHidden();
+  await expect(page.getByText("Skip to content", { exact: true })).toBeHidden();
+  await expect(page.getByRole("button", { name: "Skip intro" })).toHaveCount(0);
+  await expect(title(page)).toBeVisible({ timeout: 5_000 });
   await expect(intro(page)).toHaveCount(0);
+  await expect(
+    page.getByRole("navigation", { name: "Primary", exact: true }),
+  ).toBeVisible();
   expect(requests).toHaveLength(requestCount);
 });
 

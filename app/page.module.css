@@ -5,37 +5,14 @@
   background: var(--splash-bg);
   overflow: hidden;
 }
-.skipIntro {
-  position: absolute;
-  bottom: 36px;
-  right: max(24px, calc((100vw - 1200px) / 2));
-  min-height: 44px;
-  padding: 10px 18px;
-  border: 1px solid var(--border-hover);
-  border-radius: 100px;
-  background: transparent;
-  color: var(--text-primary);
-  font-size: 0.8125rem;
-  cursor: pointer;
-}
-.skipIntro span {
-  margin-left: 20px;
-}
-:global(main):has(.Home) {
-  max-width: none;
-  padding: 0;
-}
 .Home {
-  --home-gutter: clamp(20px, 4vw, 72px);
+  --home-gutter: var(--page-gutter);
   text-align: left;
   width: 100%;
   overflow-x: clip;
 }
-.Home :global(.Bar) {
-  padding-inline: var(--home-gutter);
-}
 .content {
-  padding: 0 var(--home-gutter);
+  min-width: 0;
 }
 .hero {
   padding: 32px 0 24px;
@@ -412,9 +389,6 @@ a.researchLink {
   }
 }
 @media (max-width: 640px) {
-  .Home {
-    --home-gutter: 20px;
-  }
   .heroStage {
     min-height: 560px;
     margin-top: 16px;
