@@ -12,7 +12,6 @@ import styles from "./page.module.css";
 import WorkExperience from "./components/WorkExperience.js";
 import KalshiPositions from "./components/KalshiPositions.js";
 import OuraDashboard from "./components/OuraDashboard.js";
-import LocalTime from "./components/LocalTime";
 import CopyEmail from "./components/CopyEmail";
 import FeaturedProjects from "./components/FeaturedProjects";
 import SectionNav from "./components/SectionNav";
@@ -103,58 +102,55 @@ export default function Home() {
               <span className={styles.heroLocation}>Based in Boston, MA</span>
             </div>
             <div className={styles.heroStage}>
-              <h1 className={styles.heroTitle}>
-                <span>Ashwin</span>{" "}
-                <span>
-                  Iyer<span className={styles.titleDot}>.</span>
-                </span>
-              </h1>
+              <div className={styles.heroIntro}>
+                <h1 className={styles.heroTitle}>
+                  <span>Ashwin</span>{" "}
+                  <span>
+                    Iyer<span className={styles.titleDot}>.</span>
+                  </span>
+                </h1>
+                <div className={styles.heroCopy}>
+                  <p className={styles.heroLede}>
+                    I build software and explore the systems behind financial
+                    markets.
+                  </p>
+                  <p className={styles.heroDetail}>
+                    A computer science student in Boston, working across Python,
+                    Java, and TypeScript.
+                  </p>
+                  <div className={styles.heroActions}>
+                    <a href="#selected-projects" className="button-primary">
+                      Explore my work <span aria-hidden="true">↓</span>
+                    </a>
+                    <Link href="/resume" className={styles.heroLink}>
+                      View résumé <span aria-hidden="true">↗</span>
+                    </Link>
+                  </div>
+                  <div className={styles.heroSocial}>
+                    <a
+                      href="https://github.com/Ashwin-Iyer1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub ↗
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/ashwin-hao-iyer"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn ↗
+                    </a>
+                    <a href="mailto:ashwiniyer06@gmail.com">Email ↗</a>
+                  </div>
+                </div>
+              </div>
               <figure className={styles.heroVisual}>
                 <HeroSurface active={!shouldLoad} />
                 <figcaption className={styles.visualCaption}>
                   A surface, built from code.
                 </figcaption>
               </figure>
-            </div>
-            <div className={styles.heroBody}>
-              <div className={styles.heroCopy}>
-                <p className={styles.heroLede}>
-                  I build software and explore the systems behind financial
-                  markets.
-                </p>
-                <p className={styles.heroDetail}>
-                  A computer science student in Boston, working across Python,
-                  Java, and TypeScript.
-                </p>
-                <div className={styles.heroActions}>
-                  <a href="#selected-projects" className="button-primary">
-                    Explore my work <span aria-hidden="true">↓</span>
-                  </a>
-                  <Link href="/resume" className={styles.heroLink}>
-                    View résumé <span aria-hidden="true">↗</span>
-                  </Link>
-                </div>
-              </div>
-              <LocalTime />
-            </div>
-            <div className={styles.heroFoot}>
-              <div className={styles.heroSocial}>
-                <a
-                  href="https://github.com/Ashwin-Iyer1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub ↗
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/ashwin-hao-iyer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn ↗
-                </a>
-                <a href="mailto:ashwiniyer06@gmail.com">Email ↗</a>
-              </div>
             </div>
           </header>
           <SectionNav />
