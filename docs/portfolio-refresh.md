@@ -1,6 +1,6 @@
 # Portfolio refresh
 
-Design notes for the October 8, 2026 refresh. The direction combines expressive typography and visual project previews with a practical reading order: projects, experience, writing, personal activity, and contact.
+Design notes for the October 8, 2026 refresh. The current direction combines oversized typography and large visual compositions with a practical reading order: projects, experience, writing, personal activity, and contact.
 
 ## References and evidence
 
@@ -11,6 +11,17 @@ Design notes for the October 8, 2026 refresh. The direction combines expressive 
 | [Brittany Chiang](https://brittanychiang.com/) | The current site was read directly. It includes 2026 writing and reports 6k+ stars and 3k+ forks for its older v4 portfolio; those are site-reported figures, not independently refreshed repository counts.   | Clear professional positioning, scannable experience, project descriptions, and direct résumé access. |
 
 These are current design references with documented recognition, not a ranked popularity survey. The September award dates were verified in the live browser because search results surfaced older cached listings. The typography and colors below are original choices for this portfolio.
+
+## User-selected references: scale and imagery
+
+| Reference and sources                                                                                                                                                                               | Observed choices                                                                                                                                                                                               | Direction for this portfolio                                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ERA Residence — [live site](https://www.era-residence.com/), [Awwwards](https://www.awwwards.com/sites/era-residence)                                                                               | Enormous narrow serif lettering over full-viewport blue-sky architecture, overlapping script, small supporting labels, and a scroll-linked image reveal. Inspected live in Chrome.                             | Strong display-to-body scale contrast, a distinct handwritten counterpoint, and a large atmospheric blue visual.                                                                                  |
+| Lama Lama — [site linked by Awwwards](https://lamalama.com/), [Awwwards](https://www.awwwards.com/sites/lama-lama-2), [desktop reference](https://www.awwwards.com/inspiration/desktop-lama-lama-1) | Cinematic abstract imagery, tightly set bold uppercase headlines, compact supporting copy, and small floating navigation. Awwwards also documents logo-intro and content-morph animations.                     | A dominant visual per composition, large project headlines, and quiet metadata. The live domain returned a DNS error during research; observations come from Awwwards screenshots and recordings. |
+| Floema — [live site](https://floema.com/en), [Awwwards](https://www.awwwards.com/sites/floema)                                                                                                      | Oversized rounded Zimula headline, floating photographic fragments, then full-viewport photography with overlaid headlines. Palette: `#E9E778` / `#241F21`. Inspected live in Chrome.                          | A bold stacked name and project presentations that occupy the full content width.                                                                                                                 |
+| Oryzo — [live site](https://oryzo.ai/), [Awwwards](https://www.awwwards.com/sites/oryzo-ai)                                                                                                         | Huge heavy wordmark over a full-bleed 3D desk; scrolling isolates the coaster against a dark background. Halyard Display Variable supports the copy. Palette: `#100904` / `#FF8539`. Inspected live in Chrome. | One original sculptural focal point with depth and restrained movement, followed by clear content.                                                                                                |
+
+These references inform scale, composition, and pacing. The portfolio retains its Bricolage/Manrope typography and blue-default palette; the reference fonts, photographs, and 3D assets are not incorporated.
 
 ## Typography
 
@@ -34,7 +45,9 @@ The light theme uses darker accent equivalents to preserve readable contrast. Ed
 
 ## Presentation choices
 
-The home page uses a larger name treatment, visual featured projects, sticky section jump links, and a stronger contact ending. The handwritten splash remains, with skip and replay controls and reduced-motion handling. Theme and accent choices let the same layout take on a warmer or cooler character.
+The current visual direction uses an oversized, stacked Bricolage name; a large original procedural blue folded surface in the hero; full-width project posters; and a large “Let's connect” ending. The existing hero details and contact content remain part of the composition. The folded surface uses Three.js as progressive enhancement, with an SVG fallback so the visual does not depend on WebGL. It is decorative artwork, not a scientific plot or a representation of project results. Pointer movement tilts it; the Rotate sculpture button provides the same exploration by keyboard. Rendering stops after settling, when offscreen, and when the tab is hidden. Reduced-motion users get a static SVG that changes discretely on rotation. Context loss also restores the SVG, and the renderer disposes its GPU resources on cleanup.
+
+Sticky section jump links preserve quick access through the larger sections. The handwritten splash remains, with skip and replay controls and reduced-motion handling. Theme and accent choices let the same layout take on a warmer or cooler character.
 
 Project art in [`app/components/FeaturedProjects.js`](../app/components/FeaturedProjects.js) illustrates factor decomposition, event volatility, and semantic matching. Its captions identify concept illustrations and schematic curves. These visuals are not product screenshots, measured performance, backtest results, or fabricated metrics; project descriptions and links provide the substantive context.
 
@@ -42,10 +55,10 @@ Project art in [`app/components/FeaturedProjects.js`](../app/components/Featured
 
 Run `npm run lint`, `npm run build`, and `npm run test:ui`. On a new machine, install the test browser first with `npx playwright install chromium`.
 
-- All 14 Chromium smoke tests pass: delayed-JavaScript splash-first rendering, repeat visits, reduced motion, replay/skip without refetching widgets, keyboard accent selection and persistence, theme persistence, project destinations/search, unavailable-service retries, sticky anchor clearance, and no-JavaScript content fallback.
-- Responsive checks cover 320, 390, 768, and 1440px widths and check for clipped controls as well as document overflow. Desktop/mobile screenshots were reviewed in both themes.
+- All 17 Chromium smoke tests pass: delayed-JavaScript splash-first rendering, repeat visits, reduced motion, replay/skip without refetching widgets, keyboard accent selection and persistence, theme persistence, project destinations/search, unavailable-service retries, sticky anchor clearance, no-JavaScript content fallback, keyboard sculpture rotation, reduced-motion sculpture rendering, unavailable WebGL, and WebGL context loss.
+- Responsive checks cover 320, 390, 768, and 1440px widths and check for clipped headings and controls as well as document overflow. Every browser test also checks for React hydration errors. Desktop/mobile screenshots were reviewed in both themes.
 - Local live WakaTime, Oura, Kalshi positions, and Kalshi profile requests returned HTTP 200. The page reported no uncaught browser errors. Automated smoke tests use unavailable responses for the personal-data services to keep their payloads out of test artifacts.
 - All three accent text colors exceed 5.9:1 contrast against the light page background and 8.7:1 against the dark background. This is a token-level check, not a whole-site accessibility certification.
-- Existing lint warnings for two image elements and build warnings for older AVIF content remain. The npm audit count is unchanged from the starting lockfile (27 advisories); none of the added font or test packages introduces a newly affected package.
+- Existing lint warnings for two image elements and build warnings for older AVIF content remain. The npm audit count is unchanged from the starting lockfile (27 advisories); the added font, test, and Three.js packages do not increase the advisory count.
 
 This work is local to `design/portfolio-refresh`; it has not been deployed.

@@ -3,10 +3,21 @@ import { test, expect } from "@playwright/test";
 const intro = (page) => page.getByRole("status", { name: "Loading portfolio" });
 const title = (page) =>
   page.getByRole("heading", { level: 1, name: "Ashwin Iyer." });
+const hydrationErrors = new WeakMap();
 
 // Keep private data outside the test runner, traces, and screenshots. These
 // unavailable responses also exercise the production error-state contracts.
 test.beforeEach(async ({ page }) => {
+  const errors = [];
+  hydrationErrors.set(page, errors);
+  page.on("console", (message) => {
+    if (
+      message.type() === "error" &&
+      /hydration|hydrated|server rendered HTML/i.test(message.text())
+    ) {
+      errors.push(message.text().split("\n")[0]);
+    }
+  });
   await page.route(
     /\/api\/(?:oura|kalshi(?:-profile)?|wakatime)(?:\?|$)/,
     (route) =>
@@ -16,6 +27,13 @@ test.beforeEach(async ({ page }) => {
         body: JSON.stringify({ message: "Temporarily unavailable" }),
       }),
   );
+});
+
+test.afterEach(async ({ page }) => {
+  expect(
+    hydrationErrors.get(page),
+    "No React hydration errors were logged",
+  ).toEqual([]);
 });
 
 async function openReturningVisit(page) {
@@ -213,7 +231,9 @@ for (const width of [320, 390, 768, 1440]) {
     expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport + 1);
     expect(dimensions.body).toBeLessThanOrEqual(dimensions.viewport + 1);
     const clippedControls = await page
-      .locator("a:visible, button:visible, input:visible")
+      .locator(
+        "a:visible, button:visible, input:visible, h1:visible, h2:visible, h3:visible",
+      )
       .evaluateAll((elements) =>
         elements
           .filter((element) => {
@@ -235,6 +255,41 @@ for (const width of [320, 390, 768, 1440]) {
     await expect(
       page.getByRole("link", { name: /^Equity factor risk model/ }),
     ).toBeVisible();
+    if (width === 390 || width === 1440) {
+      await page.evaluate(() => document.fonts.ready);
+      await page.screenshot({
+        animations: "disabled",
+        path: test.info().outputPath("home-dark.png"),
+      });
+      await page.getByRole("button", { name: "Switch to light theme" }).click();
+      await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+      await page.screenshot({
+        animations: "disabled",
+        path: test.info().outputPath("home-light.png"),
+      });
+      if (width === 390) {
+        await page
+          .getByRole("heading", { name: "Selected work", exact: true })
+          .evaluate((element) => {
+            element.scrollIntoView({ behavior: "instant", block: "start" });
+          });
+        await page.screenshot({
+          animations: "disabled",
+          path: test.info().outputPath("projects-light.png"),
+        });
+        await page
+          .getByRole("button", { name: "Switch to dark theme" })
+          .click();
+        await expect(page.locator("html")).toHaveAttribute(
+          "data-theme",
+          "dark",
+        );
+        await page.screenshot({
+          animations: "disabled",
+          path: test.info().outputPath("projects-dark.png"),
+        });
+      }
+    }
   });
 }
 
@@ -340,4 +395,129 @@ test.describe("without JavaScript", () => {
       page.getByRole("link", { name: "Send an email", exact: true }),
     ).toHaveAttribute("href", "mailto:ashwiniyer06@gmail.com");
   });
+});
+
+const sculpture = (page) =>
+  page.getByRole("img", { name: /folded mathematical surface/ });
+
+test("reduced-motion visitors can rotate the visible sculpture with the keyboard", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await openReturningVisit(page);
+  const artwork = sculpture(page);
+  await expect(artwork.locator("svg")).toBeVisible();
+  await expect(artwork.locator("canvas")).toHaveCount(0);
+  const before = await artwork.screenshot();
+  const rotate = page.getByRole("button", {
+    name: "Rotate sculpture",
+    exact: true,
+  });
+  await rotate.focus();
+  await rotate.press("Enter");
+  await expect
+    .poll(async () => !(await artwork.screenshot()).equals(before))
+    .toBe(true);
+  await expect(artwork.locator("svg")).toBeVisible();
+  await expect(artwork.locator("canvas")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test("WebGL failure preserves a usable sculpture without an uncaught error", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    window.__portfolioWebGLAttempts = 0;
+    HTMLCanvasElement.prototype.getContext = function (type, ...args) {
+      if (["webgl", "webgl2", "experimental-webgl"].includes(type)) {
+        window.__portfolioWebGLAttempts += 1;
+        return null;
+      }
+      return original.call(this, type, ...args);
+    };
+  });
+  await openReturningVisit(page);
+  await expect
+    .poll(() => page.evaluate(() => window.__portfolioWebGLAttempts))
+    .toBeGreaterThan(0);
+  const artwork = sculpture(page);
+  await expect(artwork.locator("svg")).toBeVisible();
+  const before = await artwork.screenshot();
+  await page
+    .getByRole("button", { name: "Rotate sculpture", exact: true })
+    .press("Space");
+  await expect
+    .poll(async () => !(await artwork.screenshot()).equals(before))
+    .toBe(true);
+  await expect(artwork.locator("svg")).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test("WebGL sculpture rotates and restores its fallback after a lost context", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await openReturningVisit(page);
+  const supported = await page.evaluate(() => {
+    const probe = document.createElement("canvas");
+    const context = probe.getContext("webgl2");
+    const available = Boolean(context);
+    context?.getExtension("WEBGL_lose_context")?.loseContext();
+    return available;
+  });
+  test.skip(
+    !supported,
+    "This browser has no WebGL2; the forced-unavailable test covers the fallback.",
+  );
+  const artwork = sculpture(page);
+  const canvas = artwork.locator("canvas");
+  await expect(canvas).toHaveCSS("opacity", "1", { timeout: 15_000 });
+  await expect(artwork.locator("svg")).toBeHidden();
+  let previousFrame;
+  await expect
+    .poll(async () => {
+      const currentFrame = await artwork.screenshot();
+      const settled = previousFrame && currentFrame.equals(previousFrame);
+      previousFrame = currentFrame;
+      return Boolean(settled);
+    })
+    .toBe(true);
+  const before = previousFrame;
+  await page
+    .getByRole("button", { name: "Rotate sculpture", exact: true })
+    .press("Enter");
+  await expect
+    .poll(async () => !(await artwork.screenshot()).equals(before))
+    .toBe(true);
+
+  const contextLost = await canvas.evaluate((element) => {
+    const extension = element
+      .getContext("webgl2")
+      ?.getExtension("WEBGL_lose_context");
+    if (!extension) return false;
+    extension.loseContext();
+    return true;
+  });
+  expect(
+    contextLost,
+    "WebGL2 exposes the context-loss simulation extension",
+  ).toBe(true);
+  await expect(artwork.locator("svg")).toBeVisible();
+  await expect(canvas).toHaveCSS("opacity", "0");
+  const fallbackBefore = await artwork.screenshot();
+  await page
+    .getByRole("button", { name: "Rotate sculpture", exact: true })
+    .press("Enter");
+  await expect
+    .poll(async () => !(await artwork.screenshot()).equals(fallbackBefore))
+    .toBe(true);
+  await expect(artwork.locator("svg")).toBeVisible();
+  await expect(canvas).toHaveCSS("opacity", "0");
+  expect(errors).toEqual([]);
 });

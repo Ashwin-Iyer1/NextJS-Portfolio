@@ -19,6 +19,7 @@ import CopyEmail from "./components/CopyEmail";
 import FeaturedProjects from "./components/FeaturedProjects";
 import AccentPicker from "./components/AccentPicker";
 import SectionNav from "./components/SectionNav";
+import HeroSurface from "./components/HeroSurface";
 
 import MiscProj from "./components/MiscProj";
 
@@ -105,9 +106,20 @@ export default function Home() {
               <span>Computer science × financial markets</span>
               <span className={styles.heroLocation}>Based in Boston, MA</span>
             </div>
-            <h1 className={styles.heroTitle}>
-              Ashwin Iyer<span className={styles.titleDot}>.</span>
-            </h1>
+            <div className={styles.heroStage}>
+              <h1 className={styles.heroTitle}>
+                <span>Ashwin</span>{" "}
+                <span>
+                  Iyer<span className={styles.titleDot}>.</span>
+                </span>
+              </h1>
+              <figure className={styles.heroVisual}>
+                <HeroSurface active={!shouldLoad} />
+                <figcaption className={styles.visualCaption}>
+                  A surface, built from code.
+                </figcaption>
+              </figure>
+            </div>
             <div className={styles.heroBody}>
               <div className={styles.heroCopy}>
                 <p className={styles.heroLede}>
@@ -153,7 +165,7 @@ export default function Home() {
           <SectionNav />
 
           <section
-            className={styles.section}
+            className={`${styles.section} ${styles.selectedWork}`}
             aria-labelledby="selected-projects"
           >
             <div className={styles.sectionHeading}>
@@ -281,9 +293,6 @@ export default function Home() {
 
           {/* Contact */}
           <section className={`${styles.section} ${styles.contactSection}`}>
-            <p className={styles.contactKicker}>
-              Good things start with a conversation.
-            </p>
             <h2 className="section-title" id="contact">
               Let’s connect
             </h2>

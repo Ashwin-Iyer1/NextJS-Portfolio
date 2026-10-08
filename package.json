@@ -48,7 +48,8 @@
     "react-dom": "19.2.1",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "simple-icons": "^13.14.1"
+    "simple-icons": "^13.14.1",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",

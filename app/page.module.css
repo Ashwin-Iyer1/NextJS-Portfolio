@@ -21,16 +21,24 @@
 .skipIntro span {
   margin-left: 20px;
 }
+:global(main):has(.Home) {
+  max-width: none;
+  padding: 0;
+}
 .Home {
+  --home-gutter: clamp(20px, 4vw, 72px);
   text-align: left;
   width: 100%;
   overflow-x: clip;
 }
+.Home :global(.Bar) {
+  padding-inline: var(--home-gutter);
+}
 .content {
-  padding: 0 var(--space-lg);
+  padding: 0 var(--home-gutter);
 }
 .hero {
-  padding: 42px 0 24px;
+  padding: 32px 0 24px;
 }
 .heroTopline {
   display: flex;
@@ -42,21 +50,68 @@
 .heroLocation {
   color: var(--text-muted);
 }
+.heroStage {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(500px, 43vw, 760px);
+  display: flex;
+  align-items: center;
+  margin: 24px calc(-1 * var(--home-gutter)) 36px;
+  padding-inline: var(--home-gutter);
+}
 .heroTitle {
-  font-size: clamp(5rem, 12.2vw, 9.6rem);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.065em;
-  margin: 30px 0 38px -5px;
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  pointer-events: none;
+  font-size: clamp(7rem, 18.7vw, 21rem);
+  font-weight: 600;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  margin-left: -0.055em;
+  padding-bottom: 0.06em;
+}
+.heroTitle > span {
+  display: block;
+}
+.heroTitle > span + span {
+  margin-top: 0.09em;
 }
 .titleDot {
   color: var(--accent-brand);
+}
+.heroVisual {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: -4%;
+  bottom: -3%;
+  width: 69%;
+  margin: 0;
+}
+.heroVisual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg-primary), transparent 46%);
+  pointer-events: none;
+}
+.visualCaption {
+  position: absolute;
+  z-index: 1;
+  bottom: 16px;
+  left: 22%;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  pointer-events: none;
 }
 .heroBody {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 285px;
   align-items: start;
   gap: 80px;
+  max-width: 1440px;
+  margin-inline: auto;
 }
 .heroCopy {
   min-width: 0;
@@ -118,18 +173,25 @@
   min-height: 44px;
 }
 .section {
-  margin-top: 88px;
+  margin: 112px auto 0;
   width: 100%;
+  max-width: 1440px;
 }
 .section :global(.section-title) {
   text-align: left;
-  font-size: clamp(1.8rem, 3.4vw, 2.65rem);
+  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   margin-bottom: 30px;
 }
 .section :global(.section-title)::after {
   display: none;
+}
+.selectedWork :global(.section-title) {
+  font-size: clamp(4rem, 10vw, 10rem);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  margin-bottom: 24px;
 }
 .sectionHeading {
   display: flex;
@@ -251,18 +313,16 @@ a.researchLink {
   min-width: 0;
 }
 .contactSection {
-  padding: 48px;
-  border-radius: 20px;
+  padding: 64px 48px;
+  border-radius: 4px;
   background: var(--bg-secondary);
 }
-.contactKicker {
-  font-size: 0.8125rem;
-  margin-bottom: 28px;
-}
 .contactSection :global(.section-title) {
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  max-width: 17ch;
-  line-height: 1.1;
+  font-size: clamp(3.8rem, 12vw, 11rem);
+  max-width: none;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+  margin-bottom: 48px;
 }
 .contactIntro {
   max-width: 56ch;
@@ -333,13 +393,38 @@ a.researchLink {
   .heroLocation {
     display: none;
   }
+  .heroStage {
+    min-height: 610px;
+    align-items: flex-start;
+    padding-top: 28px;
+  }
   .heroTitle {
-    font-size: clamp(4.25rem, 12vw, 6rem);
+    font-size: clamp(6.5rem, 22vw, 10rem);
+  }
+  .heroVisual {
+    top: 160px;
+    bottom: 0;
+    width: 90%;
+    right: 0;
+  }
+  .visualCaption {
+    left: 16px;
   }
 }
 @media (max-width: 640px) {
-  .content {
-    padding: 0;
+  .Home {
+    --home-gutter: 20px;
+  }
+  .heroStage {
+    min-height: 560px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+  .heroVisual {
+    top: 150px;
+    bottom: 0;
+    width: 100%;
+    right: 0;
   }
   .hero {
     padding-top: 30px;
@@ -348,8 +433,8 @@ a.researchLink {
     font-size: 0.75rem;
   }
   .heroTitle {
-    font-size: clamp(3.35rem, 13vw, 5.2rem);
-    margin: 26px 0 28px -2px;
+    font-size: clamp(5rem, 25vw, 10rem);
+    margin: 0 0 0 -0.055em;
   }
   .heroLede {
     font-size: 1.6rem;
@@ -366,7 +451,10 @@ a.researchLink {
     gap: 24px;
   }
   .section {
-    margin-top: 60px;
+    margin-top: 80px;
+  }
+  .selectedWork :global(.section-title) {
+    font-size: clamp(3.7rem, 14vw, 5rem);
   }
   .workAside {
     grid-template-columns: 1fr;
@@ -392,7 +480,11 @@ a.researchLink {
     padding: 16px;
   }
   .contactSection {
-    padding: 28px 22px;
+    padding: 36px 22px;
+  }
+  .contactSection :global(.section-title) {
+    font-size: clamp(3.2rem, 13vw, 5rem);
+    margin-bottom: 28px;
   }
   .contactEmail {
     font-size: 1rem;
