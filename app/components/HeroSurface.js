@@ -7,7 +7,7 @@ import styles from "./HeroSurface.module.css";
 function pointOnSurface(u, v) {
   return [
     u * 2.15,
-    1.3 * (u * u - v * v) + 0.14 * Math.sin(u * 18 + v * 2.6),
+    1.3 * (v*v - u*u) + 0.14 * Math.sin(u * 18 + v * 2.6),
     v * 1.9,
   ];
 }
