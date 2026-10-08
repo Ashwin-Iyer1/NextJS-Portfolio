@@ -3,12 +3,13 @@
   --art-ink: #152c42;
   --art-paper: #d9e7f1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(64px, 8vw, 128px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
 }
 
 .project {
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   color: var(--text-primary);
 }
@@ -25,7 +26,8 @@
 
 .artwork {
   position: relative;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 11;
+  flex-shrink: 0;
   overflow: hidden;
   isolation: isolate;
   border-radius: 8px;
@@ -61,34 +63,40 @@
 .artworkCategory,
 .artworkCaption {
   position: absolute;
-  left: clamp(18px, 3vw, 40px);
-  font-size: 0.8125rem;
+  left: 18px;
+  font-size: 0.6875rem;
   line-height: 1.4;
 }
 
 .artworkCategory {
-  top: clamp(18px, 3vw, 40px);
+  top: 18px;
   font-weight: 600;
 }
 
 .artworkCaption {
-  bottom: clamp(18px, 3vw, 36px);
-  font-size: 0.6875rem;
+  bottom: 18px;
+  max-width: calc(100% - 88px);
+  font-size: 0.625rem;
 }
 
 .openIcon {
   position: absolute;
-  right: clamp(18px, 3vw, 40px);
-  bottom: clamp(18px, 3vw, 36px);
+  right: 18px;
+  bottom: 18px;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
+  width: 38px;
+  height: 38px;
   border: 1px solid currentColor;
   border-radius: 50%;
   transition:
     background-color 180ms ease,
     color 180ms ease;
+}
+
+.openIcon svg {
+  width: 22px;
+  height: 22px;
 }
 
 .project:hover .openIcon,
@@ -106,34 +114,37 @@
 }
 
 .copy {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: clamp(32px, 6vw, 96px);
-  align-items: start;
-  padding-top: clamp(24px, 3vw, 42px);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 20px;
 }
 
 .project h3 {
-  max-width: 16ch;
+  max-width: 22ch;
+  min-height: 2.24em;
   margin: 0;
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-size: clamp(1.6rem, 2.1vw, 2.1rem);
   font-weight: 500;
-  letter-spacing: -0.055em;
-  line-height: 1.02;
+  letter-spacing: -0.045em;
+  line-height: 1.12;
   text-wrap: balance;
 }
 
 .details {
-  padding-top: 4px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   min-width: 0;
 }
 
 .project p {
   max-width: 49ch;
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.8;
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
 
 .footer {
@@ -141,8 +152,9 @@
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px 20px;
-  margin-top: 26px;
+  gap: 10px 16px;
+  margin-top: auto;
+  padding-top: 18px;
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -326,53 +338,32 @@
   stroke-linejoin: round;
 }
 
-@media (max-width: 800px) {
-  .copy {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .project h3 {
-    max-width: 21ch;
-  }
-
-  .project p {
-    max-width: 65ch;
-  }
-
-  .footer {
-    justify-content: flex-start;
-    margin-top: 20px;
+@media (max-width: 1099px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 679px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 36px;
+  }
+
   .artwork {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     border-radius: 5px;
   }
 
-  .artworkCategory {
-    font-size: 0.6875rem;
-  }
-
-  .artworkCaption {
-    max-width: calc(100% - 90px);
-    font-size: 0.5625rem;
-  }
-
-  .openIcon {
-    width: 42px;
-    height: 42px;
-  }
-
-  .openIcon svg {
-    width: 23px;
-    height: 23px;
+  .copy {
+    gap: 12px;
+    padding-top: 18px;
   }
 
   .project h3 {
-    font-size: clamp(2.5rem, 9vw, 3.5rem);
+    min-height: 0;
+    font-size: 1.75rem;
   }
 }
 
