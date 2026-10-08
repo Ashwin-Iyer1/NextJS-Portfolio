@@ -285,7 +285,7 @@ a.researchLink {
   background: var(--bg-secondary);
 }
 .contactSection :global(.section-title) {
-  font-size: clamp(3.8rem, 12vw, 11rem);
+  font-size: clamp(3.8rem, 7vw, 6.5rem);
   max-width: none;
   letter-spacing: -0.065em;
   line-height: 0.95;
