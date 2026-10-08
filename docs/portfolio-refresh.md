@@ -33,21 +33,19 @@ All three fonts are installed through npm and self-hosted with `next/font/local`
 
 ## Color
 
-The dark theme uses charcoal `#151b1d` with paper-colored text `#edf0e9`. The light theme uses paper `#f1f3ee` with ink `#1b2628`. Glacier blue is the default accent; the appearance control also offers Brass and Iris. Returning visitors retain their saved accent choice.
+The dark theme uses charcoal `#151b1d` with paper-colored text `#edf0e9`. The light theme uses paper `#f1f3ee` with ink `#1b2628`. Glacier blue is the fixed accent. The accent picker is removed, and obsolete saved accent preferences are ignored.
 
 | Accent  | Dark theme | Light theme on `#f1f3ee` |
 | ------- | ---------- | ------------------------ |
-| Brass   | `#ddbd80`  | `#785719`                |
 | Glacier | `#9cc9df`  | `#2c627b`                |
-| Iris    | `#bcb0e8`  | `#685096`                |
 
-The light theme uses darker accent equivalents to preserve readable contrast. Edit theme tokens and `data-accent` overrides in [`app/globals.css`](../app/globals.css). Accent names and selection controls live in [`app/components/AccentPicker.js`](../app/components/AccentPicker.js); [`app/layout.js`](../app/layout.js) restores the saved selection before paint.
+The light theme uses a darker Glacier shade to preserve readable contrast. Edit the `--accent-brand` theme tokens in [`app/globals.css`](../app/globals.css). The light/dark theme control remains, and [`app/layout.js`](../app/layout.js) restores that theme before paint.
 
 ## Presentation choices
 
 The current visual direction uses an oversized, stacked Bricolage name; a large original procedural blue folded surface in the hero; a compact project grid with three columns on desktop, two on tablets, and one on phones; and a large “Let's connect” ending. The existing hero details and contact content remain part of the composition. The folded surface uses Three.js as progressive enhancement, with an SVG fallback so the visual does not depend on WebGL. It is decorative artwork, not a scientific plot or a representation of project results. Pointer movement tilts it; the Rotate sculpture button provides the same exploration by keyboard. Rendering stops after settling, when offscreen, and when the tab is hidden. Reduced-motion users get a static SVG that changes discretely on rotation. Context loss also restores the SVG, and the renderer disposes its GPU resources on cleanup.
 
-Sticky section jump links preserve quick access through the larger sections. The handwritten splash remains, with a replay control and reduced-motion handling. The Skip intro control is intentionally hidden. Theme and accent choices let the same layout take on a warmer or cooler character.
+Sticky section jump links preserve quick access through the larger sections. The handwritten splash remains, with a replay control and reduced-motion handling. The Skip intro control is intentionally hidden. Both light and dark themes use the fixed Glacier palette.
 
 Project art in [`app/components/FeaturedProjects.js`](../app/components/FeaturedProjects.js) illustrates factor decomposition, event volatility, and semantic matching. Its captions identify concept illustrations and schematic curves. These visuals are not product screenshots, measured performance, backtest results, or fabricated metrics; project descriptions and links provide the substantive context.
 
@@ -61,10 +59,10 @@ A persistent intro provider distinguishes first document entry from internal nav
 
 Run `npm run lint`, `npm run build`, and `npm run test:ui`. On a new machine, install the test browser first with `npx playwright install chromium`.
 
-- All 21 Chromium smoke tests pass: delayed-JavaScript splash-first rendering, repeat visits, reduced motion, automatic replay completion without refetching widgets, keyboard accent selection and persistence, theme persistence, project destinations/search, unavailable-service retries, sticky anchor clearance, no-JavaScript content fallback, keyboard sculpture rotation, reduced-motion sculpture rendering, unavailable WebGL, WebGL context loss, persistent header geometry and shared page widths across routes, and zero transient splash insertions when navigating back to Home.
+- The 21 Chromium smoke tests cover delayed-JavaScript splash-first rendering, repeat visits, reduced motion, automatic replay completion without refetching widgets, fixed Glacier styling despite obsolete saved accent choices, theme persistence, project destinations/search, unavailable-service retries, sticky anchor clearance, no-JavaScript content fallback, keyboard sculpture rotation, reduced-motion sculpture rendering, unavailable WebGL, WebGL context loss, persistent header geometry and shared page widths across routes, and zero transient splash insertions when navigating back to Home.
 - Responsive checks cover 320, 390, 768, and 1440px widths and check for clipped headings and controls as well as document overflow. Every browser test also checks for React hydration errors. Desktop/mobile screenshots were reviewed in both themes.
 - Local live WakaTime, Oura, Kalshi positions, and Kalshi profile requests returned HTTP 200. The page reported no uncaught browser errors. Automated smoke tests use unavailable responses for the personal-data services to keep their payloads out of test artifacts.
-- All three accent text colors exceed 5.9:1 contrast against the light page background and 8.7:1 against the dark background. This is a token-level check, not a whole-site accessibility certification.
+- Glacier accent text exceeds 5.9:1 contrast against the light page background and 8.7:1 against the dark background. This is a token-level check, not a whole-site accessibility certification.
 - Existing lint warnings for two image elements and build warnings for older AVIF content remain. The npm audit count is unchanged from the starting lockfile (27 advisories); the added font, test, and Three.js packages do not increase the advisory count.
 
 This work is local to `design/portfolio-refresh`; it has not been deployed.

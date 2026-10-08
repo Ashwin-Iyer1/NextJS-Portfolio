@@ -285,41 +285,42 @@ test("visitors can replay the signature through automatic completion without rem
   expect(requests).toHaveLength(requestCount);
 });
 
-test("accent radios support keyboard selection and persist alongside the theme", async ({
+test("Glacier stays fixed despite obsolete accent preferences while themes persist", async ({
   page,
 }) => {
+  await page.addInitScript(() => {
+    if (localStorage.getItem("accent") === null) {
+      localStorage.setItem("accent", "brass");
+    }
+  });
   await openReturningVisit(page);
-  await expect(
-    page.getByRole("radio", { name: "Glacier", exact: true }),
-  ).toBeChecked();
-  await page.getByRole("radio", { name: "Glacier", exact: true }).check();
-  await expect(page.locator("html")).toHaveAttribute("data-accent", "glacier");
-  await page
-    .getByRole("radio", { name: "Glacier", exact: true })
-    .press("ArrowRight");
-  await expect(
-    page.getByRole("radio", { name: "Iris", exact: true }),
-  ).toBeChecked();
-  await expect(page.locator("html")).toHaveAttribute("data-accent", "iris");
+  const activeHome = page
+    .getByRole("navigation", { name: "Primary", exact: true })
+    .getByRole("link", { name: "Home", exact: true });
+  async function expectFixedGlacier(color) {
+    await expect(activeHome).toHaveCSS("color", color);
+    await expect(
+      page.getByRole("radio", { name: /^(Brass|Glacier|Iris)$/ }),
+    ).toHaveCount(0);
+    await expect(page.locator("[data-accent]")).toHaveCount(0);
+  }
+
+  await expectFixedGlacier("rgb(156, 201, 223)");
   await page.getByRole("button", { name: "Switch to light theme" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expectFixedGlacier("rgb(44, 98, 123)");
 
+  await page.evaluate(() => localStorage.setItem("accent", "iris"));
   await page.reload();
-  await expect(
-    page.getByRole("radio", { name: "Iris", exact: true }),
-  ).toBeChecked();
   await expect(
     page.getByRole("button", { name: "Switch to dark theme" }),
   ).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await expect(page.locator("html")).toHaveAttribute("data-accent", "iris");
+  await expectFixedGlacier("rgb(44, 98, 123)");
   await page.getByRole("button", { name: "Switch to dark theme" }).click();
-  await page.getByRole("radio", { name: "Brass", exact: true }).check();
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await expect(
-    page.getByRole("radio", { name: "Brass", exact: true }),
-  ).toBeChecked();
+  await expectFixedGlacier("rgb(156, 201, 223)");
 });
 
 test("selected work retains real project destinations and identifies its concept illustrations", async ({
@@ -426,7 +427,7 @@ for (const width of [320, 390, 768, 1440]) {
       );
     expect(clippedControls).toEqual([]);
     await expect(
-      page.getByRole("radio", { name: "Iris", exact: true }),
+      page.getByRole("button", { name: "Switch to light theme" }),
     ).toBeVisible();
     await expect(
       page.getByRole("link", { name: /^Equity factor risk model/ }),

@@ -387,25 +387,6 @@ select {
   color: var(--bg-primary);
 }
 
-/* Each accent has a separately tuned light-mode value for readable links. */
-[data-accent="brass"] {
-  --accent-brand: #ddbd80;
-}
-[data-accent="glacier"] {
-  --accent-brand: #9cc9df;
-}
-[data-accent="iris"] {
-  --accent-brand: #bcb0e8;
-}
-[data-theme="light"][data-accent="glacier"] {
-  --accent-brand: #2c627b;
-}
-[data-theme="light"][data-accent="brass"] {
-  --accent-brand: #785719;
-}
-[data-theme="light"][data-accent="iris"] {
-  --accent-brand: #685096;
-}
 @media (max-width: 640px) {
   [id] {
     scroll-margin-top: 184px;

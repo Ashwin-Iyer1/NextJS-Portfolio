@@ -15,7 +15,6 @@ import OuraDashboard from "./components/OuraDashboard.js";
 import LocalTime from "./components/LocalTime";
 import CopyEmail from "./components/CopyEmail";
 import FeaturedProjects from "./components/FeaturedProjects";
-import AccentPicker from "./components/AccentPicker";
 import SectionNav from "./components/SectionNav";
 import HeroSurface from "./components/HeroSurface";
 import { useInitialDocumentEntry } from "./components/IntroSessionProvider";
@@ -156,7 +155,6 @@ export default function Home() {
                 </a>
                 <a href="mailto:ashwiniyer06@gmail.com">Email ↗</a>
               </div>
-              <AccentPicker />
             </div>
           </header>
           <SectionNav />

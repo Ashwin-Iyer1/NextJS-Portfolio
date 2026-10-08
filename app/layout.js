@@ -50,12 +50,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var a=localStorage.getItem('accent');if(['brass','glacier','iris'].includes(a))document.documentElement.setAttribute('data-accent',a)}catch(e){}})()`;
+  const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`;
 
   return (
     <html
       lang="en"
-      data-accent="glacier"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${manrope.variable} ${bricolage.variable} ${caveat.variable}`}
