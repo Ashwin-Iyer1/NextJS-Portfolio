@@ -17,21 +17,23 @@ export default function Bar() {
 
   return (
     <nav className="Bar" aria-label="Primary">
-      <Link href="/" className="logo">
-        Ashwin Iyer
-      </Link>
-      <div className="nav-links">
-        {navLinks.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            aria-current={pathname === href ? "page" : undefined}
-            className={`nav-link ${pathname === href ? "nav-link-active" : ""}`}
-          >
-            {label}
-          </Link>
-        ))}
-        <ThemeToggle />
+      <div className="page-shell bar-inner">
+        <Link href="/" className="logo">
+          Ashwin Iyer
+        </Link>
+        <div className="nav-links">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={pathname === href ? "page" : undefined}
+              className={`nav-link ${pathname === href ? "nav-link-active" : ""}`}
+            >
+              {label}
+            </Link>
+          ))}
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

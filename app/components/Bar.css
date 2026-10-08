@@ -3,23 +3,28 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-md) 0;
+  flex-shrink: 0;
+  height: var(--header-height);
   width: 100%;
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: var(--space-xl);
   background: var(--bg-primary);
   background: color-mix(in srgb, var(--bg-primary) 82%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
+.bar-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  height: 100%;
+  padding-block: 16px;
+}
+
 .logo {
-  font-family: "Caveat", cursive;
+  font-family: var(--font-signature), "Caveat", cursive;
   font-weight: 700;
   font-size: 2rem;
   line-height: 1.2;
@@ -46,10 +51,10 @@
 }
 
 .nav-link {
-  /* font-family inherits from body (self-hosted Inter via next/font) */
+  /* Inherit the self-hosted body font. */
   color: var(--text-secondary);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   padding: 8px 14px;
   border-radius: var(--radius-sm);
@@ -137,13 +142,12 @@
   opacity: 1;
 }
 
-/* Compact layout on small screens: stays a single row, wrapping
-   gracefully on ultra-narrow viewports instead of clipping. */
+/* The same two-row header on every small-screen route. */
 @media (max-width: 640px) {
-  .Bar {
+  .bar-inner {
     flex-wrap: wrap;
     gap: var(--space-sm);
-    padding: 12px 0;
+    padding-block: 12px;
   }
 
   .logo {
@@ -151,7 +155,8 @@
   }
 
   .nav-links {
-    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
     gap: 2px;
   }
 
@@ -175,7 +180,7 @@
 }
 
 @media (max-width: 420px) {
-  .Bar {
+  .bar-inner {
     gap: 12px;
   }
   .nav-links {
@@ -184,5 +189,16 @@
   }
   .nav-link {
     padding: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-link {
+    padding: 10px 6px;
+    font-size: 0.75rem;
+    min-height: 44px;
+  }
+  .theme-toggle {
+    margin-left: 0;
   }
 }

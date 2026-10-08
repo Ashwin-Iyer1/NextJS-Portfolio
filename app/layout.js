@@ -1,13 +1,29 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import Bar from "./components/Bar";
+import IntroSessionProvider from "./components/IntroSessionProvider";
+import "./landing.css";
 
-const inter = Inter({
-  subsets: ["latin"],
+const manrope = localFont({
+  src: "../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-body",
+  weight: "200 800",
+});
+const bricolage = localFont({
+  src: "../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2",
+  display: "swap",
+  variable: "--font-display",
+  weight: "200 800",
+});
+const caveat = localFont({
+  src: "../node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2",
+  display: "swap",
+  variable: "--font-signature",
+  weight: "700",
 });
 
 export const metadata = {
@@ -41,21 +57,24 @@ export default function RootLayout({ children }) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={inter.variable}
+      className={`${manrope.variable} ${bricolage.variable} ${caveat.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={inter.className}>
-        <a href="#page-content" className="skip-link">
-          Skip to content
-        </a>
-        <main id="main-content" tabIndex={-1}>
-          {children}
-          <footer>
-            <span>&copy; {new Date().getFullYear()} Ashwin Iyer</span>
-          </footer>
-        </main>
+      <body>
+        <IntroSessionProvider>
+          <a href="#page-content" className="skip-link">
+            Skip to content
+          </a>
+          <Bar />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+            <footer>
+              <span>&copy; {new Date().getFullYear()} Ashwin Iyer</span>
+            </footer>
+          </main>
+        </IntroSessionProvider>
         <GoogleAnalytics gaId="G-DFDFQZ1B7Q" />
         <SpeedInsights />
         <Analytics />

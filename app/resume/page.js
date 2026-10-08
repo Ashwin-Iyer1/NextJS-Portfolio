@@ -1,6 +1,5 @@
 import "./resume.css";
 import React from "react";
-import Bar from "../components/Bar";
 import DownloadButton from "./DownloadButton";
 
 export const metadata = {
@@ -10,8 +9,7 @@ export const metadata = {
 
 export default function Resume() {
   return (
-    <div className="resume">
-      <Bar />
+    <div className="page-shell resume">
       <header className="resume-header" id="page-content" tabIndex={-1}>
         <div>
           <p className="resume-eyebrow">Curriculum Vitae</p>

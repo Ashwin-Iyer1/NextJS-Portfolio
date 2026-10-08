@@ -1,33 +1,44 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 const NEU = "/Images/NEU.webp";
 import NameAnim from "./components/NameAnim.js";
-import Links from "./components/Links.js";
 import Image from "next/image";
 import Link from "next/link";
 import Skills from "./components/Skills.js";
 import Contact from "./components/Contact.js";
 import GetTimeWrapper from "./components/GetTimeWrapper.js";
-import Bar from "./components/Bar";
 import BlogList from "./components/BlogList";
-import "./landing.css";
 import styles from "./page.module.css";
 import WorkExperience from "./components/WorkExperience.js";
 import KalshiPositions from "./components/KalshiPositions.js";
 import OuraDashboard from "./components/OuraDashboard.js";
-import LocalTime from "./components/LocalTime";
 import CopyEmail from "./components/CopyEmail";
 import FeaturedProjects from "./components/FeaturedProjects";
+import SectionNav from "./components/SectionNav";
+import HeroSurface from "./components/HeroSurface";
+import { useInitialDocumentEntry } from "./components/IntroSessionProvider";
 
 import MiscProj from "./components/MiscProj";
 
 export default function Home() {
-  // Render the same splash-first markup on the server and during hydration.
-  // The portfolio stays mounted underneath, so its data can load only once.
-  const [shouldLoad, setShouldLoad] = useState(true);
+  // Only the initial document render can start the intro automatically. The
+  // persistent layout provider makes internal Home mounts visible immediately.
+  const initialDocumentEntry = useInitialDocumentEntry();
+  const [shouldLoad, setShouldLoad] = useState(initialDocumentEntry);
+  const [animateReveal, setAnimateReveal] = useState(initialDocumentEntry);
   const [fadeOut, setFadeOut] = useState(false);
 
+  const [introRun, setIntroRun] = useState(0);
+
+  const finishIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem("loaded", "true");
+    } catch {}
+    setShouldLoad(false);
+  }, []);
+
   useEffect(() => {
+    if (!shouldLoad) return;
     let alreadyLoaded = true;
     try {
       alreadyLoaded = sessionStorage.getItem("loaded") !== null;
@@ -37,29 +48,33 @@ export default function Home() {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-
-    if (alreadyLoaded || reduceMotion) {
+    if (introRun === 0 && (alreadyLoaded || reduceMotion)) {
       const timer = setTimeout(() => setShouldLoad(false), 0);
       return () => clearTimeout(timer);
     }
-
-    const fadeTimer = setTimeout(() => setFadeOut(true), 2200);
-    const finishTimer = setTimeout(() => {
-      try {
-        sessionStorage.setItem("loaded", "true");
-      } catch {}
-      setShouldLoad(false);
-    }, 2600);
+    const fadeTimer = setTimeout(
+      () => setFadeOut(true),
+      reduceMotion ? 700 : 2200,
+    );
+    const finishTimer = setTimeout(finishIntro, reduceMotion ? 900 : 2600);
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(finishTimer);
     };
-  }, []);
+  }, [finishIntro, introRun, shouldLoad]);
+
+  function replayIntro() {
+    setFadeOut(false);
+    setAnimateReveal(true);
+    setIntroRun((run) => run + 1);
+    setShouldLoad(true);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
 
   return (
     <>
       <noscript>
-        <style>{`[data-home-intro] { display: none !important; } [data-home-content] { display: block !important; opacity: 1 !important; }`}</style>
+        <style>{`[data-home-intro] { display: none !important; } [data-home-content] { display: block !important; opacity: 1 !important; } .Bar, .skip-link { visibility: visible !important; }`}</style>
       </noscript>
       {shouldLoad && (
         <div
@@ -68,58 +83,82 @@ export default function Home() {
           role="status"
           aria-label="Loading portfolio"
         >
-          <NameAnim />
+          <NameAnim key={introRun} />
         </div>
       )}
       <div
         data-home-content
-        className={`${styles.Home} ${shouldLoad ? "" : "fade-in"}`}
+        className={`${styles.Home} ${!shouldLoad && animateReveal ? "fade-in" : ""}`}
         style={{ display: shouldLoad ? "none" : undefined }}
       >
-        <Bar />
-
-        <div className={styles.content} id="page-content" tabIndex={-1}>
+        <div
+          className={`${styles.content} page-shell`}
+          id="page-content"
+          tabIndex={-1}
+        >
           <header className={styles.hero} id="top">
-            <div className={styles.heroCopy}>
-              <p className={styles.heroEyebrow}>
-                Computer science at Northeastern University
-              </p>
-              <h1 className={styles.heroTitle}>Ashwin Iyer</h1>
-              <p className={styles.heroLede}>
-                I build software and explore financial markets. A computer
-                science student in Boston, working across Python, Java, and
-                TypeScript.
-              </p>
-              <div className={styles.heroActions}>
-                <Link href="/projects" className="button-primary">
-                  Explore my projects
-                </Link>
-                <Link href="/resume" className="button-secondary">
-                  View résumé
-                </Link>
-                <a href="#contact" className={styles.heroLink}>
-                  Get in touch
-                </a>
-              </div>
-              <div className={styles.heroSocial}>
-                <Links />
-              </div>
+            <div className={styles.heroTopline}>
+              <span>Computer Science × Fintech</span>
+              <span className={styles.heroLocation}>Based in Boston, MA</span>
             </div>
-            <LocalTime />
+            <div className={styles.heroStage}>
+              <div className={styles.heroIntro}>
+                <h1 className={styles.heroTitle}>
+                  <span>Ashwin</span>{" "}
+                  <span>
+                    Iyer<span className={styles.titleDot}>.</span>
+                  </span>
+                </h1>
+                <div className={styles.heroCopy}>
+                  <p className={styles.heroLede}>
+                    I build software and explore the systems behind financial
+                    markets.
+                  </p>
+                  <p className={styles.heroDetail}>
+                    A computer science student in Boston, working across Python,
+                    Java, and TypeScript.
+                  </p>
+                  <div className={styles.heroActions}>
+                    <a href="#selected-projects" className="button-primary">
+                      Explore my work <span aria-hidden="true">↓</span>
+                    </a>
+                    <Link href="/resume" className={styles.heroLink}>
+                      View résumé <span aria-hidden="true">↗</span>
+                    </Link>
+                  </div>
+                  <div className={styles.heroSocial}>
+                    <a
+                      href="https://github.com/Ashwin-Iyer1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub ↗
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/ashwin-hao-iyer"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn ↗
+                    </a>
+                    <a href="mailto:ashwiniyer06@gmail.com">Email ↗</a>
+                  </div>
+                </div>
+              </div>
+              <figure className={styles.heroVisual}>
+                <HeroSurface active={!shouldLoad} />
+                <figcaption className={styles.visualCaption}>
+                  A surface, built from code.
+                </figcaption>
+              </figure>
+            </div>
           </header>
-          <nav className={styles.sectionNav} aria-label="On this page">
-            <span>On this page</span>
-            <a href="#WorkingOn">Experience</a>
-            <a href="#selected-projects">Projects</a>
-            <a href="#writing">Writing</a>
-            <a href="#now-title">Now</a>
-            <a href="#contact">Contact</a>
-          </nav>
+          <SectionNav />
 
           {/* Work Experience */}
           <section className={styles.section}>
             <h2 className="section-title" id="WorkingOn">
-              Work Experience
+              Where I’ve been
             </h2>
             <div className={styles.workRow}>
               <div className={`glass-card ${styles.workCard}`}>
@@ -146,15 +185,18 @@ export default function Home() {
           </section>
 
           <section
-            className={styles.section}
+            className={`${styles.section} ${styles.selectedWork}`}
             aria-labelledby="selected-projects"
           >
             <div className={styles.sectionHeading}>
-              <h2 className="section-title" id="selected-projects">
-                Selected projects
-              </h2>
+              <div>
+                <h2 className="section-title" id="selected-projects">
+                  Selected work
+                </h2>
+                <p>From understanding risk to building something useful.</p>
+              </div>
               <Link href="/projects">
-                Browse all projects <span aria-hidden="true">↗</span>
+                All projects <span aria-hidden="true">↗</span>
               </Link>
             </div>
             <FeaturedProjects />
@@ -162,7 +204,7 @@ export default function Home() {
 
           {/* Skills */}
           <section className={styles.section}>
-            <h2 className="section-title">Skills</h2>
+            <h2 className="section-title">My toolkit</h2>
             <Skills />
           </section>
 
@@ -192,7 +234,7 @@ export default function Home() {
 
           {/* Miscellaneous Projects */}
           <section className={styles.section}>
-            <h2 className="section-title">Projects & explorations</h2>
+            <h2 className="section-title">A few more explorations</h2>
             <div className={styles.miscProjContainer}>
               <MiscProj />
             </div>
@@ -200,16 +242,23 @@ export default function Home() {
 
           {/* Writing */}
           <section className={styles.section}>
-            <h2 className="section-title" id="writing">
-              Writing
-            </h2>
+            <div className={styles.sectionHeading}>
+              <div>
+                <h2 className="section-title" id="writing">
+                  Notes & interests
+                </h2>
+                <p>
+                  A little of what I’m learning, reading, and thinking about.
+                </p>
+              </div>
+            </div>
             <BlogList initialLimit={4} />
           </section>
 
           {/* Now — live widgets */}
           <section className={styles.section} aria-labelledby="now-title">
             <h2 className="section-title" id="now-title">
-              Now
+              Away from the editor
             </h2>
             <p className={styles.nowNote}>
               A look beyond the code: activity from my Oura ring and positions
@@ -234,7 +283,7 @@ export default function Home() {
           </section>
 
           {/* Contact */}
-          <section className={styles.section}>
+          <section className={`${styles.section} ${styles.contactSection}`}>
             <h2 className="section-title" id="contact">
               Let’s connect
             </h2>
@@ -256,9 +305,18 @@ export default function Home() {
               <CopyEmail />
             </div>
           </section>
-          <a href="#top" className={styles.backToTop}>
-            Back to top ↑
-          </a>
+          <div className={styles.bottomBar}>
+            <button
+              type="button"
+              onClick={replayIntro}
+              className={styles.replayIntro}
+            >
+              Replay the intro
+            </button>
+            <a href="#top" className={styles.backToTop}>
+              Back to top ↑
+            </a>
+          </div>
         </div>
       </div>
     </>

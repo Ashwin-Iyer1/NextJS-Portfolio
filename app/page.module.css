@@ -5,130 +5,193 @@
   background: var(--splash-bg);
   overflow: hidden;
 }
-
 .Home {
+  --home-gutter: var(--page-gutter);
   text-align: left;
-  max-width: 1200px;
   width: 100%;
   overflow-x: clip;
 }
 .content {
-  padding: 0 var(--space-lg);
-}
-.section {
-  margin-top: 80px;
-  width: 100%;
-}
-.section :global(.section-title) {
-  text-align: left;
-  font-size: 1.5rem;
-}
-.section :global(.section-title)::after {
-  margin-left: 0;
-  width: 28px;
+  min-width: 0;
 }
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  align-items: center;
-  gap: 64px;
-  padding: 64px 0 44px;
+  padding: 32px 0 24px;
+}
+.heroTopline {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+}
+.heroLocation {
+  color: var(--text-muted);
+}
+.heroStage {
+  position: relative;
+  isolation: isolate;
+  margin: 32px calc(-1 * var(--home-gutter)) 16px;
+  padding: 16px var(--home-gutter) 24px;
+}
+.heroIntro {
+  position: relative;
+  z-index: 2;
+  width: 46%;
+}
+.heroTitle {
+  position: relative;
+  z-index: 2;
+  width: fit-content;
+  pointer-events: none;
+  font-size: clamp(7rem, 16.5vw, 19rem);
+  font-weight: 600;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  margin-left: -0.055em;
+  padding-bottom: 0.06em;
+}
+.heroTitle > span {
+  display: block;
+}
+.heroTitle > span + span {
+  margin-top: 0.09em;
+}
+.titleDot {
+  color: var(--accent-brand);
+}
+.heroVisual {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 62%;
+  margin: 0;
+}
+.heroVisual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg-primary), transparent 36%);
+  pointer-events: none;
+}
+.visualCaption {
+  position: absolute;
+  z-index: 1;
+  bottom: 16px;
+  left: 22%;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  pointer-events: none;
 }
 .heroCopy {
   min-width: 0;
-}
-.heroEyebrow {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  margin-bottom: 18px;
-}
-.heroTitle {
-  font-size: clamp(3rem, 5.5vw, 4.5rem);
-  font-weight: 600;
-  letter-spacing: -0.06em;
-  line-height: 1.1;
-  margin-bottom: 22px;
+  max-width: 520px;
+  margin-top: 32px;
 }
 .heroLede {
+  max-width: 29ch;
+  color: var(--text-primary);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+}
+.heroDetail {
   max-width: 52ch;
-  font-size: 1.125rem;
-  line-height: 1.8;
+  font-size: 0.9375rem;
+  margin-top: 14px;
 }
 .heroActions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 12px 20px;
-  margin-top: 28px;
+  gap: 18px 28px;
+  margin-top: 22px;
+}
+.heroActions :global(.button-primary) {
+  padding-inline: 24px;
+  gap: 36px;
+  background: var(--accent-brand);
+  border-color: var(--accent-brand);
+}
+.heroActions :global(.button-primary:hover) {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
 }
 .heroLink {
-  color: var(--text-secondary);
   font-size: 0.875rem;
-  text-underline-offset: 5px;
+  color: var(--text-primary);
+  padding: 12px 0;
 }
-.heroLink:hover {
-  color: var(--accent-brand);
-  text-decoration: underline;
+.heroLink span {
+  margin-left: 8px;
 }
 .heroSocial {
-  margin-top: 24px;
-  width: fit-content;
-}
-.heroSocial :global(section) {
-  background: none;
-  border: 0;
-  padding: 0;
-}
-.heroSocial :global(section > div) {
-  padding: 0;
-  gap: 10px;
-}
-.heroSocial :global(section a) {
-  width: 40px;
-  height: 40px;
-  background: none;
-  border-color: transparent;
-}
-.heroSocial :global(section a img) {
-  height: 20px;
-}
-.sectionNav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 28px;
-  padding: 18px 0;
-  border-block: 1px solid var(--border-color);
+  gap: 24px;
+  margin-top: 12px;
   font-size: 0.8125rem;
 }
-.sectionNav span {
-  color: var(--text-muted);
-  margin-right: auto;
+.heroSocial a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
-.sectionNav a {
-  padding: 4px 0;
+.section {
+  margin: 112px auto 0;
+  width: 100%;
+  max-width: 1440px;
+}
+.section :global(.section-title) {
+  text-align: left;
+  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin-bottom: 30px;
+}
+.section :global(.section-title)::after {
+  display: none;
+}
+.selectedWork :global(.section-title) {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  margin-bottom: 24px;
 }
 .sectionHeading {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.sectionHeading :global(.section-title) {
+  margin-bottom: 12px;
+}
+.sectionHeading p {
+  font-size: 0.875rem;
 }
 .sectionHeading > a {
   font-size: 0.875rem;
   white-space: nowrap;
+  padding-block: 10px;
 }
 .workRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 24px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 40px;
+  align-items: start;
 }
 .workCard {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.workCard:hover {
+  background: transparent;
 }
 .workCard:hover,
 .nowCard:hover,
@@ -173,11 +236,13 @@ a.researchLink {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 26px 30px;
+  padding: 30px 32px;
   color: var(--text-primary);
+  border-left: 3px solid var(--accent-brand);
 }
 .researchLink h3 {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
+  font-weight: 500;
   margin: 8px 0;
 }
 .researchLink p {
@@ -185,7 +250,7 @@ a.researchLink {
 }
 .researchMeta {
   font-size: 0.8125rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 .researchBadge {
   color: var(--accent-brand);
@@ -214,8 +279,21 @@ a.researchLink {
 .nowCol {
   min-width: 0;
 }
+.contactSection {
+  padding: 64px 48px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+}
+.contactSection :global(.section-title) {
+  font-size: clamp(3.8rem, 7vw, 6.5rem);
+  max-width: none;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+  margin-bottom: 48px;
+}
 .contactIntro {
   max-width: 56ch;
+  font-size: 0.9375rem;
 }
 .contactEmail {
   margin-top: 12px;
@@ -223,7 +301,7 @@ a.researchLink {
   overflow-wrap: anywhere;
 }
 .contactEmail a {
-  color: var(--text-primary);
+  color: var(--accent-brand);
 }
 .contactActions {
   display: flex;
@@ -232,27 +310,52 @@ a.researchLink {
   gap: 12px;
   margin-top: 24px;
 }
-.section:has(.contactIntro) {
-  border-top: 1px solid var(--border-color);
-  padding-top: 48px;
-}
-.section:has(.contactIntro) > div:first-of-type {
+.contactSection > div:first-of-type {
   justify-content: flex-start;
   padding-bottom: 8px;
 }
-.backToTop {
-  display: block;
-  width: fit-content;
-  margin: 56px 0 0 auto;
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+.backToTop,
+.replayIntro {
+  padding: 12px 0;
   font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+.replayIntro {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.replayIntro:hover {
+  color: var(--accent-brand);
 }
 @media (max-width: 1023px) {
-  .hero {
-    gap: 32px;
-    grid-template-columns: minmax(0, 1fr) 270px;
+  .heroIntro {
+    width: 100%;
+  }
+  .heroTitle {
+    font-size: clamp(7rem, 22vw, 13rem);
+  }
+  .heroVisual {
+    position: relative;
+    inset: auto;
+    width: calc(100% + 2 * var(--home-gutter));
+    height: 440px;
+    margin: 24px calc(-1 * var(--home-gutter)) 0;
+  }
+  .heroVisual::after {
+    display: none;
+  }
+  .visualCaption {
+    left: 20px;
   }
   .workRow {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr;
   }
   .workAside {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -262,47 +365,57 @@ a.researchLink {
   }
 }
 @media (max-width: 760px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 32px;
-  }
-  .hero > aside {
-    max-width: 100%;
+  .heroLocation {
+    display: none;
   }
 }
 @media (max-width: 640px) {
-  .content {
-    padding: 0;
+  .heroStage {
+    margin-top: 16px;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
-  .section {
-    margin-top: 56px;
+  .heroCopy {
+    margin-top: 24px;
+  }
+  .heroVisual {
+    height: clamp(340px, 85vw, 420px);
+  }
+  .visualCaption {
+    left: 16px;
+  }
+  .hero {
+    padding-top: 30px;
+  }
+  .heroTopline {
+    font-size: 0.75rem;
   }
   .heroTitle {
-    font-size: 3.25rem;
+    font-size: clamp(5rem, 25vw, 10rem);
+    margin: 0 0 0 -0.055em;
   }
   .heroLede {
-    font-size: 1rem;
+    font-size: 1.375rem;
+  }
+  .heroDetail {
+    font-size: 0.875rem;
+  }
+  .section {
+    margin-top: 80px;
+  }
+  .selectedWork :global(.section-title) {
+    font-size: clamp(2.7rem, 10vw, 3.5rem);
   }
   .workAside {
     grid-template-columns: 1fr;
   }
-  .workCard {
-    padding: 24px 16px;
-  }
-  .sectionNav {
-    gap: 8px 18px;
-  }
-  .sectionNav span {
-    flex-basis: 100%;
-  }
   .sectionHeading {
     flex-wrap: wrap;
-    gap: 0;
+    gap: 8px;
     margin-bottom: 24px;
   }
   .sectionHeading :global(.section-title) {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
   a.researchLink {
     align-items: flex-start;
@@ -315,5 +428,15 @@ a.researchLink {
   }
   .nowCard {
     padding: 16px;
+  }
+  .contactSection {
+    padding: 36px 22px;
+  }
+  .contactSection :global(.section-title) {
+    font-size: clamp(3.2rem, 13vw, 5rem);
+    margin-bottom: 28px;
+  }
+  .contactEmail {
+    font-size: 1rem;
   }
 }

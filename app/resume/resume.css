@@ -4,9 +4,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 0 var(--space-lg) var(--space-lg);
+  min-height: calc(100dvh - var(--header-height));
+  padding-block: var(--space-2xl) var(--space-lg);
 }
 
 /* Header row: title block + download action */
@@ -126,7 +125,7 @@
 
 @media (max-width: 640px) {
   .resume {
-    padding: 0 var(--space-md) var(--space-md);
+    padding-block: var(--space-xl) var(--space-md);
   }
 
   .resume-header {
