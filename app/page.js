@@ -98,7 +98,7 @@ export default function Home() {
         >
           <header className={styles.hero} id="top">
             <div className={styles.heroTopline}>
-              <span>Computer science × financial markets</span>
+              <span>Computer Science × Fintech</span>
               <span className={styles.heroLocation}>Based in Boston, MA</span>
             </div>
             <div className={styles.heroStage}>
