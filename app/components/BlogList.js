@@ -6,7 +6,7 @@ const blogs = [
   {
     slug: "books",
     title: "Books",
-    description: "My favorite books and books I plan to read.",
+    description: "What I’ve read and what’s next on my Goodreads shelves.",
   },
   {
     slug: "coding",

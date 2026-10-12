@@ -1,0 +1,178 @@
+.shelf {
+  margin-top: var(--space-2xl);
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.heading h2 {
+  margin: 0;
+}
+
+.heading > a {
+  font-size: 0.875rem;
+}
+
+.fallback {
+  color: var(--text-secondary);
+}
+
+.widget {
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* Goodreads supplies the books; scoped styles use the site's theme tokens. */
+.widget :global(.gr_custom_header_),
+.widget :global(.gr_custom_container_) > br,
+.widget :global(.gr_grid_container) > br {
+  display: none;
+}
+
+.widget :global(.gr_custom_each_container_) {
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr);
+  column-gap: var(--space-lg);
+  align-content: start;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.widget :global(.gr_custom_book_container_) {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+}
+
+.widget :global(.gr_custom_book_container_) img {
+  display: block;
+  width: auto;
+  max-width: 98px;
+  max-height: 150px;
+  border-radius: var(--radius-sm);
+}
+
+.widget :global(.gr_custom_title_) {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.widget :global(.gr_custom_author_) {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: var(--space-xs);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.widget :global(.gr_custom_rating_) {
+  grid-column: 2;
+  grid-row: 3;
+  margin-top: var(--space-sm);
+  line-height: 1;
+}
+
+.widget :global(.staticStars) {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.widget :global(.gr_custom_review_) {
+  grid-column: 2;
+  grid-row: 4;
+  margin-top: var(--space-md);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.widget :global(.gr_custom_tags_) {
+  grid-column: 2;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.widget :global(.gr_custom_container_) > center {
+  padding-top: var(--space-sm);
+}
+
+.widget :global(.gr_custom_container_) > center img {
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.widget :global(.gr_grid_container) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(98px, 1fr));
+  gap: var(--space-lg) var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.widget :global(.gr_grid_book_container) {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  min-height: 150px;
+}
+
+.widget :global(.gr_grid_book_container) a {
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.widget :global(.gr_grid_book_container) img {
+  display: block;
+  width: auto;
+  max-width: 98px;
+  max-height: 150px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.widget :global(.gr_grid_branding) {
+  grid-column: 1 / -1;
+  /* Override the widget's inline brown text for dark-theme contrast. */
+  color: var(--text-secondary) !important;
+  font-size: 0.875rem !important;
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .heading h2 {
+    margin: 0;
+  }
+
+  .widget :global(.gr_custom_each_container_) {
+    grid-template-columns: 65px minmax(0, 1fr);
+    column-gap: var(--space-md);
+    padding: var(--space-md);
+  }
+
+  .widget :global(.gr_custom_book_container_) img {
+    max-width: 65px;
+  }
+
+  .widget :global(.gr_custom_review_) {
+    grid-column: 1 / -1;
+    grid-row: 5;
+  }
+
+  .widget :global(.gr_grid_container) {
+    padding: var(--space-md);
+  }
+}
