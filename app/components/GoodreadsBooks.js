@@ -8,10 +8,10 @@ const SHELVES = [
   {
     shelf: "read",
     title: "Books I’ve read",
-    id: "gr_custom_widget_",
+    id: "gr_custom_widget_1791821667",
     scriptUrl:
-      "https://www.goodreads.com/review/custom_widget/189157306.Ashwin%27s%20bookshelf:%20read?cover_position=left&cover_size=medium&num_books=5&order=d&shelf=read&sort=date_added&widget_bg_transparent=true",
-    bookSelector: ".gr_custom_each_container_",
+      "https://www.goodreads.com/review/custom_widget/189157306?shelf=read&sort=date_updated&order=d&num_books=5&cover_position=left&cover_size=small&title=Ashwin%27s%20bookshelf:%20read&show_cover=1&show_author=1&show_title=1&show_rating=1&show_review=1&show_tags=1&widget_id=1791821667&widget_bg_color=FFFFFF&widget_bg_transparent=true&widget_text_color=000000&widget_title_size=medium",
+    bookSelector: ".gr_custom_each_container_1791821667",
   },
   {
     shelf: "to-read",
