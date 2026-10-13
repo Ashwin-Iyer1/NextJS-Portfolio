@@ -17,7 +17,7 @@ const EXPERIENCES = [
     date: "Spring 2027 Co-op",
     logo: "/Images/morgan_stanley_logo.png",
     logoAlt: "Morgan Stanley Logo",
-    hidden: true,
+    // hidden: true,
   },
   {
     company: "Wellington Management",
