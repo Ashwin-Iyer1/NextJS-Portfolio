@@ -12,7 +12,7 @@ const EXPERIENCES = [
   },
   {
     company: "Morgan Stanley",
-    role: "Institutional Equity Derivatives & Trading Co-op",
+    role: "Incoming Institutional Equity Co-op",
     subRoleText: "Derivatives Sales Trading",
     date: "Spring 2027 Co-op",
     logo: "/Images/morgan_stanley_logo.png",
