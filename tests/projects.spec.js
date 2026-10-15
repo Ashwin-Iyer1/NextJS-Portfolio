@@ -146,6 +146,7 @@ for (const project of projects.filter((project) => project.demo)) {
   for (const width of [390, 1440]) {
     test(`${project.slug} demo loads at ${width}px without errors or external services`, async ({
       page,
+      request,
     }) => {
       await page.setViewportSize({ width, height: 900 });
       const errors = [],
@@ -178,6 +179,22 @@ for (const project of projects.filter((project) => project.demo)) {
       ).toBe(true);
       expect(errors).toEqual([]);
       expect(external).toEqual([]);
+      const internalLinks = await page
+        .locator("a[href]")
+        .evaluateAll((anchors) => [
+          ...new Set(
+            anchors
+              .map((anchor) => new URL(anchor.href))
+              .filter((url) => url.origin === location.origin)
+              .map((url) => url.pathname + url.search),
+          ),
+        ]);
+      for (const href of internalLinks) {
+        expect(
+          (await request.get(href)).ok(),
+          `${project.slug} internal link ${href}`,
+        ).toBe(true);
+      }
       if (process.env.UPDATE_PROJECT_PREVIEWS === "1" && width === 1440) {
         await page.evaluate(() => document.fonts.ready);
         if (project.slug === "firmware-workbench") {

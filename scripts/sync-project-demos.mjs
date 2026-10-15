@@ -105,6 +105,8 @@ for (const project of selected) {
     encoding: "utf8",
   }).trim();
   let html = await readFile(path.join(destination, "index.html"), "utf8");
+  // Next serves public files explicitly rather than directory-indexing them.
+  html = html.replace(/href=(['"])\.\/?\1/g, 'href="./index.html"');
   const footer = `<aside aria-label="Project context" class="portfolio-project-context"><a href="/projects/${project.slug}">← Back to the case study</a> · <a href="${repository}/tree/${commit}" target="_blank" rel="noopener noreferrer">${dirty ? "Source repository (working preview)" : "View this version’s source"} ↗</a>${project.licenses ? ' · <a href="./LICENSE">License</a> · <a href="./NOTICE">Attribution</a>' : ""}</aside>`;
   html = html.replace(
     "</head>",
