@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ashwin Iyer — portfolio
+
+A Next.js portfolio for software engineering, mathematical tools, and quantitative research. The project collection is curated locally and stays usable without the repository database. Each case study links the problem, implementation, decisions, evidence, limitations, and a working demonstration.
+
+## Project collection
+
+- `app/data/projects.js` and `additionalProjects.js` are the authoritative public project registry.
+- `app/projects/[slug]/page.js` renders static case studies with project-specific metadata.
+- `public/demos/` contains self-contained copies of the selected projects' public demo artifacts. No private repository source or personal data belongs here.
+- Each demo includes `provenance.json` with the source repository, commit, and SHA-256 file hashes. `scripts/sync-project-demos.mjs` refreshes these artifacts from sibling checkouts after their own tests/builds pass. Source changes should be committed before the final sync so the source link identifies the shipped code.
+- `UPDATE_PROJECT_PREVIEWS=1` while running `tests/projects.spec.js` refreshes actual interface screenshots. CI does not modify them.
+
+Run `npm run sync:demos` after committing the project sources. The sync refuses dirty source trees; `--allow-dirty` is only for local previews and marks those artifacts accordingly. Project demos are isolated static documents with relative assets, an explicit return link, and source attribution. The firmware copy retains its AGPL license and upstream notice.
+
+The collection includes factor-risk analysis, Fourier signal processing, NUCoop, firmware tooling, the Oura visualization library, fantasy draft modeling, Row2Reach, and the existing NUSA team research. Concept art is labeled separately from real interface screenshots. Research assumptions and synthetic demonstration data are stated on the relevant pages.
+
 
 ## Getting Started
 

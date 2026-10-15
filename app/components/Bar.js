@@ -26,8 +26,8 @@ export default function Bar() {
             <Link
               key={href}
               href={href}
-              aria-current={pathname === href ? "page" : undefined}
-              className={`nav-link ${pathname === href ? "nav-link-active" : ""}`}
+              aria-current={(pathname === href || (href !== "/" && pathname.startsWith(`${href}/`))) ? "page" : undefined}
+              className={`nav-link ${(pathname === href || (href !== "/" && pathname.startsWith(`${href}/`))) ? "nav-link-active" : ""}`}
             >
               {label}
             </Link>

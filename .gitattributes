@@ -1,0 +1,2 @@
+# Keep published runtime bytes identical across Windows and Linux for provenance hashes.
+public/demos/** text=auto eol=lf

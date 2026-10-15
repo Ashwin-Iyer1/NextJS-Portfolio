@@ -65,4 +65,4 @@ Run `npm run lint`, `npm run build`, and `npm run test:ui`. On a new machine, in
 - Glacier accent text exceeds 5.9:1 contrast against the light page background and 8.7:1 against the dark background. This is a token-level check, not a whole-site accessibility certification.
 - Existing lint warnings for two image elements and build warnings for older AVIF content remain. The npm audit count is unchanged from the starting lockfile (27 advisories); the added font, test, and Three.js packages do not increase the advisory count.
 
-This work is local to `design/portfolio-refresh`; it has not been deployed.
+The original visual refresh described above was merged into `main`. The October 2026 project expansion retains that visual system and adds a curated registry, individual case studies, source provenance, and self-contained interactive demos; current release status is recorded by the deployment checks.

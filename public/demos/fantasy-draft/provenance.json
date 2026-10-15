@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/FantasyDraft",
+  "commit": "1a29f0c74459eba74db02a64a3e969ad6fab1609",
+  "workingPreview": false,
+  "sourceDirectory": "web/dist",
+  "files": {
+    "assets/index-bbFaGUUt.css": "53c47a72bd8d25a953be4c4afc629dc135a9b63c9d93cb26ba2d13951a2ca21e",
+    "assets/index-BLwun4f_.js": "0476a13d592c0bfdabcbbd88e4c24bdfdc6d7d00f7b8ac9affad806f5d40a6da",
+    "board.json": "c29a76b8b9e5325910b3078ec8f0ba02212359fd323ef52a2849e654e88c96b9",
+    "favicon.svg": "fa8c5c159e95119c62c6ee823329239c88420e67c72d113386a9dc007b8a8fa4",
+    "index.html": "2c6bf810ae9342d50209659e9e23af16b44f01fa300071da2a5f157abfb109a5",
+    "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc"
+  }
+}

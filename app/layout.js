@@ -30,11 +30,11 @@ export const metadata = {
   metadataBase: new URL("https://ashwiniyer.com"),
   title: "Ashwin Iyer's Portfolio",
   description:
-    "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
+    "Software engineering and quantitative research by Ashwin Iyer. Explore interactive tools, mathematical models, and source-backed project case studies.",
   openGraph: {
     title: "Ashwin Iyer's Portfolio",
     description:
-      "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
+      "Software engineering and quantitative research by Ashwin Iyer. Explore interactive tools, mathematical models, and source-backed project case studies.",
     url: "https://ashwiniyer.com",
     siteName: "Ashwin Iyer's Portfolio",
     locale: "en_US",
@@ -44,7 +44,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Ashwin Iyer's Portfolio",
     description:
-      "Personal website of Ashwin Iyer, a junior at Northeastern University from Southlake, Texas.",
+      "Software engineering and quantitative research by Ashwin Iyer. Explore interactive tools, mathematical models, and source-backed project case studies.",
     creator: "@ashwiniyer",
   },
 };

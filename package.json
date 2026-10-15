@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "test:ui": "playwright test",
-    "test:ui:production": "npm run build && PLAYWRIGHT_PRODUCTION=1 playwright test",
+    "test:ui:production": "node scripts/test-production.mjs",
+    "sync:demos": "node scripts/sync-project-demos.mjs",
     "audit:production": "npm audit --omit=dev"
   },
   "dependencies": {

@@ -5,6 +5,7 @@ const eslintConfig = [
   {
     ignores: [
       "node_modules/**",
+      "public/demos/**",
       ".claude/**",
       ".design-sync/.cache/**",
       "venv/**",

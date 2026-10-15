@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/NUWorks-Co-op-grader",
+  "commit": "051ab9fcd1b8076c01399bb2b4f73cad88cbac48",
+  "workingPreview": false,
+  "sourceDirectory": "demo",
+  "files": {
+    "app.mjs": "0982180587b4cdae98a3b1d8a8f0e848c44dd399354796a9117e58953c0d0199",
+    "data.mjs": "ccab04acacd48932cc09341764ea8f1beebbfb13d36fbd6f6d2cae5dad7f00de",
+    "demo.css": "d9697cdb14bc22686a3e500924887c55d6dcf69773c2c1f6edc4acdf0533373a",
+    "index.html": "383d6c041d43ca5a2d560a7bd6ae9c5e53e5b769b78449ad7ed4ee18eb50bfec",
+    "model.mjs": "467410e3fb246e00d9ed7fb535b57c0d677aa29fcca1998161e88ad188f44081",
+    "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc",
+    "vendor/LICENSE": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "vendor/matcher.mjs": "cb1cb511e3a83d39e703ddccc025fe219f8d4dce76a660e8d3e245e767f496d1",
+    "vendor/PROVENANCE.json": "b86418d5ac92f83d8e68880aa2e0717ad28e29e7b2e265fced709684117e7add"
+  }
+}

@@ -1,9 +1,6 @@
 .grid {
-  --art-blue: #8cbde7;
-  --art-ink: #152c42;
-  --art-paper: #d9e7f1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px 28px;
 }
 
@@ -12,6 +9,29 @@
   flex-direction: column;
   min-width: 0;
   color: var(--text-primary);
+}
+
+.artLink {
+  display: block;
+  border-radius: 8px;
+}
+.artLink:focus-visible {
+  outline: 2px solid var(--accent-brand);
+  outline-offset: 5px;
+}
+.projectIndex {
+  color: var(--accent-brand);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.project .proof {
+  margin-top: 16px;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+}
+.project h3 a {
+  color: inherit;
 }
 
 .project:hover {
@@ -25,6 +45,9 @@
 }
 
 .artwork {
+  --art-blue: #8cbde7;
+  --art-ink: #152c42;
+  --art-paper: #d9e7f1;
   position: relative;
   aspect-ratio: 16 / 11;
   flex-shrink: 0;

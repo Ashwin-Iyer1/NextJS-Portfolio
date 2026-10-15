@@ -31,11 +31,11 @@ export default function About() {
               <p>
                 I have been hobby coding for around 10 years and have competed
                 in two hackathons, <b>HackUTD</b> and <b>AIFAHacks</b>, winning
-                both competitions. I currently have a few side{" "}
+                both competitions. My current work spans{" "}
                 <Link href="/projects" className={styles.projectLink}>
                   projects
                 </Link>
-                , which range from web scraping to basic machine learning.
+                 in portfolio risk, signal processing, on-device machine learning, and developer tools. I like making the reasoning behind a result as usable as the interface.
               </p>
             </div>
 

@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/Uniden-Firmware-Decompilation-Tool",
+  "commit": "85c82fe5bd02b43ff6683722fc88e9b9734e34a8",
+  "workingPreview": false,
+  "sourceDirectory": "web",
+  "files": {
+    "app.mjs": "6c5f00b5e11c503bde27c01da045228e5ee38e7b92ea0df38c2c5ab2355012b9",
+    "binary.mjs": "42423747ee5a590f1e3a932d008614148aacfdfd1cb2cb179fc022a95e82190b",
+    "comparison.mjs": "04aca89e53a2f581cc08fc6b60add78c7c6302da92ea05f26e8ebe792eb45a74",
+    "firmware.mjs": "bb66d2fea8f008c1f27be3872c5795b33ad05dd0a5bc2a5d736122b18da10402",
+    "index.html": "dfe85caa3cbf6808a94d9c4fa28b3450f678342c662eec5d6f9f0a9a3443a1a6",
+    "LICENSE": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+    "NOTICE": "f02d0ac953d2c11183f8cb82231a01734a41a6329e552ce06a3d4ffc998ad0af",
+    "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc",
+    "practice.mjs": "ffad18860c7b971f5651a559ea09ee318d4452bf52b53234e7184618bb5c712e",
+    "profile.mjs": "47dfef81794665c2e21277e5deace3ce036291365047c54d888b2a9f6eaa84de",
+    "resources.mjs": "15b9930e9b44455cef2c677cc112705c4301bfef2b83095786465e9ee67373f3",
+    "styles.css": "1a93641c583ba0f473411deb8a1eeccaf0a3c7749f644022eda820e5c02edc88"
+  }
+}

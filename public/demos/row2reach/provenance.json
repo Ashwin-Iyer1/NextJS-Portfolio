@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/row2reach",
+  "commit": "b2e9f722801b28f824910c400760c96c2a6819a2",
+  "workingPreview": false,
+  "sourceDirectory": "studio",
+  "files": {
+    "app.mjs": "d5d27aeca3f146a8e42a5379880c304f8a689fdee2beaba2a1478a046d3d15b6",
+    "core.mjs": "aa702272b2d064512eb2609d85f591c0e9c8ff65024d93745bd1ea775d15d4fb",
+    "index.html": "bb5587c72757efb21204b762cc4d40e03519d460f56080dc32e8bdc604d34007",
+    "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc",
+    "style.css": "2218882b408beab91c17b9735cf3d44b58b49996d4af78c7aba082bc402e0b64",
+    "upload.mjs": "820e8c7d74471e28f724851e9734841f1ca9b52c71b6d07fd46fe93d799444fc"
+  }
+}

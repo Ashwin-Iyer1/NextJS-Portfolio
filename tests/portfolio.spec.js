@@ -323,31 +323,14 @@ test("Glacier stays fixed despite obsolete accent preferences while themes persi
   await expectFixedGlacier("rgb(156, 201, 223)");
 });
 
-test("selected work retains real project destinations and identifies its concept illustrations", async ({
-  page,
-}) => {
+test("selected work opens substantive case studies and labels concept art", async ({ page }) => {
   await openReturningVisit(page);
   const work = page.getByRole("region", { name: "Selected work" });
-  const destinations = [
-    [
-      "Equity factor risk model",
-      "https://github.com/Ashwin-Iyer1/Index-based-Factor-Decomposition",
-    ],
-    [
-      "Event-driven equity volatility",
-      "https://github.com/ArnMehta11/Equity_Volatility_Strategy",
-    ],
-    ["NUCoop", "https://nucoop.app/"],
-  ];
-  for (const [name, href] of destinations) {
-    const project = work.getByRole("link", { name: new RegExp(`^${name}`) });
-    await expect(project).toHaveAttribute("href", href);
-    await expect(project).toHaveAttribute("target", "_blank");
-    await expect(project).toHaveAttribute("rel", /noopener/);
-    await expect(project).toHaveAccessibleDescription(
-      /Concept illustration|Schematic curves/,
-    );
+  for (const [title, slug] of [["Equity factor risk model","factor-risk"],["Fourier signal lab","fourier-lab"],["NUCoop","nucoop"],["Firmware workbench","firmware-workbench"]]) {
+    await expect(work.getByRole("link", { name: `${title} case study`, exact: true })).toHaveAttribute("href", `/projects/${slug}`);
+    await expect(work.getByRole("link", { name: `Try ${title}`, exact: true })).toHaveAttribute("href", /^\/demos\//);
   }
+  await expect(work.getByText(/Concept illustration/)).toHaveCount(4);
 });
 
 test("unavailable live widgets keep navigation usable and offer working retry controls", async ({
@@ -430,7 +413,7 @@ for (const width of [320, 390, 768, 1440]) {
       page.getByRole("button", { name: "Switch to light theme" }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /^Equity factor risk model/ }),
+      page.getByRole("link", { name: "Equity factor risk model", exact: true }),
     ).toBeVisible();
     if (width === 390 || width === 1440) {
       await page.evaluate(() => document.fonts.ready);
@@ -563,10 +546,10 @@ test.describe("without JavaScript", () => {
       page.getByRole("navigation", { name: "Primary", exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /^Equity factor risk model/ }),
+      page.getByRole("link", { name: "Equity factor risk model", exact: true }),
     ).toHaveAttribute(
       "href",
-      "https://github.com/Ashwin-Iyer1/Index-based-Factor-Decomposition",
+      "/projects/factor-risk",
     );
     await expect(
       page.getByRole("link", { name: "Send an email", exact: true }),
