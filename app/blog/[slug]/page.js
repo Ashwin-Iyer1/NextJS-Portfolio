@@ -5,28 +5,22 @@ import "./page.css";
 export default async function Page(props) {
   const params = await props.params;
   const { slug } = params;
+  let Post;
 
   try {
     // Dynamically import the Markdown file
-    const { default: Post } = await import(`@/content/${slug}.mdx`);
-
-    return (
-      <div className="page-shell full-width-wrapper">
-        <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
-          <Post />
-        </article>
-      </div>
-    );
+    ({ default: Post } = await import(`@/content/${slug}.mdx`));
   } catch (error) {
     console.log(error);
-    return (
-      <div className="page-shell full-width-wrapper">
-        <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
-          <p>Post not found.</p>
-        </article>
-      </div>
-    );
   }
+
+  return (
+    <div className="page-shell full-width-wrapper">
+      <article className="half-width-wrapper" id="page-content" tabIndex={-1}>
+        {Post ? <Post /> : <p>Post not found.</p>}
+      </article>
+    </div>
+  );
 }
 
 // Auto-generate static paths from the content folder

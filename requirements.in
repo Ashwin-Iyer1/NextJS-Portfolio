@@ -1,0 +1,6 @@
+# Direct dependencies for the Python 3.12 data-sync jobs.
+# Regenerate requirements.txt with the command in its header.
+requests>=2.34.2,<3
+psycopg2-binary>=2.9.13,<3
+python-dotenv>=1.2.4,<2
+cryptography>=50.0.2,<51
