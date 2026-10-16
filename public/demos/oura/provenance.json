@@ -1,12 +1,12 @@
 {
   "repository": "https://github.com/Ashwin-Iyer1/oura-npm",
-  "commit": "56d894dd525f55987c7f5ae92563e6bb6d7427e0",
+  "commit": "cc69279bb7283fce8c33278f307c5d997dd3c1b3",
   "workingPreview": false,
   "sourceDirectory": "demo/dist",
   "files": {
     "assets/index-Cl84cn2p.js": "39b75119e7ab2fe3d9b0d81326935c3cd92b75ae829af479262c356c8bae4420",
     "assets/index-DI0TNI_d.css": "4301f3410e2b9a32fe5b48f5d214ab04ef2f7f84dd7af3bab3fc7f0fb7d03161",
-    "index.html": "4a18a4ccaca4ff4383d6f37ca28ffff5c067d85f4e7b6a047bdd0817d3a8fd5f",
+    "index.html": "1e8fe698498cb9e53577e73fba235accb358f24463fb81cc0f22abf93e5b54e5",
     "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc"
   }
 }

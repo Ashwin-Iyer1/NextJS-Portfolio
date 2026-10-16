@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/insta_confirm_action",
+  "commit": "bbd379fa3c947216c8dbf04d6025934ae5a8fe2e",
+  "workingPreview": false,
+  "sourceDirectory": ".",
+  "entry": "demo.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "demo.html": "0f6a012647d43b3e8de5f6233ce273160e14ad3ae9c78a4a0de3d3c2a7513aca",
+    "demo.js": "7c28b106c41e28b28fa6cf6c3184bb604161b5e4f27d7e02dc2c10d6388ebbab",
+    "core.js": "d8b0d565f42037806e4142601849c0430e1abe4e2ddedeb7c08c4e85d69acec3",
+    "content.js": "c9e4add4d9dfc48f772f3b6782e0bb3f22eb337fa1a7457d2ddd49821ab476bc",
+    "style.css": "7cdf9055ffa8743a57db98f85d2a8602d05b113f9d428cedd922b3387fdc7a98"
+  },
+  "files": {
+    "demo.html": "018e8eddc7f49a6fb654264de406475b40c1e4fd40ca939a072140f979408ab3",
+    "demo.js": "7c28b106c41e28b28fa6cf6c3184bb604161b5e4f27d7e02dc2c10d6388ebbab",
+    "core.js": "d8b0d565f42037806e4142601849c0430e1abe4e2ddedeb7c08c4e85d69acec3",
+    "content.js": "c9e4add4d9dfc48f772f3b6782e0bb3f22eb337fa1a7457d2ddd49821ab476bc",
+    "style.css": "7cdf9055ffa8743a57db98f85d2a8602d05b113f9d428cedd922b3387fdc7a98",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

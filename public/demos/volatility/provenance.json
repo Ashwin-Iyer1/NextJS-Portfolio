@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/IVTrading",
+  "commit": "1eac922e9183af8dd39dc447e97395bcc805cb28",
+  "workingPreview": false,
+  "sourceDirectory": "lab",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "5d27c8d32df7cf117d3fadb093bebf9a931c53092e8173c8b4877f0fd6092e2a",
+    "app.js": "498ffc44de3957e0183e061ceb89d1021955037eb08839a8854c4de75494c8b7",
+    "math.js": "bcea8e8f0b4b31774cdd33f5cb2edcca8b670ee680711f3a1228d3cc5ee0b4b2",
+    "styles.css": "6a381198b3aa0f4b7c592a71ea06014408dd9c1d91c61c68bb7f78e68228ac79"
+  },
+  "files": {
+    "index.html": "f194bd9e22917e389990b895dc0b484f12dfc9146359bcd80f95eaf4ed9c0513",
+    "app.js": "498ffc44de3957e0183e061ceb89d1021955037eb08839a8854c4de75494c8b7",
+    "math.js": "bcea8e8f0b4b31774cdd33f5cb2edcca8b670ee680711f3a1228d3cc5ee0b4b2",
+    "styles.css": "6a381198b3aa0f4b7c592a71ea06014408dd9c1d91c61c68bb7f78e68228ac79",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

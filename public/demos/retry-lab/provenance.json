@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/tiktodv4",
+  "commit": "2c40b28b706a42c81aa62984f01df088b36594f1",
+  "workingPreview": false,
+  "sourceDirectory": "lab",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "13995d96f2422977ce5f6d58154b269104db864e64595045e15a102eac57ab67",
+    "app.js": "acae76f8ac9a2f304a1111708d56030d8815af830c2444afb7414c44712739a0",
+    "engine.js": "a424da333b617f1233568f9419302cc4d9c6998bbf5f23f27a3387829f1ebe56",
+    "scenarios.js": "c86eed3570ec4c7a57994bd63be28d558732b90d0717f1d9041107d5ef89d92e",
+    "style.css": "34449df039199223c7947f6049677d747d3cd6d8c3d49e4c01b8f585f6b06655"
+  },
+  "files": {
+    "index.html": "a110083d7252c751c5e24f14f323288eda46bf7ad69c2ce244a5a24e4427cd67",
+    "app.js": "acae76f8ac9a2f304a1111708d56030d8815af830c2444afb7414c44712739a0",
+    "engine.js": "a424da333b617f1233568f9419302cc4d9c6998bbf5f23f27a3387829f1ebe56",
+    "scenarios.js": "c86eed3570ec4c7a57994bd63be28d558732b90d0717f1d9041107d5ef89d92e",
+    "style.css": "34449df039199223c7947f6049677d747d3cd6d8c3d49e4c01b8f585f6b06655",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

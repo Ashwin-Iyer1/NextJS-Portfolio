@@ -1,11 +1,11 @@
 {
   "repository": "https://github.com/Ashwin-Iyer1/FourierSeries",
-  "commit": "1232817dbccaf7af69d707287d3c2d070a39adee",
+  "commit": "57bcba20971d2ac14ffeb06697a1933d17c0dea6",
   "workingPreview": false,
   "sourceDirectory": "web",
   "files": {
     "app.mjs": "5b0437f45db9a6f528facd90a0f929ed02887afda1c41576654d5f700bec3bc9",
-    "index.html": "000f1129e8b6e7ccc0e435974f575a5252eca10355e6287294a5b6fe6ab2be70",
+    "index.html": "1c8aa07044a41d98bc7978203c8adea324a47726fa20422265ee51e06b2a0a12",
     "math.mjs": "3ed40371f5e70ab274d487814313af3e1ef31f5eca11ebf9a9575615c36d42c1",
     "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc",
     "styles.css": "24fcef1ebb3f6056404d826d721e3ddaecac051fdf22743be531a7c7dc7cd0a9"

@@ -1,4 +1,5 @@
 import "./projects.css";
+import Link from "next/link";
 
 import ProjectList from "../components/ProjectList";
 import { projects } from "../data/projects";
@@ -25,6 +26,7 @@ export default function Projects() {
             mathematical tools and engineering projects, with the
             implementation, tradeoffs, and evidence behind each one.
           </p>
+          <Link className="project-directory-link" href="/projects/explore">Explore all 39 public repositories →</Link>
         </header>
         <ProjectList
           projects={projects.map(

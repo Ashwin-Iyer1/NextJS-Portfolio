@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/ArbitrageFinder",
+  "commit": "afecf52542300faad9ffdd6660f5b8e6571fde82",
+  "workingPreview": false,
+  "sourceDirectory": ".",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "822abec6d89a9550984dcae28e9af7374fc422b9a4c4a68333dd7ac19d31edb5",
+    "app.js": "bda4c5925e302d8cfca56462658c9f3b20754883f03e94c40abadb7a3991e18a",
+    "lab.js": "27773b726129eacf07b672ba32ba2217e39d17bc011f2a1d73fd80f91bfdfcc9",
+    "arbitrage_opportunities.json": "533377c9df5177e8603425409631cd844a29b235466a8684dd83f2ef9599d17e",
+    "style.css": "c4747b6d59bc2941720796dcf73eb66d125fb37beabc1cb64a16000fec4c4e9b",
+    "LICENSE": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+  },
+  "files": {
+    "index.html": "0cd262bd1727b7548b704fe12540762af18cc6350d82b1270aabe842161f3e30",
+    "app.js": "bda4c5925e302d8cfca56462658c9f3b20754883f03e94c40abadb7a3991e18a",
+    "lab.js": "27773b726129eacf07b672ba32ba2217e39d17bc011f2a1d73fd80f91bfdfcc9",
+    "arbitrage_opportunities.json": "533377c9df5177e8603425409631cd844a29b235466a8684dd83f2ef9599d17e",
+    "style.css": "c4747b6d59bc2941720796dcf73eb66d125fb37beabc1cb64a16000fec4c4e9b",
+    "LICENSE": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

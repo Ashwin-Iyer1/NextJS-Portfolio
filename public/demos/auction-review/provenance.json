@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/SkyblockSniper",
+  "commit": "c8e5aa22f282ff32a1fb2421d591dc0fd7ed53de",
+  "workingPreview": false,
+  "sourceDirectory": "review",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "78b5de196b884e0121758029847a619c3a275598bd5e561166b6a99967cb96c0",
+    "app.js": "3cec785dab4d9e64e68dd2e959b50a31ecc4d7d545ec9335c80b987133f59ee4",
+    "report.json": "61776a4ca61415e4eb77d35aba67cb66a790274edf2738eba6daba4bde580ade",
+    "style.css": "a16714a83f06d14428c0baedcbcdb4db7553fac0a10376480f34426ae9c69af4",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+  },
+  "files": {
+    "index.html": "fe2416e38ea597f6e78f1cd4b0b4e23f732081c92543c82fa52c687481ad4561",
+    "app.js": "3cec785dab4d9e64e68dd2e959b50a31ecc4d7d545ec9335c80b987133f59ee4",
+    "report.json": "61776a4ca61415e4eb77d35aba67cb66a790274edf2738eba6daba4bde580ade",
+    "style.css": "a16714a83f06d14428c0baedcbcdb4db7553fac0a10376480f34426ae9c69af4",
+    "LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

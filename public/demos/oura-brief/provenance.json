@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/Oura-message-bot",
+  "commit": "8c9005678a57cf70d54d4e222ef285dc52bf45c1",
+  "workingPreview": false,
+  "sourceDirectory": "demo",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "41ea6dfde6166cc9e6c2fb9873efa7dfe795e2a2be1f9d9eaf9d95da46a6490a"
+  },
+  "files": {
+    "index.html": "e4b0268faff3e9f8a8e6075f2b2c6e7cc87a761911169f69675b373a61d9e1bc",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

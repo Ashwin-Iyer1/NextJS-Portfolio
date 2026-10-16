@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/PolymarketArbitrage",
+  "commit": "5e6a5813786bde7f0f3f478034554b2596e2d66b",
+  "workingPreview": false,
+  "sourceDirectory": "lab",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "cf27802b6b9d862b0cc0348f1a26bba6db7f022c1c752e98a27d4ef69b161872",
+    "app.js": "50ed2ad7c17f752a634dd56f52b885aeabaa7704398b29e5d4385cd815fd5efc",
+    "archive.json": "655c93fff3269d0c3656c545e973ab494cdd25c835f6cc7c961e643afa8b3736",
+    "depth.js": "1dcff80f308e705b3fb3a4fb2d2a749f969a506a5867cd44d7ba81e910f9f025",
+    "style.css": "221c8120dbedb2e1358def443b95a6f9fcbf5474bfdebb1262d063ba5f8b43d3"
+  },
+  "files": {
+    "index.html": "55d31307defb7e02ead283f473341fbc57555b4faaf0e836bc3cb7ae88c78769",
+    "app.js": "50ed2ad7c17f752a634dd56f52b885aeabaa7704398b29e5d4385cd815fd5efc",
+    "archive.json": "655c93fff3269d0c3656c545e973ab494cdd25c835f6cc7c961e643afa8b3736",
+    "depth.js": "1dcff80f308e705b3fb3a4fb2d2a749f969a506a5867cd44d7ba81e910f9f025",
+    "style.css": "221c8120dbedb2e1358def443b95a6f9fcbf5474bfdebb1262d063ba5f8b43d3",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

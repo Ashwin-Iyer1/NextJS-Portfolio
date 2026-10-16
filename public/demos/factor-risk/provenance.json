@@ -1,13 +1,13 @@
 {
   "repository": "https://github.com/Ashwin-Iyer1/Index-based-Factor-Decomposition",
-  "commit": "238df7a83800d28684d87d80a3a2994c6c4ad51c",
+  "commit": "db765616c08e9e1411c136228ce837a52ec92454",
   "workingPreview": false,
   "sourceDirectory": "workbench/dist",
   "files": {
     "assets/index-DTdHylxZ.js": "6be137d2562935e3d952fc4335247e2ae6de558a8c7c1cd216123305378dcea5",
     "assets/index-pkDUpG5g.css": "afe10b16b576327f47b3c4464cf213098c7922efbee1d6d0c128e49a983b2e03",
     "favicon.svg": "ddef0531cc7ddfa82dc04939760b1646f7fd8405392e479531f05778e028e242",
-    "index.html": "11016c70c3a323c0b2f5e45b1402243ffea4aaf58b472ce78f750b557ada0c2d",
+    "index.html": "addea73db717776aeb2d701354de8735cab08a85f6d53a6f517db8febbce7d7d",
     "model.json": "30182c2437e534213fbe96e10eb3a16ed80f6e2dd4e900a237a0978e9bac9334",
     "portfolio-context.css": "49a49a95be85cc190dc3437b93c7ff3fe3814702bea53f9651e455e36af373bc"
   }

@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/MLProjects",
+  "commit": "13f2e2b5fc0da27002a32071db3a407909c710b3",
+  "workingPreview": false,
+  "sourceDirectory": "lab",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "b1a0d0fa847a5f069ef7eee1162440b7223282744346623785a3e3a0e27e34c7",
+    "app.js": "6840a85037295c314d2089a91afc68c27661d991f7d407bd83515bb7a603a834",
+    "metrics.js": "17ae1b79459489c4a77e6f3e17811a6fdc21bbc21667ebe98cca7dfade011ae7",
+    "report.json": "0bebc8f1f5032ee3c4d12aab71e817f6aa442d89c710520a2f6360238fe39de9",
+    "style.css": "bf0321528431ce492c772ff733ac0ec49848042a9a8ce7787b07462579b099a1"
+  },
+  "files": {
+    "index.html": "9e07aaf2ae2c103712dbde7aa835028594a5eb37969ae2aa54444781645c55f2",
+    "app.js": "6840a85037295c314d2089a91afc68c27661d991f7d407bd83515bb7a603a834",
+    "metrics.js": "17ae1b79459489c4a77e6f3e17811a6fdc21bbc21667ebe98cca7dfade011ae7",
+    "report.json": "0bebc8f1f5032ee3c4d12aab71e817f6aa442d89c710520a2f6360238fe39de9",
+    "style.css": "bf0321528431ce492c772ff733ac0ec49848042a9a8ce7787b07462579b099a1",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

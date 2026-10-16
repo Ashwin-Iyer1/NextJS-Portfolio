@@ -1,0 +1,818 @@
+{
+  "schemaVersion": 1,
+  "source": "ParsedPoliticsMarkets.json",
+  "sha256": "0dea51db5875dec45e1925b396f705d6fd066b10c5fa8c01e9c5da5e9373291a",
+  "context": "Market metadata committed in December 2024. Saved active/closed fields are historical, not current status. No executable books are present.",
+  "markets": [
+    {
+      "question": "Will Gustavo Jalkh win the 2025 Ecuadorian Presidential Election?",
+      "endDate": "2025-04-13T00:00:00Z",
+      "conditionId": "0xc84ac0cca6352c640525e455600e3d7798bbf5b2259444b78910c99e1dcb7c33",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0225
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9775
+        }
+      ]
+    },
+    {
+      "question": "Will Szymon Hołownia be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0x9067b99e22ed2b8ed4bad7d72ce8eed3706861ae2c3a79f769e13de7c2967e6c",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0105
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9895
+        }
+      ]
+    },
+    {
+      "question": "Will Marek Jakubiak be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0x95874e7c989d91e5268ed7e880acb9269f13803ea0b5629f4a6acd1a4b5d6fbb",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0035
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9965
+        }
+      ]
+    },
+    {
+      "question": "Will Trump impose 25% tariff on Mexico/Canada?",
+      "endDate": "2025-01-31T00:00:00Z",
+      "conditionId": "0x66a86bed2460bb982e1a9a22d111b08bea41349423ef9e8669570e488cf96de0",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.21
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.79
+        }
+      ]
+    },
+    {
+      "question": "Will Agnieszka Dziemianowicz-Bąk be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0x0d7365208720dac4019e847e5dc11e795ec5392997d570ae26b89383c806561a",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0025
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9975
+        }
+      ]
+    },
+    {
+      "question": "Brooke Rollins confirmed as Agriculture Secretary?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x91162adb993288b7a2900c9d7ba33ba9c466cac7da1cadceccd8c0c205be584b",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.885
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.115
+        }
+      ]
+    },
+    {
+      "question": "Another Trump Cabinet nominee withdrawn before inauguration?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0xe83b123f0ad85b941624a74ea0d7d460dd7a3ea57cb7f32c2225a7d8ebaa7a73",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.87
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.13
+        }
+      ]
+    },
+    {
+      "question": "Will Waldemar Witkowski be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0xcf703c240cb264953898e97eab0ee287df5b750f1df8e4cfde7a9af940797f19",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0025
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9975
+        }
+      ]
+    },
+    {
+      "question": "Will Romuald Starosielec be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0x43e3f41dcc39116738cab3b8cef2002ce7eb514ced96d66aec12848437fb7afe",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0025
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9975
+        }
+      ]
+    },
+    {
+      "question": "Will Henry Cucalón win the 2025 Ecuadorian Presidential Election?",
+      "endDate": "2025-04-13T00:00:00Z",
+      "conditionId": "0x5ab99b5c84e83438d0919125c4bb9fa883fb5238388b2803aa998f434a073dec",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.007
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.993
+        }
+      ]
+    },
+    {
+      "question": "Will Daniel Noboa win the 2025 Ecuadorian Presidential Election?",
+      "endDate": "2025-04-13T00:00:00Z",
+      "conditionId": "0x961ee2529ff3c3b27a9b7dc424c1d7046f52bdd5b4ae38bd74ae65f0838fabaa",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.525
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.475
+        }
+      ]
+    },
+    {
+      "question": "Will Karol Nawrocki be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0x5ce0d897bd66142c43a38204a67ad85bc3e0643382258411a5aa58ca3e825082",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.355
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.645
+        }
+      ]
+    },
+    {
+      "question": "UK election called before 2025?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x3c802ebb829bce581d467211cb21debc58d23a66014728b3fbac7f73d9160af9",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.014
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.986
+        }
+      ]
+    },
+    {
+      "question": "Will Jan Topić win the 2025 Ecuadorian Presidential Election?",
+      "endDate": "2025-04-13T00:00:00Z",
+      "conditionId": "0xae7e07679b826f51fcaaa6575fd1770d6c02148153f54267a3e7b598722b6a64",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.055
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.945
+        }
+      ]
+    },
+    {
+      "question": "Will Sławomir Mentzen be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0xdf22571f38286a13ef30bb31197c737a77610f071f093ff643c951d644d76ba3",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.061
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.939
+        }
+      ]
+    },
+    {
+      "question": "Will 3+ Trump cabinet picks fail to get appointed?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x9583315d69dfbaf9488dbc8add7c8d114386fe5056b2103f65a231d99db1c61b",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.74
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.26
+        }
+      ]
+    },
+    {
+      "question": "Will Rafał Trzaskowski be the next President of Poland?",
+      "endDate": "2025-05-18T00:00:00Z",
+      "conditionId": "0xd009ac14bccdd12925a2d9f8d910411556e4ed153337abb18a97b97fabcf7db0",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.565
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.435
+        }
+      ]
+    },
+    {
+      "question": "Scott Bessent confirmed as Treasury Secretary?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x426ed0832cdf69783a463d39111d70841ad808bd8696e77098f8e3f41ff24e5b",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.93
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.07
+        }
+      ]
+    },
+    {
+      "question": "Will Luisa González win the 2025 Ecuadorian Presidential Election?",
+      "endDate": "2025-04-13T00:00:00Z",
+      "conditionId": "0x73f531e7088e7da29626e152d60566aa71a4a078b6ae6b7215577a963edc376c",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.41
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.59
+        }
+      ]
+    },
+    {
+      "question": "Yoon out as president of South Korea before April?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xa638577415195ac2ca0e8ab8befd45e3991612be6d2cf64e661abc6350c7900a",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.535
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.465
+        }
+      ]
+    },
+    {
+      "question": "Will Russia abandon Syrian naval base before April 2025?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0x5b2691a691ece9066c2b855815e6c8784011833b17d85c65976dc7494b18e002",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.235
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.765
+        }
+      ]
+    },
+    {
+      "question": "Lori Chavez-DeRemer confirmed as Labor Secretary?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x663bdcf8373cfa2af610ee93ff43f4451c0d0d07322129a6432b8127884687fd",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.86
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.14
+        }
+      ]
+    },
+    {
+      "question": "Will Ken Paxton be Trump's FBI director?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0xa4e7c0c6b03e823dba9bae1581e027a2c17e39e6355ce2d6a3589b46c96c7864",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.055
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.945
+        }
+      ]
+    },
+    {
+      "question": "Will Daniel Penny sentenced to less than 5 years?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x478b608789acf587c7071c3b404c8f64b341b9e5be842d8d18c6bb16e074ac97",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.135
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.865
+        }
+      ]
+    },
+    {
+      "question": "Irakli Kobakhidze out as Georgia PM in 2024?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x9fe6eddaed79491d7a935d0035026820897d4bf3e056c15226746f8373a860d0",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.075
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.925
+        }
+      ]
+    },
+    {
+      "question": "Kash Patel confirmed as Director of the FBI?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x14618aaf6f238e45400b1bb50857617f4b8d5a3a04e8dfa8b17de3db3b26bb27",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.65
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.35
+        }
+      ]
+    },
+    {
+      "question": "Will the U.S. abandon Syrian base before April 2025?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0x67cc22ede739a48424f07683b53b546579345c8c963a9b21b7e6c31501e84353",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.14
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.86
+        }
+      ]
+    },
+    {
+      "question": "South Korean President impeached in 2024?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x68ff092a4ea332946bc7ca59efc2b2a56bb702fd0d85d02ba883d29d7fdc5f2e",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.35
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.65
+        }
+      ]
+    },
+    {
+      "question": "Will Daniel Penny sentenced to more than 10 years years?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0xb333044e18f0dce9e34e916cc4d5138611f869aeae8c8b0af8f8826175a0e3ab",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.004
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.996
+        }
+      ]
+    },
+    {
+      "question": "Will Daniel Penny sentenced to 5-10 years?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0xf405e3f68d6a6f6036a5e8c6aec26305576c240b5144ba2b748bdcb746d918a0",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.0175
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.9825
+        }
+      ]
+    },
+    {
+      "question": "Will Trump pardon Roger Ver in his first 100 days?",
+      "endDate": "2025-04-29T00:00:00Z",
+      "conditionId": "0x1bf98b2e116dfe87345973a026dbc13ee6183bb3c0328851c55c21089e893a93",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.61
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.39
+        }
+      ]
+    },
+    {
+      "question": "NATO article 5 before March?",
+      "endDate": "2025-02-28T00:00:00Z",
+      "conditionId": "0xf9700d2d3ae459e4467729f092fb0543b305d9210d011f9b937d2f85c1519b4a",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.08
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.92
+        }
+      ]
+    },
+    {
+      "question": "Will China unban Bitcoin by March 31?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xfa5b660a1366853b220f0420cf8f2367ce618c854d25cfe3451dab9b415ad2a7",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.115
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.885
+        }
+      ]
+    },
+    {
+      "question": "Will Kash Patel be Trump's FBI director?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x74c68b3e4e27d104600cae587eaa0e6afa4c8ae738f04c28a2fca43a2bd372f7",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.675
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.325
+        }
+      ]
+    },
+    {
+      "question": "Yoon out as president of South Korea in 2024?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x2dee7133255484468b06465e9de2ef3efeab7b0ba6e58ce0a965f73a24e134b1",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.235
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.765
+        }
+      ]
+    },
+    {
+      "question": "Daniel Penny not sentenced to prison?",
+      "endDate": "2024-12-31T00:00:00Z",
+      "conditionId": "0x98b37ce52cbde9b943184cba4f5e8290e32d3878085c23f6013096f7359e3e1e",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.85
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.15
+        }
+      ]
+    },
+    {
+      "question": "Eric Adams out as NYC mayor by March 31?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xd4b11814de6b0ca7dd4039828dd70c741e04b7e6317cc4c0897235df19986368",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.185
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.815
+        }
+      ]
+    },
+    {
+      "question": "Khamenei out as Supreme Leader of Iran by June 30?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x1b2b69401b202d313f8909800ca7e5b1c631de6782d0b74e7cc827e1873abfb0",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.31
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.69
+        }
+      ]
+    },
+    {
+      "question": "Assad out as President of Syria by March 31, 2025?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xb016ffde99bb7820cf82a9358f73d2cd9d0b9df6d3b1fd30198b043656a077ee",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.285
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.715
+        }
+      ]
+    },
+    {
+      "question": "Daniel Penny found guilty?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xc1823123d3af6771255637bb9582473fbbb99c682ebce4aa98ad4c52d735bb46",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.375
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.625
+        }
+      ]
+    },
+    {
+      "question": "Will Trump eliminate daylight saving time in first 100 days?",
+      "endDate": "2025-04-29T00:00:00Z",
+      "conditionId": "0x4a41eba8bd729f6c93e1fe66524168fd2a65ecccd3a88e6a1501a8635f00bdb7",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.085
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.915
+        }
+      ]
+    },
+    {
+      "question": "Will Trump pardon Daniel Penny in his first 100 days?",
+      "endDate": "2025-04-29T00:00:00Z",
+      "conditionId": "0xc64d3236e385c33bd6c4461f7d1ade64925ed3671401ce6d5a1b36912de228a1",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.055
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.945
+        }
+      ]
+    },
+    {
+      "question": "Will US gov sell Bitcoin before Trump inauguration?",
+      "endDate": "2025-01-19T00:00:00Z",
+      "conditionId": "0xe9dae7a3fdc3512d9cc855189b48a6aa81873a0133b854db65f3d87755861a24",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.265
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.735
+        }
+      ]
+    },
+    {
+      "question": "Daniel Penny found guilty of manslaughter?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0x10fe6469583bb82a3421be8b08913372946a35030f82a048d386e03e5fa480b3",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.195
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.805
+        }
+      ]
+    },
+    {
+      "question": "Will Andrew Bailey be Trump's FBI director?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0xa293cf61ba98fef68ae9d0c3cee8d89d8ad80beb7767c97f2f2a3502d111db99",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.115
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.885
+        }
+      ]
+    },
+    {
+      "question": "Will Russia pull out of Syria before April 2025?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0x4fccc0dcb625ea55ff1ca0409bb44fe1952c04bc16cf5255002ceb2cc3791888",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.185
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.815
+        }
+      ]
+    },
+    {
+      "question": "Will a nuclear weapon detonate by March 31?",
+      "endDate": "2025-03-31T00:00:00Z",
+      "conditionId": "0xe3b31dd451916bf35fb28b6c9e6c1b249dac45ef6c2e02b4ef2faa40308b82df",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.115
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.885
+        }
+      ]
+    },
+    {
+      "question": "Will Biden pardon Fauci?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0xcb1745eeb2d414a6865e6dd69b9d648e6596c67ff92c778c1eed6b0b43d27055",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.335
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.665
+        }
+      ]
+    },
+    {
+      "question": "Will Biden pardon Edward Snowden?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0x6a248e9e979d3b94ee8555166df52c3bd42af298c3b2a035fa2765910852e506",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.037
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.963
+        }
+      ]
+    },
+    {
+      "question": "Will a nuclear weapon detonate by June 30?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0x2dac5b263a09b9a84d775bbc1cbc856559dbe49d3a2b875e7e6ad42a88d07b3b",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.155
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.845
+        }
+      ]
+    },
+    {
+      "question": "Will Mike Rogers be Trump's FBI director?",
+      "endDate": "2025-06-30T00:00:00Z",
+      "conditionId": "0xdb646b2ab2070eaecc8eceaac59476a00fc11538fbf6bb69ab3fc2af7f2e7e88",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.065
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.935
+        }
+      ]
+    },
+    {
+      "question": "Will Biden pardon Jim Biden?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0xcde81adc8f07ce43f0287684a259ac4a6b3612a73c71c0247c6bc8b2bc97a691",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.285
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.715
+        }
+      ]
+    },
+    {
+      "question": "Will Biden pardon Liz Cheney?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0x0ba6d0a2f35fbb9a38aaee50b4a44b21093f4da96a2c3a3b49704b488a6b6b20",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.245
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.755
+        }
+      ]
+    },
+    {
+      "question": "Will Biden pardon Adam Schiff?",
+      "endDate": "2025-01-20T00:00:00Z",
+      "conditionId": "0x072acaa7dd352c795948d495e019eec539539d36698225ab98b2f55c692d1b0c",
+      "tokens": [
+        {
+          "outcome": "Yes",
+          "indicativePrice": 0.265
+        },
+        {
+          "outcome": "No",
+          "indicativePrice": 0.735
+        }
+      ]
+    }
+  ]
+}

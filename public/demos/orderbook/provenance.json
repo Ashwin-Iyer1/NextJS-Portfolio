@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/pm-tradingdesk",
+  "commit": "337a11ff3c74f188363f6445970fdf4130c4a346",
+  "workingPreview": false,
+  "sourceDirectory": "replay",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "651b0a9d00e738ea2a151c35aff2fc7c81ffbc3b2fcf0475f1bc1a49edb5a6d5",
+    "app.js": "8a117bfcff808bc2a49d8fc97f69df05796453a5d22ae83a7dbbe00500f05c05",
+    "book.js": "4945db4035be15bfdc8054cf2609161721e06db4a318bf9303a5d6b43f21225f",
+    "fixtures.js": "3cc46a4b5439ab47a1ad7c6953ec624f2a39166fc3dbef6da85ecc026e8863d0",
+    "style.css": "7db98b71b31c9ba61f1d0079bba6f9dc695bcd096a99b76696cb571a7775790e"
+  },
+  "files": {
+    "index.html": "1189839b05a1f34fc79e69d7ad24013df46bfff6a639c3c7b18641a4d8cf7759",
+    "app.js": "8a117bfcff808bc2a49d8fc97f69df05796453a5d22ae83a7dbbe00500f05c05",
+    "book.js": "4945db4035be15bfdc8054cf2609161721e06db4a318bf9303a5d6b43f21225f",
+    "fixtures.js": "3cc46a4b5439ab47a1ad7c6953ec624f2a39166fc3dbef6da85ecc026e8863d0",
+    "style.css": "7db98b71b31c9ba61f1d0079bba6f9dc695bcd096a99b76696cb571a7775790e",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

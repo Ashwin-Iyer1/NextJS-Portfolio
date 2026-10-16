@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/openai_merch_bot",
+  "commit": "d5d5d4544900ce761b679441929fcfe3a583731d",
+  "workingPreview": false,
+  "sourceDirectory": "demo",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "14a78b4f24ec189d401abee787e0c3a209f6e0146e3fddf9b13212c7a5544828"
+  },
+  "files": {
+    "index.html": "fdc067b527aee12df35818363ae52de3e9cae4375aa1517b92461bd2752eeef3",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/Interview-Prep",
+  "commit": "dbf81432a9fce5d1ec4dd772e3a6ba2bf2dc7fc7",
+  "workingPreview": false,
+  "sourceDirectory": "studio",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "b8f54ad35fd608a4edfee2ecd25883889c5364ad7b5df20cfbca041ebe05d7af",
+    "app.js": "da3d442997c2c5cf0d7321116231a5372ef65deffcb35744a929e8aa189ba769",
+    "core.js": "e7506f1d87d164352cd2e864f2519f31930fac982937529d7e918b25350f6d53",
+    "questions.js": "8723b06e25d46ac93af19a211c29590d9fdcbc13dabc2f9280f7c5bed4b6bcd8",
+    "style.css": "7a3a750b2533ef44e692e14b241880ab0b8550d04c4bfc9b899d3a9e4546b2e0"
+  },
+  "files": {
+    "index.html": "f34eac87b2ff180e30dbfd2c3e2e20a409883e46c32706554e3bf8adee6df315",
+    "app.js": "da3d442997c2c5cf0d7321116231a5372ef65deffcb35744a929e8aa189ba769",
+    "core.js": "e7506f1d87d164352cd2e864f2519f31930fac982937529d7e918b25350f6d53",
+    "questions.js": "8723b06e25d46ac93af19a211c29590d9fdcbc13dabc2f9280f7c5bed4b6bcd8",
+    "style.css": "7a3a750b2533ef44e692e14b241880ab0b8550d04c4bfc9b899d3a9e4546b2e0",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

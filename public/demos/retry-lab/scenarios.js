@@ -1,0 +1,10 @@
+export const scenarios = {
+  recovery: { name: 'Service recovery', description: 'Two temporary failures, then a successful response. Compare jitter against fixed exponential backoff.', policy: {}, responses: [{status:503,durationMs:180},{status:502,durationMs:240},{status:200,durationMs:160}] },
+  rateLimit: { name: 'Respect Retry-After', description: 'The first response requests 6 seconds. A 2-second local cap must not shorten the server delay.', policy: {capDelayMs:2000}, responses: [{status:429,durationMs:100,retryAfter:'6'},{status:200,durationMs:200}] },
+  date: { name: 'A date, not a duration', description: 'The virtual clock starts at 2026-01-01 00:00:00 UTC. Retry-After is an absolute 5-second timestamp.', policy: {}, responses: [{status:503,durationMs:1200,retryAfter:'Thu, 01 Jan 2026 00:00:05 GMT'},{status:200,durationMs:300}] },
+  timeout: { name: 'The slow response', description: 'A scripted 8-second response misses the 3-second per-attempt timeout. Its late success cannot count.', policy: {}, responses: [{status:200,durationMs:8000},{status:'network',durationMs:100},{status:200,durationMs:200}] },
+  deadline: { name: 'A deadline wins', description: 'A 6-second Retry-After exceeds the remaining 4-second budget. No request is sent early to fit the budget.', policy: {deadlineMs:4000}, responses: [{status:429,durationMs:100,retryAfter:'6'},{status:200,durationMs:200}] },
+  cancellation: { name: 'Cancel while waiting', description: 'Cancellation interrupts the virtual wait at exactly 1.5 seconds.', policy: {cancelAtMs:1500}, responses: [{status:429,durationMs:100,retryAfter:'6'},{status:200,durationMs:200}] },
+  unsafe: { name: 'Unsafe to repeat', description: 'A network error is ambiguous: an operation may already have completed. Retry safety must be established by the caller.', policy: {retrySafe:false}, responses: [{status:'network',durationMs:120},{status:200,durationMs:100}] },
+  permanent: { name: 'A permanent failure', description: 'Authentication failure is terminal in this policy. More retries would not repair credentials.', policy: {}, responses: [{status:401,durationMs:150},{status:200,durationMs:100}] },
+};

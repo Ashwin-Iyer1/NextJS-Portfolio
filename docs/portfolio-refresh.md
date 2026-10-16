@@ -66,3 +66,13 @@ Run `npm run lint`, `npm run build`, and `npm run test:ui`. On a new machine, in
 - Existing lint warnings for two image elements and build warnings for older AVIF content remain. The npm audit count is unchanged from the starting lockfile (27 advisories); the added font, test, and Three.js packages do not increase the advisory count.
 
 The original visual refresh described above was merged into `main`. The October 2026 project expansion retains that visual system and adds a curated registry, individual case studies, source provenance, and self-contained interactive demos; current release status is recorded by the deployment checks.
+
+## October 16 public project directory
+
+The `/projects/explore` route covers all 39 owned public repositories. Eight selected case studies remain at `/projects`; the directory extends discovery to the rest of the engineering, mathematical, machine-learning, robotics, and product work. Reference documents and historical archives retain distinct categories. The page offers 28 browser experiences, including 22 demo bundles hosted with this portfolio, and clear setup links for local services, desktop utilities, and device plugins.
+
+Filter state is encoded in the URL using Next.js native history integration. The complete card collection remains available in the server-rendered fallback. Cards separate the contribution, verification evidence, limitations, and attribution; concept illustrations retain their labels and screenshots identify the real application.
+
+Fifteen additional public demo bundles use explicit runtime allowlists, clean source commits, source hashes, and output hashes. Relative worker, dictionary, model, and CSS paths are checked at their actual nested URLs. Screenshots also have a provenance manifest. The browser checks cover filter composition, reload/back behavior, mobile layout, readable evidence, absence of missing assets/external service calls in the bundled demos, and representative model interactions.
+
+All 21 directory-specific checks pass against the production build, in addition to the 46 existing portfolio checks. Independent Chrome review covers 360px and desktop layouts, both themes, shared URLs, and an actual focus-timer session entered from the directory. The existing lint warnings are the two older raw image elements; production dependencies report zero known vulnerabilities. AVIF build warnings remain limited to the older blog images. The final CI run verifies the full suite on the published commit.

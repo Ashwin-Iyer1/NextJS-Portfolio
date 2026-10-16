@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/GPTvsGeminiTrader",
+  "commit": "f51334e6e516c904f5737db28b823b0c2148352b",
+  "workingPreview": false,
+  "sourceDirectory": "studio",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "9fbe27a2e997f55a2e80da858c551f32c5baedab3ad4c45efbd5c7a3d4f32e98",
+    "app.js": "1a1ae497ec16b1a4d5916309ef3754a84545f9e329234ef4176ebf2e936b2ba9",
+    "engine.js": "7695db3f35561c360b076541009d5d57f132eaaff3d182fde3ebc2147ddf7556",
+    "style.css": "12b30685b97f45dc397cb1c50201b630497d1d725c89da03568100ce4d84191e"
+  },
+  "files": {
+    "index.html": "9ba0dcbb485d10c55afeadfc4d88b975de5d16d734da4c9cfc7f849b05518142",
+    "app.js": "1a1ae497ec16b1a4d5916309ef3754a84545f9e329234ef4176ebf2e936b2ba9",
+    "engine.js": "7695db3f35561c360b076541009d5d57f132eaaff3d182fde3ebc2147ddf7556",
+    "style.css": "12b30685b97f45dc397cb1c50201b630497d1d725c89da03568100ce4d84191e",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

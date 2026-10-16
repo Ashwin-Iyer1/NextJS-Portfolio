@@ -109,16 +109,10 @@ export default function ProjectList({ projects }) {
       )}
       <div className={styles.archiveLink}>
         <p>
-          Looking for the rest? Older experiments and smaller utilities live on
-          GitHub.
+          There is more to explore: mathematical workbenches, local tools,
+          machine-learning experiments, and the complete public archive.
         </p>
-        <a
-          href="https://github.com/Ashwin-Iyer1?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Browse the full repository archive ↗
-        </a>
+        <Link href="/projects/explore">Explore all 39 public repositories →</Link>
       </div>
     </div>
   );

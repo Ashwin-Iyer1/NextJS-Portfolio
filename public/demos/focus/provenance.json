@@ -1,0 +1,19 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/Pomodoro-App",
+  "commit": "91e16782afd277ac2150aa838f567471bec5320c",
+  "workingPreview": false,
+  "sourceDirectory": "dist/ui",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "b94a9cbc212ed470563df73370f6af56b4d6127739071f076d2cccadb9ad2f97",
+    "assets/index-B7fTs8FH.js": "825617e91de5ed65deda89f69e5aa03b3b52c5c8211b7ffad09a211f7a66c3d1",
+    "assets/index-DEBt-oRx.css": "2be759bce8d51205a114daaabfac4dc0969a94f4ae9c39845725b2bd8d0ed303"
+  },
+  "files": {
+    "index.html": "109a6914822e4a714b9345caca70313f29e33a50e1c5d8cca76b6097ba746ce3",
+    "assets/index-B7fTs8FH.js": "825617e91de5ed65deda89f69e5aa03b3b52c5c8211b7ffad09a211f7a66c3d1",
+    "assets/index-DEBt-oRx.css": "2be759bce8d51205a114daaabfac4dc0969a94f4ae9c39845725b2bd8d0ed303",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

@@ -1,2 +1,5 @@
 # Keep published runtime bytes identical across Windows and Linux for provenance hashes.
 public/demos/** text=auto eol=lf
+
+# Preserve the generated TensorFlow.js diagnostic string verbatim.
+public/demos/sensor-review/assets/inference.worker-*.js -whitespace

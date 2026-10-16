@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/Game-Pigeon-Anagrams",
+  "commit": "8b257721452334ff9775cff5981ae037300d7d2d",
+  "workingPreview": false,
+  "sourceDirectory": ".",
+  "entry": "web/index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "web/index.html": "6a0bad884e03d3a12ad56a579595b774a39fffa785c935f102c118e5eeba5d78",
+    "web/app.js": "52b6ef40a497454a9aafd306c5d9b0f70e48a3f096ef4618792505b623fe8c29",
+    "web/solver.js": "9a53be2d1b0c7d5aa0f7f6db4e4a2d20b238b156c1ece167be904031359de469",
+    "web/style.css": "83aa6535846508ad90ddae0f41bbe217de44aebd5698b6156bfb1900f057d943",
+    "web/worker.js": "ecd3f62c663575faffd392221dcb3785a9f2850f49701aa2b59519c248a5fd36",
+    "Anagrams/wordlist.txt": "a5e77cdf1ae3ab173db0f26d721fca3b69c35212f982ad48c306e27269357173"
+  },
+  "files": {
+    "web/index.html": "a42b83bd7c48201ffc664cc0609225336e1b42ab3b1479856b7907d2865682fc",
+    "web/app.js": "52b6ef40a497454a9aafd306c5d9b0f70e48a3f096ef4618792505b623fe8c29",
+    "web/solver.js": "9a53be2d1b0c7d5aa0f7f6db4e4a2d20b238b156c1ece167be904031359de469",
+    "web/style.css": "83aa6535846508ad90ddae0f41bbe217de44aebd5698b6156bfb1900f057d943",
+    "web/worker.js": "ecd3f62c663575faffd392221dcb3785a9f2850f49701aa2b59519c248a5fd36",
+    "Anagrams/wordlist.txt": "a5e77cdf1ae3ab173db0f26d721fca3b69c35212f982ad48c306e27269357173",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}

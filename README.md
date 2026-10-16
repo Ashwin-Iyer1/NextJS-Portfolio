@@ -4,6 +4,15 @@ A Next.js portfolio for software engineering, mathematical tools, and quantitati
 
 ## Project collection
 
+The [complete public directory](https://ashwiniyer.com/projects/explore) covers **39 owned public repositories**, alongside eight selected case studies (including the separately attributed NUSA team research). Its 28 browser experiences include 22 self-contained demo bundles served by this portfolio and six independently hosted projects. Search, discipline and runtime filters persist in shareable URLs; every entry explains the contribution, verification evidence, attribution, and limits.
+
+- `app/data/explorerProjects.js` is the complete directory registry. Private repositories are excluded; archived/team/fork work is explicitly labeled.
+- `npm run sync:explorer` copies 15 new demo bundles and actual screenshots through the explicit allowlists in `scripts/explorer-demo-config.mjs`. It refuses dirty source checkouts. Run each source project's build and tests first; generated `dist` bundles are built from the pinned checkout.
+- `public/project-previews/provenance.json` pins screenshot source commits and hashes. Demo manifests include shipped-file hashes and normalized source-file hashes. Inline demo data is fictional or explicitly identified historical research.
+- `tests/explorer.spec.js` checks all 39 entries, URL filters/reload/history, responsive details, demo resources and file hashes, worker dictionary loading, and classifier interactions. Local desktop/API tools link to their setup instructions instead of a nonfunctional hosted shell.
+
+The original seven case-study demos use the sync below. The new bundle sync preserves upstream attribution and license files, and points the optional interview AI workflow to local setup instructions.
+
 - `app/data/projects.js` and `additionalProjects.js` are the authoritative public project registry.
 - `app/projects/[slug]/page.js` renders static case studies with project-specific metadata.
 - `public/demos/` contains self-contained copies of the selected projects' public demo artifacts. No private repository source or personal data belongs here.

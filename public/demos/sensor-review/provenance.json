@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/Ashwin-Iyer1/studentsdrivesafe",
+  "commit": "0b1932067f24e8488f929202aa89d1465e5d246a",
+  "workingPreview": false,
+  "sourceDirectory": "dist",
+  "entry": "index.html",
+  "sourceHashNormalization": "UTF-8 text line endings normalized to LF; binary files unchanged",
+  "sourceFiles": {
+    "index.html": "f9b7f1aad3d2becef4fcb6d024593886348f1cb9acdccf6221648a5eea496de9",
+    "assets/index-Cks4VGgJ.css": "870729af0287a6f7f8d2759371d551743ac911a81daa6a1b1d6ecbc5ee433f38",
+    "assets/index-XOeHGj8S.js": "132eaff212545727a0ecccce4dfb538a1caa5e5a28d279d53664462b5a389bf7",
+    "assets/inference.worker-B5dxQz5V.js": "f9a4ac8cc3950d02641076c1fc8c8ec1c86cfe4e7a5326cee930be90379ea779",
+    "model/group1-shard1of1.bin": "3c2e40c6054c6359ca445d33894a4e374891630119f881f4b93644429396c76f",
+    "model/model.json": "9626bd116642e9a569a7ae162c8e891b3e5153669cc2f9bf0e3ef9a66297df16"
+  },
+  "files": {
+    "index.html": "f57a5db0bd06e7b4f7a2fc3f89b81b95d19f0861703cd587792a86e921799fea",
+    "assets/index-Cks4VGgJ.css": "870729af0287a6f7f8d2759371d551743ac911a81daa6a1b1d6ecbc5ee433f38",
+    "assets/index-XOeHGj8S.js": "132eaff212545727a0ecccce4dfb538a1caa5e5a28d279d53664462b5a389bf7",
+    "assets/inference.worker-B5dxQz5V.js": "f9a4ac8cc3950d02641076c1fc8c8ec1c86cfe4e7a5326cee930be90379ea779",
+    "model/group1-shard1of1.bin": "3c2e40c6054c6359ca445d33894a4e374891630119f881f4b93644429396c76f",
+    "model/model.json": "9626bd116642e9a569a7ae162c8e891b3e5153669cc2f9bf0e3ef9a66297df16",
+    "portfolio-context.css": "952a4ba46f7d167457fd29123e364bea10cbbeaca915cc2c9cb14b0dc49462a2"
+  }
+}
