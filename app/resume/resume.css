@@ -1,4 +1,4 @@
-/* Resume page — header row + full-height framed PDF viewer */
+/* Resume page — live resume content, styled with the portfolio's theme tokens. */
 
 .resume {
   display: flex;
@@ -71,30 +71,147 @@
   outline-offset: 2px;
 }
 
-/* Viewer: canonical card frame, fills remaining viewport height.
-   Flex column with a flex:1 iframe (not height: 100%): percentage heights
-   are not guaranteed to resolve against a flex-grown parent when the page
-   height comes from min-height. isolation makes WebKit clip the iframe to
-   the rounded corners. */
+/* The imported document has no styles of its own. Scope every content rule
+   here so neither site's navigation, headings, or footer can affect the other. */
 .resume-viewer {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 480px;
-  background: var(--bg-card);
+  /* background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  isolation: isolate;
+  border-radius: var(--radius-lg); */
 }
 
-.resume-iframe {
-  flex: 1;
+.resume-content {
   width: 100%;
-  border: 0;
+  max-width: 92ch;
+  margin-inline: auto;
+  /* padding: clamp(24px, 4vw, 56px); */
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
-/* Fallback for browsers that won't render inline PDFs */
+.resume-content > header {
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resume-content h2 {
+  margin-bottom: var(--space-md);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.resume-content > header p {
+  font-size: 0.875rem;
+}
+
+.resume-content section {
+  margin-top: var(--space-xl);
+}
+
+.resume-content h3 {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--accent-brand);
+  font-size: 1.25rem;
+}
+
+.resume-content h4 {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.resume-content article + article,
+.resume-content ul + h4 {
+  margin-top: var(--space-lg);
+}
+
+.resume-content .entry-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.resume-content p {
+  margin-top: var(--space-sm);
+}
+
+.resume-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.resume-content .date {
+  color: var(--text-muted);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.resume-content .entry-heading .date {
+  margin: 0;
+}
+
+.resume-content p strong .date {
+  display: inline-block;
+  margin-left: var(--space-sm);
+}
+
+.resume-content h4 .date {
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+.resume-content h4 em,
+.resume-content h4 a {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.resume-content ul,
+.resume-content ol {
+  padding-left: 1.25rem;
+  margin-top: var(--space-sm);
+}
+
+.resume-content li {
+  padding-left: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.resume-content li::marker {
+  color: var(--accent-brand);
+}
+
+.resume-content a,
+.resume-unavailable a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 3px;
+}
+
+.resume-content a:hover,
+.resume-unavailable a:hover {
+  color: var(--accent-brand);
+  text-decoration-color: currentColor;
+}
+
+.resume-unavailable {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+}
+
+.resume-unavailable p {
+  margin-top: var(--space-md);
+}
+
+/* Direct access to the source remains available alongside the PDF download. */
 .resume-fallback {
   margin-top: var(--space-md);
   font-size: 1rem;
@@ -143,8 +260,17 @@
     justify-content: center;
   }
 
-  .resume-viewer {
-    min-height: 420px;
+  .resume-content {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .resume-content .entry-heading {
+    flex-direction: column;
+  }
+
+  .resume-content p strong .date {
+    display: block;
+    margin-left: 0;
   }
 }
 
