@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import localSongsData from "../data/songs.json"; // Fallback when the API is unavailable
 import styles from "./SongList.module.css";
+import Image from "next/image";
 
 const SongList = () => {
   const songRefs = useRef([]);
@@ -88,11 +89,13 @@ const SongList = () => {
           }}
           className={styles.songItem}
         >
-          <img
+          <Image
             src={song.songcoverlink}
             alt={`${song.song_name} cover`}
             className={styles.songCover}
             loading="lazy"
+            width={100}
+            height={100}
           />
           <div className={styles.songInfo}>
             <h3 className={styles.songName} title={song.song_name}>

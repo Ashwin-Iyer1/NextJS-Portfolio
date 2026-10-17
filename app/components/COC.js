@@ -63,10 +63,12 @@ export default function COC() {
                 <dt className={styles.statLabel}>League</dt>
                 <dd className={styles.statValue}>
                   {COCData.league.iconUrls?.tiny && (
-                    <img
+                    <Image
                       src={COCData.league.iconUrls.tiny}
                       alt=""
                       className={styles.leagueIcon}
+                      width={100}
+                      height={100}
                     />
                   )}
                   {COCData.league.name}
