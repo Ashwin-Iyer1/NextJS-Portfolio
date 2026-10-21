@@ -103,7 +103,7 @@ const coreProjects = [
     source:
       "https://github.com/Ashwin-Iyer1/NUWorks-Co-op-grader/tree/chrome-extension",
     live: "https://nucoop.app/",
-    demo: "/demos/nucoop/index.html",
+    demo: "https://fine-tuned-resume-grading-model.vercel.app/",
     demoLabel: "Try the matching demo",
     demoNote:
       "Fictional jobs and sample résumés run through the extension’s keyword matcher. This demo does not load the optional semantic model or connect to NUWorks.",
