@@ -4,10 +4,15 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { projects } from "../app/data/projects";
 
+// Externally hosted demos have no packaged bundle or provenance manifest here.
+const localDemos = projects.filter((project) =>
+  project.demo?.startsWith("/demos/"),
+);
+
 test("published demo files match their committed-source manifests", async ({
   request,
 }) => {
-  for (const project of projects.filter((project) => project.demo)) {
+  for (const project of localDemos) {
     const directory = project.demo.replace(/index\.html$/, "");
     const response = await request.get(`${directory}provenance.json`);
     expect(response.ok()).toBe(true);
@@ -142,7 +147,7 @@ test("unknown case studies return a real 404", async ({ page }) => {
   expect(response.status()).toBe(404);
 });
 
-for (const project of projects.filter((project) => project.demo)) {
+for (const project of localDemos) {
   for (const width of [390, 1440]) {
     test(`${project.slug} demo loads at ${width}px without errors or external services`, async ({
       page,

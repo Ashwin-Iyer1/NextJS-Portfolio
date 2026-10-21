@@ -326,9 +326,9 @@ test("Glacier stays fixed despite obsolete accent preferences while themes persi
 test("selected work opens substantive case studies and labels concept art", async ({ page }) => {
   await openReturningVisit(page);
   const work = page.getByRole("region", { name: "Selected work" });
-  for (const [title, slug] of [["Equity factor risk model","factor-risk"],["Fourier signal lab","fourier-lab"],["NUCoop","nucoop"],["Firmware workbench","firmware-workbench"]]) {
+  for (const [title, slug, demo] of [["Equity factor risk model","factor-risk",/^\/demos\//],["Fourier signal lab","fourier-lab",/^\/demos\//],["NUCoop","nucoop","https://fine-tuned-resume-grading-model.vercel.app/"],["Firmware workbench","firmware-workbench",/^\/demos\//]]) {
     await expect(work.getByRole("link", { name: `${title} case study`, exact: true })).toHaveAttribute("href", `/projects/${slug}`);
-    await expect(work.getByRole("link", { name: `Try ${title}`, exact: true })).toHaveAttribute("href", /^\/demos\//);
+    await expect(work.getByRole("link", { name: `Try ${title}`, exact: true })).toHaveAttribute("href", demo);
   }
   await expect(work.getByText(/Concept illustration/)).toHaveCount(4);
 });
